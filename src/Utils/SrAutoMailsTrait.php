@@ -2,6 +2,8 @@
 
 namespace srag\Plugins\SrAutoMails\Utils;
 
+use srag\Plugins\SrAutoMails\Rule\Rules;
+
 /**
  * Trait SrAutoMailsTrait
  *
@@ -11,4 +13,10 @@ namespace srag\Plugins\SrAutoMails\Utils;
  */
 trait SrAutoMailsTrait {
 
+	/**
+	 * @return Rules
+	 */
+	protected static function rules(): Rules {
+		return Rules::getInstance();
+	}
 }

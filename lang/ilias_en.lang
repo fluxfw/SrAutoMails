@@ -1,6 +1,32 @@
+config_actions#:#Actions
+config_add#:#Add
+config_add_rule#:#Add rule
+config_added_rule#:#Rule %s added
+config_cancel#:#Cancel
 config_configuration#:#Configuration
 config_configuration_saved#:#Configuration saved
+config_description#:#Description
+config_disable_rules#:#Disable rules
+config_disable_rules#:#Rules disabled
+config_edit_rule#:#Edit rule
+config_enable_rules#:#Enable rules
+config_enabled#:#Enabled
+config_enabled_rules#:#Rules enabled
+config_no#:#No
+config_object_type#:#Object type
+config_object_type_crs#:#Course
+config_remove#:#Remove
+config_remove_rule#:#Remove rule
+config_remove_rule_confirm#:#Are you really want to delete the rule: %s ?
+config_remove_rules#:#Removes rules
+config_remove_rules_confirm#:#Are you really want to delete the follow rules?
+config_removed_rule#:#Rule %s removed
+config_removed_rules#:#Rules removed
+config_rules#:#Rules
 config_save#:#Save
+config_saved_rule#:#Rule %s saved
+config_title#:#Title
+config_yes#:#Yes
 removeplugindataconfirm_cancel#:#Cancel
 removeplugindataconfirm_confirm_remove_data#:#Do you want to remove the %1$s data as well? At most, you just want to disable the %1$s plugin?
 removeplugindataconfirm_deactivate#:#Just deactivate %1$s plugin

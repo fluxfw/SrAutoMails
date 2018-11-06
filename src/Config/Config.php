@@ -19,6 +19,12 @@ class Config extends ActiveRecordConfig {
 	use SrAutoMailsTrait;
 	const TABLE_NAME = "srauma_config";
 	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
+	/**
+	 * @var array
+	 */
+	protected static $fields = [
+
+	];
 
 
 	/**

@@ -12,9 +12,31 @@ config_edit_rule#:#Edit rule
 config_enable_rules#:#Enable rules
 config_enabled#:#Enabled
 config_enabled_rules#:#Rules enabled
+config_mail_template_name#:#Mail template name
+config_metadata#:#Metadata
 config_no#:#No
+config_object_property_countCourseMembers#:#Count course members
 config_object_type#:#Object type
-config_object_type_crs#:#Course
+config_object_course#:#Course
+config_operator#:#Operator
+config_operator_contains#:#Contanints
+config_operator_ends_with#:#Ends with
+config_operator_equals#:#Equals
+config_operator_is_empty#:#Is empty
+config_operator_negated#:#Negation
+config_operator_reg_ex#:#RegEx
+config_operator_reg_ex_info#:#Hint: RegExp must be written in / /
+config_operator_starts_with#:#Starts with
+config_operator_value#:#Value
+config_operator_value_type#:#Value type
+config_operator_value_type_object_property#:#%s property
+config_operator_value_type_text#:#Text
+config_receiver#:#Receiver
+config_receiver_course_administrators#:#To course administrators
+config_receiver_course_members#:#To course members
+config_receiver_course_superior_of_members#:#To superior of course members
+config_receiver_course_tutors#:#To course tutors
+config_receiver_users#:#Users
 config_remove#:#Remove
 config_remove_rule#:#Remove rule
 config_remove_rule_confirm#:#Are you really want to delete the rule: %s ?

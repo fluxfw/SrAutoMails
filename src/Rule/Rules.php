@@ -6,6 +6,7 @@ use ilSrAutoMailsConfigGUI;
 use ilSrAutoMailsPlugin;
 use srag\DIC\DICTrait;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
+use srNotification;
 
 /**
  * Class Rules
@@ -48,12 +49,31 @@ class Rules {
 	/**
 	 * @return array
 	 */
-	public function getObjectTypes(): array {
-		return array_map(function (string $object_type): string {
-			return self::plugin()->translate("object_type_" . $object_type, ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG);
-		}, Rule::$object_types);
+	public function getMailTemplates(): array {
+		/**
+		 * @var srNotification[] $notifications
+		 */
+		$notifications = srNotification::get();
+
+		$mail_templates = [];
+
+		foreach ($notifications as $notification) {
+			$mail_templates[$notification->getName()] = $notification->getName();
+		}
+
+		return $mail_templates;
 	}
 
+
+
+	/**
+	 * @return array
+	 */
+	public function getOperators(): array {
+		return array_map(function (string $operator): string {
+			return self::plugin()->translate("operator_" . $operator, ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG);
+		}, Rule::$operators);
+	}
 
 	/**
 	 * @param string    $title

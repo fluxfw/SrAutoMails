@@ -96,7 +96,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 
 		self::dic()->ctrl()->setParameter($this, "srauma_rule_id", $form->getRule()->getRuleId());
 
-		$this->redirectToTab(self::TAB_RULES);
+		self::dic()->ctrl()->redirect($this, self::CMD_EDIT_RULE);
 	}
 
 
@@ -255,7 +255,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 		$confirmation->setHeaderText($this->txt("remove_rules_confirm"));
 
 		foreach ($rules as $rule) {
-			$confirmation->addItem("srauma_rule_id", $rule->getRuleId(), $rule->getTitle());
+			$confirmation->addItem("srauma_rule_id[]", $rule->getRuleId(), $rule->getTitle());
 		}
 
 		$confirmation->setConfirm($this->txt("remove"), self::CMD_REMOVE_RULES);

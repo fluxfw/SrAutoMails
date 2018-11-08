@@ -21,11 +21,28 @@ class Rule extends ActiveRecord {
 	use SrAutoMailsTrait;
 	const TABLE_NAME = "srauma_rule";
 	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
-	const OBJECT_TYPE_COURSE = "crs";
+	const OPERATOR_EQUALS = 1;
+	const OPERATOR_STARTS_WITH = 2;
+	const OPERATOR_CONTAINS = 3;
+	const OPERATOR_ENDS_WITH = 4;
+	const OPERATOR_IS_EMPTY = 5;
+	const OPERATOR_NOT_IS_EMPTY = 6;
+	const OPERATOR_REG_EX = 7;
+	const OPERATOR_VALUE_TYPE_TEXT = 1;
+	const OPERATOR_VALUE_TYPE_OBJECT_PROPERTY = 2;
+	const RECEIVER_TYPE_OBJECT = 1;
+	const RECEIVER_TYPE_USERS = 2;
 	/**
 	 * @var array
 	 */
-	public static $object_types = [ self::OBJECT_TYPE_COURSE => self::OBJECT_TYPE_COURSE ];
+	public static $operators = [
+		self::OPERATOR_EQUALS => "equals",
+		self::OPERATOR_STARTS_WITH => "starts_with",
+		self::OPERATOR_CONTAINS => "contains",
+		self::OPERATOR_ENDS_WITH => "ends_with",
+		self::OPERATOR_IS_EMPTY => "is_empty",
+		self::OPERATOR_REG_EX => "reg_ex",
+	];
 
 
 	/**
@@ -58,6 +75,15 @@ class Rule extends ActiveRecord {
 	 */
 	protected $rule_id;
 	/**
+	 * @var bool
+	 *
+	 * @con_has_field    true
+	 * @con_fieldtype    integer
+	 * @con_length       1
+	 * @con_is_notnull   true
+	 */
+	protected $enabled = false;
+	/**
 	 * @var string
 	 *
 	 * @con_has_field    true
@@ -74,13 +100,32 @@ class Rule extends ActiveRecord {
 	 */
 	protected $description = "";
 	/**
-	 * @var string
+	 * @var int
 	 *
 	 * @con_has_field    true
-	 * @con_fieldtype    text
+	 * @con_fieldtype    integer
+	 * @con_length       2
 	 * @con_is_notnull   true
 	 */
-	protected $object_type = "";
+	protected $object_type;
+	/**
+	 * @var int
+	 *
+	 * @con_has_field    true
+	 * @con_fieldtype    integer
+	 * @con_length       8
+	 * @con_is_notnull   true
+	 */
+	protected $metadata;
+	/**
+	 * @var int
+	 *
+	 * @con_has_field    true
+	 * @con_fieldtype    integer
+	 * @con_length       2
+	 * @con_is_notnull   true
+	 */
+	protected $operator;
 	/**
 	 * @var bool
 	 *
@@ -89,7 +134,49 @@ class Rule extends ActiveRecord {
 	 * @con_length       1
 	 * @con_is_notnull   true
 	 */
-	protected $enabled = false;
+	protected $operator_negated = false;
+	/**
+	 * @var int
+	 *
+	 * @con_has_field    true
+	 * @con_fieldtype    integer
+	 * @con_length       1
+	 * @con_is_notnull   true
+	 */
+	protected $operator_value_type;
+	/**
+	 * @var string
+	 *
+	 * @con_has_field    true
+	 * @con_fieldtype    text
+	 * @con_is_notnull   true
+	 */
+	protected $operator_value = "";
+	/**
+	 * @var string
+	 *
+	 * @con_has_field    true
+	 * @con_fieldtype    text
+	 * @con_is_notnull   true
+	 */
+	protected $mail_template_name = "";
+	/**
+	 * @var int
+	 *
+	 * @con_has_field    true
+	 * @con_fieldtype    integer
+	 * @con_length       1
+	 * @con_is_notnull   true
+	 */
+	protected $receiver_type;
+	/**
+	 * @var array
+	 *
+	 * @con_has_field    true
+	 * @con_fieldtype    text
+	 * @con_is_notnull   true
+	 */
+	protected $receiver = [];
 
 
 	/**
@@ -114,8 +201,11 @@ class Rule extends ActiveRecord {
 
 		switch ($field_name) {
 			case "enabled":
+			case "operator_negated":
 				return ($field_value ? 1 : 0);
-				break;
+
+			case "receiver":
+				return json_encode($field_value);
 
 			default:
 				return NULL;
@@ -132,12 +222,19 @@ class Rule extends ActiveRecord {
 	public function wakeUp($field_name, $field_value) {
 		switch ($field_name) {
 			case "rule_id":
+			case "object_type":
+			case "metadata":
+			case "operator":
+			case "operator_value_type":
+			case "receiver_type":
 				return intval($field_value);
-				break;
 
 			case "enabled":
+			case "operator_negated":
 				return boolval($field_value);
-				break;
+
+			case "receiver":
+				return json_decode($field_value);
 
 			default:
 				return NULL;
@@ -158,6 +255,22 @@ class Rule extends ActiveRecord {
 	 */
 	public function setRuleId(int $rule_id)/*: void*/ {
 		$this->rule_id = $rule_id;
+	}
+
+
+	/**
+	 * @return bool
+	 */
+	public function isEnabled(): bool {
+		return $this->enabled;
+	}
+
+
+	/**
+	 * @param bool $enabled
+	 */
+	public function setEnabled(bool $enabled)/*: void*/ {
+		$this->enabled = $enabled;
 	}
 
 
@@ -194,33 +307,145 @@ class Rule extends ActiveRecord {
 
 
 	/**
-	 * @return string
+	 * @return int
 	 */
-	public function getObjectType(): string {
+	public function getObjectType(): int {
 		return $this->object_type;
 	}
 
 
 	/**
-	 * @param string $object_type
+	 * @param int $object_type
 	 */
-	public function setObjectType(string $object_type)/*: void*/ {
+	public function setObjectType(int $object_type)/*: void*/ {
 		$this->object_type = $object_type;
+	}
+
+
+	/**
+	 * @return int
+	 */
+	public function getMetadata(): int {
+		return $this->metadata;
+	}
+
+
+	/**
+	 * @param int $metadata
+	 */
+	public function setMetadata(int $metadata)/*: void*/ {
+		$this->metadata = $metadata;
+	}
+
+
+	/**
+	 * @return int
+	 */
+	public function getOperator(): int {
+		return $this->operator;
+	}
+
+
+	/**
+	 * @param int $operator
+	 */
+	public function setOperator(int $operator)/*: void*/ {
+		$this->operator = $operator;
 	}
 
 
 	/**
 	 * @return bool
 	 */
-	public function isEnabled(): bool {
-		return $this->enabled;
+	public function isOperatorNegated(): bool {
+		return $this->operator_negated;
 	}
 
 
 	/**
-	 * @param bool $enabled
+	 * @param bool $operator_negated
 	 */
-	public function setEnabled(bool $enabled)/*: void*/ {
-		$this->enabled = $enabled;
+	public function setOperatorNegated(bool $operator_negated)/*: void*/ {
+		$this->operator_negated = $operator_negated;
+	}
+
+
+	/**
+	 * @return int
+	 */
+	public function getOperatorValueType(): int {
+		return $this->operator_value_type;
+	}
+
+
+	/**
+	 * @param int $operator_value_type
+	 */
+	public function setOperatorValueType(int $operator_value_type)/*: void*/ {
+		$this->operator_value_type = $operator_value_type;
+	}
+
+
+	/**
+	 * @return string
+	 */
+	public function getOperatorValue(): string {
+		return $this->operator_value;
+	}
+
+
+	/**
+	 * @param string $operator_value
+	 */
+	public function setOperatorValue(string $operator_value)/*: void*/ {
+		$this->operator_value = $operator_value;
+	}
+
+
+	/**
+	 * @return string
+	 */
+	public function getMailTemplateName(): string {
+		return $this->mail_template_name;
+	}
+
+
+	/**
+	 * @param string $mail_template_name
+	 */
+	public function setMailTemplateName(string $mail_template_name)/*: void*/ {
+		$this->mail_template_name = $mail_template_name;
+	}
+
+
+	/**
+	 * @return int
+	 */
+	public function getReceiverType(): int {
+		return $this->receiver_type;
+	}
+
+
+	/**
+	 * @param int $receiver_type
+	 */
+	public function setReceiverType(int $receiver_type)/*: void*/ {
+		$this->receiver_type = $receiver_type;
+	}
+
+
+	/**
+	 * @return array
+	 */
+	public function getReceiver(): array {
+		return $this->receiver;
+	}
+
+
+	/**
+	 * @param array $receiver
+	 */
+	public function setReceiver(array $receiver)/*: void*/ {
+		$this->receiver = $receiver;
 	}
 }

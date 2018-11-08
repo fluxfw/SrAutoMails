@@ -12,14 +12,36 @@ config_edit_rule#:#Regel bearbeiten
 config_enable_rules#:#Regeln aktivieren
 config_enabled_rules#:#Regeln aktiviert
 config_enabled#:#Aktiviert
+config_mail_template_name#:#Mail-Vorlage-Name
+config_metadata#:#Metadaten
 config_no#:#Nein
+config_object_property_countCourseMembers#:#Anzahl Mitglieder
 config_object_type#:#Objekt-Typ
-config_object_type_crs#:#Kurs
+config_object_course#:#Kurs
+config_operator#:#Vergleicher
+config_operator_contains#:#Enthält
+config_operator_ends_with#:#Endet mit
+config_operator_equals#:#Ist gleich
+config_operator_is_empty#:#Ist leer
+config_operator_negated#:#Negation
+config_operator_reg_ex#:#RegEx
+config_operator_reg_ex_info#:#Hinweis: RegExp muss in / / geschrieben werden
+config_operator_starts_with#:#Startet mit
+config_operator_value#:#Wert
+config_operator_value_object_property#:#%s-Eigenschaft
+config_operator_value_text#:#Text
+config_operator_value_type#:#Wert-Typ
+config_receiver#:#Empfänger
+config_receiver_course_administrators#:#An Kursadministratoren
+config_receiver_course_members#:#An Kursmitglieder
+config_receiver_course_superior_of_members#:#An Vorgesetze von Kursmitgliedern
+config_receiver_course_tutors#:#An Kurstutoren
+config_receiver_users#:#Benutzer
 config_remove#:#Entfernen
 config_remove_rule#:#Regel entfernen
 config_remove_rule_confirm#:#Möchten Sie die Regel wirklich entfernen: %s ?
 config_remove_rules#:#Regeln entfernen
-config_remove_rules_confirm#:#Möchten Sie die folgende Regeln?
+config_remove_rules_confirm#:#Möchten Sie die folgende Regeln wirklich entfernen?
 config_removed_rule#:#Regel %s entfernt
 config_removed_rules#:#Regeln entfernt
 config_rules#:#Regeln

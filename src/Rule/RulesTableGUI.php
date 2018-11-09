@@ -78,7 +78,7 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 		$this->filter_description->readFromSession();
 
 		$this->filter_object_type = new ilSelectInputGUI($this->txt("object_type"), "srauma_object_type");
-		$this->filter_object_type->setOptions([ "" => "" ] + self::objectTypes()->getObjectTypes());
+		$this->filter_object_type->setOptions([ "" => "" ] + self::objectTypes()->getObjectTypesText());
 		$this->addFilterItem($this->filter_object_type);
 		$this->filter_object_type->readFromSession();
 
@@ -156,7 +156,7 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 
 		$this->tpl->setVariable("RULE_DESCRIPTION", $rule["description"]);
 
-		$this->tpl->setVariable("RULE_OBJECT_TYPE", self::objectTypes()->getObjectTypes()[$rule["object_type"]]);
+		$this->tpl->setVariable("RULE_OBJECT_TYPE", self::objectTypes()->getObjectTypesText()[$rule["object_type"]]);
 
 		$actions = new ilAdvancedSelectionListGUI();
 		$actions->setListTitle($this->txt("actions"));

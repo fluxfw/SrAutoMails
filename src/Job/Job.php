@@ -6,12 +6,17 @@ use ilCronJob;
 use ilCronJobResult;
 use ilSrAutoMailsPlugin;
 use srag\DIC\DICTrait;
+use srag\Plugins\SrAutoMails\ObjectType\ObjectType;
+use srag\Plugins\SrAutoMails\Rule\Rule;
+use srag\Plugins\SrAutoMails\Sent\Sent;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
+use srNotification;
+use srNotificationInternalMailSender;
 
 /**
  * Class Job
  *
- * @package rag\AVL\Plugins\OrgUnitAssistant\Job
+ * @package rag\AVL\Plugins\SrAutoMails\Job
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
@@ -105,8 +110,53 @@ class Job extends ilCronJob {
 	public function run(): ilCronJobResult {
 		$result = new ilCronJobResult();
 
-		$result->setStatus(ilCronJobResult::STATUS_NO_ACTION);
+		$object_types = self::objectTypes()->getObjectTypes();
+
+		foreach ($object_types as $object_type) {
+			$objects = $object_type->getObjects();
+
+			$rules = self::rules()->getRulesForObjectType($object_type->getObjectType());
+
+			foreach ($objects as $object) {
+
+				foreach ($rules as $rule) {
+					if ($object_type->checkRuleForObject($rule, $object)) {
+
+						$receivers = $object_type->getReceivers($rule, $object);
+
+						foreach ($receivers as $user_id) {
+							if (!Sent::hasSent($rule->getRuleId(), $object_type->getObjectId($object), $user_id)) {
+								if ($this->sendNotification($rule, $object_type, $object, $user_id)) {
+									Sent::sent($rule->getRuleId(), $object_type->getObjectId($object), $user_id);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		$result->setStatus(ilCronJobResult::STATUS_OK);
 
 		return $result;
+	}
+
+
+	/**
+	 * @param Rule       $rule
+	 * @param ObjectType $object_type
+	 * @param object     $object
+	 * @param int        $user_id
+	 *
+	 * @return bool
+	 */
+	protected function sendNotification(Rule $rule, ObjectType $object_type, $object, int $user_id): bool {
+		$notification = srNotification::getInstanceByName($rule->getMailTemplateName());
+
+		$sender = new srNotificationInternalMailSender(0, $user_id);
+
+		$placeholders = $object_type->getPlaceholdersForMail($object, $user_id, $rule);
+
+		return $notification->send($sender, $placeholders, $placeholders["user"]->getLanguage());
 	}
 }

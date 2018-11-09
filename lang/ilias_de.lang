@@ -15,14 +15,19 @@ config_enabled#:#Aktiviert
 config_mail_template_name#:#Mail-Vorlage-Name
 config_metadata#:#Metadaten
 config_no#:#Nein
-config_object_property_countCourseMembers#:#Anzahl Mitglieder
+config_object_property_count_course_members#:#Anzahl Mitglieder
 config_object_type#:#Objekt-Typ
 config_object_course#:#Kurs
 config_operator#:#Vergleicher
+config_operator_bigger#:#Grösser als
+config_operator_bigger_equals#:#Grösser als oder ist gleich
+config_operator_case_sensitive#:#Gross-/Kleinschreibung beachten
 config_operator_contains#:#Enthält
 config_operator_ends_with#:#Endet mit
 config_operator_equals#:#Ist gleich
 config_operator_is_empty#:#Ist leer
+config_operator_less#:#Kleiner als
+config_operator_less_equals#:#Kleiner als oder ist gleich
 config_operator_negated#:#Negation
 config_operator_reg_ex#:#RegEx
 config_operator_reg_ex_info#:#Hinweis: RegExp muss in / / geschrieben werden

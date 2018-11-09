@@ -2,18 +2,19 @@
 
 namespace srag\Plugins\SrAutoMails\Access;
 
+use ilObjCourse;
 use ilSrAutoMailsPlugin;
 use srag\DIC\DICTrait;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
- * Class Users
+ * Class Courses
  *
  * @package srag\Plugins\SrAutoMails\Access
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-final class Users {
+final class Courses {
 
 	use DICTrait;
 	use SrAutoMailsTrait;
@@ -37,7 +38,7 @@ final class Users {
 
 
 	/**
-	 * Users constructor
+	 * Courses constructor
 	 */
 	private function __construct() {
 
@@ -45,15 +46,15 @@ final class Users {
 
 
 	/**
-	 * @return array
+	 * @return ilObjCourse[]
 	 */
-	public function getUsers(): array {
-		$result = self::dic()->database()->queryF('SELECT usr_id, firstname, lastname FROM usr_data WHERE active=%s', [ "integer" ], [ 1 ]);
+	public function getCourses(): array {
+		$result = self::dic()->database()->queryF('SELECT obj_id FROM object_data WHERE type=%s', [ "text" ], [ "crs" ]);
 
 		$array = [];
 
 		while (($row = $result->fetchAssoc()) !== false) {
-			$array[$row["usr_id"]] = $row["lastname"] . ", " . $row["firstname"];
+			$array[] = new ilObjCourse($row["obj_id"], false);
 		}
 
 		return $array;

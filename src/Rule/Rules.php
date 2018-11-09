@@ -49,7 +49,7 @@ class Rules {
 	/**
 	 * @return array
 	 */
-	public function getMailTemplates(): array {
+	public function getMailTemplatesText(): array {
 		/**
 		 * @var srNotification[] $notifications
 		 */
@@ -65,15 +65,15 @@ class Rules {
 	}
 
 
-
 	/**
 	 * @return array
 	 */
-	public function getOperators(): array {
+	public function getOperatorsText(): array {
 		return array_map(function (string $operator): string {
 			return self::plugin()->translate("operator_" . $operator, ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG);
 		}, Rule::$operators);
 	}
+
 
 	/**
 	 * @param string    $title
@@ -114,11 +114,27 @@ class Rules {
 	 */
 	public function getRuleById(int $rule_id)/*: ?Rule*/ {
 		/**
-		 * @var Rule|null $log
+		 * @var Rule|null $rule
 		 */
 
-		$log = Rule::where([ "rule_id" => $rule_id ])->first();
+		$rule = Rule::where([ "rule_id" => $rule_id ])->first();
 
-		return $log;
+		return $rule;
+	}
+
+
+	/**
+	 * @param string $object_type
+	 *
+	 * @return Rule[]
+	 */
+	public function getRulesForObjectType(string $object_type): array {
+		/**
+		 * @var Rule[] $rules
+		 */
+
+		$rules = Rule::where([ "object_type" => $object_type ])->get();
+
+		return $rules;
 	}
 }

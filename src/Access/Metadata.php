@@ -58,4 +58,18 @@ final class Metadata {
 
 		return $array;
 	}
+
+
+	/**
+	 * @param int $field_id
+	 *
+	 * @return int
+	 */
+	public function getRecordOfField(int $field_id): int {
+		$result = self::dic()->database()->queryF('SELECT record_id FROM adv_mdf_definition WHERE field_id=%s', [ "integer" ], [ $field_id ]);
+
+		$record_id = intval($result->fetchAssoc()["record_id"]);
+
+		return $record_id;
+	}
 }

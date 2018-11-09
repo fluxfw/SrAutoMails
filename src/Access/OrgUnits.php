@@ -2,9 +2,9 @@
 
 namespace srag\Plugins\SrAutoMails\Access;
 
-use ilOrgUnitAssistantPlugin;
-use srag\AVL\Plugins\OrgUnitAssistant\Utils\OrgUnitAssistantTrait;
+use ilSrAutoMailsPlugin;
 use srag\DIC\DICTrait;
+use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
  * Class OrgUnits
@@ -16,8 +16,8 @@ use srag\DIC\DICTrait;
 final class OrgUnits {
 
 	use DICTrait;
-	use OrgUnitAssistantTrait;
-	const PLUGIN_CLASS_NAME = ilOrgUnitAssistantPlugin::class;
+	use SrAutoMailsTrait;
+	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
 	/**
 	 * @var self
 	 */
@@ -41,5 +41,35 @@ final class OrgUnits {
 	 */
 	private function __construct() {
 
+	}
+
+
+	/**
+	 * @param int $user_id
+	 *
+	 * @return int[]
+	 */
+	public function getSuperiorsOfUser(int $user_id): array {
+		$users = [];
+
+		// TODO: Fill superiors
+
+		return $users;
+	}
+
+
+	/**
+	 * @param int[] $users
+	 *
+	 * @return int[]
+	 */
+	public function getSuperiorsOfUsers(array $users): array {
+		$array = [];
+
+		foreach ($users as $user_id) {
+			$array = array_merge($array, $this->getSuperiorsOfUser($user_id));
+		}
+
+		return $array;
 	}
 }

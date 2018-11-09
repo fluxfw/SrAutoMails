@@ -26,8 +26,11 @@ class Rule extends ActiveRecord {
 	const OPERATOR_CONTAINS = 3;
 	const OPERATOR_ENDS_WITH = 4;
 	const OPERATOR_IS_EMPTY = 5;
-	const OPERATOR_NOT_IS_EMPTY = 6;
-	const OPERATOR_REG_EX = 7;
+	const OPERATOR_REG_EX = 6;
+	const OPERATOR_LESS = 7;
+	const OPERATOR_LESS_EQUALS = 8;
+	const OPERATOR_BIGGER = 9;
+	const OPERATOR_BIGGER_EQUALS = 10;
 	const OPERATOR_VALUE_TYPE_TEXT = 1;
 	const OPERATOR_VALUE_TYPE_OBJECT_PROPERTY = 2;
 	const RECEIVER_TYPE_OBJECT = 1;
@@ -42,6 +45,10 @@ class Rule extends ActiveRecord {
 		self::OPERATOR_ENDS_WITH => "ends_with",
 		self::OPERATOR_IS_EMPTY => "is_empty",
 		self::OPERATOR_REG_EX => "reg_ex",
+		self::OPERATOR_LESS => "less",
+		self::OPERATOR_LESS_EQUALS => "less_equals",
+		self::OPERATOR_BIGGER => "bigger",
+		self::OPERATOR_BIGGER_EQUALS => "bigger_equals",
 	];
 
 
@@ -136,6 +143,15 @@ class Rule extends ActiveRecord {
 	 */
 	protected $operator_negated = false;
 	/**
+	 * @var bool
+	 *
+	 * @con_has_field    true
+	 * @con_fieldtype    integer
+	 * @con_length       1
+	 * @con_is_notnull   true
+	 */
+	protected $operator_case_sensitive = false;
+	/**
 	 * @var int
 	 *
 	 * @con_has_field    true
@@ -196,12 +212,14 @@ class Rule extends ActiveRecord {
 	 *
 	 * @return mixed|null
 	 */
-	public function sleep($field_name) {
+	public function sleep(/*string*/
+		$field_name) {
 		$field_value = $this->{$field_name};
 
 		switch ($field_name) {
 			case "enabled":
 			case "operator_negated":
+			case "operator_case_sensitive":
 				return ($field_value ? 1 : 0);
 
 			case "receiver":
@@ -219,7 +237,8 @@ class Rule extends ActiveRecord {
 	 *
 	 * @return mixed|null
 	 */
-	public function wakeUp($field_name, $field_value) {
+	public function wakeUp(/*string*/
+		$field_name, $field_value) {
 		switch ($field_name) {
 			case "rule_id":
 			case "object_type":
@@ -231,6 +250,7 @@ class Rule extends ActiveRecord {
 
 			case "enabled":
 			case "operator_negated":
+			case "operator_case_sensitive":
 				return boolval($field_value);
 
 			case "receiver":
@@ -367,6 +387,22 @@ class Rule extends ActiveRecord {
 	 */
 	public function setOperatorNegated(bool $operator_negated)/*: void*/ {
 		$this->operator_negated = $operator_negated;
+	}
+
+
+	/**
+	 * @return bool
+	 */
+	public function isOperatorCaseSensitive(): bool {
+		return $this->operator_case_sensitive;
+	}
+
+
+	/**
+	 * @param bool $operator_case_sensitive
+	 */
+	public function setOperatorCaseSensitive(bool $operator_case_sensitive)/*: void*/ {
+		$this->operator_case_sensitive = $operator_case_sensitive;
 	}
 
 

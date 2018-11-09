@@ -70,7 +70,7 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 
 		$object_type = new ilSelectInputGUI($this->txt("object_type"), "srauma_object_type");
 		$object_type->setRequired(true);
-		$object_type->setOptions([ "" => "" ] + self::objectTypes()->getObjectTypes());
+		$object_type->setOptions([ "" => "" ] + self::objectTypes()->getObjectTypesText());
 		if ($this->rule !== NULL) {
 			$object_type->setValue($this->rule->getObjectType());
 			$object_type->setDisabled(true);
@@ -103,13 +103,17 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 			$operator = new ilSelectInputGUI($this->txt("operator"), "srauma_operator");
 			$operator->setInfo($this->txt("operator_reg_ex_info"));
 			$operator->setRequired(true);
-			$operator->setOptions([ "" => "" ] + self::rules()->getOperators());
+			$operator->setOptions([ "" => "" ] + self::rules()->getOperatorsText());
 			$operator->setValue($this->rule->getOperator());
 			$this->addItem($operator);
 
 			$operator_negated = new ilCheckboxInputGUI($this->txt("operator_negated"), "srauma_operator_negated");
 			$operator_negated->setChecked($this->rule->isOperatorNegated());
 			$this->addItem($operator_negated);
+
+			$operator_case_sensitive = new ilCheckboxInputGUI($this->txt("operator_case_sensitive"), "srauma_operator_case_sensitive");
+			$operator_case_sensitive->setChecked($this->rule->isOperatorCaseSensitive());
+			$this->addItem($operator_case_sensitive);
 
 			$operator_value_type = new ilRadioGroupInputGUI($this->txt("operator_value_type"), "srauma_operator_value_type");
 			$operator_value_type->setRequired(true);
@@ -140,7 +144,7 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 			$mail_template_name = new ilSelectInputGUI($this->txt("mail_template_name"), "srauma_mail_template_name");
 			$mail_template_name->setInfo(ilNotifications4PluginsPlugin::PLUGIN_NAME);
 			$mail_template_name->setRequired(true);
-			$mail_template_name->setOptions([ "" => "" ] + self::rules()->getMailTemplates());
+			$mail_template_name->setOptions([ "" => "" ] + self::rules()->getMailTemplatesText());
 			$mail_template_name->setValue($this->rule->getMailTemplateName());
 			$this->addItem($mail_template_name);
 
@@ -202,6 +206,9 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 
 		$operator_negated = boolval($this->getInput("srauma_operator_negated"));
 		$this->rule->setOperatorNegated($operator_negated);
+
+		$operator_case_sensitive = boolval($this->getInput("srauma_operator_case_sensitive"));
+		$this->rule->setOperatorCaseSensitive($operator_case_sensitive);
 
 		$operator_value_type = intval($this->getInput("srauma_operator_value_type"));
 		$this->rule->setOperatorValueType($operator_value_type);

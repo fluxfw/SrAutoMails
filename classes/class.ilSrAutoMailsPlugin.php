@@ -6,6 +6,7 @@ require_once __DIR__ . "/../../../../UIComponent/UserInterfaceHook/Notifications
 use srag\Plugins\SrAutoMails\Config\Config;
 use srag\Plugins\SrAutoMails\Job\Job;
 use srag\Plugins\SrAutoMails\Rule\Rule;
+use srag\Plugins\SrAutoMails\Sent\Sent;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 use srag\RemovePluginDataConfirm\PluginUninstallTrait;
 
@@ -87,5 +88,6 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin {
 	protected function deleteData()/*: void*/ {
 		self::dic()->database()->dropTable(Config::TABLE_NAME, false);
 		self::dic()->database()->dropTable(Rule::TABLE_NAME, false);
+		self::dic()->database()->dropTable(Sent::TABLE_NAME, false);
 	}
 }

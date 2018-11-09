@@ -5,6 +5,7 @@ namespace srag\Plugins\SrAutoMails\ObjectType;
 use ilSrAutoMailsConfigGUI;
 use ilSrAutoMailsPlugin;
 use srag\DIC\DICTrait;
+use srag\Plugins\SrAutoMails\ObjectType\Object\CourseObjectType;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
@@ -45,11 +46,11 @@ final class ObjectTypes {
 
 
 	/**
-	 * @param int $object_type
+	 * @param string $object_type
 	 *
 	 * @return ObjectType|null
 	 */
-	public function factory(int $object_type)/*: ?ObjectType*/ {
+	public function factory(string $object_type)/*: ?ObjectType*/ {
 		switch ($object_type) {
 			case self::OBJECT_TYPE_COURSE:
 				return new CourseObjectType();
@@ -61,9 +62,19 @@ final class ObjectTypes {
 
 
 	/**
-	 * @return array
+	 * @return ObjectType[]
 	 */
 	public function getObjectTypes(): array {
+		return array_map(function (string $object_type): ObjectType {
+			return $this->factory($object_type);
+		}, array_keys(self::$object_types));
+	}
+
+
+	/**
+	 * @return array
+	 */
+	public function getObjectTypesText(): array {
 		return array_map(function (string $object_type): string {
 			return self::plugin()->translate("object_" . $object_type, ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG);
 		}, self::$object_types);

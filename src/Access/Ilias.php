@@ -45,6 +45,14 @@ final class Ilias {
 
 
 	/**
+	 * @return Courses
+	 */
+	public function courses(): Courses {
+		return Courses::getInstance();
+	}
+
+
+	/**
 	 * @return Metadata
 	 */
 	public function metadata(): Metadata {

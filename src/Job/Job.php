@@ -8,7 +8,6 @@ use ilSrAutoMailsPlugin;
 use srag\DIC\DICTrait;
 use srag\Plugins\SrAutoMails\ObjectType\ObjectType;
 use srag\Plugins\SrAutoMails\Rule\Rule;
-use srag\Plugins\SrAutoMails\Sent\Sent;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 use srNotification;
 use srNotificationInternalMailSender;
@@ -125,9 +124,9 @@ class Job extends ilCronJob {
 						$receivers = $object_type->getReceivers($rule, $object);
 
 						foreach ($receivers as $user_id) {
-							if (!Sent::hasSent($rule->getRuleId(), $object_type->getObjectId($object), $user_id)) {
+							if (!self::sents()->hasSent($rule->getRuleId(), $object_type->getObjectId($object), $user_id)) {
 								if ($this->sendNotification($rule, $object_type, $object, $user_id)) {
-									Sent::sent($rule->getRuleId(), $object_type->getObjectId($object), $user_id);
+									self::sents()->sent($rule->getRuleId(), $object_type->getObjectId($object), $user_id);
 								}
 							}
 						}

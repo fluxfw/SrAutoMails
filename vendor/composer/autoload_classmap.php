@@ -55,6 +55,7 @@ return array(
     'srag\\Plugins\\SrAutoMails\\Rule\\Rules' => $baseDir . '/src/Rule/Rules.php',
     'srag\\Plugins\\SrAutoMails\\Rule\\RulesTableGUI' => $baseDir . '/src/Rule/RulesTableGUI.php',
     'srag\\Plugins\\SrAutoMails\\Sent\\Sent' => $baseDir . '/src/Sent/Sent.php',
+    'srag\\Plugins\\SrAutoMails\\Sent\\Sents' => $baseDir . '/src/Sent/Sents.php',
     'srag\\Plugins\\SrAutoMails\\Utils\\SrAutoMailsTrait' => $baseDir . '/src/Utils/SrAutoMailsTrait.php',
     'srag\\RemovePluginDataConfirm\\AbstractPluginUninstallTrait' => $vendorDir . '/srag/removeplugindataconfirm/src/AbstractPluginUninstallTrait.php',
     'srag\\RemovePluginDataConfirm\\AbstractRemovePluginDataConfirm' => $vendorDir . '/srag/removeplugindataconfirm/src/AbstractRemovePluginDataConfirm.php',

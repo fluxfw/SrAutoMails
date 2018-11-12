@@ -2,10 +2,6 @@
 
 namespace srag\Plugins\SrAutoMails\ObjectType;
 
-use ilADT;
-use ilADTInteger;
-use ilADTText;
-use ilAdvancedMDValues;
 use ilObjUser;
 use ilSrAutoMailsConfigGUI;
 use ilSrAutoMailsPlugin;
@@ -34,7 +30,7 @@ abstract class ObjectType {
 	 * @return bool
 	 */
 	public final function checkRuleForObject(Rule $rule, $object): bool {
-		$metadata = $this->getMetadataForObject($object, $rule->getMetadata());
+		$metadata = self::ilias()->metadata()->getMetadataForObject($this->getObjectId($object), $rule->getMetadata());
 
 		if (empty($metadata)) {
 			return false;
@@ -114,35 +110,6 @@ abstract class ObjectType {
 		}
 
 		return $check;
-	}
-
-
-	/**
-	 * @param object $object
-	 * @param int    $metadata_id
-	 *
-	 * @return mixed
-	 */
-	protected final function getMetadataForObject($object, int $metadata_id) {
-		$values = new ilAdvancedMDValues(self::ilias()->metadata()->getRecordOfField($metadata_id), $this->getObjectId($object), "", "");
-
-		$values->read();
-
-		/**
-		 * @var ilADT|null $metadata
-		 */
-		$metadata = $values->getADTGroup()->getElement($metadata_id);
-
-		switch (true) {
-			case ($metadata instanceof ilADTText):
-				return $metadata->getText();
-
-			case ($metadata instanceof ilADTInteger):
-				return $metadata->getNumber();
-
-			default:
-				return NULL;
-		}
 	}
 
 

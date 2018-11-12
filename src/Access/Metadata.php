@@ -2,6 +2,10 @@
 
 namespace srag\Plugins\SrAutoMails\Access;
 
+use ilADT;
+use ilADTInteger;
+use ilADTText;
+use ilAdvancedMDValues;
 use ilSrAutoMailsPlugin;
 use srag\DIC\DICTrait;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
@@ -61,11 +65,40 @@ final class Metadata {
 
 
 	/**
+	 * @param int $obj_id
+	 * @param int $metadata_id
+	 *
+	 * @return mixed
+	 */
+	public function getMetadataForObject(int $obj_id, int $metadata_id) {
+		$values = new ilAdvancedMDValues($this->getRecordOfField($metadata_id), $obj_id, "", "");
+
+		$values->read();
+
+		/**
+		 * @var ilADT|null $metadata
+		 */
+		$metadata = $values->getADTGroup()->getElement($metadata_id);
+
+		switch (true) {
+			case ($metadata instanceof ilADTText):
+				return $metadata->getText();
+
+			case ($metadata instanceof ilADTInteger):
+				return $metadata->getNumber();
+
+			default:
+				return NULL;
+		}
+	}
+
+
+	/**
 	 * @param int $field_id
 	 *
 	 * @return int
 	 */
-	public function getRecordOfField(int $field_id): int {
+	protected function getRecordOfField(int $field_id): int {
 		$result = self::dic()->database()->queryF('SELECT record_id FROM adv_mdf_definition WHERE field_id=%s', [ "integer" ], [ $field_id ]);
 
 		$record_id = intval($result->fetchAssoc()["record_id"]);

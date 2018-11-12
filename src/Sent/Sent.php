@@ -40,60 +40,6 @@ class Sent extends ActiveRecord {
 
 
 	/**
-	 * @param int $rule_id
-	 * @param int $object_id
-	 * @param int $user_id
-	 *
-	 * @return self|null
-	 */
-	public static function getSent(int $rule_id, int $object_id, int $user_id)/*: ?self*/ {
-		/**
-		 * @var self|null $sent
-		 */
-
-		$sent = self::where([
-			"rule_id" => $rule_id,
-			"object_id" => $object_id,
-			"user_id" => $user_id
-		])->first();
-
-		return $sent;
-	}
-
-
-	/**
-	 * @param int $rule_id
-	 * @param int $object_id
-	 * @param int $user_id
-	 *
-	 * @return bool
-	 */
-	public static function hasSent(int $rule_id, int $object_id, int $user_id): bool {
-		$sent = self::getSent($rule_id, $object_id, $user_id);
-
-		return ($sent !== NULL);
-	}
-
-
-	/**
-	 * @param int $rule_id
-	 * @param int $object_id
-	 * @param int $user_id
-	 */
-	public static function sent(int $rule_id, int $object_id, int $user_id)/*: void*/ {
-		$sent = self::getSent($rule_id, $object_id, $user_id);
-
-		if ($sent === NULL) {
-			$sent = new self();
-			$sent->setRuleId($rule_id);
-			$sent->setObjectId($object_id);
-			$sent->setUserId($user_id);
-			$sent->store();
-		}
-	}
-
-
-	/**
 	 * @var int
 	 *
 	 * @con_has_field   true

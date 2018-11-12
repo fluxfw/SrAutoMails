@@ -5,6 +5,7 @@ namespace srag\Plugins\SrAutoMails\Utils;
 use srag\Plugins\SrAutoMails\Access\Ilias;
 use srag\Plugins\SrAutoMails\ObjectType\ObjectTypes;
 use srag\Plugins\SrAutoMails\Rule\Rules;
+use srag\Plugins\SrAutoMails\Sent\Sents;
 
 /**
  * Trait SrAutoMailsTrait
@@ -36,5 +37,13 @@ trait SrAutoMailsTrait {
 	 */
 	protected static function rules(): Rules {
 		return Rules::getInstance();
+	}
+
+
+	/**
+	 * @return Sents
+	 */
+	protected static function sents(): Sents {
+		return Sents::getInstance();
 	}
 }

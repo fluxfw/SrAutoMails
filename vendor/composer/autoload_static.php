@@ -90,6 +90,7 @@ class ComposerStaticInit1760e46ce99334f16b04a6042182988e
         'srag\\Plugins\\SrAutoMails\\Rule\\Rules' => __DIR__ . '/../..' . '/src/Rule/Rules.php',
         'srag\\Plugins\\SrAutoMails\\Rule\\RulesTableGUI' => __DIR__ . '/../..' . '/src/Rule/RulesTableGUI.php',
         'srag\\Plugins\\SrAutoMails\\Sent\\Sent' => __DIR__ . '/../..' . '/src/Sent/Sent.php',
+        'srag\\Plugins\\SrAutoMails\\Sent\\Sents' => __DIR__ . '/../..' . '/src/Sent/Sents.php',
         'srag\\Plugins\\SrAutoMails\\Utils\\SrAutoMailsTrait' => __DIR__ . '/../..' . '/src/Utils/SrAutoMailsTrait.php',
         'srag\\RemovePluginDataConfirm\\AbstractPluginUninstallTrait' => __DIR__ . '/..' . '/srag/removeplugindataconfirm/src/AbstractPluginUninstallTrait.php',
         'srag\\RemovePluginDataConfirm\\AbstractRemovePluginDataConfirm' => __DIR__ . '/..' . '/srag/removeplugindataconfirm/src/AbstractRemovePluginDataConfirm.php',

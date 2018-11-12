@@ -58,7 +58,7 @@ final class Rules {
 		$mail_templates = [];
 
 		foreach ($notifications as $notification) {
-			$mail_templates[$notification->getName()] = $notification->getName();
+			$mail_templates[$notification->getName()] = $notification->getTitle() . " (" . $notification->getName() . ")";
 		}
 
 		return $mail_templates;

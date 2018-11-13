@@ -1,16 +1,16 @@
 <?php
 
-namespace srag\DIC;
+namespace srag\DIC\SrAutoMails;
 
-use srag\DIC\DIC\DICInterface;
-use srag\DIC\Exception\DICException;
-use srag\DIC\Plugin\PluginInterface;
-use srag\DIC\Version\VersionInterface;
+use srag\DIC\SrAutoMails\DIC\DICInterface;
+use srag\DIC\SrAutoMails\Exception\DICException;
+use srag\DIC\SrAutoMails\Plugin\PluginInterface;
+use srag\DIC\SrAutoMails\Version\VersionInterface;
 
 /**
  * Interface DICStaticInterface
  *
- * @package srag\DIC
+ * @package srag\DIC\SrAutoMails
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */

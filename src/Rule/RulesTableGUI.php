@@ -9,7 +9,7 @@ use ilSrAutoMailsConfigGUI;
 use ilSrAutoMailsPlugin;
 use ilTextInputGUI;
 use ilUtil;
-use srag\ActiveRecordConfig\ActiveRecordConfigTableGUI;
+use srag\ActiveRecordConfig\SrAutoMails\ActiveRecordConfigTableGUI;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**

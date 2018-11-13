@@ -3,7 +3,7 @@
 namespace srag\Plugins\SrAutoMails\Config;
 
 use ilSrAutoMailsPlugin;
-use srag\ActiveRecordConfig\ActiveRecordConfig;
+use srag\ActiveRecordConfig\SrAutoMails\ActiveRecordConfig;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**

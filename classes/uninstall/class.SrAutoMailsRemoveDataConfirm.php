@@ -3,7 +3,7 @@
 require_once __DIR__ . "/../../vendor/autoload.php";
 
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
-use srag\RemovePluginDataConfirm\AbstractRemovePluginDataConfirm;
+use srag\RemovePluginDataConfirm\SrAutoMails\AbstractRemovePluginDataConfirm;
 
 /**
  * Class SrAutoMailsRemoveDataConfirm

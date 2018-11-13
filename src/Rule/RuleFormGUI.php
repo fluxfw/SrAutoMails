@@ -10,9 +10,9 @@ use ilSelectInputGUI;
 use ilSrAutoMailsConfigGUI;
 use ilSrAutoMailsPlugin;
 use ilTextInputGUI;
-use srag\ActiveRecordConfig\ActiveRecordConfigFormGUI;
-use srag\ActiveRecordConfig\ActiveRecordConfigGUI;
-use srag\CustomInputGUIs\MultiSelectSearchInputGUI\MultiSelectSearchInputGUI;
+use srag\ActiveRecordConfig\SrAutoMails\ActiveRecordConfigFormGUI;
+use srag\ActiveRecordConfig\SrAutoMails\ActiveRecordConfigGUI;
+use srag\CustomInputGUIs\SrAutoMails\MultiSelectSearchInputGUI\MultiSelectSearchInputGUI;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**

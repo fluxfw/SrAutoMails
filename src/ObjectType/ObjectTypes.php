@@ -4,7 +4,7 @@ namespace srag\Plugins\SrAutoMails\ObjectType;
 
 use ilSrAutoMailsConfigGUI;
 use ilSrAutoMailsPlugin;
-use srag\DIC\DICTrait;
+use srag\DIC\SrAutoMails\DICTrait;
 use srag\Plugins\SrAutoMails\ObjectType\Object\CourseObjectType;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 

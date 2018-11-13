@@ -3,7 +3,7 @@
 namespace srag\Plugins\SrAutoMails\Access;
 
 use ilSrAutoMailsPlugin;
-use srag\DIC\DICTrait;
+use srag\DIC\SrAutoMails\DICTrait;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**

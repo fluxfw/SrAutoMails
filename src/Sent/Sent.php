@@ -5,7 +5,7 @@ namespace srag\Plugins\SrAutoMails\Sent;
 use ActiveRecord;
 use arConnector;
 use ilSrAutoMailsPlugin;
-use srag\DIC\DICTrait;
+use srag\DIC\SrAutoMails\DICTrait;
 
 /**
  * Class Sent

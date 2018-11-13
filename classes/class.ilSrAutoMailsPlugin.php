@@ -8,7 +8,7 @@ use srag\Plugins\SrAutoMails\Job\Job;
 use srag\Plugins\SrAutoMails\Rule\Rule;
 use srag\Plugins\SrAutoMails\Sent\Sent;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
-use srag\RemovePluginDataConfirm\PluginUninstallTrait;
+use srag\RemovePluginDataConfirm\SrAutoMails\PluginUninstallTrait;
 
 /**
  * Class ilSrAutoMailsPlugin

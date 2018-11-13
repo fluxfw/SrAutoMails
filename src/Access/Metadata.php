@@ -7,7 +7,7 @@ use ilADTInteger;
 use ilADTText;
 use ilAdvancedMDValues;
 use ilSrAutoMailsPlugin;
-use srag\DIC\DICTrait;
+use srag\DIC\SrAutoMails\DICTrait;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**

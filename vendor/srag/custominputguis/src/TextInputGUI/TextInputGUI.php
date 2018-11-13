@@ -1,14 +1,14 @@
 <?php
 
-namespace srag\CustomInputGUIs\TextInputGUI;
+namespace srag\CustomInputGUIs\SrAutoMails\TextInputGUI;
 
 use ilTextInputGUI;
-use srag\DIC\DICTrait;
+use srag\DIC\SrAutoMails\DICTrait;
 
 /**
  * Class TextInputGUI
  *
- * @package srag\CustomInputGUIs\TextInputGUI
+ * @package srag\CustomInputGUIs\SrAutoMails\TextInputGUI
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */

@@ -2,7 +2,7 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-use srag\ActiveRecordConfig\ActiveRecordConfigGUI;
+use srag\ActiveRecordConfig\SrAutoMails\ActiveRecordConfigGUI;
 use srag\Plugins\SrAutoMails\Rule\Rule;
 use srag\Plugins\SrAutoMails\Rule\RuleFormGUI;
 use srag\Plugins\SrAutoMails\Rule\RulesTableGUI;

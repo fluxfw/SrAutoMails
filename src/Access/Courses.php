@@ -4,7 +4,7 @@ namespace srag\Plugins\SrAutoMails\Access;
 
 use ilObjCourse;
 use ilSrAutoMailsPlugin;
-use srag\DIC\DICTrait;
+use srag\DIC\SrAutoMails\DICTrait;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**

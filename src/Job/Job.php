@@ -5,7 +5,7 @@ namespace srag\Plugins\SrAutoMails\Job;
 use ilCronJob;
 use ilCronJobResult;
 use ilSrAutoMailsPlugin;
-use srag\DIC\DICTrait;
+use srag\DIC\SrAutoMails\DICTrait;
 use srag\Plugins\SrAutoMails\ObjectType\ObjectType;
 use srag\Plugins\SrAutoMails\Rule\Rule;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;

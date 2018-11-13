@@ -5,7 +5,7 @@ namespace srag\Plugins\SrAutoMails\Rule;
 use ActiveRecord;
 use arConnector;
 use ilSrAutoMailsPlugin;
-use srag\DIC\DICTrait;
+use srag\DIC\SrAutoMails\DICTrait;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**

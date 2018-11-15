@@ -13,6 +13,7 @@ use ilTextInputGUI;
 use srag\ActiveRecordConfig\SrAutoMails\ActiveRecordConfigFormGUI;
 use srag\ActiveRecordConfig\SrAutoMails\ActiveRecordConfigGUI;
 use srag\CustomInputGUIs\SrAutoMails\MultiSelectSearchInputGUI\MultiSelectSearchInputGUI;
+use srag\Plugins\SrAutoMails\Config\Config;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
@@ -26,6 +27,7 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 
 	use SrAutoMailsTrait;
 	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
+	const CONFIG_CLASS_NAME = Config::class;
 	/**
 	 * @var Rule|null
 	 */

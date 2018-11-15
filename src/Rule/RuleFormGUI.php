@@ -52,24 +52,36 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 
 
 	/**
-	 *
+	 * @inheritdoc
 	 */
-	protected function initForm()/*: void*/ {
+	protected function initAction()/*: void*/ {
 		if ($this->rule !== NULL) {
 			self::dic()->ctrl()->setParameter($this->parent, "srauma_rule_id", $this->rule->getRuleId());
 		}
+
 		$this->setFormAction(self::dic()->ctrl()->getFormAction($this->parent));
+
 		self::dic()->ctrl()->setParameter($this->parent, "srauma_rule_id", NULL);
+	}
 
-		$this->setTitle($this->txt($this->rule !== NULL ? "edit_rule" : "add_rule"));
 
+	/**
+	 * @inheritdoc
+	 */
+	protected function initCommands()/*: void*/ {
 		if ($this->rule !== NULL) {
 			$this->addCommandButton(ilSrAutoMailsConfigGUI::CMD_UPDATE_RULE, $this->txt("save"));
 		} else {
 			$this->addCommandButton(ilSrAutoMailsConfigGUI::CMD_CREATE_RULE, $this->txt("add"));
 		}
 		$this->addCommandButton($this->parent->getCmdForTab(ilSrAutoMailsConfigGUI::TAB_RULES), $this->txt("cancel"));
+	}
 
+
+	/**
+	 * @inheritdoc
+	 */
+	protected function initFields()/*: void*/ {
 		$object_type = new ilSelectInputGUI($this->txt("object_type"), "srauma_object_type");
 		$object_type->setRequired(true);
 		$object_type->setOptions([ "" => "" ] + self::objectTypes()->getObjectTypesText());
@@ -183,7 +195,15 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 	/**
 	 * @inheritdoc
 	 */
-	public function updateConfig()/*: void*/ {
+	protected function initTile()/*: void*/ {
+		$this->setTitle($this->txt($this->rule !== NULL ? "edit_rule" : "add_rule"));
+	}
+
+
+	/**
+	 * @inheritdoc
+	 */
+	public function updateForm()/*: void*/ {
 		if ($this->rule === NULL) {
 			$this->rule = new Rule();
 

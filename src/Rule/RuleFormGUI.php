@@ -101,7 +101,7 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 					return $this->rule->getMailTemplateName();
 
 				case "receiver":
-					return $this->rule->getReceiver();
+					return $this->rule->getReceiverType();
 
 				case "receiver_object":
 					if ($this->rule->getReceiverType() === Rule::RECEIVER_TYPE_OBJECT) {
@@ -205,7 +205,8 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 								"operator_value_text" => [
 									self::PROPERTY_CLASS => ilTextInputGUI::class
 								]
-							]
+							],
+							"setTitle" => $this->txt("operator_value_text")
 						],
 						Rule::OPERATOR_VALUE_TYPE_OBJECT_PROPERTY => [
 							self::PROPERTY_CLASS => ilRadioOption::class,
@@ -252,7 +253,8 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 									self::PROPERTY_REQUIRED => true,
 									self::PROPERTY_OPTIONS => self::ilias()->users()->getUsers()
 								]
-							]
+							],
+							"setTitle" => $this->txt("receiver_users")
 						]
 					]
 				]

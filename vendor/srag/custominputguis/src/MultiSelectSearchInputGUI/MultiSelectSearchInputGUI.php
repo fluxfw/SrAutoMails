@@ -52,8 +52,8 @@ class MultiSelectSearchInputGUI extends ilMultiSelectInputGUI {
 	 * @param string $post_var
 	 */
 	public function __construct(/*string*/
-		$title, /*string*/
-		$post_var) {
+		$title = "", /*string*/
+		$post_var = "") {
 		if (substr($post_var, - 2) != "[]") {
 			$post_var = $post_var . "[]";
 		}

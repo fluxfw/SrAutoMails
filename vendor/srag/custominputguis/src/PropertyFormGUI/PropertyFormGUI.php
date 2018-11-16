@@ -10,6 +10,7 @@ use ilPropertyFormGUI;
 use ilRadioGroupInputGUI;
 use ilRadioOption;
 use srag\CustomInputGUIs\SrAutoMails\PropertyFormGUI\Exception\PropertyFormGUIException;
+use srag\DIC\SrAutoMails\Exception\DICException;
 
 /**
  * Class BasePropertyFormGUI
@@ -44,6 +45,10 @@ abstract class PropertyFormGUI extends BasePropertyFormGUI {
 	 * @var string
 	 */
 	const PROPERTY_SUBITEMS = "subitems";
+	/**
+	 * @var string
+	 */
+	const LANG_MODULE = "";
 	/**
 	 * @var array
 	 */
@@ -275,13 +280,21 @@ abstract class PropertyFormGUI extends BasePropertyFormGUI {
 	 *
 	 * @return string
 	 */
-	protected function txt(/*string*/
+	protected final function txt(/*string*/
 		$key,/*?string*/
 		$default = NULL)/*: string*/ {
 		if ($default !== NULL) {
-			return self::plugin()->translate($key, "", [], true, "", $default);
+			try {
+				return self::plugin()->translate($key, static::LANG_MODULE, [], true, "", $default);
+			} catch (DICException $ex) {
+				return $default;
+			}
 		} else {
-			return self::plugin()->translate($key);
+			try {
+				return self::plugin()->translate($key, static::LANG_MODULE);
+			} catch (DICException $ex) {
+				return "";
+			}
 		}
 	}
 

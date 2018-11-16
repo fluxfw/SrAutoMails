@@ -90,7 +90,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 			return;
 		}
 
-		$form->updateConfig();
+		$form->updateForm();
 
 		ilUtil::sendSuccess(self::plugin()->translate("added_rule", self::LANG_MODULE_CONFIG, [ $form->getRule()->getTitle() ]), true);
 
@@ -134,7 +134,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 			return;
 		}
 
-		$form->updateConfig();
+		$form->updateForm();
 
 		ilUtil::sendSuccess(self::plugin()->translate("saved_rule", self::LANG_MODULE_CONFIG, [ $rule->getTitle() ]), true);
 

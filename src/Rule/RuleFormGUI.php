@@ -54,6 +54,79 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 	/**
 	 * @inheritdoc
 	 */
+	protected function getValue(/*string*/
+		$key) {
+		if ($this->rule !== NULL) {
+			switch ($key) {
+				case "object_type":
+					return $this->rule->getObjectType();
+
+				case "enabled":
+					return $this->rule->isEnabled();
+
+				case "title":
+					return $this->rule->getTitle();
+
+				case "description":
+					return $this->rule->getDescription();
+
+				case "metadata":
+					return $this->rule->getMetadata();
+
+				case "operator":
+					return $this->rule->getOperator();
+
+				case "operator_negated":
+					return $this->rule->isOperatorNegated();
+
+				case "operator_case_sensitive":
+					return $this->rule->isOperatorCaseSensitive();
+
+				case "operator_value_type":
+					return $this->rule->getOperatorValueType();
+
+				case "operator_value_text":
+					if ($this->rule->getOperatorValueType() === Rule::OPERATOR_VALUE_TYPE_TEXT) {
+						return $this->rule->getOperatorValue();
+					}
+					break;
+
+				case "operator_value_object_property":
+					if ($this->rule->getOperatorValueType() === Rule::OPERATOR_VALUE_TYPE_OBJECT_PROPERTY) {
+						return $this->rule->getOperatorValue();
+					}
+					break;
+
+				case "mail_template_name":
+					return $this->rule->getMailTemplateName();
+
+				case "receiver":
+					return $this->rule->getReceiver();
+
+				case "receiver_object":
+					if ($this->rule->getReceiverType() === Rule::RECEIVER_TYPE_OBJECT) {
+						return $this->rule->getReceiver();
+					}
+					break;
+
+				case "receiver_users":
+					if ($this->rule->getReceiverType() === Rule::RECEIVER_TYPE_USERS) {
+						return $this->rule->getReceiver();
+					}
+					break;
+
+				default:
+					break;
+			}
+		}
+
+		return NULL;
+	}
+
+
+	/**
+	 * @inheritdoc
+	 */
 	protected function initAction()/*: void*/ {
 		if ($this->rule !== NULL) {
 			self::dic()->ctrl()->setParameter($this->parent, "srauma_rule_id", $this->rule->getRuleId());
@@ -82,112 +155,108 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 	 * @inheritdoc
 	 */
 	protected function initFields()/*: void*/ {
-		$object_type = new ilSelectInputGUI($this->txt("object_type"), "srauma_object_type");
-		$object_type->setRequired(true);
-		$object_type->setOptions([ "" => "" ] + self::objectTypes()->getObjectTypesText());
-		if ($this->rule !== NULL) {
-			$object_type->setValue($this->rule->getObjectType());
-			$object_type->setDisabled(true);
-		}
-		$this->addItem($object_type);
+		$this->fields = [
+			"object_type" => [
+				self::PROPERTY_CLASS => ilSelectInputGUI::class,
+				self::PROPERTY_REQUIRED => true,
+				self::PROPERTY_OPTIONS => [ "" => "" ] + self::objectTypes()->getObjectTypesText(),
+				self::PROPERTY_DISABLED => ($this->rule !== NULL)
+			]
+		];
 
 		if ($this->rule !== NULL) {
 			$object_type_definiton = self::objectTypes()->factory($this->rule->getObjectType());
-			$object = $object_type->getOptions()[$object_type->getValue()];
+			$object = $this->fields["object_type"][self::PROPERTY_OPTIONS][$this->rule->getObjectType()];
 
-			$enabled = new ilCheckboxInputGUI($this->txt("enabled"), "srauma_enabled");
-			$enabled->setChecked($this->rule->isEnabled());
-			$this->addItem($enabled);
-
-			$title = new ilTextInputGUI($this->txt("title"), "srauma_title");
-			$title->setRequired(true);
-			$title->setValue($this->rule->getTitle());
-			$this->addItem($title);
-
-			$description = new ilTextInputGUI($this->txt("description"), "srauma_description");
-			$description->setValue($this->rule->getDescription());
-			$this->addItem($description);
-
-			$metadata = new ilSelectInputGUI($this->txt("metadata"), "srauma_metadata");
-			$metadata->setRequired(true);
-			$metadata->setOptions([ "" => "" ] + self::ilias()->metadata()->getMetadata());
-			$metadata->setValue($this->rule->getMetadata());
-			$this->addItem($metadata);
-
-			$operator = new ilSelectInputGUI($this->txt("operator"), "srauma_operator");
-			$operator->setInfo($this->txt("operator_reg_ex_info"));
-			$operator->setRequired(true);
-			$operator->setOptions([ "" => "" ] + self::rules()->getOperatorsText());
-			$operator->setValue($this->rule->getOperator());
-			$this->addItem($operator);
-
-			$operator_negated = new ilCheckboxInputGUI($this->txt("operator_negated"), "srauma_operator_negated");
-			$operator_negated->setChecked($this->rule->isOperatorNegated());
-			$this->addItem($operator_negated);
-
-			$operator_case_sensitive = new ilCheckboxInputGUI($this->txt("operator_case_sensitive"), "srauma_operator_case_sensitive");
-			$operator_case_sensitive->setChecked($this->rule->isOperatorCaseSensitive());
-			$this->addItem($operator_case_sensitive);
-
-			$operator_value_type = new ilRadioGroupInputGUI($this->txt("operator_value_type"), "srauma_operator_value_type");
-			$operator_value_type->setRequired(true);
-			$operator_value_type->setValue($this->rule->getOperatorValueType());
-			$this->addItem($operator_value_type);
-
-			$operator_value_type_text = new ilRadioOption($this->txt("operator_value_text"), Rule::OPERATOR_VALUE_TYPE_TEXT);
-			$operator_value_type->addOption($operator_value_type_text);
-
-			$operator_value_type_text_text = new ilTextInputGUI($this->txt("operator_value_text"), "srauma_operator_value_type_text");
-			if ($this->rule->getOperatorValueType() === Rule::OPERATOR_VALUE_TYPE_TEXT) {
-				$operator_value_type_text_text->setValue($this->rule->getOperatorValue());
-			}
-			$operator_value_type_text->addSubItem($operator_value_type_text_text);
-
-			$operator_value_type_object_property = new ilRadioOption(self::plugin()
-				->translate("operator_value_object_property", ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG, [ $object ]), Rule::OPERATOR_VALUE_TYPE_OBJECT_PROPERTY);
-			$operator_value_type->addOption($operator_value_type_object_property);
-
-			$operator_value_type_object_property_select = new ilSelectInputGUI(self::plugin()
-				->translate("operator_value_object_property", ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG, [ $object ]), "srauma_operator_value_type_object_property");
-			$operator_value_type_object_property_select->setOptions([ "" => "" ] + $object_type_definiton->getObjectPropertiesText());
-			if ($this->rule->getOperatorValueType() === Rule::OPERATOR_VALUE_TYPE_OBJECT_PROPERTY) {
-				$operator_value_type_object_property_select->setValue($this->rule->getOperatorValue());
-			}
-			$operator_value_type_object_property->addSubItem($operator_value_type_object_property_select);
-
-			$mail_template_name = new ilSelectInputGUI($this->txt("mail_template_name"), "srauma_mail_template_name");
-			$mail_template_name->setInfo(ilNotifications4PluginsPlugin::PLUGIN_NAME);
-			$mail_template_name->setRequired(true);
-			$mail_template_name->setOptions([ "" => "" ] + self::rules()->getMailTemplatesText());
-			$mail_template_name->setValue($this->rule->getMailTemplateName());
-			$this->addItem($mail_template_name);
-
-			$receiver = new ilRadioGroupInputGUI($this->txt("receiver"), "srauma_receiver");
-			$receiver->setRequired(true);
-			$receiver->setValue($this->rule->getReceiverType());
-			$this->addItem($receiver);
-
-			$receiver_object = new ilRadioOption($object, Rule::RECEIVER_TYPE_OBJECT);
-			$receiver->addOption($receiver_object);
-
-			$receiver_object_select = new MultiSelectSearchInputGUI($object, "srauma_receiver_object");
-			$receiver_object_select->setRequired(true);
-			$receiver_object_select->setOptions($object_type_definiton->getReceiverPropertiesText());
-			if ($this->rule->getReceiverType() === Rule::RECEIVER_TYPE_OBJECT) {
-				$receiver_object_select->setValue($this->rule->getReceiver());
-			}
-			$receiver_object->addSubItem($receiver_object_select);
-
-			$receiver_users = new ilRadioOption($this->txt("receiver_users"), Rule::RECEIVER_TYPE_USERS);
-			$receiver->addOption($receiver_users);
-
-			$receiver_users_select = new MultiSelectSearchInputGUI($this->txt("receiver_users"), "srauma_receiver_users");
-			$receiver_users_select->setRequired(true);
-			$receiver_users_select->setOptions(self::ilias()->users()->getUsers());
-			if ($this->rule->getReceiverType() === Rule::RECEIVER_TYPE_USERS) {
-				$receiver_users_select->setValue($this->rule->getReceiver());
-			}
-			$receiver_users->addSubItem($receiver_users_select);
+			$this->fields = array_merge($this->fields, [
+				"enabled" => [
+					self::PROPERTY_CLASS => ilCheckboxInputGUI::class
+				],
+				"title" => [
+					self::PROPERTY_CLASS => ilTextInputGUI::class,
+					self::PROPERTY_REQUIRED => true
+				],
+				"description" => [
+					self::PROPERTY_CLASS => ilTextInputGUI::class
+				],
+				"metadata" => [
+					self::PROPERTY_CLASS => ilSelectInputGUI::class,
+					self::PROPERTY_REQUIRED => true,
+					self::PROPERTY_OPTIONS => [ "" => "" ] + self::ilias()->metadata()->getMetadata()
+				],
+				"operator" => [
+					self::PROPERTY_CLASS => ilSelectInputGUI::class,
+					self::PROPERTY_REQUIRED => true,
+					self::PROPERTY_OPTIONS => [ "" => "" ] + self::rules()->getOperatorsText()
+				],
+				"operator_negated" => [
+					self::PROPERTY_CLASS => ilCheckboxInputGUI::class
+				],
+				"operator_case_sensitive" => [
+					self::PROPERTY_CLASS => ilCheckboxInputGUI::class
+				],
+				"operator_value_type" => [
+					self::PROPERTY_CLASS => ilRadioGroupInputGUI::class,
+					self::PROPERTY_REQUIRED => true,
+					self::PROPERTY_SUBITEMS => [
+						Rule::OPERATOR_VALUE_TYPE_TEXT => [
+							self::PROPERTY_CLASS => ilRadioOption::class,
+							self::PROPERTY_SUBITEMS => [
+								"operator_value_text" => [
+									self::PROPERTY_CLASS => ilTextInputGUI::class
+								]
+							]
+						],
+						Rule::OPERATOR_VALUE_TYPE_OBJECT_PROPERTY => [
+							self::PROPERTY_CLASS => ilRadioOption::class,
+							self::PROPERTY_SUBITEMS => [
+								"operator_value_object_property" => [
+									self::PROPERTY_CLASS => ilSelectInputGUI::class,
+									self::PROPERTY_OPTIONS => [ "" => "" ] + $object_type_definiton->getObjectPropertiesText(),
+									"setTitle" => self::plugin()
+										->translate("operator_value_object_property", ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG, [ $object ])
+								]
+							],
+							"setTitle" => self::plugin()
+								->translate("operator_value_object_property", ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG, [ $object ])
+						]
+					]
+				],
+				"mail_template_name" => [
+					self::PROPERTY_CLASS => ilSelectInputGUI::class,
+					self::PROPERTY_REQUIRED => true,
+					self::PROPERTY_OPTIONS => [ "" => "" ] + self::rules()->getMailTemplatesText(),
+					"setInfo" => ilNotifications4PluginsPlugin::PLUGIN_NAME
+				],
+				"receiver" => [
+					self::PROPERTY_CLASS => ilRadioGroupInputGUI::class,
+					self::PROPERTY_REQUIRED => true,
+					self::PROPERTY_SUBITEMS => [
+						Rule::RECEIVER_TYPE_OBJECT => [
+							self::PROPERTY_CLASS => ilRadioOption::class,
+							self::PROPERTY_SUBITEMS => [
+								"receiver_object" => [
+									self::PROPERTY_CLASS => MultiSelectSearchInputGUI::class,
+									self::PROPERTY_REQUIRED => true,
+									self::PROPERTY_OPTIONS => $object_type_definiton->getReceiverPropertiesText(),
+									"setTitle" => $object
+								]
+							],
+							"setTitle" => $object
+						],
+						Rule::RECEIVER_TYPE_USERS => [
+							self::PROPERTY_CLASS => ilRadioOption::class,
+							self::PROPERTY_SUBITEMS => [
+								"receiver_users" => [
+									self::PROPERTY_CLASS => MultiSelectSearchInputGUI::class,
+									self::PROPERTY_REQUIRED => true,
+									self::PROPERTY_OPTIONS => self::ilias()->users()->getUsers()
+								]
+							]
+						]
+					]
+				]
+			]);
 		}
 	}
 
@@ -207,42 +276,42 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 		if ($this->rule === NULL) {
 			$this->rule = new Rule();
 
-			$object_type = intval($this->getInput("srauma_object_type"));
+			$object_type = intval($this->getInput("object_type"));
 			$this->rule->setObjectType($object_type);
 		}
 
-		$enabled = boolval($this->getInput("srauma_enabled"));
+		$enabled = boolval($this->getInput("enabled"));
 		$this->rule->setEnabled($enabled);
 
-		$title = strval($this->getInput("srauma_title"));
+		$title = strval($this->getInput("title"));
 		$this->rule->setTitle($title);
 
-		$description = strval($this->getInput("srauma_description"));
+		$description = strval($this->getInput("description"));
 		$this->rule->setDescription($description);
 
-		$metadata = intval($this->getInput("srauma_metadata"));
+		$metadata = intval($this->getInput("metadata"));
 		$this->rule->setMetadata($metadata);
 
-		$operator = intval($this->getInput("srauma_operator"));
+		$operator = intval($this->getInput("operator"));
 		$this->rule->setOperator($operator);
 
-		$operator_negated = boolval($this->getInput("srauma_operator_negated"));
+		$operator_negated = boolval($this->getInput("operator_negated"));
 		$this->rule->setOperatorNegated($operator_negated);
 
-		$operator_case_sensitive = boolval($this->getInput("srauma_operator_case_sensitive"));
+		$operator_case_sensitive = boolval($this->getInput("operator_case_sensitive"));
 		$this->rule->setOperatorCaseSensitive($operator_case_sensitive);
 
-		$operator_value_type = intval($this->getInput("srauma_operator_value_type"));
+		$operator_value_type = intval($this->getInput("operator_value_type"));
 		$this->rule->setOperatorValueType($operator_value_type);
 
 		switch ($operator_value_type) {
 			case Rule::OPERATOR_VALUE_TYPE_TEXT:
-				$operator_value = strval($this->getInput("srauma_operator_value_type_text"));
+				$operator_value = strval($this->getInput("operator_value_text"));
 				$this->rule->setOperatorValue($operator_value);
 				break;
 
 			case Rule::OPERATOR_VALUE_TYPE_OBJECT_PROPERTY:
-				$operator_value = strval($this->getInput("srauma_operator_value_type_object_property"));
+				$operator_value = strval($this->getInput("operator_value_object_property"));
 				$this->rule->setOperatorValue($operator_value);
 				break;
 
@@ -250,20 +319,20 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 				break;
 		}
 
-		$mail_template_name = strval($this->getInput("srauma_mail_template_name"));
+		$mail_template_name = strval($this->getInput("mail_template_name"));
 		$this->rule->setMailTemplateName($mail_template_name);
 
-		$receiver = intval($this->getInput("srauma_receiver"));
+		$receiver = intval($this->getInput("receiver"));
 		$this->rule->setReceiverType($receiver);
 
 		switch ($receiver) {
 			case Rule::RECEIVER_TYPE_OBJECT:
-				$receiver = $this->getInput("srauma_receiver_object");
+				$receiver = $this->getInput("receiver_object");
 				$this->rule->setReceiver($receiver);
 				break;
 
 			case Rule::RECEIVER_TYPE_USERS:
-				$receiver = $this->getInput("srauma_receiver_users");
+				$receiver = $this->getInput("receiver_users");
 				$this->rule->setReceiver($receiver);
 				break;
 

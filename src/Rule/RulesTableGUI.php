@@ -10,6 +10,7 @@ use ilSrAutoMailsPlugin;
 use ilTextInputGUI;
 use ilUtil;
 use srag\ActiveRecordConfig\SrAutoMails\ActiveRecordConfigTableGUI;
+use srag\CustomInputGUIs\SrAutoMails\PropertyFormGUI\PropertyFormGUI;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
@@ -23,22 +24,38 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 
 	use SrAutoMailsTrait;
 	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
+	const ROW_TEMPLATE = "rules_table_row.html";
+
+
 	/**
-	 * @var ilTextInputGUI
+	 * @inheritdoc
 	 */
-	protected $filter_title;
+	protected function getColumnValue(/*string*/
+		$column, /*array*/
+		$row, /*bool*/
+		$raw_export = false): string {
+		switch ($column) {
+			default:
+				$column = $row[$column];
+				break;
+		}
+
+		if (!empty($column)) {
+			return $column;
+		} else {
+			return "";
+		}
+	}
+
+
 	/**
-	 * @var ilTextInputGUI
+	 * @inheritdoc
 	 */
-	protected $filter_description;
-	/**
-	 * @var ilSelectInputGUI
-	 */
-	protected $filter_object_type;
-	/**
-	 * @var ilSelectInputGUI
-	 */
-	protected $filter_enabled;
+	public function getSelectableColumns(): array {
+		$columns = [];
+
+		return $columns;
+	}
 
 
 	/**
@@ -74,19 +91,21 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 	 * @inheritdoc
 	 */
 	protected function initData()/*: void*/ {
-		$title = $this->filter_title->getValue();
+		$filter = $this->getFilterValues();
+
+		$title = $filter["title"];
 		if ($title === false) {
 			$title = "";
 		}
-		$description = $this->filter_description->getValue();
+		$description = $filter["description"];
 		if ($description === false) {
 			$description = "";
 		}
-		$object_type = $this->filter_object_type->getValue();
+		$object_type = $filter["object_type"];
 		if ($object_type === false) {
 			$object_type = "";
 		}
-		$enabled = $this->filter_enabled->getValue();
+		$enabled = $filter["enabled"];
 		if (!empty($enabled)) {
 			$enabled = ($enabled === "yes");
 		} else {
@@ -100,63 +119,52 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 	/**
 	 * @inheritdoc
 	 */
-	public function initFilter()/*: void*/ {
-		parent::initFilter();
+	public function initFilterFields()/*: void*/ {
+		parent::initFilterFields();
 
-		$this->filter_title = new ilTextInputGUI($this->txt("title"), "srauma_title");
-		$this->addFilterItem($this->filter_title);
-		$this->filter_title->readFromSession();
-
-		$this->filter_description = new ilTextInputGUI($this->txt("description"), "srauma_description");
-		$this->addFilterItem($this->filter_description);
-		$this->filter_description->readFromSession();
-
-		$this->filter_object_type = new ilSelectInputGUI($this->txt("object_type"), "srauma_object_type");
-		$this->filter_object_type->setOptions([ "" => "" ] + self::objectTypes()->getObjectTypesText());
-		$this->addFilterItem($this->filter_object_type);
-		$this->filter_object_type->readFromSession();
-
-		$this->filter_enabled = new ilSelectInputGUI($this->txt("enabled"), "srauma_enabled");
-		$this->filter_enabled->setOptions([ "" => "", "yes" => $this->txt("yes"), "no" => $this->txt("no") ]);
-		$this->addFilterItem($this->filter_enabled);
-		$this->filter_enabled->readFromSession();
-
-		$this->setDisableFilterHiding(true);
+		$this->filters_fields = [
+			"title" => [
+				PropertyFormGUI::PROPERTY_CLASS => ilTextInputGUI::class
+			],
+			"description" => [
+				PropertyFormGUI::PROPERTY_CLASS => ilTextInputGUI::class
+			],
+			"object_type" => [
+				PropertyFormGUI::PROPERTY_CLASS => ilSelectInputGUI::class,
+				PropertyFormGUI::PROPERTY_OPTIONS => [ "" => "" ] + self::objectTypes()->getObjectTypesText()
+			],
+			"enabled" => [
+				PropertyFormGUI::PROPERTY_CLASS => ilSelectInputGUI::class,
+				PropertyFormGUI::PROPERTY_OPTIONS => [ "" => "", "yes" => $this->txt("yes"), "no" => $this->txt("no") ]
+			]
+		];
 	}
 
 
 	/**
-	 * @inheritdoc
-	 */
-	protected function initRowTemplate()/*: void*/ {
-		$this->setRowTemplate("rules_table_row.html", self::plugin()->directory());
-	}
-
-
-	/**
-	 * @param array $rule
+	 * @param array $row
 	 */
 	protected function fillRow(/*array*/
-		$rule)/*: void*/ {
-		self::dic()->ctrl()->setParameter($this->parent_obj, "srauma_rule_id", $rule["rule_id"]);
+		$row)/*: void*/ {
+		self::dic()->ctrl()->setParameter($this->parent_obj, "srauma_rule_id", $row["rule_id"]);
 		$edit_rule_link = self::dic()->ctrl()->getLinkTarget($this->parent_obj, ilSrAutoMailsConfigGUI::CMD_EDIT_RULE);
 		$remove_rule_link = self::dic()->ctrl()->getLinkTarget($this->parent_obj, ilSrAutoMailsConfigGUI::CMD_REMOVE_RULE_CONFIRM);
 		self::dic()->ctrl()->setParameter($this->parent_obj, "srauma_rule_id", NULL);
 
-		$this->tpl->setVariable("RULE_ID", $rule["rule_id"]);
+		$this->tpl->setVariable("RULE_ID", $row["rule_id"]);
 
-		if ($rule["enabled"]) {
+		if ($row["enabled"]) {
 			$enabled = ilUtil::getImagePath("icon_ok.svg");
 		} else {
 			$enabled = ilUtil::getImagePath("icon_not_ok.svg");
 		}
 		$this->tpl->setVariable("RULE_ENABLED", self::dic()->ui()->renderer()->render(self::dic()->ui()->factory()->image()->standard($enabled, "")));
 
-		$this->tpl->setVariable("RULE_TITLE", $rule["title"]);
+		$this->tpl->setVariable("RULE_TITLE", $row["title"]);
 
-		$this->tpl->setVariable("RULE_DESCRIPTION", $rule["description"]);
+		$this->tpl->setVariable("RULE_DESCRIPTION", $row["description"]);
 
-		$this->tpl->setVariable("RULE_OBJECT_TYPE", self::objectTypes()->getObjectTypesText()[$rule["object_type"]]);
+		$this->tpl->setVariable("RULE_OBJECT_TYPE", self::objectTypes()->getObjectTypesText()[$row["object_type"]]);
 
 		$actions = new ilAdvancedSelectionListGUI();
 		$actions->setListTitle($this->txt("actions"));

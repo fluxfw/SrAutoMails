@@ -301,7 +301,7 @@ class MultiSelectSearchInputGUI extends ilMultiSelectInputGUI {
 	public function setPostVar(/*string*/
 		$a_postvar)/*: void*/ {
 		if (substr($a_postvar, - 2) != "[]") {
-			$post_var = $a_postvar . "[]";
+			$a_postvar = $a_postvar . "[]";
 		}
 		parent::setPostVar($a_postvar);
 	}

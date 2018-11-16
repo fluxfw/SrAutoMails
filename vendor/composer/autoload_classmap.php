@@ -25,6 +25,7 @@ return array(
     'srag\\CustomInputGUIs\\SrAutoMails\\PropertyFormGUI\\PropertyFormGUI' => $vendorDir . '/srag/custominputguis/src/PropertyFormGUI/PropertyFormGUI.php',
     'srag\\CustomInputGUIs\\SrAutoMails\\ScreenshotsInputGUI\\ScreenshotsInputGUI' => $vendorDir . '/srag/custominputguis/src/ScreenshotsInputGUI/ScreenshotsInputGUI.php',
     'srag\\CustomInputGUIs\\SrAutoMails\\StaticHTMLPresentationInputGUI\\StaticHTMLPresentationInputGUI' => $vendorDir . '/srag/custominputguis/src/StaticHTMLPresentationInputGUI/StaticHTMLPresentationInputGUI.php',
+    'srag\\CustomInputGUIs\\SrAutoMails\\TableGUI\\BaseTableGUI' => $vendorDir . '/srag/custominputguis/src/TableGUI/BaseTableGUI.php',
     'srag\\CustomInputGUIs\\SrAutoMails\\Template\\Template' => $vendorDir . '/srag/custominputguis/src/Template/Template.php',
     'srag\\CustomInputGUIs\\SrAutoMails\\TextAreaInputGUI\\TextAreaInputGUI' => $vendorDir . '/srag/custominputguis/src/TextAreaInputGUI/TextAreaInputGUI.php',
     'srag\\CustomInputGUIs\\SrAutoMails\\TextInputGUI\\TextInputGUI' => $vendorDir . '/srag/custominputguis/src/TextInputGUI/TextInputGUI.php',

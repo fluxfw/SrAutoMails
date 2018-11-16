@@ -42,19 +42,26 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 
 
 	/**
-	 *
+	 * @inheritdoc
 	 */
-	protected function initTable()/*: void*/ {
-		parent::initTable();
+	protected function initColumns()/*: void*/ {
+		$this->addColumn("");
+		$this->addColumn("");
+		$this->addColumn($this->txt("title"), true);
+		$this->addColumn($this->txt("description"));
+		$this->addColumn($this->txt("object_type"), true);
+		$this->addColumn($this->txt("actions"));
+	}
 
-		$parent = $this->getParentObject();
 
+	/**
+	 * @inheritdoc
+	 */
+	protected function initCommands()/*: void*/ {
 		$add_rule = ilLinkButton::getInstance();
 		$add_rule->setCaption($this->txt("add_rule"), false);
-		$add_rule->setUrl(self::dic()->ctrl()->getLinkTarget($parent, ilSrAutoMailsConfigGUI::CMD_ADD_RULE));
+		$add_rule->setUrl(self::dic()->ctrl()->getLinkTarget($this->parent_obj, ilSrAutoMailsConfigGUI::CMD_ADD_RULE));
 		self::dic()->toolbar()->addButtonInstance($add_rule);
-
-		$this->setRowTemplate("rules_table_row.html", self::plugin()->directory());
 
 		$this->setSelectAllCheckbox("srauma_rule_id");
 		$this->addMultiCommand(ilSrAutoMailsConfigGUI::CMD_ENABLE_RULES, $this->txt("enable_rules"));
@@ -64,7 +71,34 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 
 
 	/**
-	 *
+	 * @inheritdoc
+	 */
+	protected function initData()/*: void*/ {
+		$title = $this->filter_title->getValue();
+		if ($title === false) {
+			$title = "";
+		}
+		$description = $this->filter_description->getValue();
+		if ($description === false) {
+			$description = "";
+		}
+		$object_type = $this->filter_object_type->getValue();
+		if ($object_type === false) {
+			$object_type = "";
+		}
+		$enabled = $this->filter_enabled->getValue();
+		if (!empty($enabled)) {
+			$enabled = ($enabled === "yes");
+		} else {
+			$enabled = NULL;
+		}
+
+		$this->setData(self::rules()->getRulesArray($title, $description, $object_type, $enabled));
+	}
+
+
+	/**
+	 * @inheritdoc
 	 */
 	public function initFilter()/*: void*/ {
 		parent::initFilter();
@@ -92,42 +126,10 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 
 
 	/**
-	 *
+	 * @inheritdoc
 	 */
-	protected function initData()/*: void*/ {
-		$title = $this->filter_title->getValue();
-		if ($title === false) {
-			$title = "";
-		}
-		$description = $this->filter_description->getValue();
-		if ($description === false) {
-			$description = "";
-		}
-		$object_type = $this->filter_object_type->getValue();
-		if ($object_type === false) {
-			$object_type = "";
-		}
-		$enabled = $this->filter_enabled->getValue();
-		if (!empty($enabled)) {
-			$enabled = ($enabled === "yes");
-		} else {
-			$enabled = NULL;
-		}
-
-		$this->setData(self::rules()->getRulesArray($title, $description, $object_type, $enabled));
-	}
-
-
-	/**
-	 *
-	 */
-	protected function initColumns()/*: void*/ {
-		$this->addColumn("");
-		$this->addColumn("");
-		$this->addColumn($this->txt("title"), true);
-		$this->addColumn($this->txt("description"));
-		$this->addColumn($this->txt("object_type"), true);
-		$this->addColumn($this->txt("actions"));
+	protected function initRowTemplate()/*: void*/ {
+		$this->setRowTemplate("rules_table_row.html", self::plugin()->directory());
 	}
 
 
@@ -135,13 +137,11 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 	 * @param array $rule
 	 */
 	protected function fillRow(/*array*/
-		$rule) {
-		$parent = $this->getParentObject();
-
-		self::dic()->ctrl()->setParameter($parent, "srauma_rule_id", $rule["rule_id"]);
-		$edit_rule_link = self::dic()->ctrl()->getLinkTarget($parent, ilSrAutoMailsConfigGUI::CMD_EDIT_RULE);
-		$remove_rule_link = self::dic()->ctrl()->getLinkTarget($parent, ilSrAutoMailsConfigGUI::CMD_REMOVE_RULE_CONFIRM);
-		self::dic()->ctrl()->setParameter($parent, "srauma_rule_id", NULL);
+		$rule)/*: void*/ {
+		self::dic()->ctrl()->setParameter($this->parent_obj, "srauma_rule_id", $rule["rule_id"]);
+		$edit_rule_link = self::dic()->ctrl()->getLinkTarget($this->parent_obj, ilSrAutoMailsConfigGUI::CMD_EDIT_RULE);
+		$remove_rule_link = self::dic()->ctrl()->getLinkTarget($this->parent_obj, ilSrAutoMailsConfigGUI::CMD_REMOVE_RULE_CONFIRM);
+		self::dic()->ctrl()->setParameter($this->parent_obj, "srauma_rule_id", NULL);
 
 		$this->tpl->setVariable("RULE_ID", $rule["rule_id"]);
 

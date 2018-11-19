@@ -274,6 +274,82 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 	/**
 	 * @inheritdoc
 	 */
+	protected function setValue(/*string*/
+		$key, $value)/*: void*/ {
+		switch ($key) {
+			case "enabled":
+				$this->rule->setEnabled($value);
+				break;
+
+			case "title":
+				$this->rule->setTitle(strval($value));
+				break;
+
+			case "description":
+				$this->rule->setDescription(strval($value));
+				break;
+
+			case "metadata":
+				$this->rule->setMetadata(intval($value));
+				break;
+
+			case "operator":
+				$this->rule->setOperator(intval($value));
+				break;
+
+			case "operator_negated":
+				$this->rule->setOperatorNegated($value);
+				break;
+
+			case "operator_case_sensitive":
+				$this->rule->setOperatorCaseSensitive($value);
+				break;
+
+			case "operator_value_type":
+				$this->rule->setOperatorValueType(intval($value));
+				break;
+
+			case "operator_value_text":
+				if ($this->rule->getOperatorValueType() === Rule::OPERATOR_VALUE_TYPE_TEXT) {
+					$this->rule->setOperatorValue($value);
+				}
+				break;
+
+			case "operator_value_object_property":
+				if ($this->rule->getOperatorValueType() === Rule::OPERATOR_VALUE_TYPE_OBJECT_PROPERTY) {
+					$this->rule->setOperatorValue($value);
+				}
+				break;
+
+			case "mail_template_name":
+				$this->rule->setMailTemplateName(strval($value));
+				break;
+
+			case "receiver":
+				$this->rule->setReceiverType(intval($value));
+				break;
+
+			case "receiver_object":
+				if ($this->rule->getReceiverType() === Rule::RECEIVER_TYPE_OBJECT) {
+					$this->rule->setReceiver($value);
+				}
+				break;
+
+			case "receiver_users":
+				if ($this->rule->getReceiverType() === Rule::RECEIVER_TYPE_USERS) {
+					$this->rule->setReceiver($value);
+				}
+				break;
+
+			default:
+				break;
+		}
+	}
+
+
+	/**
+	 * @inheritdoc
+	 */
 	public function updateForm()/*: void*/ {
 		if ($this->rule === NULL) {
 			$this->rule = new Rule();
@@ -282,65 +358,7 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 			$this->rule->setObjectType($object_type);
 		}
 
-		$enabled = boolval($this->getInput("enabled"));
-		$this->rule->setEnabled($enabled);
-
-		$title = strval($this->getInput("title"));
-		$this->rule->setTitle($title);
-
-		$description = strval($this->getInput("description"));
-		$this->rule->setDescription($description);
-
-		$metadata = intval($this->getInput("metadata"));
-		$this->rule->setMetadata($metadata);
-
-		$operator = intval($this->getInput("operator"));
-		$this->rule->setOperator($operator);
-
-		$operator_negated = boolval($this->getInput("operator_negated"));
-		$this->rule->setOperatorNegated($operator_negated);
-
-		$operator_case_sensitive = boolval($this->getInput("operator_case_sensitive"));
-		$this->rule->setOperatorCaseSensitive($operator_case_sensitive);
-
-		$operator_value_type = intval($this->getInput("operator_value_type"));
-		$this->rule->setOperatorValueType($operator_value_type);
-
-		switch ($operator_value_type) {
-			case Rule::OPERATOR_VALUE_TYPE_TEXT:
-				$operator_value = strval($this->getInput("operator_value_text"));
-				$this->rule->setOperatorValue($operator_value);
-				break;
-
-			case Rule::OPERATOR_VALUE_TYPE_OBJECT_PROPERTY:
-				$operator_value = strval($this->getInput("operator_value_object_property"));
-				$this->rule->setOperatorValue($operator_value);
-				break;
-
-			default:
-				break;
-		}
-
-		$mail_template_name = strval($this->getInput("mail_template_name"));
-		$this->rule->setMailTemplateName($mail_template_name);
-
-		$receiver = intval($this->getInput("receiver"));
-		$this->rule->setReceiverType($receiver);
-
-		switch ($receiver) {
-			case Rule::RECEIVER_TYPE_OBJECT:
-				$receiver = $this->getInput("receiver_object");
-				$this->rule->setReceiver($receiver);
-				break;
-
-			case Rule::RECEIVER_TYPE_USERS:
-				$receiver = $this->getInput("receiver_users");
-				$this->rule->setReceiver($receiver);
-				break;
-
-			default:
-				break;
-		}
+		parent::updateForm();
 
 		$this->rule->store();
 	}

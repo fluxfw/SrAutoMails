@@ -113,7 +113,9 @@ abstract class TableGUI extends BaseTableGUI {
 		if ($this->checkRowTemplateConst()) {
 			$this->setRowTemplate(static::ROW_TEMPLATE, self::plugin()->directory());
 		} else {
-			$this->setRowTemplate("table_row.html", __DIR__);
+			$dir = __DIR__;
+			$dir = substr($dir, strpos($dir, "/Customizing/") + 1);
+			$this->setRowTemplate("table_row.html", $dir);
 		}
 	}
 

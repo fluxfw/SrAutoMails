@@ -231,7 +231,7 @@ abstract class TableGUI extends BaseTableGUI {
 	 * @return bool
 	 */
 	private final function checkRowTemplateConst()/*: bool*/ {
-		return (defined("static::ROW_TEMPLATE") || !empty(static::ROW_TEMPLATE));
+		return (defined("static::ROW_TEMPLATE") && !empty(static::ROW_TEMPLATE));
 	}
 
 

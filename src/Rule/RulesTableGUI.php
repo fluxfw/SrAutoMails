@@ -122,7 +122,7 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 	public function initFilterFields()/*: void*/ {
 		parent::initFilterFields();
 
-		$this->filters_fields = [
+		$this->filter_fields = [
 			"title" => [
 				PropertyFormGUI::PROPERTY_CLASS => ilTextInputGUI::class
 			],

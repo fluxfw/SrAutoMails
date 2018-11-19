@@ -132,7 +132,7 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 			self::dic()->ctrl()->setParameter($this->parent, "srauma_rule_id", $this->rule->getRuleId());
 		}
 
-		$this->setFormAction(self::dic()->ctrl()->getFormAction($this->parent));
+		parent::initAction();
 
 		self::dic()->ctrl()->setParameter($this->parent, "srauma_rule_id", NULL);
 	}

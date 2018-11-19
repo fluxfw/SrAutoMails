@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.13.5]
+- Improve TableGUI
+
 ## [0.13.4]
 - Fix ilCustomInputGUI
 

@@ -2,9 +2,7 @@
 
 namespace srag\CustomInputGUIs\SrAutoMails\PropertyFormGUI\Items;
 
-use ilCheckboxInputGUI;
 use ilCustomInputGUI;
-use ilDateTimeInputGUI;
 use ilFormPropertyGUI;
 use ilFormSectionHeaderGUI;
 use ilPropertyFormGUI;
@@ -70,23 +68,29 @@ final class Items {
 	 * @return mixed
 	 */
 	public static function getValueFromItem($item) {
-		if ($item instanceof ilCheckboxInputGUI) {
+		if (method_exists($item, "getChecked")) {
 			return boolval($item->getChecked());
-		} else {
-			if ($item instanceof ilDateTimeInputGUI) {
-				return $item->getDate();
+		}
+
+		if (method_exists($item, "getDate")) {
+			return $item->getDate();
+		}
+
+		if (!($item instanceof ilCustomInputGUI)) {
+			if ($item->getMulti()) {
+				return $item->getMultiValues();
 			} else {
-				if (!($item instanceof ilCustomInputGUI)) {
-					if ($item->getMulti()) {
-						return $item->getMultiValues();
-					} else {
-						return $item->getValue();
-					}
-				} else {
-					return NULL;
+				$value = $item->getValue();
+
+				if (empty($value)) {
+					$value = "";
 				}
+
+				return $value;
 			}
 		}
+
+		return NULL;
 	}
 
 
@@ -141,16 +145,20 @@ final class Items {
 	 * @param mixed                                                  $value
 	 */
 	public static function setValueToItem($item, $value)/*: void*/ {
-		if ($item instanceof ilCheckboxInputGUI) {
+		if (method_exists($item, "setChecked")) {
 			$item->setChecked($value);
-		} else {
-			if ($item instanceof ilDateTimeInputGUI) {
-				$item->setDate($value);
-			} else {
-				if (!($item instanceof ilRadioOption || $item instanceof ilCustomInputGUI)) {
-					$item->setValue($value);
-				}
-			}
+
+			return;
+		}
+
+		if (method_exists($item, "setDate")) {
+			$item->setDate($value);
+
+			return;
+		}
+
+		if (!($item instanceof ilRadioOption || $item instanceof ilCustomInputGUI)) {
+			$item->setValue($value);
 		}
 	}
 

@@ -94,17 +94,8 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 		$filter = $this->getFilterValues();
 
 		$title = $filter["title"];
-		if ($title === false) {
-			$title = "";
-		}
 		$description = $filter["description"];
-		if ($description === false) {
-			$description = "";
-		}
 		$object_type = $filter["object_type"];
-		if ($object_type === false) {
-			$object_type = "";
-		}
 		$enabled = $filter["enabled"];
 		if (!empty($enabled)) {
 			$enabled = ($enabled === "yes");

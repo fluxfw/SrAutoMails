@@ -42,7 +42,6 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 	 * @param Rule|null             $rule
 	 */
 	public function __construct(ActiveRecordConfigGUI $parent, string $tab_id, /*?*/
-		/*?*/
 		Rule $rule = NULL) {
 
 		$this->rule = $rule;

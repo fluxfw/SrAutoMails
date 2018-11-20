@@ -310,13 +310,13 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 
 			case "operator_value_text":
 				if ($this->rule->getOperatorValueType() === Rule::OPERATOR_VALUE_TYPE_TEXT) {
-					$this->rule->setOperatorValue($value);
+					$this->rule->setOperatorValue(strval($value));
 				}
 				break;
 
 			case "operator_value_object_property":
 				if ($this->rule->getOperatorValueType() === Rule::OPERATOR_VALUE_TYPE_OBJECT_PROPERTY) {
-					$this->rule->setOperatorValue($value);
+					$this->rule->setOperatorValue(strval($value));
 				}
 				break;
 

@@ -40,11 +40,7 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 				break;
 		}
 
-		if (!empty($column)) {
-			return $column;
-		} else {
-			return "";
-		}
+		return strval($column);
 	}
 
 

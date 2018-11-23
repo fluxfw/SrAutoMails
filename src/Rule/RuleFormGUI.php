@@ -273,7 +273,28 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 	/**
 	 * @inheritdoc
 	 */
-	protected function setValue(/*string*/
+	public function storeForm()/*: bool*/ {
+		if ($this->rule === NULL) {
+			$this->rule = new Rule();
+
+			$object_type = intval($this->getInput("object_type"));
+			$this->rule->setObjectType($object_type);
+		}
+
+		if (!parent::storeForm()) {
+			return false;
+		}
+
+		$this->rule->store();
+
+		return true;
+	}
+
+
+	/**
+	 * @inheritdoc
+	 */
+	protected function storeValue(/*string*/
 		$key, $value)/*: void*/ {
 		switch ($key) {
 			case "enabled":
@@ -343,23 +364,6 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 			default:
 				break;
 		}
-	}
-
-
-	/**
-	 * @inheritdoc
-	 */
-	public function updateForm()/*: void*/ {
-		if ($this->rule === NULL) {
-			$this->rule = new Rule();
-
-			$object_type = intval($this->getInput("object_type"));
-			$this->rule->setObjectType($object_type);
-		}
-
-		parent::updateForm();
-
-		$this->rule->store();
 	}
 
 

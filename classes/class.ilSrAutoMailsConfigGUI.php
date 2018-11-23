@@ -70,7 +70,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 
 		$form = $this->getRuleForm();
 
-		self::plugin()->output($form);
+		self::output()->output($form);
 	}
 
 
@@ -82,15 +82,11 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 
 		$form = $this->getRuleForm();
 
-		$form->setValuesByPost();
-
-		if (!$form->checkInput()) {
-			self::plugin()->output($form);
+		if (!$form->storeForm()) {
+			self::output()->output($form);
 
 			return;
 		}
-
-		$form->updateForm();
 
 		ilUtil::sendSuccess(self::plugin()->translate("added_rule", self::LANG_MODULE_CONFIG, [ $form->getRule()->getTitle() ]), true);
 
@@ -111,7 +107,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 
 		$form = $this->getRuleForm($rule);
 
-		self::plugin()->output($form);
+		self::output()->output($form);
 	}
 
 
@@ -126,15 +122,11 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 
 		$form = $this->getRuleForm($rule);
 
-		$form->setValuesByPost();
-
-		if (!$form->checkInput()) {
-			self::plugin()->output($form);
+		if (!$form->storeForm()) {
+			self::output()->output($form);
 
 			return;
 		}
-
-		$form->updateForm();
 
 		ilUtil::sendSuccess(self::plugin()->translate("saved_rule", self::LANG_MODULE_CONFIG, [ $rule->getTitle() ]), true);
 
@@ -164,7 +156,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 		$confirmation->setConfirm($this->txt("remove"), self::CMD_REMOVE_RULE);
 		$confirmation->setCancel($this->txt("cancel"), $this->getCmdForTab(self::TAB_RULES));
 
-		self::plugin()->output($confirmation);
+		self::output()->output($confirmation);
 	}
 
 
@@ -261,7 +253,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 		$confirmation->setConfirm($this->txt("remove"), self::CMD_REMOVE_RULES);
 		$confirmation->setCancel($this->txt("cancel"), $this->getCmdForTab(self::TAB_RULES));
 
-		self::plugin()->output($confirmation);
+		self::output()->output($confirmation);
 	}
 
 

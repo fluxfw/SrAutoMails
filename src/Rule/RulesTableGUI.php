@@ -159,6 +159,6 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 		$actions->addItem($this->txt("edit_rule"), "", $edit_rule_link);
 		$actions->addItem($this->txt("remove_rule"), "", $remove_rule_link);
 
-		$this->tpl->setVariable("ACTIONS", $actions->getHTML());
+		$this->tpl->setVariable("ACTIONS", self::output()->getHTML($actions));
 	}
 }

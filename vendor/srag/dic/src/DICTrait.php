@@ -4,6 +4,7 @@ namespace srag\DIC\SrAutoMails;
 
 use srag\DIC\SrAutoMails\DIC\DICInterface;
 use srag\DIC\SrAutoMails\Exception\DICException;
+use srag\DIC\SrAutoMails\Output\OutputInterface;
 use srag\DIC\SrAutoMails\Plugin\PluginInterface;
 use srag\DIC\SrAutoMails\Version\VersionInterface;
 
@@ -32,6 +33,16 @@ trait DICTrait {
 	 */
 	protected static final function dic()/*: DICInterface*/ {
 		return DICStatic::dic();
+	}
+
+
+	/**
+	 * Get output interface
+	 *
+	 * @return OutputInterface Output interface
+	 */
+	protected static final function output()/*: OutputInterface*/ {
+		return DICStatic::output();
 	}
 
 

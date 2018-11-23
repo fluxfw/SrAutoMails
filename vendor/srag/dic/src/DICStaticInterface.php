@@ -4,6 +4,7 @@ namespace srag\DIC\SrAutoMails;
 
 use srag\DIC\SrAutoMails\DIC\DICInterface;
 use srag\DIC\SrAutoMails\Exception\DICException;
+use srag\DIC\SrAutoMails\Output\OutputInterface;
 use srag\DIC\SrAutoMails\Plugin\PluginInterface;
 use srag\DIC\SrAutoMails\Version\VersionInterface;
 
@@ -22,6 +23,15 @@ interface DICStaticInterface {
 	 * @return DICInterface DIC interface
 	 */
 	public static function dic()/*: DICInterface*/
+	;
+
+
+	/**
+	 * Get output interface
+	 *
+	 * @return OutputInterface Output interface
+	 */
+	public static function output()/*: OutputInterface*/
 	;
 
 

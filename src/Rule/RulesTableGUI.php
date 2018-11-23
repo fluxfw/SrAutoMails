@@ -145,7 +145,7 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 		} else {
 			$enabled = ilUtil::getImagePath("icon_not_ok.svg");
 		}
-		$this->tpl->setVariable("RULE_ENABLED", self::dic()->ui()->renderer()->render(self::dic()->ui()->factory()->image()->standard($enabled, "")));
+		$this->tpl->setVariable("RULE_ENABLED", self::output()->getHTML(self::dic()->ui()->factory()->image()->standard($enabled, "")));
 
 		$this->tpl->setVariable("RULE_TITLE", $row["title"]);
 

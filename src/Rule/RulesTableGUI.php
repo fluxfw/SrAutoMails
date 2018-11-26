@@ -24,7 +24,6 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 
 	use SrAutoMailsTrait;
 	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
-	const ROW_TEMPLATE = "rules_table_row.html";
 
 
 	/**
@@ -35,6 +34,10 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 		$row, /*bool*/
 		$raw_export = false): string {
 		switch ($column) {
+			case "object_type":
+				$column = self::objectTypes()->getObjectTypesText()[$row[$column]];
+				break;
+
 			default:
 				$column = $row[$column];
 				break;
@@ -48,7 +51,18 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 	 * @inheritdoc
 	 */
 	public function getSelectableColumns2(): array {
-		$columns = [];
+		$columns = [
+			"title" => "title",
+			"description" => "description",
+			"object_type" => "object_type"
+		];
+		$columns = array_map(function (string $key): array {
+			return [
+				"id" => $key,
+				"default" => true,
+				"sort" => ($key !== "description")
+			];
+		}, $columns);
 
 		return $columns;
 	}
@@ -60,9 +74,9 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 	protected function initColumns()/*: void*/ {
 		$this->addColumn("");
 		$this->addColumn("");
-		$this->addColumn($this->txt("title"), true);
-		$this->addColumn($this->txt("description"));
-		$this->addColumn($this->txt("object_type"), true);
+
+		parent::initColumns();
+
 		$this->addColumn($this->txt("actions"));
 	}
 
@@ -138,20 +152,21 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 		$remove_rule_link = self::dic()->ctrl()->getLinkTarget($this->parent_obj, ilSrAutoMailsConfigGUI::CMD_REMOVE_RULE_CONFIRM);
 		self::dic()->ctrl()->setParameter($this->parent_obj, "srauma_rule_id", NULL);
 
-		$this->tpl->setVariable("RULE_ID", $row["rule_id"]);
+		$this->tpl->setCurrentBlock("checkbox");
+		$this->tpl->setVariable("CHECKBOX_POST_VAR", "srauma_rule_id");
+		$this->tpl->setVariable("ID", $row["rule_id"]);
+		$this->tpl->parseCurrentBlock();
 
+		$this->tpl->setCurrentBlock("column");
 		if ($row["enabled"]) {
 			$enabled = ilUtil::getImagePath("icon_ok.svg");
 		} else {
 			$enabled = ilUtil::getImagePath("icon_not_ok.svg");
 		}
-		$this->tpl->setVariable("RULE_ENABLED", self::output()->getHTML(self::dic()->ui()->factory()->image()->standard($enabled, "")));
+		$this->tpl->setVariable("COLUMN", self::output()->getHTML(self::dic()->ui()->factory()->image()->standard($enabled, "")));
+		$this->tpl->parseCurrentBlock();
 
-		$this->tpl->setVariable("RULE_TITLE", $row["title"]);
-
-		$this->tpl->setVariable("RULE_DESCRIPTION", $row["description"]);
-
-		$this->tpl->setVariable("RULE_OBJECT_TYPE", self::objectTypes()->getObjectTypesText()[$row["object_type"]]);
+		parent::fillRow($row);
 
 		$actions = new ilAdvancedSelectionListGUI();
 		$actions->setListTitle($this->txt("actions"));
@@ -159,6 +174,6 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 		$actions->addItem($this->txt("edit_rule"), "", $edit_rule_link);
 		$actions->addItem($this->txt("remove_rule"), "", $remove_rule_link);
 
-		$this->tpl->setVariable("ACTIONS", self::output()->getHTML($actions));
+		$this->tpl->setVariable("COLUMN", self::output()->getHTML($actions));
 	}
 }

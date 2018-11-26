@@ -114,7 +114,7 @@ class Rule extends ActiveRecord {
 	 * @con_length       2
 	 * @con_is_notnull   true
 	 */
-	protected $object_type;
+	protected $object_type = 0;
 	/**
 	 * @var int
 	 *
@@ -123,7 +123,7 @@ class Rule extends ActiveRecord {
 	 * @con_length       8
 	 * @con_is_notnull   true
 	 */
-	protected $metadata;
+	protected $metadata = 0;
 	/**
 	 * @var int
 	 *
@@ -132,7 +132,7 @@ class Rule extends ActiveRecord {
 	 * @con_length       2
 	 * @con_is_notnull   true
 	 */
-	protected $operator;
+	protected $operator = 0;
 	/**
 	 * @var bool
 	 *
@@ -159,7 +159,7 @@ class Rule extends ActiveRecord {
 	 * @con_length       1
 	 * @con_is_notnull   true
 	 */
-	protected $operator_value_type;
+	protected $operator_value_type = 0;
 	/**
 	 * @var string
 	 *
@@ -184,7 +184,7 @@ class Rule extends ActiveRecord {
 	 * @con_length       1
 	 * @con_is_notnull   true
 	 */
-	protected $receiver_type;
+	protected $receiver_type = 0;
 	/**
 	 * @var array
 	 *

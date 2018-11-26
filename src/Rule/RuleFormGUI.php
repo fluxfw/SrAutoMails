@@ -276,9 +276,6 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 	public function storeForm()/*: bool*/ {
 		if ($this->rule === NULL) {
 			$this->rule = new Rule();
-
-			$object_type = intval($this->getInput("object_type"));
-			$this->rule->setObjectType($object_type);
 		}
 
 		if (!parent::storeForm()) {
@@ -297,6 +294,12 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 	protected function storeValue(/*string*/
 		$key, $value)/*: void*/ {
 		switch ($key) {
+			case "object_type":
+				if (empty($this->rule->getObjectType())) {
+					$this->rule->setObjectType(intval($value));
+				}
+				break;
+
 			case "enabled":
 				$this->rule->setEnabled($value);
 				break;

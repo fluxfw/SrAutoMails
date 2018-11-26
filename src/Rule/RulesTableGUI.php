@@ -56,6 +56,7 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 			"description" => "description",
 			"object_type" => "object_type"
 		];
+
 		$columns = array_map(function (string $key): array {
 			return [
 				"id" => $key,

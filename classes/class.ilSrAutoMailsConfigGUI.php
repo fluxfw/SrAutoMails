@@ -102,7 +102,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 	protected function editRule()/*: void*/ {
 		self::dic()->tabs()->activateTab(self::TAB_RULES);
 
-		$rule_id = filter_input(INPUT_GET, "srauma_rule_id");
+		$rule_id = intval(filter_input(INPUT_GET, "srauma_rule_id"));
 		$rule = self::rules()->getRuleById($rule_id);
 
 		$form = $this->getRuleForm($rule);
@@ -117,7 +117,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 	protected function updateRule()/*: void*/ {
 		self::dic()->tabs()->activateTab(self::TAB_RULES);
 
-		$rule_id = filter_input(INPUT_GET, "srauma_rule_id");
+		$rule_id = intval(filter_input(INPUT_GET, "srauma_rule_id"));
 		$rule = self::rules()->getRuleById($rule_id);
 
 		$form = $this->getRuleForm($rule);
@@ -140,7 +140,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 	protected function removeRuleConfirm()/*: void*/ {
 		self::dic()->tabs()->activateTab(self::TAB_RULES);
 
-		$rule_id = filter_input(INPUT_GET, "srauma_rule_id");
+		$rule_id = intval(filter_input(INPUT_GET, "srauma_rule_id"));
 		$rule = self::rules()->getRuleById($rule_id);
 
 		$confirmation = new ilConfirmationGUI();
@@ -164,7 +164,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 	 *
 	 */
 	protected function removeRule()/*: void*/ {
-		$rule_id = filter_input(INPUT_GET, "srauma_rule_id");
+		$rule_id = intval(filter_input(INPUT_GET, "srauma_rule_id"));
 		$rule = self::rules()->getRuleById($rule_id);
 
 		$rule->delete();

@@ -52,6 +52,7 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 	 */
 	public function getSelectableColumns2(): array {
 		$columns = [
+			"enabled" => "enabled",
 			"title" => "title",
 			"description" => "description",
 			"object_type" => "object_type"
@@ -73,7 +74,6 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 	 * @inheritdoc
 	 */
 	protected function initColumns()/*: void*/ {
-		$this->addColumn("");
 		$this->addColumn("");
 
 		parent::initColumns();
@@ -114,7 +114,16 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 			$enabled = NULL;
 		}
 
-		$this->setData(self::rules()->getRulesArray($title, $description, $object_type, $enabled));
+		$this->setData(array_map(function (array &$row): array {
+			if ($row["enabled"]) {
+				$enabled = ilUtil::getImagePath("icon_ok.svg");
+			} else {
+				$enabled = ilUtil::getImagePath("icon_not_ok.svg");
+			}
+			$row["enabled"] = self::output()->getHTML(self::dic()->ui()->factory()->image()->standard($enabled, ""));
+
+			return $row;
+		}, self::rules()->getRulesArray($title, $description, $object_type, $enabled)));
 	}
 
 
@@ -156,15 +165,6 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 		$this->tpl->setCurrentBlock("checkbox");
 		$this->tpl->setVariable("CHECKBOX_POST_VAR", "srauma_rule_id");
 		$this->tpl->setVariable("ID", $row["rule_id"]);
-		$this->tpl->parseCurrentBlock();
-
-		$this->tpl->setCurrentBlock("column");
-		if ($row["enabled"]) {
-			$enabled = ilUtil::getImagePath("icon_ok.svg");
-		} else {
-			$enabled = ilUtil::getImagePath("icon_not_ok.svg");
-		}
-		$this->tpl->setVariable("COLUMN", self::output()->getHTML(self::dic()->ui()->factory()->image()->standard($enabled, "")));
 		$this->tpl->parseCurrentBlock();
 
 		parent::fillRow($row);

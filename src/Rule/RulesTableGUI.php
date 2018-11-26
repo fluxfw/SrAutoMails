@@ -62,7 +62,7 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 			return [
 				"id" => $key,
 				"default" => true,
-				"sort" => ($key !== "description")
+				"sort" => ($key !== "enabled" && $key !== "description")
 			];
 		}, $columns);
 

@@ -15,7 +15,7 @@ use srNotificationInternalMailSender;
 /**
  * Class Job
  *
- * @package rag\AVL\Plugins\SrAutoMails\Job
+ * @package rag\Plugins\SrAutoMails\Job
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */

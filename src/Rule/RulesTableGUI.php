@@ -153,6 +153,14 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 
 
 	/**
+	 * @inheritdoc
+	 */
+	protected function initId()/*: void*/ {
+		$this->setId("srauma_rules");
+	}
+
+
+	/**
 	 * @param array $row
 	 */
 	protected function fillRow(/*array*/

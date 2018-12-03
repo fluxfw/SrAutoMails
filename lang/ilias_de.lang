@@ -1,0 +1,64 @@
+config_actions#:#Aktionen
+config_add#:#Hinzufügen
+config_add_rule#:#Regel hinzufügen
+config_added_rule#:#Regel %s hinzugefügt
+config_cancel#:#Abbrechen
+config_configuration#:#Konfiguration
+config_configuration_saved#:#Konfiguration gespeichert
+config_description#:#Beschreibung
+config_disable_rules#:#Regeln deaktivieren
+config_disabled_rules#:#Regeln deaktiviert
+config_edit_rule#:#Regel bearbeiten
+config_enable_rules#:#Regeln aktivieren
+config_enabled_rules#:#Regeln aktiviert
+config_enabled#:#Aktiviert
+config_mail_template_name#:#Mail-Vorlage-Name
+config_metadata#:#Metadaten
+config_no#:#Nein
+config_object_property_count_course_members#:#Anzahl Mitglieder
+config_object_type#:#Objekt-Typ
+config_object_course#:#Kurs
+config_operator#:#Vergleicher
+config_operator_bigger#:#Grösser als
+config_operator_bigger_equals#:#Grösser als oder ist gleich
+config_operator_case_sensitive#:#Gross-/Kleinschreibung beachten
+config_operator_contains#:#Enthält
+config_operator_ends_with#:#Endet mit
+config_operator_equals#:#Ist gleich
+config_operator_is_empty#:#Ist leer
+config_operator_less#:#Kleiner als
+config_operator_less_equals#:#Kleiner als oder ist gleich
+config_operator_negated#:#Negation
+config_operator_reg_ex#:#RegEx
+config_operator_reg_ex_info#:#Hinweis: RegExp muss in / / geschrieben werden
+config_operator_starts_with#:#Startet mit
+config_operator_value#:#Wert
+config_operator_value_object_property#:#%s-Eigenschaft
+config_operator_value_text#:#Text
+config_operator_value_type#:#Wert-Typ
+config_receiver#:#Empfänger
+config_receiver_course_administrators#:#An Kursadministratoren
+config_receiver_course_members#:#An Kursmitglieder
+config_receiver_course_superior_of_members#:#An Vorgesetze von Kursmitgliedern
+config_receiver_course_tutors#:#An Kurstutoren
+config_receiver_users#:#Benutzer
+config_remove#:#Entfernen
+config_remove_rule#:#Regel entfernen
+config_remove_rule_confirm#:#Möchten Sie die Regel wirklich entfernen: %s ?
+config_remove_rules#:#Regeln entfernen
+config_remove_rules_confirm#:#Möchten Sie die folgende Regeln wirklich entfernen?
+config_removed_rule#:#Regel %s entfernt
+config_removed_rules#:#Regeln entfernt
+config_rules#:#Regeln
+config_save#:#Speichern
+config_saved_rule#:#Regel %s gespeichert
+config_title#:#Titel
+config_yes#:#Ja
+removeplugindataconfirm_cancel#:#Abbrechen
+removeplugindataconfirm_confirm_remove_data#:#Möchten Sie die %1$s-Daten auch entfernen? Allenfalls möchten Sie das %1$s-Plugin nur deaktivieren?
+removeplugindataconfirm_deactivate#:#%1$s-Plugin nur deaktivieren
+removeplugindataconfirm_data#:#%1$s-Daten
+removeplugindataconfirm_keep_data#:#%1$s-Daten behalten
+removeplugindataconfirm_msg_kept_data#:#Die %1$s-Daten wurden behalten
+removeplugindataconfirm_msg_removed_data#:#Die %1$s-Daten wurden auch entfernt
+removeplugindataconfirm_remove_data#:#Entferne %1$s-Daten

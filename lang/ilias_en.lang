@@ -1,0 +1,64 @@
+config_actions#:#Actions
+config_add#:#Add
+config_add_rule#:#Add rule
+config_added_rule#:#Rule %s added
+config_cancel#:#Cancel
+config_configuration#:#Configuration
+config_configuration_saved#:#Configuration saved
+config_description#:#Description
+config_disable_rules#:#Disable rules
+config_disable_rules#:#Rules disabled
+config_edit_rule#:#Edit rule
+config_enable_rules#:#Enable rules
+config_enabled#:#Enabled
+config_enabled_rules#:#Rules enabled
+config_mail_template_name#:#Mail template name
+config_metadata#:#Metadata
+config_no#:#No
+config_object_property_count_course_members#:#Count course members
+config_object_type#:#Object type
+config_object_course#:#Course
+config_operator#:#Operator
+config_operator_bigger#:#Bigger than
+config_operator_bigger_equals#:#Bigger than or is equals
+config_operator_case_sensitive#:#Case sensitive
+config_operator_contains#:#Contanints
+config_operator_ends_with#:#Ends with
+config_operator_equals#:#Is equals
+config_operator_is_empty#:#Is empty
+config_operator_less#:#Less than
+config_operator_less_equals#:#Less than or is equals
+config_operator_negated#:#Negation
+config_operator_reg_ex#:#RegEx
+config_operator_reg_ex_info#:#Hint: RegExp must be written in / /
+config_operator_starts_with#:#Starts with
+config_operator_value#:#Value
+config_operator_value_type#:#Value type
+config_operator_value_type_object_property#:#%s property
+config_operator_value_type_text#:#Text
+config_receiver#:#Receiver
+config_receiver_course_administrators#:#To course administrators
+config_receiver_course_members#:#To course members
+config_receiver_course_superior_of_members#:#To superior of course members
+config_receiver_course_tutors#:#To course tutors
+config_receiver_users#:#Users
+config_remove#:#Remove
+config_remove_rule#:#Remove rule
+config_remove_rule_confirm#:#Are you really want to delete the rule: %s ?
+config_remove_rules#:#Removes rules
+config_remove_rules_confirm#:#Are you really want to delete the follow rules?
+config_removed_rule#:#Rule %s removed
+config_removed_rules#:#Rules removed
+config_rules#:#Rules
+config_save#:#Save
+config_saved_rule#:#Rule %s saved
+config_title#:#Title
+config_yes#:#Yes
+removeplugindataconfirm_cancel#:#Cancel
+removeplugindataconfirm_confirm_remove_data#:#Do you want to remove the %1$s data as well? At most, you just want to disable the %1$s plugin?
+removeplugindataconfirm_deactivate#:#Just deactivate %1$s plugin
+removeplugindataconfirm_data#:#%1$s data
+removeplugindataconfirm_keep_data#:#Keep %1$s data
+removeplugindataconfirm_msg_kept_data#:#The %1$s data was kept
+removeplugindataconfirm_msg_removed_data#:#The %1$s data was also removed
+removeplugindataconfirm_remove_data#:#Remove %1$s data

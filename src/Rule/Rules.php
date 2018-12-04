@@ -5,8 +5,8 @@ namespace srag\Plugins\SrAutoMails\Rule;
 use ilSrAutoMailsConfigGUI;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
+use srag\Plugins\Notifications4Plugins\Notification\srNotification;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
-use srNotification;
 
 /**
  * Class Rules

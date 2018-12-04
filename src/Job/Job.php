@@ -6,11 +6,11 @@ use ilCronJob;
 use ilCronJobResult;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
+use srag\Plugins\Notifications4Plugins\Notification\srNotification;
+use srag\Plugins\Notifications4Plugins\NotificationSender\srNotificationInternalMailSender;
 use srag\Plugins\SrAutoMails\ObjectType\ObjectType;
 use srag\Plugins\SrAutoMails\Rule\Rule;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
-use srNotification;
-use srNotificationInternalMailSender;
 
 /**
  * Class Job

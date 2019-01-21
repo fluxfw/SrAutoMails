@@ -2,6 +2,7 @@
 
 namespace srag\Plugins\SrAutoMails\Utils;
 
+use srag\Plugins\SrAutoMails\Access\Access;
 use srag\Plugins\SrAutoMails\Access\Ilias;
 use srag\Plugins\SrAutoMails\ObjectType\ObjectTypes;
 use srag\Plugins\SrAutoMails\Rule\Rules;
@@ -17,7 +18,15 @@ use srag\Plugins\SrAutoMails\Sent\Sents;
 trait SrAutoMailsTrait {
 
 	/**
-	 * @return Ilias ias
+	 * @return Access
+	 */
+	protected static function access(): Access {
+		return Access::getInstance();
+	}
+
+
+	/**
+	 * @return Ilias
 	 */
 	protected static function ilias(): Ilias {
 		return Ilias::getInstance();

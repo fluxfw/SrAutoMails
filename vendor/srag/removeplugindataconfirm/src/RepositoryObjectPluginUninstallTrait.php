@@ -2,6 +2,8 @@
 
 namespace srag\RemovePluginDataConfirm\SrAutoMails;
 
+use srag\RemovePluginDataConfirm\SrAutoMails\Exception\RemovePluginDataConfirmException;
+
 /**
  * Trait RepositoryObjectPluginUninstallTrait
  *

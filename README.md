@@ -28,8 +28,8 @@ Please use it for further development!
 
 ### Adjustment suggestions
 * Adjustment suggestions by pull requests on https://git.studer-raimann.ch/ILIAS/Plugins/SrAutoMails/tree/develop
-* Adjustment suggestions which are not yet worked out in detail by Jira tasks under https://jira.studer-raimann.ch/projects/AVL
-* Bug reports under https://jira.studer-raimann.ch/projects/AVL
+* Adjustment suggestions which are not yet worked out in detail by Jira tasks under https://jira.studer-raimann.ch/projects/PLSRAUMA
+* Bug reports under https://jira.studer-raimann.ch/projects/PLSRAUMA
 * For external users please send an email to support-custom1@studer-raimann.ch
 
 ### Development

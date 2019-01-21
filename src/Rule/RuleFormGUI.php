@@ -265,7 +265,7 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 	/**
 	 * @inheritdoc
 	 */
-	protected function initTile()/*: void*/ {
+	protected function initTitle()/*: void*/ {
 		$this->setTitle($this->txt($this->rule !== NULL ? "edit_rule" : "add_rule"));
 	}
 

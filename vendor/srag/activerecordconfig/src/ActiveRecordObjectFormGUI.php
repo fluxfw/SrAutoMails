@@ -2,16 +2,18 @@
 
 namespace srag\ActiveRecordConfig\SrAutoMails;
 
-use srag\CustomInputGUIs\SrAutoMails\PropertyFormGUI\ConfigPropertyFormGUI;
+use ActiveRecord;
+use ilObject;
+use srag\CustomInputGUIs\SrAutoMails\PropertyFormGUI\ObjectPropertyFormGUI;
 
 /**
- * Class ActiveRecordConfigFormGUI
+ * Class ActiveRecordObjectFormGUI
  *
  * @package srag\ActiveRecordConfig\SrAutoMails
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-abstract class ActiveRecordConfigFormGUI extends ConfigPropertyFormGUI {
+abstract class ActiveRecordObjectFormGUI extends ObjectPropertyFormGUI {
 
 	/**
 	 * @var string
@@ -24,16 +26,17 @@ abstract class ActiveRecordConfigFormGUI extends ConfigPropertyFormGUI {
 
 
 	/**
-	 * ActiveRecordConfigFormGUI constructor
+	 * ActiveRecordObjectFormGUI constructor
 	 *
-	 * @param ActiveRecordConfigGUI $parent
-	 * @param string                $tab_id
+	 * @param object                            $parent
+	 * @param ilObject|ActiveRecord|object|null $object
+	 * @param bool                              $object_auto_store
 	 */
-	public function __construct(ActiveRecordConfigGUI $parent, /*string*/
-		$tab_id) {
+	public function __construct($parent, $tab_id, $object = NULL,/*bool*/
+		$object_auto_store = true) {
 		$this->tab_id = $tab_id;
 
-		parent::__construct($parent);
+		parent::__construct($parent, $object, $object_auto_store);
 	}
 
 

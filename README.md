@@ -9,6 +9,10 @@ git clone https://github.com/studer-raimann/SrAutoMails.git SrAutoMails
 ```
 Update and activate the plugin in the ILIAS Plugin Administration
 
+### Some screenshots
+Rule:
+![Rule](./doc/screenshots/rule.png)
+
 ### Dependencies
 * ILIAS 5.3
 * PHP >=7.0

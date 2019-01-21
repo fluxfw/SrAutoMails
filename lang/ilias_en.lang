@@ -33,9 +33,9 @@ config_operator_reg_ex#:#RegEx
 config_operator_reg_ex_info#:#Hint: RegExp must be written in / /
 config_operator_starts_with#:#Starts with
 config_operator_value#:#Value
+config_operator_value_object_property#:#%s propert
+config_operator_value_text#:#Text
 config_operator_value_type#:#Value type
-config_operator_value_type_object_property#:#%s property
-config_operator_value_type_text#:#Text
 config_receiver#:#Receiver
 config_receiver_course_administrators#:#To course administrators
 config_receiver_course_members#:#To course members

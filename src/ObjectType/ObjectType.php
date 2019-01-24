@@ -30,20 +30,22 @@ abstract class ObjectType {
 	 * @return bool
 	 */
 	public final function checkRuleForObject(Rule $rule, $object): bool {
-		$metadata = self::ilias()->metadata()->getMetadataForObject($this->getObjectId($object), $rule->getMetadata());
+		$time = time();
 
-		if (empty($metadata)) {
+		$metadata_value = self::ilias()->metadata()->getMetadataForObject($this->getObjectId($object), $rule->getMetadata());
+
+		if (empty($metadata_value)) {
 			return false;
 		}
 
-		$text = "";
+		$object_value = "";
 		switch ($rule->getOperatorValueType()) {
 			case Rule::OPERATOR_VALUE_TYPE_TEXT:
-				$text = $rule->getOperatorValue();
+				$object_value = $rule->getOperatorValue();
 				break;
 
 			case Rule::OPERATOR_VALUE_TYPE_OBJECT_PROPERTY:
-				$text = $this->getObjectProperty($object, $rule->getOperatorValue());
+				$object_value = $this->getObjectProperty($object, $rule->getOperatorValue());
 				break;
 
 			default:
@@ -51,54 +53,66 @@ abstract class ObjectType {
 		}
 
 		if (!$rule->isOperatorCaseSensitive()) {
-			$metadata = strtolower($metadata);
-			$text = strtolower($text);
+			if (is_string($metadata_value)) {
+				$metadata_value = strtolower($metadata_value);
+			}
+			if (is_string($object_value)) {
+				$object_value = strtolower($object_value);
+			}
 		}
 
 		$check = false;
 		switch ($rule->getOperator()) {
 			case Rule::OPERATOR_EQUALS:
-				$check = ($metadata == $text);
+				$check = ($metadata_value == $object_value);
 				break;
 
 			case Rule::OPERATOR_STARTS_WITH:
-				$check = (strpos($metadata, $text) === 0);
+				$check = (strpos($metadata_value, $object_value) === 0);
 				break;
 
 			case Rule::OPERATOR_CONTAINS:
-				$check = (strpos($metadata, $text) !== false);
+				$check = (strpos($metadata_value, $object_value) !== false);
 				break;
 
 			case Rule::OPERATOR_ENDS_WITH:
-				$check = (strrpos($metadata, $text) === (strlen($metadata) - strlen($text)));
+				$check = (strrpos($metadata_value, $object_value) === (strlen($metadata_value) - strlen($object_value)));
 				break;
 
 			case Rule::OPERATOR_IS_EMPTY:
-				$check = empty($metadata);
+				$check = empty($metadata_value);
 				break;
 
 			case Rule::OPERATOR_REG_EX:
 				// Fix RegExp
-				if ($text[0] !== "/" && $text[strlen($text) - 1] !== "/") {
-					$text = "/$text/";
+				if ($object_value[0] !== "/" && $object_value[strlen($object_value) - 1] !== "/") {
+					$object_value = "/$object_value/";
 				}
-				$check = (preg_match($text, $metadata) === 1);
+				$check = (preg_match($object_value, $metadata_value) === 1);
 				break;
 
 			case Rule::OPERATOR_LESS:
-				$check = ($metadata < $text);
+				$check = ($metadata_value < $object_value);
 				break;
 
 			case Rule::OPERATOR_LESS_EQUALS:
-				$check = ($metadata <= $text);
+				$check = ($metadata_value <= $object_value);
 				break;
 
 			case Rule::OPERATOR_BIGGER:
-				$check = ($metadata > $text);
+				$check = ($metadata_value > $object_value);
 				break;
 
 			case Rule::OPERATOR_BIGGER_EQUALS:
-				$check = ($metadata >= $text);
+				$check = ($metadata_value >= $object_value);
+				break;
+
+			case Rule::OPERATOR_X_DAYS_BEFORE:
+				$check = ((($object_value->getUnixTime() - $time) / (60 * 60 * 24)) <= $metadata_value);
+				break;
+
+			case Rule::OPERATOR_X_DAYS_AFTER:
+				$check = ((($time - $object_value->getUnixTime()) / (60 * 60 * 24)) >= $metadata_value);
 				break;
 
 			default:

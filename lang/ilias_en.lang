@@ -16,6 +16,8 @@ config_mail_template_name#:#Mail template name
 config_metadata#:#Metadata
 config_no#:#No
 config_object_property_count_course_members#:#Count course members
+config_object_property_course_end#:#Course end
+config_object_property_course_start#:#Course start
 config_object_type#:#Object type
 config_object_course#:#Course
 config_operator#:#Operator
@@ -36,6 +38,8 @@ config_operator_value#:#Value
 config_operator_value_object_property#:#%s propert
 config_operator_value_text#:#Text
 config_operator_value_type#:#Value type
+config_operator_x_days_after#:#X days after
+config_operator_x_days_before#:#X days before
 config_receiver#:#Receiver
 config_receiver_course_administrators#:#To course administrators
 config_receiver_course_members#:#To course members

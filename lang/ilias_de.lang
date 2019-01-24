@@ -16,6 +16,8 @@ config_mail_template_name#:#Mail-Vorlage-Name
 config_metadata#:#Metadaten
 config_no#:#Nein
 config_object_property_count_course_members#:#Anzahl Mitglieder
+config_object_property_course_end#:#Kurs-Ende
+config_object_property_course_start#:#Kurs-Start
 config_object_type#:#Objekt-Typ
 config_object_course#:#Kurs
 config_operator#:#Vergleicher
@@ -36,6 +38,8 @@ config_operator_value#:#Wert
 config_operator_value_object_property#:#%s-Eigenschaft
 config_operator_value_text#:#Text
 config_operator_value_type#:#Wert-Typ
+config_operator_x_days_after#:#X Tage nachher
+config_operator_x_days_before#:#X Tage vorher
 config_receiver#:#Empfänger
 config_receiver_course_administrators#:#An Kursadministratoren
 config_receiver_course_members#:#An Kursmitglieder

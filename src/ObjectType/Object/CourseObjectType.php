@@ -16,6 +16,8 @@ class CourseObjectType extends ObjObjectType {
 
 	const OBJECT_TYPE = ObjectTypes::OBJECT_TYPE_COURSE;
 	const OBJECT_PROPERTY_COUNT_COURSE_MEMBERS = "count_course_members";
+	const OBJECT_PROPERTY_COURSE_START = "course_start";
+	const OBJECT_PROPERTY_COURSE_END = "course_end";
 	const RECEIVER_COURSE_ADMINISTRATORS = "course_administrators";
 	const RECEIVER_COURSE_MEMBERS = "course_members";
 	const RECEIVER_COURSE_SUPERIOR_OF_MEMBERS = "course_superior_of_members";
@@ -36,7 +38,9 @@ class CourseObjectType extends ObjObjectType {
 	 */
 	protected function getObjectProperties(): array {
 		return [
-			self::OBJECT_PROPERTY_COUNT_COURSE_MEMBERS => self::OBJECT_PROPERTY_COUNT_COURSE_MEMBERS
+			self::OBJECT_PROPERTY_COUNT_COURSE_MEMBERS => self::OBJECT_PROPERTY_COUNT_COURSE_MEMBERS,
+			self::OBJECT_PROPERTY_COURSE_START => self::OBJECT_PROPERTY_COURSE_START,
+			self::OBJECT_PROPERTY_COURSE_END => self::OBJECT_PROPERTY_COURSE_END
 		];
 	}
 
@@ -51,6 +55,12 @@ class CourseObjectType extends ObjObjectType {
 		switch ($object_property) {
 			case self::OBJECT_PROPERTY_COUNT_COURSE_MEMBERS:
 				return $object->getMembersObject()->getCountMembers();
+
+			case self::OBJECT_PROPERTY_COURSE_START:
+				return $object->getCourseStart();
+
+			case self::OBJECT_PROPERTY_COURSE_END:
+				return $object->getCourseEnd();
 
 			default:
 				return NULL;

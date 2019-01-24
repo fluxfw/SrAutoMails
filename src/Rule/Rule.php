@@ -31,6 +31,8 @@ class Rule extends ActiveRecord {
 	const OPERATOR_LESS_EQUALS = 8;
 	const OPERATOR_BIGGER = 9;
 	const OPERATOR_BIGGER_EQUALS = 10;
+	const OPERATOR_X_DAYS_BEFORE = 11;
+	const OPERATOR_X_DAYS_AFTER = 12;
 	const OPERATOR_VALUE_TYPE_TEXT = 1;
 	const OPERATOR_VALUE_TYPE_OBJECT_PROPERTY = 2;
 	const RECEIVER_TYPE_OBJECT = 1;
@@ -49,6 +51,8 @@ class Rule extends ActiveRecord {
 		self::OPERATOR_LESS_EQUALS => "less_equals",
 		self::OPERATOR_BIGGER => "bigger",
 		self::OPERATOR_BIGGER_EQUALS => "bigger_equals",
+		self::OPERATOR_X_DAYS_BEFORE => "x_days_before",
+		self::OPERATOR_X_DAYS_AFTER => "x_days_after"
 	];
 
 

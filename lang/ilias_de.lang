@@ -38,6 +38,8 @@ config_operator_value#:#Wert
 config_operator_value_object_property#:#%s-Eigenschaft
 config_operator_value_text#:#Text
 config_operator_value_type#:#Wert-Typ
+config_operator_x_days_after#:#X Tage nachher
+config_operator_x_days_before#:#X Tage vorher
 config_receiver#:#Empfänger
 config_receiver_course_administrators#:#An Kursadministratoren
 config_receiver_course_members#:#An Kursmitglieder

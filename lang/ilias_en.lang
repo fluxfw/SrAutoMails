@@ -12,10 +12,15 @@ config_edit_rule#:#Edit rule
 config_enable_rules#:#Enable rules
 config_enabled#:#Enabled
 config_enabled_rules#:#Rules enabled
+config_interval#:#Interval
+config_interval_days#:#days
+config_interval_info#:#Checks this rule only all x days
 config_mail_template_name#:#Mail template name
 config_metadata#:#Metadata
 config_no#:#No
 config_object_property_count_course_members#:#Count course members
+config_object_property_count_course_members_completed#:#Count completed
+config_object_property_count_course_members_not_completed#:#Count not completed
 config_object_property_course_end#:#Course end
 config_object_property_course_start#:#Course start
 config_object_type#:#Object type
@@ -58,6 +63,7 @@ config_save#:#Save
 config_saved_rule#:#Rule %s saved
 config_title#:#Title
 config_yes#:#Yes
+cron_status#:#%1$s rules checked\n%2$s mails sent
 removeplugindataconfirm_cancel#:#Cancel
 removeplugindataconfirm_confirm_remove_data#:#Do you want to remove the %1$s data as well? At most, you just want to disable the %1$s plugin?
 removeplugindataconfirm_deactivate#:#Just deactivate %1$s plugin

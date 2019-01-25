@@ -2,6 +2,7 @@
 
 namespace srag\Plugins\SrAutoMails\ObjectType\Object;
 
+use ilLPStatusWrapper;
 use ilObjCourse;
 use srag\Plugins\SrAutoMails\ObjectType\ObjectTypes;
 
@@ -16,6 +17,8 @@ class CourseObjectType extends ObjObjectType {
 
 	const OBJECT_TYPE = ObjectTypes::OBJECT_TYPE_COURSE;
 	const OBJECT_PROPERTY_COUNT_COURSE_MEMBERS = "count_course_members";
+	const OBJECT_PROPERTY_COUNT_COURSE_MEMBERS_COMPLETED = "count_course_members_completed";
+	const OBJECT_PROPERTY_COUNT_COURSE_MEMBERS_NOT_COMPLETED = "count_course_members_not_completed";
 	const OBJECT_PROPERTY_COURSE_START = "course_start";
 	const OBJECT_PROPERTY_COURSE_END = "course_end";
 	const RECEIVER_COURSE_ADMINISTRATORS = "course_administrators";
@@ -40,7 +43,9 @@ class CourseObjectType extends ObjObjectType {
 		return [
 			self::OBJECT_PROPERTY_COUNT_COURSE_MEMBERS => self::OBJECT_PROPERTY_COUNT_COURSE_MEMBERS,
 			self::OBJECT_PROPERTY_COURSE_START => self::OBJECT_PROPERTY_COURSE_START,
-			self::OBJECT_PROPERTY_COURSE_END => self::OBJECT_PROPERTY_COURSE_END
+			self::OBJECT_PROPERTY_COURSE_END => self::OBJECT_PROPERTY_COURSE_END,
+			self::OBJECT_PROPERTY_COUNT_COURSE_MEMBERS_COMPLETED => self::OBJECT_PROPERTY_COUNT_COURSE_MEMBERS_COMPLETED,
+			self::OBJECT_PROPERTY_COUNT_COURSE_MEMBERS_NOT_COMPLETED => self::OBJECT_PROPERTY_COUNT_COURSE_MEMBERS_NOT_COMPLETED
 		];
 	}
 
@@ -61,6 +66,24 @@ class CourseObjectType extends ObjObjectType {
 
 			case self::OBJECT_PROPERTY_COURSE_END:
 				return $object->getCourseEnd();
+
+			case self::OBJECT_PROPERTY_COUNT_COURSE_MEMBERS_COMPLETED:
+				$completed = ilLPStatusWrapper::_lookupCompletedForObject($object->getId());
+
+				$completed = array_filter($object->getMembersObject()->getMembers(), function (int $user_id) use ($completed): bool {
+					return in_array($user_id, $completed);
+				});
+
+				return count($completed);
+
+			case self::OBJECT_PROPERTY_COUNT_COURSE_MEMBERS_NOT_COMPLETED:
+				$not_completed = ilLPStatusWrapper::_lookupCompletedForObject($object->getId());
+
+				$not_completed = array_filter($object->getMembersObject()->getMembers(), function (int $user_id) use ($not_completed): bool {
+					return !in_array($user_id, $not_completed);
+				});
+
+				return count($not_completed);
 
 			default:
 				return NULL;

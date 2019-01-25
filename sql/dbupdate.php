@@ -4,3 +4,7 @@
 \srag\Plugins\SrAutoMails\Rule\Rule::updateDB();
 \srag\Plugins\SrAutoMails\Sent\Sent::updateDB();
 ?>
+<#2>
+<?php
+\srag\Plugins\SrAutoMails\Rule\Rule::updateDB();
+?>

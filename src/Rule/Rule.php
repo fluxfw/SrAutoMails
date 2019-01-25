@@ -4,6 +4,7 @@ namespace srag\Plugins\SrAutoMails\Rule;
 
 use ActiveRecord;
 use arConnector;
+use ilDateTime;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
@@ -197,6 +198,23 @@ class Rule extends ActiveRecord {
 	 * @con_is_notnull   true
 	 */
 	protected $receiver = [];
+	/**
+	 * @var int
+	 *
+	 * @con_has_field    true
+	 * @con_fieldtype    integer
+	 * @con_length       1
+	 * @con_is_notnull   true
+	 */
+	protected $interval = 0;
+	/**
+	 * @var ilDateTime|null
+	 *
+	 * @con_has_field    true
+	 * @con_fieldtype    timestamp
+	 * @con_is_notnull   false
+	 */
+	protected $last_check = NULL;
 
 
 	/**
@@ -229,6 +247,13 @@ class Rule extends ActiveRecord {
 			case "receiver":
 				return json_encode($field_value);
 
+			case "last_check":
+				if ($field_value !== NULL) {
+					return $field_value->get(IL_CAL_DATETIME);
+				} else {
+					return NULL;
+				}
+
 			default:
 				return NULL;
 		}
@@ -250,6 +275,7 @@ class Rule extends ActiveRecord {
 			case "operator":
 			case "operator_value_type":
 			case "receiver_type":
+			case "interval":
 				return intval($field_value);
 
 			case "enabled":
@@ -259,6 +285,13 @@ class Rule extends ActiveRecord {
 
 			case "receiver":
 				return json_decode($field_value);
+
+			case "last_check":
+				if ($field_value !== NULL) {
+					return new ilDateTime($field_value, IL_CAL_DATETIME);
+				} else {
+					return NULL;
+				}
 
 			default:
 				return NULL;
@@ -487,5 +520,37 @@ class Rule extends ActiveRecord {
 	 */
 	public function setReceiver(array $receiver)/*: void*/ {
 		$this->receiver = $receiver;
+	}
+
+
+	/**
+	 * @return int
+	 */
+	public function getInterval(): int {
+		return $this->interval;
+	}
+
+
+	/**
+	 * @param int $interval
+	 */
+	public function setInterval(int $interval)/*: void*/ {
+		$this->interval = $interval;
+	}
+
+
+	/**
+	 * @return ilDateTime|null
+	 */
+	public function getLastCheck()/*: ?ilDateTime*/ {
+		return $this->last_check;
+	}
+
+
+	/**
+	 * @param ilDateTime $last_check
+	 */
+	public function setLastCheck(ilDateTime $last_check)/*: void*/ {
+		$this->last_check = $last_check;
 	}
 }

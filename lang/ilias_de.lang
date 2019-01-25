@@ -12,10 +12,15 @@ config_edit_rule#:#Regel bearbeiten
 config_enable_rules#:#Regeln aktivieren
 config_enabled_rules#:#Regeln aktiviert
 config_enabled#:#Aktiviert
+config_interval#:#Intervall
+config_interval_days#:#Tage
+config_interval_info#:#Überprüft diese Regel nur alle x Tage
 config_mail_template_name#:#Mail-Vorlage-Name
 config_metadata#:#Metadaten
 config_no#:#Nein
 config_object_property_count_course_members#:#Anzahl Mitglieder
+config_object_property_count_course_members_completed#:#Anzahl abgeschlossen
+config_object_property_count_course_members_not_completed#:#Anzahl nicht abgeschlossen
 config_object_property_course_end#:#Kurs-Ende
 config_object_property_course_start#:#Kurs-Start
 config_object_type#:#Objekt-Typ
@@ -58,6 +63,7 @@ config_save#:#Speichern
 config_saved_rule#:#Regel %s gespeichert
 config_title#:#Titel
 config_yes#:#Ja
+cron_status#:#%1$s Regeln geprüft\n%2$s Mails versendet
 removeplugindataconfirm_cancel#:#Abbrechen
 removeplugindataconfirm_confirm_remove_data#:#Möchten Sie die %1$s-Daten auch entfernen? Allenfalls möchten Sie das %1$s-Plugin nur deaktivieren?
 removeplugindataconfirm_deactivate#:#%1$s-Plugin nur deaktivieren

@@ -4,6 +4,7 @@ namespace srag\Plugins\SrAutoMails\Rule;
 
 use ilCheckboxInputGUI;
 use ilNotifications4PluginsPlugin;
+use ilNumberInputGUI;
 use ilRadioGroupInputGUI;
 use ilRadioOption;
 use ilSelectInputGUI;
@@ -62,6 +63,9 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 
 				case "enabled":
 					return $this->rule->isEnabled();
+
+				case "interval":
+					return $this->rule->getInterval();
 
 				case "title":
 					return $this->rule->getTitle();
@@ -170,6 +174,11 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 			$this->fields = array_merge($this->fields, [
 				"enabled" => [
 					self::PROPERTY_CLASS => ilCheckboxInputGUI::class
+				],
+				"interval" => [
+					self::PROPERTY_CLASS => ilNumberInputGUI::class,
+					"setMinValue" => 0,
+					"setSuffix" => $this->txt("interval_days")
 				],
 				"title" => [
 					self::PROPERTY_CLASS => ilTextInputGUI::class,
@@ -302,6 +311,10 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 
 			case "enabled":
 				$this->rule->setEnabled($value);
+				break;
+
+			case "interval":
+				$this->rule->setInterval(intval($value));
 				break;
 
 			case "title":

@@ -125,15 +125,27 @@ final class Rules {
 
 	/**
 	 * @param string $object_type
+	 * @param bool   $interval_check
 	 *
 	 * @return Rule[]
 	 */
-	public function getRulesForObjectType(string $object_type): array {
+	public function getRulesForObjectType(string $object_type, bool $interval_check = true): array {
+		$time = time();
+
 		/**
 		 * @var Rule[] $rules
 		 */
-
 		$rules = Rule::where([ "object_type" => $object_type ])->get();
+
+		if ($interval_check) {
+			$rules = array_filter($rules, function (Rule $rule) use ($time): bool {
+				if ($rule->getLastCheck() === NULL) {
+					return true;
+				}
+
+				return ((($time - $rule->getLastCheck()->getUnixTime()) / (60 * 60 * 24)) >= $rule->getInterval());
+			});
+		}
 
 		return $rules;
 	}

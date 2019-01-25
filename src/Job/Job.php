@@ -4,6 +4,7 @@ namespace srag\Plugins\SrAutoMails\Job;
 
 use ilCronJob;
 use ilCronJobResult;
+use ilDateTime;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\Plugins\Notifications4Plugins\Notification\srNotification;
@@ -25,6 +26,7 @@ class Job extends ilCronJob {
 	use SrAutoMailsTrait;
 	const CRON_JOB_ID = ilSrAutoMailsPlugin::PLUGIN_ID;
 	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
+	const LANG_MODULE_CRON = "cron";
 
 
 	/**
@@ -107,9 +109,14 @@ class Job extends ilCronJob {
 	 * @return ilCronJobResult
 	 */
 	public function run(): ilCronJobResult {
+		$time = time();
+		$sent_mails_count = 0;
+
 		$result = new ilCronJobResult();
 
 		$object_types = self::objectTypes()->getObjectTypes();
+
+		$checked_rules = [];
 
 		foreach ($object_types as $object_type) {
 			$objects = $object_type->getObjects();
@@ -127,15 +134,32 @@ class Job extends ilCronJob {
 							if (!self::sents()->hasSent($rule->getRuleId(), $object_type->getObjectId($object), $user_id)) {
 								if ($this->sendNotification($rule, $object_type, $object, $user_id)) {
 									self::sents()->sent($rule->getRuleId(), $object_type->getObjectId($object), $user_id);
+
+									$sent_mails_count ++;
 								}
 							}
 						}
+					}
+
+					if (!isset($checked_rules[$rule->getRuleId()])) {
+						$checked_rules[$rule->getRuleId()] = $rule;
 					}
 				}
 			}
 		}
 
+		foreach ($checked_rules as $rule) {
+			$rule->setLastCheck(new ilDateTime($time, IL_CAL_UNIX));
+
+			$rule->store();
+		}
+
 		$result->setStatus(ilCronJobResult::STATUS_OK);
+
+		$result->setMessage(nl2br(str_replace("\\n", "\n", self::plugin()->translate("status", self::LANG_MODULE_CRON, [
+			count($rules),
+			$sent_mails_count
+		])), false));
 
 		return $result;
 	}

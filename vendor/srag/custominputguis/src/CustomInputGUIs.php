@@ -2,8 +2,9 @@
 
 namespace srag\CustomInputGUIs\SrAutoMails;
 
-use ILIAS\UI\Implementation\Component\Glyph\Factory as ProgressMeterFactoryCore;
+use ILIAS\UI\Implementation\Component\Chart\ProgressMeter\Factory as ProgressMeterFactoryCore;
 use srag\CustomInputGUIs\SrAutoMails\ProgressMeter\Implementation\Factory as ProgressMeterFactory;
+use srag\CustomInputGUIs\SrAutoMails\ViewControlModeGUI\ViewControlModeGUI;
 use srag\DIC\SrAutoMails\DICTrait;
 
 /**
@@ -47,5 +48,13 @@ final class CustomInputGUIs {
 		} else {
 			return new ProgressMeterFactory();
 		}
+	}
+
+
+	/**
+	 * @return ViewControlModeGUI
+	 */
+	public function viewControlModeGUI() {
+		return new ViewControlModeGUI();
 	}
 }

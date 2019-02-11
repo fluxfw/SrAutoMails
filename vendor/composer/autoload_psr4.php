@@ -9,7 +9,7 @@ return array(
     'srag\\RemovePluginDataConfirm\\SrAutoMails\\' => array($vendorDir . '/srag/removeplugindataconfirm/src'),
     'srag\\Plugins\\SrAutoMails\\' => array($baseDir . '/src'),
     'srag\\LibrariesNamespaceChanger\\' => array($vendorDir . '/srag/librariesnamespacechanger/src'),
-    'srag\\DIC\\' => array($vendorDir . '/srag/dic/src'),
-    'srag\\CustomInputGUIs\\' => array($vendorDir . '/srag/custominputguis/src'),
-    'srag\\ActiveRecordConfig\\' => array($vendorDir . '/srag/activerecordconfig/src'),
+    'srag\\DIC\\SrAutoMails\\' => array($vendorDir . '/srag/dic/src'),
+    'srag\\CustomInputGUIs\\SrAutoMails\\' => array($vendorDir . '/srag/custominputguis/src'),
+    'srag\\ActiveRecordConfig\\SrAutoMails\\' => array($vendorDir . '/srag/activerecordconfig/src'),
 );

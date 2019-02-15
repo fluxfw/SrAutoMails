@@ -7,7 +7,7 @@ namespace srag\CustomInputGUIs\SrAutoMails\ProgressMeter\Component;
 /**
  * Interface Factory
  *
- * https://github.com/ILIAS-eLearning/ILIAS/tree/trunk/src/UI/Component/Card/Factory.php
+ * https://github.com/ILIAS-eLearning/ILIAS/tree/trunk/src/UI/Component/Chart/ProgressMeter/Factory.php
  *
  * @package srag\CustomInputGUIs\SrAutoMails\ProgressMeter\Component
  *

@@ -9,7 +9,7 @@ use srag\CustomInputGUIs\SrAutoMails\ProgressMeter\Component\Standard as Standar
 /**
  * Class Standard
  *
- * https://github.com/ILIAS-eLearning/ILIAS/tree/trunk/src/UI/Implementation/Component/Card/Standard.php
+ * https://github.com/ILIAS-eLearning/ILIAS/tree/trunk/src/UI/Implementation/Component/Chart/ProgressMeter/Standard.php
  *
  * @package srag\CustomInputGUIs\SrAutoMails\ProgressMeter\Implementation
  *

@@ -48,6 +48,7 @@ return array(
     'srag\\CustomInputGUIs\\SrAutoMails\\Template\\Template' => $vendorDir . '/srag/custominputguis/src/Template/Template.php',
     'srag\\CustomInputGUIs\\SrAutoMails\\TextAreaInputGUI\\TextAreaInputGUI' => $vendorDir . '/srag/custominputguis/src/TextAreaInputGUI/TextAreaInputGUI.php',
     'srag\\CustomInputGUIs\\SrAutoMails\\TextInputGUI\\TextInputGUI' => $vendorDir . '/srag/custominputguis/src/TextInputGUI/TextInputGUI.php',
+    'srag\\CustomInputGUIs\\SrAutoMails\\ViewControlModeGUI\\ViewControlModeGUI' => $vendorDir . '/srag/custominputguis/src/ViewControlModeGUI/ViewControlModeGUI.php',
     'srag\\CustomInputGUIs\\SrAutoMails\\Waiter\\Waiter' => $vendorDir . '/srag/custominputguis/src/Waiter/Waiter.php',
     'srag\\DIC\\SrAutoMails\\DICStatic' => $vendorDir . '/srag/dic/src/DICStatic.php',
     'srag\\DIC\\SrAutoMails\\DICStaticInterface' => $vendorDir . '/srag/dic/src/DICStaticInterface.php',

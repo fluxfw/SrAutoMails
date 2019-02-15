@@ -30,7 +30,7 @@ Please use it for further development!
 * Adjustment suggestions by pull requests on https://git.studer-raimann.ch/ILIAS/Plugins/SrAutoMails/tree/develop
 * Adjustment suggestions which are not yet worked out in detail by Jira tasks under https://jira.studer-raimann.ch/projects/PLSRAUMA
 * Bug reports under https://jira.studer-raimann.ch/projects/PLSRAUMA
-* For external users please send an email to support-custom1@studer-raimann.ch
+* For external users you can report it at https://plugins.studer-raimann.ch/goto.php?target=uihk_srsu_PLSRAUMA
 
 ### Development
 If you want development in this plugin you should install this plugin like follow:

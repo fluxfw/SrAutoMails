@@ -22,6 +22,8 @@ class Rule extends ActiveRecord {
 	use SrAutoMailsTrait;
 	const TABLE_NAME = "srauma_rule";
 	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
+	const MATCH_TYPE_ALWAYS = 1;
+	const MATCH_TYPE_MATCH = 2;
 	const OPERATOR_EQUALS = 1;
 	const OPERATOR_STARTS_WITH = 2;
 	const OPERATOR_CONTAINS = 3;
@@ -38,6 +40,8 @@ class Rule extends ActiveRecord {
 	const OPERATOR_VALUE_TYPE_OBJECT_PROPERTY = 2;
 	const RECEIVER_TYPE_OBJECT = 1;
 	const RECEIVER_TYPE_USERS = 2;
+	const INTERVAL_TYPE_ONCE = 1;
+	const INTERVAL_TYPE_NUMBER = 2;
 	/**
 	 * @var array
 	 */
@@ -125,6 +129,15 @@ class Rule extends ActiveRecord {
 	 *
 	 * @con_has_field    true
 	 * @con_fieldtype    integer
+	 * @con_length       1
+	 * @con_is_notnull   true
+	 */
+	protected $match_type = 0;
+	/**
+	 * @var int
+	 *
+	 * @con_has_field    true
+	 * @con_fieldtype    integer
 	 * @con_length       8
 	 * @con_is_notnull   true
 	 */
@@ -206,6 +219,15 @@ class Rule extends ActiveRecord {
 	 * @con_length       1
 	 * @con_is_notnull   true
 	 */
+	protected $interval_type = 0;
+	/**
+	 * @var int
+	 *
+	 * @con_has_field    true
+	 * @con_fieldtype    integer
+	 * @con_length       1
+	 * @con_is_notnull   true
+	 */
 	protected $interval = 0;
 	/**
 	 * @var ilDateTime|null
@@ -271,10 +293,12 @@ class Rule extends ActiveRecord {
 		switch ($field_name) {
 			case "rule_id":
 			case "object_type":
+			case "match_type":
 			case "metadata":
 			case "operator":
 			case "operator_value_type":
 			case "receiver_type":
+			case "interval_type":
 			case "interval":
 				return intval($field_value);
 
@@ -376,6 +400,22 @@ class Rule extends ActiveRecord {
 	 */
 	public function setObjectType(int $object_type)/*: void*/ {
 		$this->object_type = $object_type;
+	}
+
+
+	/**
+	 * @return int
+	 */
+	public function getMatchType(): int {
+		return $this->match_type;
+	}
+
+
+	/**
+	 * @param int $match_type
+	 */
+	public function setMatchType(int $match_type)/*: void*/ {
+		$this->match_type = $match_type;
 	}
 
 
@@ -520,6 +560,22 @@ class Rule extends ActiveRecord {
 	 */
 	public function setReceiver(array $receiver)/*: void*/ {
 		$this->receiver = $receiver;
+	}
+
+
+	/**
+	 * @return int
+	 */
+	public function getIntervalType(): int {
+		return $this->interval_type;
+	}
+
+
+	/**
+	 * @param int $interval_type
+	 */
+	public function setIntervalType(int $interval_type)/*: void*/ {
+		$this->interval_type = $interval_type;
 	}
 
 

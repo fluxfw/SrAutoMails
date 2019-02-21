@@ -143,6 +143,10 @@ final class Rules {
 					return true;
 				}
 
+				if ($rule->getIntervalType() !== Rule::INTERVAL_TYPE_NUMBER) {
+					return true;
+				}
+
 				return ((($time - $rule->getLastCheck()->getUnixTime()) / (60 * 60 * 24)) >= $rule->getInterval());
 			});
 		}

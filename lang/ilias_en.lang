@@ -15,7 +15,14 @@ config_enabled_rules#:#Rules enabled
 config_interval#:#Interval
 config_interval_days#:#days
 config_interval_info#:#Checks this rule only all x days
+config_interval_type#:#Interval
+config_interval_type_number#:#Number
+config_interval_type_once#:#Once
 config_mail_template_name#:#Mail template name
+config_mail_template_name_info#:#Following placeholders can be used in the %1$s template. Below, its data type is displayed. How to use them in %1$s, please refer to its documentation
+config_match_type#:#Match type
+config_match_type_always#:#Every run
+config_match_type_match#:#Set matcher
 config_metadata#:#Metadata
 config_no#:#No
 config_object_property_count_course_members#:#Count course members
@@ -48,7 +55,11 @@ config_operator_x_days_before#:#X days before
 config_receiver#:#Receiver
 config_receiver_course_administrators#:#To course administrators
 config_receiver_course_members#:#To course members
+config_receiver_course_members_completed#:#To completed course members
+config_receiver_course_members_not_completed#:#To not completed course members
 config_receiver_course_superior_of_members#:#To superior of course members
+config_receiver_course_superior_of_members_completed#:#To superior of completed course members
+config_receiver_course_superior_of_members_not_completed#:#To superior of not completed course members
 config_receiver_course_tutors#:#To course tutors
 config_receiver_users#:#Users
 config_remove#:#Remove
@@ -63,7 +74,7 @@ config_save#:#Save
 config_saved_rule#:#Rule %s saved
 config_title#:#Title
 config_yes#:#Yes
-cron_status#:#%1$s rules checked\n%2$s mails sent
+cron_status#:#%1$s rule(s) checked\n%2$s mail(s) sent
 removeplugindataconfirm_cancel#:#Cancel
 removeplugindataconfirm_confirm_remove_data#:#Do you want to remove the %1$s data as well? At most, you just want to disable the %1$s plugin?
 removeplugindataconfirm_deactivate#:#Just deactivate %1$s plugin

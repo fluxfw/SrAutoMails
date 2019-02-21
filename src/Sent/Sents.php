@@ -96,4 +96,18 @@ final class Sents {
 			$sent->store();
 		}
 	}
+
+
+	/**
+	 * @param int $rule_id
+	 * @param int $object_id
+	 * @param int $user_id
+	 */
+	public function unsent(int $rule_id, int $object_id, int $user_id)/*: void*/ {
+		$sent = $this->getSent($rule_id, $object_id, $user_id);
+
+		if ($sent !== NULL) {
+			$sent->delete();
+		}
+	}
 }

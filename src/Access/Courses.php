@@ -2,6 +2,7 @@
 
 namespace srag\Plugins\SrAutoMails\Access;
 
+use ilLPStatusWrapper;
 use ilObjCourse;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
@@ -58,5 +59,15 @@ final class Courses {
 		}
 
 		return $array;
+	}
+
+
+	/**
+	 * @param int $obj_id
+	 *
+	 * @return array
+	 */
+	public function getCompletedUsers(int $obj_id): array {
+		return ilLPStatusWrapper::_lookupCompletedForObject($obj_id);
 	}
 }

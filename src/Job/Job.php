@@ -116,6 +116,9 @@ class Job extends ilCronJob {
 
 		$object_types = self::objectTypes()->getObjectTypes();
 
+		/**
+		 * @var Rule[] $checked_rules
+		 */
 		$checked_rules = [];
 
 		foreach ($object_types as $object_type) {
@@ -131,8 +134,11 @@ class Job extends ilCronJob {
 						$receivers = $object_type->getReceivers($rule, $object);
 
 						foreach ($receivers as $user_id) {
-							if (!self::sents()->hasSent($rule->getRuleId(), $object_type->getObjectId($object), $user_id)) {
+							if ($rule->getIntervalType() === Rule::INTERVAL_TYPE_NUMBER
+								|| !self::sents()->hasSent($rule->getRuleId(), $object_type->getObjectId($object), $user_id)) {
+
 								if ($this->sendNotification($rule, $object_type, $object, $user_id)) {
+
 									self::sents()->sent($rule->getRuleId(), $object_type->getObjectId($object), $user_id);
 
 									$sent_mails_count ++;
@@ -180,6 +186,6 @@ class Job extends ilCronJob {
 
 		$placeholders = $object_type->getPlaceholdersForMail($object, $user_id, $rule);
 
-		return $notification->send($sender, $placeholders, $placeholders["user"]->getLanguage());
+		return $notification->send($sender, $placeholders, $placeholders["receiver"]->getLanguage());
 	}
 }

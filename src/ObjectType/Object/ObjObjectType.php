@@ -15,6 +15,16 @@ use srag\Plugins\SrAutoMails\ObjectType\ObjectType;
 abstract class ObjObjectType extends ObjectType {
 
 	/**
+	 * @inheritdoc
+	 */
+	public function getMailPlaceholderKeyTypes(): array {
+		return array_merge(parent::getMailPlaceholderKeyTypes(), [
+			"object" => "object " . ilObject::class
+		]);
+	}
+
+
+	/**
 	 * @param ilObject $object
 	 *
 	 * @return int

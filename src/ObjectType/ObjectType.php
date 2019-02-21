@@ -32,98 +32,117 @@ abstract class ObjectType {
 	public final function checkRuleForObject(Rule $rule, $object): bool {
 		$time = time();
 
-		$metadata_value = self::ilias()->metadata()->getMetadataForObject($this->getObjectId($object), $rule->getMetadata());
+		switch ($rule->getMatchType()) {
+			case Rule::MATCH_TYPE_ALWAYS:
+				return true;
 
-		if (empty($metadata_value)) {
-			return false;
-		}
+			case Rule::MATCH_TYPE_MATCH:
+				$metadata_value = self::ilias()->metadata()->getMetadataForObject($this->getObjectId($object), $rule->getMetadata());
 
-		$object_value = "";
-		switch ($rule->getOperatorValueType()) {
-			case Rule::OPERATOR_VALUE_TYPE_TEXT:
-				$object_value = $rule->getOperatorValue();
-				break;
-
-			case Rule::OPERATOR_VALUE_TYPE_OBJECT_PROPERTY:
-				$object_value = $this->getObjectProperty($object, $rule->getOperatorValue());
-				break;
-
-			default:
-				return false;
-		}
-
-		if (!$rule->isOperatorCaseSensitive()) {
-			if (is_string($metadata_value)) {
-				$metadata_value = strtolower($metadata_value);
-			}
-			if (is_string($object_value)) {
-				$object_value = strtolower($object_value);
-			}
-		}
-
-		$check = false;
-		switch ($rule->getOperator()) {
-			case Rule::OPERATOR_EQUALS:
-				$check = ($metadata_value == $object_value);
-				break;
-
-			case Rule::OPERATOR_STARTS_WITH:
-				$check = (strpos($metadata_value, $object_value) === 0);
-				break;
-
-			case Rule::OPERATOR_CONTAINS:
-				$check = (strpos($metadata_value, $object_value) !== false);
-				break;
-
-			case Rule::OPERATOR_ENDS_WITH:
-				$check = (strrpos($metadata_value, $object_value) === (strlen($metadata_value) - strlen($object_value)));
-				break;
-
-			case Rule::OPERATOR_IS_EMPTY:
-				$check = empty($metadata_value);
-				break;
-
-			case Rule::OPERATOR_REG_EX:
-				// Fix RegExp
-				if ($object_value[0] !== "/" && $object_value[strlen($object_value) - 1] !== "/") {
-					$object_value = "/$object_value/";
+				if (empty($metadata_value)) {
+					return false;
 				}
-				$check = (preg_match($object_value, $metadata_value) === 1);
-				break;
 
-			case Rule::OPERATOR_LESS:
-				$check = ($metadata_value < $object_value);
-				break;
+				switch ($rule->getOperatorValueType()) {
+					case Rule::OPERATOR_VALUE_TYPE_TEXT:
+						$object_value = $rule->getOperatorValue();
+						break;
 
-			case Rule::OPERATOR_LESS_EQUALS:
-				$check = ($metadata_value <= $object_value);
-				break;
+					case Rule::OPERATOR_VALUE_TYPE_OBJECT_PROPERTY:
+						$object_value = $this->getObjectProperty($object, $rule->getOperatorValue());
+						break;
 
-			case Rule::OPERATOR_BIGGER:
-				$check = ($metadata_value > $object_value);
-				break;
+					default:
+						return false;
+				}
 
-			case Rule::OPERATOR_BIGGER_EQUALS:
-				$check = ($metadata_value >= $object_value);
-				break;
+				if (!$rule->isOperatorCaseSensitive()) {
+					if (is_string($metadata_value)) {
+						$metadata_value = strtolower($metadata_value);
+					}
+					if (is_string($object_value)) {
+						$object_value = strtolower($object_value);
+					}
+				}
 
-			case Rule::OPERATOR_X_DAYS_BEFORE:
-				$check = ((($object_value->getUnixTime() - $time) / (60 * 60 * 24)) <= $metadata_value);
-				break;
+				switch ($rule->getOperator()) {
+					case Rule::OPERATOR_EQUALS:
+						$check = ($metadata_value == $object_value);
+						break;
 
-			case Rule::OPERATOR_X_DAYS_AFTER:
-				$check = ((($time - $object_value->getUnixTime()) / (60 * 60 * 24)) >= $metadata_value);
-				break;
+					case Rule::OPERATOR_STARTS_WITH:
+						$check = (strpos($metadata_value, $object_value) === 0);
+						break;
+
+					case Rule::OPERATOR_CONTAINS:
+						$check = (strpos($metadata_value, $object_value) !== false);
+						break;
+
+					case Rule::OPERATOR_ENDS_WITH:
+						$check = (strrpos($metadata_value, $object_value) === (strlen($metadata_value) - strlen($object_value)));
+						break;
+
+					case Rule::OPERATOR_IS_EMPTY:
+						$check = empty($metadata_value);
+						break;
+
+					case Rule::OPERATOR_REG_EX:
+						// Fix RegExp
+						if ($object_value[0] !== "/" && $object_value[strlen($object_value) - 1] !== "/") {
+							$object_value = "/$object_value/";
+						}
+						$check = (preg_match($object_value, $metadata_value) === 1);
+						break;
+
+					case Rule::OPERATOR_LESS:
+						$check = ($metadata_value < $object_value);
+						break;
+
+					case Rule::OPERATOR_LESS_EQUALS:
+						$check = ($metadata_value <= $object_value);
+						break;
+
+					case Rule::OPERATOR_BIGGER:
+						$check = ($metadata_value > $object_value);
+						break;
+
+					case Rule::OPERATOR_BIGGER_EQUALS:
+						$check = ($metadata_value >= $object_value);
+						break;
+
+					case Rule::OPERATOR_X_DAYS_BEFORE:
+						$check = ((($object_value->getUnixTime() - $time) / (60 * 60 * 24)) <= $metadata_value);
+						break;
+
+					case Rule::OPERATOR_X_DAYS_AFTER:
+						$check = ((($time - $object_value->getUnixTime()) / (60 * 60 * 24)) >= $metadata_value);
+						break;
+
+					default:
+						return false;
+				}
+
+				if ($rule->isOperatorNegated()) {
+					$check = (!$check);
+				}
+
+				return $check;
 
 			default:
 				return false;
 		}
+	}
 
-		if ($rule->isOperatorNegated()) {
-			$check = (!$check);
-		}
 
-		return $check;
+	/**
+	 * @return array
+	 */
+	public function getMailPlaceholderKeyTypes(): array {
+		return [
+			"receiver" => "object " . ilObjUser::class,
+			"object" => "object",
+			"rule_id" => "int"
+		];
 	}
 
 
@@ -153,12 +172,11 @@ abstract class ObjectType {
 	 * @return array
 	 */
 	public final function getPlaceholdersForMail($object, int $user_id, Rule $rule): array {
-		$placeholders = [
-			"user" => new ilObjUser($user_id),
-			"superiors" => self::ilias()->orgUnits()->getSuperiorsOfUser($user_id),
+		$placeholders = array_merge($this->getMailPlaceholderKeyTypes(), [
+			"receiver" => new ilObjUser($user_id),
 			"object" => $object,
 			"rule_id" => $rule->getRuleId()
-		];
+		]);
 
 		$this->applyMailPlaceholders($object, $placeholders);
 

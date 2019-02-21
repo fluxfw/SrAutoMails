@@ -64,6 +64,9 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 				case "enabled":
 					return $this->rule->isEnabled();
 
+				case "interval_type":
+					return $this->rule->getIntervalType();
+
 				case "interval":
 					return $this->rule->getInterval();
 
@@ -72,6 +75,9 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 
 				case "description":
 					return $this->rule->getDescription();
+
+				case "match_type":
+					return $this->rule->getMatchType();
 
 				case "metadata":
 					return $this->rule->getMetadata();
@@ -175,10 +181,27 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 				"enabled" => [
 					self::PROPERTY_CLASS => ilCheckboxInputGUI::class
 				],
-				"interval" => [
-					self::PROPERTY_CLASS => ilNumberInputGUI::class,
-					"setMinValue" => 0,
-					"setSuffix" => $this->txt("interval_days")
+				"interval_type" => [
+					self::PROPERTY_CLASS => ilRadioGroupInputGUI::class,
+					self::PROPERTY_REQUIRED => true,
+					self::PROPERTY_SUBITEMS => [
+						Rule::INTERVAL_TYPE_ONCE => [
+							self::PROPERTY_CLASS => ilRadioOption::class,
+							self::PROPERTY_SUBITEMS => [],
+							"setTitle" => $this->txt("interval_type_once")
+						],
+						Rule::INTERVAL_TYPE_NUMBER => [
+							self::PROPERTY_CLASS => ilRadioOption::class,
+							self::PROPERTY_SUBITEMS => [
+								"interval" => [
+									self::PROPERTY_CLASS => ilNumberInputGUI::class,
+									"setMinValue" => 0,
+									"setSuffix" => $this->txt("interval_days")
+								]
+							],
+							"setTitle" => $this->txt("interval_type_number")
+						]
+					]
 				],
 				"title" => [
 					self::PROPERTY_CLASS => ilTextInputGUI::class,
@@ -187,47 +210,64 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 				"description" => [
 					self::PROPERTY_CLASS => ilTextInputGUI::class
 				],
-				"metadata" => [
-					self::PROPERTY_CLASS => ilSelectInputGUI::class,
-					self::PROPERTY_REQUIRED => true,
-					self::PROPERTY_OPTIONS => [ "" => "" ] + self::ilias()->metadata()->getMetadata()
-				],
-				"operator" => [
-					self::PROPERTY_CLASS => ilSelectInputGUI::class,
-					self::PROPERTY_REQUIRED => true,
-					self::PROPERTY_OPTIONS => [ "" => "" ] + self::rules()->getOperatorsText()
-				],
-				"operator_negated" => [
-					self::PROPERTY_CLASS => ilCheckboxInputGUI::class
-				],
-				"operator_case_sensitive" => [
-					self::PROPERTY_CLASS => ilCheckboxInputGUI::class
-				],
-				"operator_value_type" => [
+				"match_type" => [
 					self::PROPERTY_CLASS => ilRadioGroupInputGUI::class,
 					self::PROPERTY_REQUIRED => true,
 					self::PROPERTY_SUBITEMS => [
-						Rule::OPERATOR_VALUE_TYPE_TEXT => [
+						Rule::MATCH_TYPE_ALWAYS => [
 							self::PROPERTY_CLASS => ilRadioOption::class,
-							self::PROPERTY_SUBITEMS => [
-								"operator_value_text" => [
-									self::PROPERTY_CLASS => ilTextInputGUI::class
-								]
-							],
-							"setTitle" => $this->txt("operator_value_text")
+							self::PROPERTY_SUBITEMS => [],
+							"setTitle" => $this->txt("match_type_always")
 						],
-						Rule::OPERATOR_VALUE_TYPE_OBJECT_PROPERTY => [
+						Rule::MATCH_TYPE_MATCH => [
 							self::PROPERTY_CLASS => ilRadioOption::class,
 							self::PROPERTY_SUBITEMS => [
-								"operator_value_object_property" => [
+								"metadata" => [
 									self::PROPERTY_CLASS => ilSelectInputGUI::class,
-									self::PROPERTY_OPTIONS => [ "" => "" ] + $object_type_definiton->getObjectPropertiesText(),
-									"setTitle" => self::plugin()
-										->translate("operator_value_object_property", ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG, [ $object ])
+									self::PROPERTY_REQUIRED => true,
+									self::PROPERTY_OPTIONS => [ "" => "" ] + self::ilias()->metadata()->getMetadata()
+								],
+								"operator" => [
+									self::PROPERTY_CLASS => ilSelectInputGUI::class,
+									self::PROPERTY_REQUIRED => true,
+									self::PROPERTY_OPTIONS => [ "" => "" ] + self::rules()->getOperatorsText()
+								],
+								"operator_negated" => [
+									self::PROPERTY_CLASS => ilCheckboxInputGUI::class
+								],
+								"operator_case_sensitive" => [
+									self::PROPERTY_CLASS => ilCheckboxInputGUI::class
+								],
+								"operator_value_type" => [
+									self::PROPERTY_CLASS => ilRadioGroupInputGUI::class,
+									self::PROPERTY_REQUIRED => true,
+									self::PROPERTY_SUBITEMS => [
+										Rule::OPERATOR_VALUE_TYPE_TEXT => [
+											self::PROPERTY_CLASS => ilRadioOption::class,
+											self::PROPERTY_SUBITEMS => [
+												"operator_value_text" => [
+													self::PROPERTY_CLASS => ilTextInputGUI::class
+												]
+											],
+											"setTitle" => $this->txt("operator_value_text")
+										],
+										Rule::OPERATOR_VALUE_TYPE_OBJECT_PROPERTY => [
+											self::PROPERTY_CLASS => ilRadioOption::class,
+											self::PROPERTY_SUBITEMS => [
+												"operator_value_object_property" => [
+													self::PROPERTY_CLASS => ilSelectInputGUI::class,
+													self::PROPERTY_OPTIONS => [ "" => "" ] + $object_type_definiton->getObjectPropertiesText(),
+													"setTitle" => self::plugin()
+														->translate("operator_value_object_property", ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG, [ $object ])
+												]
+											],
+											"setTitle" => self::plugin()
+												->translate("operator_value_object_property", ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG, [ $object ])
+										]
+									]
 								]
 							],
-							"setTitle" => self::plugin()
-								->translate("operator_value_object_property", ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG, [ $object ])
+							"setTitle" => $this->txt("match_type_match")
 						]
 					]
 				],
@@ -235,7 +275,11 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 					self::PROPERTY_CLASS => ilSelectInputGUI::class,
 					self::PROPERTY_REQUIRED => true,
 					self::PROPERTY_OPTIONS => [ "" => "" ] + self::rules()->getMailTemplatesText(),
-					"setInfo" => ilNotifications4PluginsPlugin::PLUGIN_NAME
+					"setInfo" => self::output()->getHTML([
+						self::plugin()->translate("mail_template_name_info", self::LANG_MODULE, [ ilNotifications4PluginsPlugin::PLUGIN_NAME ]),
+						"<br><br>",
+						self::dic()->ui()->factory()->listing()->descriptive($object_type_definiton->getMailPlaceholderKeyTypes())
+					])
 				],
 				"receiver" => [
 					self::PROPERTY_CLASS => ilRadioGroupInputGUI::class,
@@ -313,6 +357,10 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 				$this->rule->setEnabled($value);
 				break;
 
+			case "interval_type":
+				$this->rule->setIntervalType(intval($value));
+				break;
+
 			case "interval":
 				$this->rule->setInterval(intval($value));
 				break;
@@ -323,6 +371,10 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 
 			case "description":
 				$this->rule->setDescription(strval($value));
+				break;
+
+			case "match_type":
+				$this->rule->setMatchType(intval($value));
 				break;
 
 			case "metadata":

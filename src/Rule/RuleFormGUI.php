@@ -326,7 +326,7 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 	/**
 	 * @inheritdoc
 	 */
-	public function storeForm()/*: bool*/ {
+	public function storeForm(): bool {
 		if ($this->rule === NULL) {
 			$this->rule = new Rule();
 		}

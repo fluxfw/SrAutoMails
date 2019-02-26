@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.3.1]
+- Supports ILIAS 5.4
+
 ## [1.3.0]
 - More config interval (Once or number)
 - More config match (Every run or set match)

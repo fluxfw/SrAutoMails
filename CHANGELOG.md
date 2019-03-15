@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.3.2]
+- Supports new Notifications4Plugins interface
+
 ## [1.3.1]
 - Supports ILIAS 5.4
 

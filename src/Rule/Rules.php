@@ -5,7 +5,6 @@ namespace srag\Plugins\SrAutoMails\Rule;
 use ilSrAutoMailsConfigGUI;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
-use srag\Plugins\Notifications4Plugins\Notification\srNotification;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
@@ -23,14 +22,14 @@ final class Rules {
 	/**
 	 * @var self
 	 */
-	protected static $instance = NULL;
+	protected static $instance = null;
 
 
 	/**
 	 * @return self
 	 */
 	public static function getInstance(): self {
-		if (self::$instance === NULL) {
+		if (self::$instance === null) {
 			self::$instance = new self();
 		}
 
@@ -43,25 +42,6 @@ final class Rules {
 	 */
 	private function __construct() {
 
-	}
-
-
-	/**
-	 * @return array
-	 */
-	public function getMailTemplatesText(): array {
-		/**
-		 * @var srNotification[] $notifications
-		 */
-		$notifications = srNotification::get();
-
-		$mail_templates = [];
-
-		foreach ($notifications as $notification) {
-			$mail_templates[$notification->getName()] = $notification->getTitle() . " (" . $notification->getName() . ")";
-		}
-
-		return $mail_templates;
 	}
 
 
@@ -84,7 +64,7 @@ final class Rules {
 	 * @return array
 	 */
 	public function getRulesArray(string $title = "", string $description = "", string $object_type = "", /*?*/
-		bool $enabled = NULL): array {
+		bool $enabled = null): array {
 		$where = Rule::where([]);
 
 		if (!empty($title)) {
@@ -99,7 +79,7 @@ final class Rules {
 			$where = $where->where([ "object_type" => '%' . $object_type . '%' ], "LIKE");
 		}
 
-		if ($enabled !== NULL) {
+		if ($enabled !== null) {
 			$where = $where->where([ "enabled" => $enabled ]);
 		}
 
@@ -139,7 +119,7 @@ final class Rules {
 
 		if ($interval_check) {
 			$rules = array_filter($rules, function (Rule $rule) use ($time): bool {
-				if ($rule->getLastCheck() === NULL) {
+				if ($rule->getLastCheck() === null) {
 					return true;
 				}
 

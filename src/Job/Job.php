@@ -7,8 +7,7 @@ use ilCronJobResult;
 use ilDateTime;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
-use srag\Plugins\Notifications4Plugins\Notification\srNotification;
-use srag\Plugins\Notifications4Plugins\NotificationSender\srNotificationInternalMailSender;
+use srag\Plugins\Notifications4Plugins\Utils\Notifications4PluginsTrait;
 use srag\Plugins\SrAutoMails\ObjectType\ObjectType;
 use srag\Plugins\SrAutoMails\Rule\Rule;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
@@ -24,6 +23,7 @@ class Job extends ilCronJob {
 
 	use DICTrait;
 	use SrAutoMailsTrait;
+	use Notifications4PluginsTrait;
 	const CRON_JOB_ID = ilSrAutoMailsPlugin::PLUGIN_ID;
 	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
 	const LANG_MODULE_CRON = "cron";
@@ -180,12 +180,12 @@ class Job extends ilCronJob {
 	 * @return bool
 	 */
 	protected function sendNotification(Rule $rule, ObjectType $object_type, $object, int $user_id): bool {
-		$notification = srNotification::getInstanceByName($rule->getMailTemplateName());
+		$notification = self::notification()->getNotificationByName($rule->getMailTemplateName());
 
-		$sender = new srNotificationInternalMailSender(ANONYMOUS_USER_ID, $user_id);
+		$sender = self::sender()->factory()->internalMail(ANONYMOUS_USER_ID, $user_id);
 
 		$placeholders = $object_type->getPlaceholdersForMail($object, $user_id, $rule);
 
-		return $notification->send($sender, $placeholders, $placeholders["receiver"]->getLanguage());
+		return self::sender()->send($sender, $notification, $placeholders, $placeholders["receiver"]->getLanguage());
 	}
 }

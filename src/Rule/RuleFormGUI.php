@@ -14,6 +14,7 @@ use ilTextInputGUI;
 use srag\ActiveRecordConfig\SrAutoMails\ActiveRecordConfigFormGUI;
 use srag\ActiveRecordConfig\SrAutoMails\ActiveRecordConfigGUI;
 use srag\CustomInputGUIs\SrAutoMails\MultiSelectSearchInputGUI\MultiSelectSearchInputGUI;
+use srag\Plugins\Notifications4Plugins\Utils\Notifications4PluginsTrait;
 use srag\Plugins\SrAutoMails\Config\Config;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
@@ -27,6 +28,7 @@ use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 class RuleFormGUI extends ActiveRecordConfigFormGUI {
 
 	use SrAutoMailsTrait;
+	use Notifications4PluginsTrait;
 	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
 	const CONFIG_CLASS_NAME = Config::class;
 	/**
@@ -43,7 +45,7 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 	 * @param Rule|null             $rule
 	 */
 	public function __construct(ActiveRecordConfigGUI $parent, string $tab_id, /*?*/
-		Rule $rule = NULL) {
+		Rule $rule = null) {
 
 		$this->rule = $rule;
 
@@ -56,7 +58,7 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 	 */
 	protected function getValue(/*string*/
 		$key) {
-		if ($this->rule !== NULL) {
+		if ($this->rule !== null) {
 			switch ($key) {
 				case "object_type":
 					return $this->rule->getObjectType();
@@ -129,7 +131,7 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 			}
 		}
 
-		return NULL;
+		return null;
 	}
 
 
@@ -137,13 +139,13 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 	 * @inheritdoc
 	 */
 	protected function initAction()/*: void*/ {
-		if ($this->rule !== NULL) {
+		if ($this->rule !== null) {
 			self::dic()->ctrl()->setParameter($this->parent, "srauma_rule_id", $this->rule->getRuleId());
 		}
 
 		parent::initAction();
 
-		self::dic()->ctrl()->setParameter($this->parent, "srauma_rule_id", NULL);
+		self::dic()->ctrl()->setParameter($this->parent, "srauma_rule_id", null);
 	}
 
 
@@ -151,7 +153,7 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 	 * @inheritdoc
 	 */
 	protected function initCommands()/*: void*/ {
-		if ($this->rule !== NULL) {
+		if ($this->rule !== null) {
 			$this->addCommandButton(ilSrAutoMailsConfigGUI::CMD_UPDATE_RULE, $this->txt("save"));
 		} else {
 			$this->addCommandButton(ilSrAutoMailsConfigGUI::CMD_CREATE_RULE, $this->txt("add"));
@@ -169,11 +171,11 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 				self::PROPERTY_CLASS => ilSelectInputGUI::class,
 				self::PROPERTY_REQUIRED => true,
 				self::PROPERTY_OPTIONS => [ "" => "" ] + self::objectTypes()->getObjectTypesText(),
-				self::PROPERTY_DISABLED => ($this->rule !== NULL)
+				self::PROPERTY_DISABLED => ($this->rule !== null)
 			]
 		];
 
-		if ($this->rule !== NULL) {
+		if ($this->rule !== null) {
 			$object_type_definiton = self::objectTypes()->factory($this->rule->getObjectType());
 			$object = $this->fields["object_type"][self::PROPERTY_OPTIONS][$this->rule->getObjectType()];
 
@@ -274,7 +276,7 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 				"mail_template_name" => [
 					self::PROPERTY_CLASS => ilSelectInputGUI::class,
 					self::PROPERTY_REQUIRED => true,
-					self::PROPERTY_OPTIONS => [ "" => "" ] + self::rules()->getMailTemplatesText(),
+					self::PROPERTY_OPTIONS => [ "" => "" ] + self::notification()->getArrayForSelection(),
 					"setInfo" => self::output()->getHTML([
 						self::plugin()->translate("mail_template_name_info", self::LANG_MODULE, [ ilNotifications4PluginsPlugin::PLUGIN_NAME ]),
 						"<br><br>",
@@ -319,7 +321,7 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 	 * @inheritdoc
 	 */
 	protected function initTitle()/*: void*/ {
-		$this->setTitle($this->txt($this->rule !== NULL ? "edit_rule" : "add_rule"));
+		$this->setTitle($this->txt($this->rule !== null ? "edit_rule" : "add_rule"));
 	}
 
 
@@ -327,7 +329,7 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 	 * @inheritdoc
 	 */
 	public function storeForm(): bool {
-		if ($this->rule === NULL) {
+		if ($this->rule === null) {
 			$this->rule = new Rule();
 		}
 

@@ -182,7 +182,7 @@ class Job extends ilCronJob {
 	protected function sendNotification(Rule $rule, ObjectType $object_type, $object, int $user_id): bool {
 		$notification = self::notification()->getNotificationByName($rule->getMailTemplateName());
 
-		$sender = self::sender()->factory()->internal(ANONYMOUS_USER_ID, $user_id);
+		$sender = self::sender()->factory()->internalMail(ANONYMOUS_USER_ID, $user_id);
 
 		$placeholders = $object_type->getPlaceholdersForMail($object, $user_id, $rule);
 

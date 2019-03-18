@@ -2,7 +2,6 @@
 
 namespace srag\Plugins\SrAutoMails\Rule;
 
-use ilAdvancedSelectionListGUI;
 use ilLinkButton;
 use ilSelectInputGUI;
 use ilSrAutoMailsConfigGUI;
@@ -111,7 +110,7 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 		if (!empty($enabled)) {
 			$enabled = ($enabled === "yes");
 		} else {
-			$enabled = NULL;
+			$enabled = null;
 		}
 
 		$this->setData(array_map(function (array &$row): array {
@@ -166,9 +165,6 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 	protected function fillRow(/*array*/
 		$row)/*: void*/ {
 		self::dic()->ctrl()->setParameter($this->parent_obj, "srauma_rule_id", $row["rule_id"]);
-		$edit_rule_link = self::dic()->ctrl()->getLinkTarget($this->parent_obj, ilSrAutoMailsConfigGUI::CMD_EDIT_RULE);
-		$remove_rule_link = self::dic()->ctrl()->getLinkTarget($this->parent_obj, ilSrAutoMailsConfigGUI::CMD_REMOVE_RULE_CONFIRM);
-		self::dic()->ctrl()->setParameter($this->parent_obj, "srauma_rule_id", NULL);
 
 		$this->tpl->setCurrentBlock("checkbox");
 		$this->tpl->setVariable("CHECKBOX_POST_VAR", "srauma_rule_id");
@@ -177,12 +173,11 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 
 		parent::fillRow($row);
 
-		$actions = new ilAdvancedSelectionListGUI();
-		$actions->setListTitle($this->txt("actions"));
-
-		$actions->addItem($this->txt("edit_rule"), "", $edit_rule_link);
-		$actions->addItem($this->txt("remove_rule"), "", $remove_rule_link);
-
-		$this->tpl->setVariable("COLUMN", self::output()->getHTML($actions));
+		$this->tpl->setVariable("COLUMN", self::output()->getHTML(self::dic()->ui()->factory()->dropdown()->standard([
+			self::dic()->ui()->factory()->button()->shy($this->txt("edit_rule"), self::dic()->ctrl()
+				->getLinkTarget($this->parent_obj, ilSrAutoMailsConfigGUI::CMD_EDIT_RULE)),
+			self::dic()->ui()->factory()->button()->shy($this->txt("remove_rule"), self::dic()->ctrl()
+				->getLinkTarget($this->parent_obj, ilSrAutoMailsConfigGUI::CMD_REMOVE_RULE_CONFIRM))
+		])->withLabel($this->txt("actions"))));
 	}
 }

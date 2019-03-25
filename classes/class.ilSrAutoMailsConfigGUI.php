@@ -55,7 +55,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 	 * @return RuleFormGUI
 	 */
 	protected function getRuleForm(/*?*/
-		Rule $rule = NULL): RuleFormGUI {
+		Rule $rule = null): RuleFormGUI {
 		$form = new RuleFormGUI($this, self::TAB_RULES, $rule);
 
 		return $form;
@@ -147,7 +147,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 
 		self::dic()->ctrl()->setParameter($this, "srauma_rule_id", $rule->getRuleId());
 		$confirmation->setFormAction(self::dic()->ctrl()->getFormAction($this));
-		self::dic()->ctrl()->setParameter($this, "srauma_rule_id", NULL);
+		self::dic()->ctrl()->setParameter($this, "srauma_rule_id", null);
 
 		$confirmation->setHeaderText(self::plugin()->translate("remove_rule_confirm", self::LANG_MODULE_CONFIG, [ $rule->getTitle() ]));
 

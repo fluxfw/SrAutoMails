@@ -18,8 +18,6 @@ config_interval_info#:#Checks this rule only all x days
 config_interval_type#:#Interval
 config_interval_type_number#:#Number
 config_interval_type_once#:#Once
-config_mail_template_name#:#Mail template name
-config_mail_template_name_info#:#Following placeholders can be used in the %1$s template. Below, its data type is displayed. How to use them in %1$s, please refer to its documentation
 config_match_type#:#Match type
 config_match_type_always#:#Every run
 config_match_type_match#:#Set matcher

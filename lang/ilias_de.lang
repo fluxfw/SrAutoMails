@@ -18,8 +18,6 @@ config_interval_info#:#Überprüft diese Regel nur alle x Tage
 config_interval_type#:#Intervall
 config_interval_type_number#:#Zahl
 config_interval_type_once#:#Einmalig
-config_mail_template_name#:#Mail-Vorlage-Name
-config_mail_template_name_info#:#Folgende Platzhalter können in der %1$s-Vorlage verwendet werden. Unterhalb wird dessen Datentyp angezeigt. Wie Sie diese in %1$s verwenden können, schauen Sie bitte in dessen Dokumentation nach
 config_match_type#:#Übereinstimmungs-Typ
 config_match_type_always#:#Bei jedem Durchlauf
 config_match_type_match#:#Übereinstimmung setzen

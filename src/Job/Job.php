@@ -11,6 +11,7 @@ use srag\Plugins\Notifications4Plugins\Utils\Notifications4PluginsTrait;
 use srag\Plugins\SrAutoMails\ObjectType\ObjectType;
 use srag\Plugins\SrAutoMails\Rule\Rule;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
+use Throwable;
 
 /**
  * Class Job
@@ -180,12 +181,18 @@ class Job extends ilCronJob {
 	 * @return bool
 	 */
 	protected function sendNotification(Rule $rule, ObjectType $object_type, $object, int $user_id): bool {
-		$notification = self::notification()->getNotificationByName($rule->getMailTemplateName());
+		try {
+			$notification = self::notification()->getNotificationByName($rule->getMailTemplateName());
 
-		$sender = self::sender()->factory()->internalMail(ANONYMOUS_USER_ID, $user_id);
+			$sender = self::sender()->factory()->internalMail(ANONYMOUS_USER_ID, $user_id);
 
-		$placeholders = $object_type->getPlaceholdersForMail($object, $user_id, $rule);
+			$placeholders = $object_type->getPlaceholdersForMail($object, $user_id, $rule);
 
-		return self::sender()->send($sender, $notification, $placeholders, $placeholders["receiver"]->getLanguage());
+			self::sender()->send($sender, $notification, $placeholders, $placeholders["receiver"]->getLanguage());
+
+			return true;
+		} catch (Throwable $ex) {
+			return false;
+		}
 	}
 }

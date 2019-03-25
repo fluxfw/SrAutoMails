@@ -5,8 +5,10 @@ namespace srag\Plugins\SrAutoMails\Job;
 use ilCronJob;
 use ilCronJobResult;
 use ilDateTime;
+use ilLogLevel;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
+use srag\Notifications4Plugins\Exception\Notifications4PluginsException;
 use srag\Plugins\Notifications4Plugins\Utils\Notifications4PluginsTrait;
 use srag\Plugins\SrAutoMails\ObjectType\ObjectType;
 use srag\Plugins\SrAutoMails\Rule\Rule;
@@ -138,11 +140,14 @@ class Job extends ilCronJob {
 							if ($rule->getIntervalType() === Rule::INTERVAL_TYPE_NUMBER
 								|| !self::sents()->hasSent($rule->getRuleId(), $object_type->getObjectId($object), $user_id)) {
 
-								if ($this->sendNotification($rule, $object_type, $object, $user_id)) {
+								try {
+									$this->sendNotification($rule, $object_type, $object, $user_id);
 
 									self::sents()->sent($rule->getRuleId(), $object_type->getObjectId($object), $user_id);
 
 									$sent_mails_count ++;
+								} catch (Throwable $ex) {
+									self::dic()->logger()->root()->log($ex->__toString(), ilLogLevel::ERROR);
 								}
 							}
 						}
@@ -178,21 +183,15 @@ class Job extends ilCronJob {
 	 * @param object     $object
 	 * @param int        $user_id
 	 *
-	 * @return bool
+	 * @throws Notifications4PluginsException
 	 */
-	protected function sendNotification(Rule $rule, ObjectType $object_type, $object, int $user_id): bool {
-		try {
-			$notification = self::notification()->getNotificationByName($rule->getMailTemplateName());
+	protected function sendNotification(Rule $rule, ObjectType $object_type, $object, int $user_id)/*: void*/ {
+		$notification = self::notification()->getNotificationByName($rule->getMailTemplateName());
 
-			$sender = self::sender()->factory()->internalMail(ANONYMOUS_USER_ID, $user_id);
+		$sender = self::sender()->factory()->internalMail(ANONYMOUS_USER_ID, $user_id);
 
-			$placeholders = $object_type->getPlaceholdersForMail($object, $user_id, $rule);
+		$placeholders = $object_type->getPlaceholdersForMail($object, $user_id, $rule);
 
-			self::sender()->send($sender, $notification, $placeholders, $placeholders["receiver"]->getLanguage());
-
-			return true;
-		} catch (Throwable $ex) {
-			return false;
-		}
+		self::sender()->send($sender, $notification, $placeholders, $placeholders["receiver"]->getLanguage());
 	}
 }

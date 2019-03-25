@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.3.3]
+- Notifications4PluginsException
+- Using some new ILIAS 5.3 UI's
+
 ## [1.3.2]
 - Supports new Notifications4Plugins interface
 

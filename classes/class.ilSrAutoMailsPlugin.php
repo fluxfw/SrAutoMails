@@ -3,6 +3,7 @@
 require_once __DIR__ . "/../vendor/autoload.php";
 require_once __DIR__ . "/../../../../UIComponent/UserInterfaceHook/Notifications4Plugins/vendor/autoload.php";
 
+use srag\DIC\SrAutoMails\Util\LibraryLanguageInstaller;
 use srag\Plugins\SrAutoMails\Config\Config;
 use srag\Plugins\SrAutoMails\Job\Job;
 use srag\Plugins\SrAutoMails\Rule\Rule;
@@ -26,14 +27,14 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin {
 	/**
 	 * @var self|null
 	 */
-	protected static $instance = NULL;
+	protected static $instance = null;
 
 
 	/**
 	 * @return self
 	 */
 	public static function getInstance(): self {
-		if (self::$instance === NULL) {
+		if (self::$instance === null) {
 			self::$instance = new self();
 		}
 
@@ -77,8 +78,19 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin {
 				return new Job();
 
 			default:
-				return NULL;
+				return null;
 		}
+	}
+
+
+	/**
+	 * @inheritdoc
+	 */
+	public function updateLanguages(array $a_lang_keys = null) {
+		parent::updateLanguages($a_lang_keys);
+
+		LibraryLanguageInstaller::getInstance()->withPlugin(self::plugin())->withLibraryLanguageDirectory(__DIR__
+			. "/../vendor/srag/removeplugindataconfirm/lang")->updateLanguages();
 	}
 
 

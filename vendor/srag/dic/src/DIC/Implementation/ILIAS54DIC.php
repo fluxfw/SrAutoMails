@@ -26,8 +26,6 @@ final class ILIAS54DIC extends AbstractDIC {
 	 * ILIAS54DIC constructor
 	 *
 	 * @param Container $dic
-	 *
-	 * @internal
 	 */
 	public function __construct(Container $dic) {
 		parent::__construct();
@@ -145,6 +143,14 @@ final class ILIAS54DIC extends AbstractDIC {
 	 */
 	public function filesystem()/*: Filesystems*/ {
 		return $this->dic->filesystem();
+	}
+
+
+	/**
+	 * @inheritdoc
+	 */
+	public function globalScreen()/*: GlobalScreenService*/ {
+		return $this->dic->globalScreen();
 	}
 
 

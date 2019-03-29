@@ -3,6 +3,7 @@
 namespace srag\Plugins\SrAutoMails\Rule;
 
 use ilCheckboxInputGUI;
+use ilNotifications4PluginsPlugin;
 use ilNumberInputGUI;
 use ilRadioGroupInputGUI;
 use ilRadioOption;
@@ -13,7 +14,10 @@ use ilTextInputGUI;
 use srag\ActiveRecordConfig\SrAutoMails\ActiveRecordConfigFormGUI;
 use srag\ActiveRecordConfig\SrAutoMails\ActiveRecordConfigGUI;
 use srag\CustomInputGUIs\SrAutoMails\MultiSelectSearchInputGUI\MultiSelectSearchInputGUI;
-use srag\Plugins\Notifications4Plugins\Utils\Notifications4PluginsTrait;
+use srag\DIC\Notifications4Plugins\DICStatic as Notifications4PluginsDICStatic;
+use srag\Notifications4Plugin\Notifications4Plugins\Utils\Notifications4PluginTrait;
+use srag\Plugins\Notifications4Plugins\Notification\Language\NotificationLanguage;
+use srag\Plugins\Notifications4Plugins\Notification\Notification;
 use srag\Plugins\SrAutoMails\Config\Config;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
@@ -27,7 +31,7 @@ use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 class RuleFormGUI extends ActiveRecordConfigFormGUI {
 
 	use SrAutoMailsTrait;
-	use Notifications4PluginsTrait;
+	use Notifications4PluginTrait;
 	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
 	const CONFIG_CLASS_NAME = Config::class;
 	/**
@@ -272,7 +276,10 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 							]
 						]
 					],
-				] + self::notification()->ui()->templateSelection("mail_template_name", $object_type_definiton->getMailPlaceholderKeyTypes()) + [
+				] + self::notificationUI()->withPlugin(Notifications4PluginsDICStatic::plugin(ilNotifications4PluginsPlugin::class))
+					->templateSelection(self::notification(Notification::class, NotificationLanguage::class)
+						->getArrayForSelection(self::notification(Notification::class, NotificationLanguage::class)
+							->getNotifications()), "mail_template_name", $object_type_definiton->getMailPlaceholderKeyTypes()) + [
 					"receiver" => [
 						self::PROPERTY_CLASS => ilRadioGroupInputGUI::class,
 						self::PROPERTY_REQUIRED => true,

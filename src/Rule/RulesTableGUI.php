@@ -2,7 +2,6 @@
 
 namespace srag\Plugins\SrAutoMails\Rule;
 
-use ilLinkButton;
 use ilSelectInputGUI;
 use ilSrAutoMailsConfigGUI;
 use ilSrAutoMailsPlugin;
@@ -85,10 +84,8 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 	 * @inheritdoc
 	 */
 	protected function initCommands()/*: void*/ {
-		$add_rule = ilLinkButton::getInstance();
-		$add_rule->setCaption($this->txt("add_rule"), false);
-		$add_rule->setUrl(self::dic()->ctrl()->getLinkTarget($this->parent_obj, ilSrAutoMailsConfigGUI::CMD_ADD_RULE));
-		self::dic()->toolbar()->addButtonInstance($add_rule);
+		self::dic()->toolbar()->addComponent(self::dic()->ui()->factory()->button()->standard($this->txt("add_rule"), self::dic()->ctrl()
+			->getLinkTarget($this->parent_obj, ilSrAutoMailsConfigGUI::CMD_ADD_RULE)));
 
 		$this->setSelectAllCheckbox("srauma_rule_id");
 		$this->addMultiCommand(ilSrAutoMailsConfigGUI::CMD_ENABLE_RULES, $this->txt("enable_rules"));

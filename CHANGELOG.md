@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.3.4]
+- Fixes
+
 ## [1.3.3]
 - Notifications4PluginsException
 - Using some new ILIAS 5.3 UI's

@@ -8,8 +8,10 @@ use ilDateTime;
 use ilLogLevel;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
-use srag\Notifications4Plugins\Exception\Notifications4PluginsException;
-use srag\Plugins\Notifications4Plugins\Utils\Notifications4PluginsTrait;
+use srag\Notifications4Plugin\Notifications4Plugins\Exception\Notifications4PluginException;
+use srag\Notifications4Plugin\Notifications4Plugins\Utils\Notifications4PluginTrait;
+use srag\Plugins\Notifications4Plugins\Notification\Language\NotificationLanguage;
+use srag\Plugins\Notifications4Plugins\Notification\Notification;
 use srag\Plugins\SrAutoMails\ObjectType\ObjectType;
 use srag\Plugins\SrAutoMails\Rule\Rule;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
@@ -26,7 +28,7 @@ class Job extends ilCronJob {
 
 	use DICTrait;
 	use SrAutoMailsTrait;
-	use Notifications4PluginsTrait;
+	use Notifications4PluginTrait;
 	const CRON_JOB_ID = ilSrAutoMailsPlugin::PLUGIN_ID;
 	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
 	const LANG_MODULE_CRON = "cron";
@@ -183,10 +185,10 @@ class Job extends ilCronJob {
 	 * @param object     $object
 	 * @param int        $user_id
 	 *
-	 * @throws Notifications4PluginsException
+	 * @throws Notifications4PluginException
 	 */
 	protected function sendNotification(Rule $rule, ObjectType $object_type, $object, int $user_id)/*: void*/ {
-		$notification = self::notification()->getNotificationByName($rule->getMailTemplateName());
+		$notification = self::notification(Notification::class, NotificationLanguage::class)->getNotificationByName($rule->getMailTemplateName());
 
 		$sender = self::sender()->factory()->internalMail(ANONYMOUS_USER_ID, $user_id);
 

@@ -1,5 +1,8 @@
 # Changelog
 
+## [x]
+- Notifications4Plugin library
+
 ## [1.3.4]
 - Fixes
 

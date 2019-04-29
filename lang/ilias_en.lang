@@ -23,6 +23,7 @@ config_match_type_always#:#Every run
 config_match_type_match#:#Set matcher
 config_metadata#:#Metadata
 config_no#:#No
+config_notification#:#Notification
 config_object_property_count_course_members#:#Count course members
 config_object_property_count_course_members_completed#:#Count members completed
 config_object_property_count_course_members_not_completed#:#Count members not completed
@@ -67,6 +68,7 @@ config_remove_rules#:#Removes rules
 config_remove_rules_confirm#:#Are you really want to delete the follow rules?
 config_removed_rule#:#Rule %s removed
 config_removed_rules#:#Rules removed
+config_rule#:#Rule
 config_rules#:#Rules
 config_save#:#Save
 config_saved_rule#:#Rule %s saved

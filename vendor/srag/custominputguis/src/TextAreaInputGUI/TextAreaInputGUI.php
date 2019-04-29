@@ -7,7 +7,7 @@ use ilTextAreaInputGUI;
 use srag\DIC\SrAutoMails\DICTrait;
 
 /**
- * Class TextInputGUI
+ * Class TextAreaInputGUI
  *
  * @package srag\CustomInputGUIs\SrAutoMails\TextAreaInputGUI
  *

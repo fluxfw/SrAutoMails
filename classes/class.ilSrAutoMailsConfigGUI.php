@@ -3,6 +3,10 @@
 require_once __DIR__ . "/../vendor/autoload.php";
 
 use srag\ActiveRecordConfig\SrAutoMails\ActiveRecordConfigGUI;
+use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
+use srag\Plugins\Notifications4Plugins\Notification\Language\NotificationLanguage;
+use srag\Plugins\SrAutoMails\Notification\Ctrl\Notifications4PluginCtrl;
+use srag\Plugins\SrAutoMails\Notification\Notification\Notification;
 use srag\Plugins\SrAutoMails\Rule\Rule;
 use srag\Plugins\SrAutoMails\Rule\RuleFormGUI;
 use srag\Plugins\SrAutoMails\Rule\RulesTableGUI;
@@ -16,8 +20,11 @@ use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 
 	use SrAutoMailsTrait;
+	use Notifications4PluginTrait;
 	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
 	const TAB_RULES = "rules";
+	const TAB_RULE = "rule";
+	const TAB_NOTIFICATION = "notification";
 	const CMD_ADD_RULE = "addRule";
 	const CMD_CREATE_RULE = "createRule";
 	const CMD_EDIT_RULE = "editRule";
@@ -54,9 +61,38 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 	 *
 	 * @return RuleFormGUI
 	 */
-	protected function getRuleForm(/*?*/
+	public function getRuleForm(/*?*/
 		Rule $rule = null): RuleFormGUI {
+		self::dic()->ctrl()->saveParameter($this, "srauma_rule_id");
+
 		$form = new RuleFormGUI($this, self::TAB_RULES, $rule);
+
+		if ($rule !== null) {
+			if (empty($rule->getMailTemplateName())) {
+				$rule->setMailTemplateName("rule_" . $rule->getRuleId());
+
+				$rule->store();
+			}
+
+			$notification = self::notification(Notification::class, NotificationLanguage::class)->getNotificationByName($rule->getMailTemplateName());
+
+			if ($notification === null) {
+				$notification = self::notification(Notification::class, NotificationLanguage::class)->factory()->newInstance();
+
+				$notification->setName($rule->getMailTemplateName());
+
+				self::notification(Notification::class, NotificationLanguage::class)->storeInstance($notification);
+			}
+
+			self::dic()->ctrl()->setParameterByClass(Notifications4PluginCtrl::class, Notifications4PluginCtrl::GET_PARAM, $notification->getId());
+
+			self::dic()->tabs()->addSubTab(self::TAB_RULE, $this->txt(self::TAB_RULE), self::dic()->ctrl()
+				->getLinkTarget($this, self::CMD_EDIT_RULE));
+			self::dic()->tabs()->activateSubTab(self::TAB_RULE);
+
+			self::dic()->tabs()->addSubTab(self::TAB_NOTIFICATION, $this->txt(self::TAB_NOTIFICATION), self::dic()->ctrl()
+					->getLinkTargetByClass(Notifications4PluginCtrl::class, Notifications4PluginCtrl::CMD_EDIT_NOTIFICATION));
+		}
 
 		return $form;
 	}

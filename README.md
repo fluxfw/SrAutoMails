@@ -22,6 +22,7 @@ Rule:
 * [srag/custominputguis](https://packagist.org/packages/srag/custominputguis)
 * [srag/dic](https://packagist.org/packages/srag/dic)
 * [srag/librariesnamespacechanger](https://packagist.org/packages/srag/librariesnamespacechanger)
+* [srag/notifications4plugin](https://packagist.org/packages/srag/notifications4plugin)
 * [srag/removeplugindataconfirm](https://packagist.org/packages/srag/removeplugindataconfirm)
 
 Please use it for further development!

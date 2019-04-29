@@ -1,11 +1,14 @@
 <?php
 
 require_once __DIR__ . "/../vendor/autoload.php";
-require_once __DIR__ . "/../../../../UIComponent/UserInterfaceHook/Notifications4Plugins/vendor/autoload.php";
+
+require_once __DIR__."/../src/Notification/Ctrl/class.Notifications4PluginCtrl.php";
 
 use srag\DIC\SrAutoMails\Util\LibraryLanguageInstaller;
 use srag\Plugins\SrAutoMails\Config\Config;
 use srag\Plugins\SrAutoMails\Job\Job;
+use srag\Plugins\SrAutoMails\Notification\Notification\Language\NotificationLanguage;
+use srag\Plugins\SrAutoMails\Notification\Notification\Notification;
 use srag\Plugins\SrAutoMails\Rule\Rule;
 use srag\Plugins\SrAutoMails\Sent\Sent;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
@@ -91,6 +94,9 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin {
 
 		LibraryLanguageInstaller::getInstance()->withPlugin(self::plugin())->withLibraryLanguageDirectory(__DIR__
 			. "/../vendor/srag/removeplugindataconfirm/lang")->updateLanguages();
+
+		LibraryLanguageInstaller::getInstance()->withPlugin(self::plugin())->withLibraryLanguageDirectory(__DIR__
+			. "/../vendor/srag/notifications4plugin/lang")->updateLanguages();
 	}
 
 
@@ -99,6 +105,8 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin {
 	 */
 	protected function deleteData()/*: void*/ {
 		self::dic()->database()->dropTable(Config::TABLE_NAME, false);
+		self::dic()->database()->dropTable(Notification::TABLE_NAME, false);
+		self::dic()->database()->dropTable(NotificationLanguage::TABLE_NAME, false);
 		self::dic()->database()->dropTable(Rule::TABLE_NAME, false);
 		self::dic()->database()->dropTable(Sent::TABLE_NAME, false);
 	}

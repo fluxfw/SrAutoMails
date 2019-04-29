@@ -3,7 +3,6 @@
 namespace srag\Plugins\SrAutoMails\Rule;
 
 use ilCheckboxInputGUI;
-use ilNotifications4PluginsPlugin;
 use ilNumberInputGUI;
 use ilRadioGroupInputGUI;
 use ilRadioOption;
@@ -14,10 +13,6 @@ use ilTextInputGUI;
 use srag\ActiveRecordConfig\SrAutoMails\ActiveRecordConfigFormGUI;
 use srag\ActiveRecordConfig\SrAutoMails\ActiveRecordConfigGUI;
 use srag\CustomInputGUIs\SrAutoMails\MultiSelectSearchInputGUI\MultiSelectSearchInputGUI;
-use srag\DIC\Notifications4Plugins\DICStatic as Notifications4PluginsDICStatic;
-use srag\Notifications4Plugin\Notifications4Plugins\Utils\Notifications4PluginTrait;
-use srag\Plugins\Notifications4Plugins\Notification\Language\NotificationLanguage;
-use srag\Plugins\Notifications4Plugins\Notification\Notification;
 use srag\Plugins\SrAutoMails\Config\Config;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
@@ -31,7 +26,6 @@ use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 class RuleFormGUI extends ActiveRecordConfigFormGUI {
 
 	use SrAutoMailsTrait;
-	use Notifications4PluginTrait;
 	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
 	const CONFIG_CLASS_NAME = Config::class;
 	/**
@@ -111,9 +105,6 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 					}
 					break;
 
-				case "mail_template_name":
-					return $this->rule->getMailTemplateName();
-
 				case "receiver":
 					return $this->rule->getReceiverType();
 
@@ -135,20 +126,6 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 		}
 
 		return null;
-	}
-
-
-	/**
-	 * @inheritdoc
-	 */
-	protected function initAction()/*: void*/ {
-		if ($this->rule !== null) {
-			self::dic()->ctrl()->setParameter($this->parent, "srauma_rule_id", $this->rule->getRuleId());
-		}
-
-		parent::initAction();
-
-		self::dic()->ctrl()->setParameter($this->parent, "srauma_rule_id", null);
 	}
 
 
@@ -183,133 +160,129 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 			$object = $this->fields["object_type"][self::PROPERTY_OPTIONS][$this->rule->getObjectType()];
 
 			$this->fields = array_merge($this->fields, [
-					"enabled" => [
-						self::PROPERTY_CLASS => ilCheckboxInputGUI::class
-					],
-					"interval_type" => [
-						self::PROPERTY_CLASS => ilRadioGroupInputGUI::class,
-						self::PROPERTY_REQUIRED => true,
-						self::PROPERTY_SUBITEMS => [
-							Rule::INTERVAL_TYPE_ONCE => [
-								self::PROPERTY_CLASS => ilRadioOption::class,
-								self::PROPERTY_SUBITEMS => [],
-								"setTitle" => $this->txt("interval_type_once")
+				"enabled" => [
+					self::PROPERTY_CLASS => ilCheckboxInputGUI::class
+				],
+				"interval_type" => [
+					self::PROPERTY_CLASS => ilRadioGroupInputGUI::class,
+					self::PROPERTY_REQUIRED => true,
+					self::PROPERTY_SUBITEMS => [
+						Rule::INTERVAL_TYPE_ONCE => [
+							self::PROPERTY_CLASS => ilRadioOption::class,
+							self::PROPERTY_SUBITEMS => [],
+							"setTitle" => $this->txt("interval_type_once")
+						],
+						Rule::INTERVAL_TYPE_NUMBER => [
+							self::PROPERTY_CLASS => ilRadioOption::class,
+							self::PROPERTY_SUBITEMS => [
+								"interval" => [
+									self::PROPERTY_CLASS => ilNumberInputGUI::class,
+									"setMinValue" => 0,
+									"setSuffix" => $this->txt("interval_days")
+								]
 							],
-							Rule::INTERVAL_TYPE_NUMBER => [
-								self::PROPERTY_CLASS => ilRadioOption::class,
-								self::PROPERTY_SUBITEMS => [
-									"interval" => [
-										self::PROPERTY_CLASS => ilNumberInputGUI::class,
-										"setMinValue" => 0,
-										"setSuffix" => $this->txt("interval_days")
-									]
-								],
-								"setTitle" => $this->txt("interval_type_number")
-							]
-						]
-					],
-					"title" => [
-						self::PROPERTY_CLASS => ilTextInputGUI::class,
-						self::PROPERTY_REQUIRED => true
-					],
-					"description" => [
-						self::PROPERTY_CLASS => ilTextInputGUI::class
-					],
-					"match_type" => [
-						self::PROPERTY_CLASS => ilRadioGroupInputGUI::class,
-						self::PROPERTY_REQUIRED => true,
-						self::PROPERTY_SUBITEMS => [
-							Rule::MATCH_TYPE_ALWAYS => [
-								self::PROPERTY_CLASS => ilRadioOption::class,
-								self::PROPERTY_SUBITEMS => [],
-								"setTitle" => $this->txt("match_type_always")
-							],
-							Rule::MATCH_TYPE_MATCH => [
-								self::PROPERTY_CLASS => ilRadioOption::class,
-								self::PROPERTY_SUBITEMS => [
-									"metadata" => [
-										self::PROPERTY_CLASS => ilSelectInputGUI::class,
-										self::PROPERTY_REQUIRED => true,
-										self::PROPERTY_OPTIONS => [ "" => "" ] + self::ilias()->metadata()->getMetadata()
-									],
-									"operator" => [
-										self::PROPERTY_CLASS => ilSelectInputGUI::class,
-										self::PROPERTY_REQUIRED => true,
-										self::PROPERTY_OPTIONS => [ "" => "" ] + self::rules()->getOperatorsText()
-									],
-									"operator_negated" => [
-										self::PROPERTY_CLASS => ilCheckboxInputGUI::class
-									],
-									"operator_case_sensitive" => [
-										self::PROPERTY_CLASS => ilCheckboxInputGUI::class
-									],
-									"operator_value_type" => [
-										self::PROPERTY_CLASS => ilRadioGroupInputGUI::class,
-										self::PROPERTY_REQUIRED => true,
-										self::PROPERTY_SUBITEMS => [
-											Rule::OPERATOR_VALUE_TYPE_TEXT => [
-												self::PROPERTY_CLASS => ilRadioOption::class,
-												self::PROPERTY_SUBITEMS => [
-													"operator_value_text" => [
-														self::PROPERTY_CLASS => ilTextInputGUI::class
-													]
-												],
-												"setTitle" => $this->txt("operator_value_text")
-											],
-											Rule::OPERATOR_VALUE_TYPE_OBJECT_PROPERTY => [
-												self::PROPERTY_CLASS => ilRadioOption::class,
-												self::PROPERTY_SUBITEMS => [
-													"operator_value_object_property" => [
-														self::PROPERTY_CLASS => ilSelectInputGUI::class,
-														self::PROPERTY_OPTIONS => [ "" => "" ] + $object_type_definiton->getObjectPropertiesText(),
-														"setTitle" => self::plugin()
-															->translate("operator_value_object_property", ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG, [ $object ])
-													]
-												],
-												"setTitle" => self::plugin()
-													->translate("operator_value_object_property", ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG, [ $object ])
-											]
-										]
-									]
-								],
-								"setTitle" => $this->txt("match_type_match")
-							]
-						]
-					],
-				] + self::notificationUI()->withPlugin(Notifications4PluginsDICStatic::plugin(ilNotifications4PluginsPlugin::class))
-					->templateSelection(self::notification(Notification::class, NotificationLanguage::class)
-						->getArrayForSelection(self::notification(Notification::class, NotificationLanguage::class)
-							->getNotifications()), "mail_template_name", $object_type_definiton->getMailPlaceholderKeyTypes()) + [
-					"receiver" => [
-						self::PROPERTY_CLASS => ilRadioGroupInputGUI::class,
-						self::PROPERTY_REQUIRED => true,
-						self::PROPERTY_SUBITEMS => [
-							Rule::RECEIVER_TYPE_OBJECT => [
-								self::PROPERTY_CLASS => ilRadioOption::class,
-								self::PROPERTY_SUBITEMS => [
-									"receiver_object" => [
-										self::PROPERTY_CLASS => MultiSelectSearchInputGUI::class,
-										self::PROPERTY_REQUIRED => true,
-										self::PROPERTY_OPTIONS => $object_type_definiton->getReceiverPropertiesText(),
-										"setTitle" => $object
-									]
-								],
-								"setTitle" => $object
-							],
-							Rule::RECEIVER_TYPE_USERS => [
-								self::PROPERTY_CLASS => ilRadioOption::class,
-								self::PROPERTY_SUBITEMS => [
-									"receiver_users" => [
-										self::PROPERTY_CLASS => MultiSelectSearchInputGUI::class,
-										self::PROPERTY_REQUIRED => true,
-										self::PROPERTY_OPTIONS => self::ilias()->users()->getUsers()
-									]
-								],
-								"setTitle" => $this->txt("receiver_users")
-							]
+							"setTitle" => $this->txt("interval_type_number")
 						]
 					]
-				]);
+				],
+				"title" => [
+					self::PROPERTY_CLASS => ilTextInputGUI::class,
+					self::PROPERTY_REQUIRED => true
+				],
+				"description" => [
+					self::PROPERTY_CLASS => ilTextInputGUI::class
+				],
+				"match_type" => [
+					self::PROPERTY_CLASS => ilRadioGroupInputGUI::class,
+					self::PROPERTY_REQUIRED => true,
+					self::PROPERTY_SUBITEMS => [
+						Rule::MATCH_TYPE_ALWAYS => [
+							self::PROPERTY_CLASS => ilRadioOption::class,
+							self::PROPERTY_SUBITEMS => [],
+							"setTitle" => $this->txt("match_type_always")
+						],
+						Rule::MATCH_TYPE_MATCH => [
+							self::PROPERTY_CLASS => ilRadioOption::class,
+							self::PROPERTY_SUBITEMS => [
+								"metadata" => [
+									self::PROPERTY_CLASS => ilSelectInputGUI::class,
+									self::PROPERTY_REQUIRED => true,
+									self::PROPERTY_OPTIONS => [ "" => "" ] + self::ilias()->metadata()->getMetadata()
+								],
+								"operator" => [
+									self::PROPERTY_CLASS => ilSelectInputGUI::class,
+									self::PROPERTY_REQUIRED => true,
+									self::PROPERTY_OPTIONS => [ "" => "" ] + self::rules()->getOperatorsText()
+								],
+								"operator_negated" => [
+									self::PROPERTY_CLASS => ilCheckboxInputGUI::class
+								],
+								"operator_case_sensitive" => [
+									self::PROPERTY_CLASS => ilCheckboxInputGUI::class
+								],
+								"operator_value_type" => [
+									self::PROPERTY_CLASS => ilRadioGroupInputGUI::class,
+									self::PROPERTY_REQUIRED => true,
+									self::PROPERTY_SUBITEMS => [
+										Rule::OPERATOR_VALUE_TYPE_TEXT => [
+											self::PROPERTY_CLASS => ilRadioOption::class,
+											self::PROPERTY_SUBITEMS => [
+												"operator_value_text" => [
+													self::PROPERTY_CLASS => ilTextInputGUI::class
+												]
+											],
+											"setTitle" => $this->txt("operator_value_text")
+										],
+										Rule::OPERATOR_VALUE_TYPE_OBJECT_PROPERTY => [
+											self::PROPERTY_CLASS => ilRadioOption::class,
+											self::PROPERTY_SUBITEMS => [
+												"operator_value_object_property" => [
+													self::PROPERTY_CLASS => ilSelectInputGUI::class,
+													self::PROPERTY_OPTIONS => [ "" => "" ] + $object_type_definiton->getObjectPropertiesText(),
+													"setTitle" => self::plugin()
+														->translate("operator_value_object_property", ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG, [ $object ])
+												]
+											],
+											"setTitle" => self::plugin()
+												->translate("operator_value_object_property", ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG, [ $object ])
+										]
+									]
+								]
+							],
+							"setTitle" => $this->txt("match_type_match")
+						]
+					]
+				],
+				"receiver" => [
+					self::PROPERTY_CLASS => ilRadioGroupInputGUI::class,
+					self::PROPERTY_REQUIRED => true,
+					self::PROPERTY_SUBITEMS => [
+						Rule::RECEIVER_TYPE_OBJECT => [
+							self::PROPERTY_CLASS => ilRadioOption::class,
+							self::PROPERTY_SUBITEMS => [
+								"receiver_object" => [
+									self::PROPERTY_CLASS => MultiSelectSearchInputGUI::class,
+									self::PROPERTY_REQUIRED => true,
+									self::PROPERTY_OPTIONS => $object_type_definiton->getReceiverPropertiesText(),
+									"setTitle" => $object
+								]
+							],
+							"setTitle" => $object
+						],
+						Rule::RECEIVER_TYPE_USERS => [
+							self::PROPERTY_CLASS => ilRadioOption::class,
+							self::PROPERTY_SUBITEMS => [
+								"receiver_users" => [
+									self::PROPERTY_CLASS => MultiSelectSearchInputGUI::class,
+									self::PROPERTY_REQUIRED => true,
+									self::PROPERTY_OPTIONS => self::ilias()->users()->getUsers()
+								]
+							],
+							"setTitle" => $this->txt("receiver_users")
+						]
+					]
+				]
+			]);
 		}
 	}
 

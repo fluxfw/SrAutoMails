@@ -23,6 +23,7 @@ config_match_type_always#:#Bei jedem Durchlauf
 config_match_type_match#:#Übereinstimmung setzen
 config_metadata#:#Metadaten
 config_no#:#Nein
+config_notification#:#Benachrichtigung
 config_object_property_count_course_members#:#Anzahl Mitglieder
 config_object_property_count_course_members_completed#:#Anzahl Mitglieder abgeschlossen
 config_object_property_count_course_members_not_completed#:#Anzahl Mitglieder nicht abgeschlossen
@@ -67,6 +68,7 @@ config_remove_rules#:#Regeln entfernen
 config_remove_rules_confirm#:#Möchten Sie die folgende Regeln wirklich entfernen?
 config_removed_rule#:#Regel %s entfernt
 config_removed_rules#:#Regeln entfernt
+config_rule#:#Regel
 config_rules#:#Regeln
 config_save#:#Speichern
 config_saved_rule#:#Regel %s gespeichert

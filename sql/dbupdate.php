@@ -28,3 +28,17 @@ foreach (\srag\Plugins\SrAutoMails\Rule\Rule::where([ "match_type" => 0 ])->get(
 	$rule->store();
 }
 ?>
+<#4>
+<?php
+\srag\Plugins\SrAutoMails\Notification\Notification\Notification::updateDB();
+\srag\Plugins\SrAutoMails\Notification\Notification\Language\NotificationLanguage::updateDB();
+
+foreach (\srag\Plugins\SrAutoMails\Rule\Rule::get() as $rule) {
+	/**
+	 * @var \srag\Plugins\SrAutoMails\Rule\Rule $rule
+	 */
+
+	\srag\Notifications4Plugin\SrAutoMails\Notification\Repository::getInstance(\srag\Plugins\SrAutoMails\Notification\Notification\Notification::class, \srag\Plugins\SrAutoMails\Notification\Notification\Language\NotificationLanguage::class)
+		->migrateFromOldGlobalPlugin($rule->getMailTemplateName());
+}
+?>

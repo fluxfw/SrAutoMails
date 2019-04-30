@@ -34,7 +34,7 @@ class Notifications4PluginCtrl extends AbstractCtrl {
 		$rule = self::rules()->getRuleById($rule_id);
 		(new ilSrAutoMailsConfigGUI())->getRuleForm($rule);
 
-		self::dic()->tabs()->activateSubTab(self::TAB_NOTIFICATION);
+		self::dic()->tabs()->activateSubTab(ilSrAutoMailsConfigGUI::TAB_NOTIFICATION);
 
 		parent::executeCommand();
 	}

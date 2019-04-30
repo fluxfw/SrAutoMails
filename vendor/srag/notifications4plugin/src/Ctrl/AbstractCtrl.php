@@ -25,6 +25,7 @@ abstract class AbstractCtrl {
 	use DICTrait;
 	use Notifications4PluginTrait;
 	const TAB_NOTIFICATIONS = "notifications";
+	const TAB_NOTIFICATION = "notification";
 	const LANG_MODULE_NOTIFICATIONS4PLUGIN = "notifications4plugin";
 	const NAME = "Notifications4Plugin";
 	const CMD_ADD_NOTIFICATION = "addNotification";

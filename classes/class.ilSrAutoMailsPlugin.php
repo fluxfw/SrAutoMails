@@ -2,8 +2,6 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-require_once __DIR__."/../src/Notification/Ctrl/class.Notifications4PluginCtrl.php";
-
 use srag\DIC\SrAutoMails\Util\LibraryLanguageInstaller;
 use srag\Plugins\SrAutoMails\Config\Config;
 use srag\Plugins\SrAutoMails\Job\Job;

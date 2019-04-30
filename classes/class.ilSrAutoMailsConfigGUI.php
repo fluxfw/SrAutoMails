@@ -4,8 +4,8 @@ require_once __DIR__ . "/../vendor/autoload.php";
 
 use srag\ActiveRecordConfig\SrAutoMails\ActiveRecordConfigGUI;
 use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
-use srag\Plugins\Notifications4Plugins\Notification\Language\NotificationLanguage;
 use srag\Plugins\SrAutoMails\Notification\Ctrl\Notifications4PluginCtrl;
+use srag\Plugins\SrAutoMails\Notification\Notification\Language\NotificationLanguage;
 use srag\Plugins\SrAutoMails\Notification\Notification\Notification;
 use srag\Plugins\SrAutoMails\Rule\Rule;
 use srag\Plugins\SrAutoMails\Rule\RuleFormGUI;
@@ -91,7 +91,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 			self::dic()->tabs()->activateSubTab(self::TAB_RULE);
 
 			self::dic()->tabs()->addSubTab(self::TAB_NOTIFICATION, $this->txt(self::TAB_NOTIFICATION), self::dic()->ctrl()
-					->getLinkTargetByClass(Notifications4PluginCtrl::class, Notifications4PluginCtrl::CMD_EDIT_NOTIFICATION));
+				->getLinkTargetByClass(Notifications4PluginCtrl::class, Notifications4PluginCtrl::CMD_EDIT_NOTIFICATION));
 		}
 
 		return $form;

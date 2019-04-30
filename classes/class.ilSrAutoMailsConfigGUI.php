@@ -24,7 +24,6 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
 	const TAB_RULES = "rules";
 	const TAB_RULE = "rule";
-	const TAB_NOTIFICATION = "notification";
 	const CMD_ADD_RULE = "addRule";
 	const CMD_CREATE_RULE = "createRule";
 	const CMD_EDIT_RULE = "editRule";
@@ -90,8 +89,9 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 				->getLinkTarget($this, self::CMD_EDIT_RULE));
 			self::dic()->tabs()->activateSubTab(self::TAB_RULE);
 
-			self::dic()->tabs()->addSubTab(self::TAB_NOTIFICATION, $this->txt(self::TAB_NOTIFICATION), self::dic()->ctrl()
-				->getLinkTargetByClass(Notifications4PluginCtrl::class, Notifications4PluginCtrl::CMD_EDIT_NOTIFICATION));
+			self::dic()->tabs()
+				->addSubTab(Notifications4PluginCtrl::TAB_NOTIFICATION, $this->txt(Notifications4PluginCtrl::TAB_NOTIFICATION), self::dic()->ctrl()
+					->getLinkTargetByClass(Notifications4PluginCtrl::class, Notifications4PluginCtrl::CMD_EDIT_NOTIFICATION));
 		}
 
 		return $form;

@@ -20,7 +20,7 @@ use Throwable;
 /**
  * Class Job
  *
- * @package rag\Plugins\SrAutoMails\Job
+ * @package srag\Plugins\SrAutoMails\Job
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */

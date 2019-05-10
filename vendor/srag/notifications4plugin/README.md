@@ -171,10 +171,10 @@ $sender = self::sender()->factory()->vcalendar(...);
 
 ```php
 // Prepare placeholders, note that the keys are the same like deklared in the notification template
-$placeholders = array(
+$placeholders = [
   'user' => new ilObjUser(6),
   'course' => new ilObjCourse(12345)
-);
+];
 ```
 
 ```php
@@ -215,10 +215,10 @@ self::notification(Notification::class, NotificationLanguage::class)->deleteNoti
 You can get the parsed subject and text from a notification, for example to display it on screen.
 
 ```php
-$placeholders = array(
+$placeholders = [
   'course' => new ilObjCourse(1234),
   'user' => new ilObjUser(6)
-);
+];
 
 $parser = self::parser()->getParserForNotification($notification);
 
@@ -250,22 +250,22 @@ protected static $tabs = [
 
 ```php
 // Table
-$table = self::notificationUI()->withPlugin(self::plugin())->notificationTable($this, $parent_cmd, function () {
+$table = self::notificationUI()->withPlugin(self::plugin())->withCtrlClass($this)->notificationTable($parent_cmd, function () {
 			return self::notification(Notification::class, NotificationLanguage::class)->getArrayForTable($notifications);
 		});
 		
 // Form
-$form = self::notificationUI()->withPlugin(self::plugin())->notificationForm($this, $notification);
+$form = self::notificationUI()->withPlugin(self::plugin())->withCtrlClass($this)->notificationForm($notification);
 
 // Delete confirmation
-$confirm = self::notificationUI()->withPlugin(self::plugin())->notificationDeleteConfirmation($this, $notification);
+$confirm = self::notificationUI()->withPlugin(self::plugin())->withCtrlClass($this)->notificationDeleteConfirmation($notification);
 
 // Template selection
-self::notificationUI()->withPlugin(self::plugin())->templateSelection($notifications, 'post_key', array(
+self::notificationUI()->withPlugin(self::plugin())->templateSelection($notifications, 'post_key', [
   'user' => 'object ' . ilObjUser::class,
   'course' => 'object ' . ilObjCourse::class,
   'id' => 'int'
-));
+]);
 ```
 
 ### Dependencies

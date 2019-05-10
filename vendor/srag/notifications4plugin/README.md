@@ -268,15 +268,9 @@ self::notificationUI()->withPlugin(self::plugin())->templateSelection($notificat
 ]);
 ```
 
-### Dependencies
+### Requirements
 * ILIAS 5.3 or ILIAS 5.4
 * PHP >=7.0
-* [composer](https://getcomposer.org)
-* [srag/custominputguis](https://packagist.org/packages/srag/custominputguis)
-* [srag/dic](https://packagist.org/packages/srag/dic)
-* [twig/twig](https://packagist.org/packages/twig/twig)
-
-Please use it for further development!
 
 ### Adjustment suggestions
 * Adjustment suggestions by pull requests

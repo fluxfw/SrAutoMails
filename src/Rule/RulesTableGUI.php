@@ -161,7 +161,7 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 
 		$this->tpl->setCurrentBlock("checkbox");
 		$this->tpl->setVariable("CHECKBOX_POST_VAR", ilSrAutoMailsConfigGUI::GET_PARAM_RULE_ID);
-		$this->tpl->setVariable("ID", ilSrAutoMailsConfigGUI::GET_PARAM_RULE_ID);
+		$this->tpl->setVariable("ID", $row["rule_id"]);
 		$this->tpl->parseCurrentBlock();
 
 		parent::fillRow($row);

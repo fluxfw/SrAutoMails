@@ -30,7 +30,7 @@ class Notifications4PluginCtrl extends AbstractCtrl {
 	 * @inheritdoc
 	 */
 	public function executeCommand()/*: void*/ {
-		$rule_id = intval(filter_input(INPUT_GET, "srauma_rule_id"));
+		$rule_id = intval(filter_input(INPUT_GET, ilSrAutoMailsConfigGUI::GET_PARAM_RULE_ID));
 		$rule = self::rules()->getRuleById($rule_id);
 		(new ilSrAutoMailsConfigGUI())->getRuleForm($rule);
 

@@ -57,17 +57,16 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 
 
 	/**
-	 * @param Rule|null $rule
+	 * @param Rule $rule
 	 *
 	 * @return RuleFormGUI
 	 */
-	public function getRuleForm(/*?*/
-		Rule $rule = null): RuleFormGUI {
+	public function getRuleForm(Rule $rule): RuleFormGUI {
 		self::dic()->ctrl()->saveParameter($this, "srauma_rule_id");
 
 		$form = new RuleFormGUI($this, self::TAB_RULES, $rule);
 
-		if ($rule !== null) {
+		if (!empty($rule->getRuleId())) {
 			if (empty($rule->getMailTemplateName())) {
 				$rule->setMailTemplateName("rule_" . $rule->getRuleId());
 
@@ -91,7 +90,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 			self::dic()->tabs()->activateSubTab(self::TAB_RULE);
 
 			self::dic()->tabs()->addSubTab(Notifications4PluginCtrl::TAB_NOTIFICATION, $this->txt(self::TAB_NOTIFICATION), self::dic()->ctrl()
-					->getLinkTargetByClass(Notifications4PluginCtrl::class, Notifications4PluginCtrl::CMD_EDIT_NOTIFICATION));
+				->getLinkTargetByClass(Notifications4PluginCtrl::class, Notifications4PluginCtrl::CMD_EDIT_NOTIFICATION));
 		}
 
 		return $form;
@@ -104,7 +103,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 	protected function addRule()/*: void*/ {
 		self::dic()->tabs()->activateTab(self::TAB_RULES);
 
-		$form = $this->getRuleForm();
+		$form = $this->getRuleForm(new Rule());
 
 		self::output()->output($form);
 	}
@@ -116,7 +115,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 	protected function createRule()/*: void*/ {
 		self::dic()->tabs()->activateTab(self::TAB_RULES);
 
-		$form = $this->getRuleForm();
+		$form = $this->getRuleForm(new Rule());
 
 		if (!$form->storeForm()) {
 			self::output()->output($form);
@@ -124,9 +123,9 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 			return;
 		}
 
-		ilUtil::sendSuccess(self::plugin()->translate("added_rule", self::LANG_MODULE_CONFIG, [ $form->getRule()->getTitle() ]), true);
+		ilUtil::sendSuccess(self::plugin()->translate("added_rule", self::LANG_MODULE_CONFIG, [ $form->getObject()->getTitle() ]), true);
 
-		self::dic()->ctrl()->setParameter($this, "srauma_rule_id", $form->getRule()->getRuleId());
+		self::dic()->ctrl()->setParameter($this, "srauma_rule_id", $form->getObject()->getRuleId());
 
 		self::dic()->ctrl()->redirect($this, self::CMD_EDIT_RULE);
 	}

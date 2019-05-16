@@ -4,9 +4,9 @@ namespace srag\Plugins\SrAutoMails\Utils;
 
 use srag\Plugins\SrAutoMails\Access\Access;
 use srag\Plugins\SrAutoMails\Access\Ilias;
-use srag\Plugins\SrAutoMails\ObjectType\ObjectTypes;
-use srag\Plugins\SrAutoMails\Rule\Rules;
-use srag\Plugins\SrAutoMails\Sent\Sents;
+use srag\Plugins\SrAutoMails\ObjectType\Repository as ObjectTypeRepository;
+use srag\Plugins\SrAutoMails\Rule\Repository as RuleRepository;
+use srag\Plugins\SrAutoMails\Sent\Repository as SentRepository;
 
 /**
  * Trait SrAutoMailsTrait
@@ -34,25 +34,25 @@ trait SrAutoMailsTrait {
 
 
 	/**
-	 * @return ObjectTypes
+	 * @return ObjectTypeRepository
 	 */
-	protected static function objectTypes(): ObjectTypes {
-		return ObjectTypes::getInstance();
+	protected static function objectTypes(): ObjectTypeRepository {
+		return ObjectTypeRepository::getInstance();
 	}
 
 
 	/**
-	 * @return Rules
+	 * @return RuleRepository
 	 */
-	protected static function rules(): Rules {
-		return Rules::getInstance();
+	protected static function rules(): RuleRepository {
+		return RuleRepository::getInstance();
 	}
 
 
 	/**
-	 * @return Sents
+	 * @return SentRepository
 	 */
-	protected static function sents(): Sents {
-		return Sents::getInstance();
+	protected static function sents(): SentRepository {
+		return SentRepository::getInstance();
 	}
 }

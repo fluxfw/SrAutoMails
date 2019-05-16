@@ -5,17 +5,16 @@ namespace srag\Plugins\SrAutoMails\ObjectType;
 use ilSrAutoMailsConfigGUI;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
-use srag\Plugins\SrAutoMails\ObjectType\Object\CourseObjectType;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
- * Class ObjectTypes
+ * Class Repository
  *
  * @package srag\Plugins\SrAutoMails\ObjectType
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-final class ObjectTypes {
+final class Repository {
 
 	use DICTrait;
 	use SrAutoMailsTrait;
@@ -30,14 +29,14 @@ final class ObjectTypes {
 	/**
 	 * @var self
 	 */
-	protected static $instance = NULL;
+	protected static $instance = null;
 
 
 	/**
 	 * @return self
 	 */
 	public static function getInstance(): self {
-		if (self::$instance === NULL) {
+		if (self::$instance === null) {
 			self::$instance = new self();
 		}
 
@@ -46,18 +45,18 @@ final class ObjectTypes {
 
 
 	/**
-	 * @param string $object_type
-	 *
-	 * @return ObjectType|null
+	 * Repository constructor
 	 */
-	public function factory(string $object_type)/*: ?ObjectType*/ {
-		switch ($object_type) {
-			case self::OBJECT_TYPE_COURSE:
-				return new CourseObjectType();
+	private function __construct() {
 
-			default:
-				return NULL;
-		}
+	}
+
+
+	/**
+	 * @return Factory
+	 */
+	public function factory(): Factory {
+		return Factory::getInstance();
 	}
 
 
@@ -66,7 +65,7 @@ final class ObjectTypes {
 	 */
 	public function getObjectTypes(): array {
 		return array_map(function (string $object_type): ObjectType {
-			return $this->factory($object_type);
+			return $this->factory()->getByObjectType($object_type);
 		}, array_keys(self::$object_types));
 	}
 

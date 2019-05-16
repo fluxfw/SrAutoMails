@@ -165,7 +165,7 @@ class Job extends ilCronJob {
 		foreach ($checked_rules as $rule) {
 			$rule->setLastCheck(new ilDateTime($time, IL_CAL_UNIX));
 
-			$rule->store();
+			self::rules()->storeRule($rule);
 		}
 
 		$result->setStatus(ilCronJobResult::STATUS_OK);

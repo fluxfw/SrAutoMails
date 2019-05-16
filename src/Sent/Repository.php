@@ -7,29 +7,29 @@ use srag\DIC\SrAutoMails\DICTrait;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
- * Class Sents
+ * Class Repository
  *
  * @package srag\Plugins\SrAutoMails\Sent
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-final class Sents {
+final class Repository {
 
 	use DICTrait;
 	use SrAutoMailsTrait;
 	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
 	/**
-	 * @var Sents
+	 * @var self
 	 */
-	protected static $instance = NULL;
+	protected static $instance = null;
 
 
 	/**
-	 * @return Sents
+	 * @return self
 	 */
-	public static function getInstance(): Sents {
-		if (self::$instance === NULL) {
-			self::$instance = new Sents();
+	public static function getInstance(): self {
+		if (self::$instance === null) {
+			self::$instance = new self();
 		}
 
 		return self::$instance;
@@ -37,10 +37,26 @@ final class Sents {
 
 
 	/**
-	 * Sents constructor
+	 * Repository constructor
 	 */
 	private function __construct() {
 
+	}
+
+
+	/**
+	 * @param Sent $sent
+	 */
+	protected function delete(Sent $sent)/*: void*/ {
+		$sent->delete();
+	}
+
+
+	/**
+	 * @return Factory
+	 */
+	protected function factory(): Factory {
+		return Factory::getInstance();
 	}
 
 
@@ -76,7 +92,7 @@ final class Sents {
 	public function hasSent(int $rule_id, int $object_id, int $user_id): bool {
 		$sent = $this->getSent($rule_id, $object_id, $user_id);
 
-		return ($sent !== NULL);
+		return ($sent !== null);
 	}
 
 
@@ -88,13 +104,21 @@ final class Sents {
 	public function sent(int $rule_id, int $object_id, int $user_id)/*: void*/ {
 		$sent = $this->getSent($rule_id, $object_id, $user_id);
 
-		if ($sent === NULL) {
-			$sent = new Sent();
+		if ($sent === null) {
+			$sent = $this->factory()->newInstance();
 			$sent->setRuleId($rule_id);
 			$sent->setObjectId($object_id);
 			$sent->setUserId($user_id);
-			$sent->store();
+			$this->store($sent);
 		}
+	}
+
+
+	/**
+	 * @param Sent $sent
+	 */
+	protected function store(Sent $sent)/*: void*/ {
+		$sent->store();
 	}
 
 
@@ -106,8 +130,8 @@ final class Sents {
 	public function unsent(int $rule_id, int $object_id, int $user_id)/*: void*/ {
 		$sent = $this->getSent($rule_id, $object_id, $user_id);
 
-		if ($sent !== NULL) {
-			$sent->delete();
+		if ($sent !== null) {
+			$this->delete($sent);
 		}
 	}
 }

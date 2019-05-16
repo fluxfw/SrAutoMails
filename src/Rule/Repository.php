@@ -8,13 +8,13 @@ use srag\DIC\SrAutoMails\DICTrait;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
- * Class Rules
+ * Class Repository
  *
  * @package srag\Plugins\SrAutoMails\Rule
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-final class Rules {
+final class Repository {
 
 	use DICTrait;
 	use SrAutoMailsTrait;
@@ -38,10 +38,26 @@ final class Rules {
 
 
 	/**
-	 * Rules constructor
+	 * Repository constructor
 	 */
 	private function __construct() {
 
+	}
+
+
+	/**
+	 * @param Rule $rule
+	 */
+	public function deleteRule(Rule $rule)/*: void*/ {
+		$rule->delete();
+	}
+
+
+	/**
+	 * @return Factory
+	 */
+	public function factory(): Factory {
+		return Factory::getInstance();
 	}
 
 
@@ -63,8 +79,7 @@ final class Rules {
 	 *
 	 * @return array
 	 */
-	public function getRulesArray(string $title = "", string $description = "", string $object_type = "", /*?*/
-		bool $enabled = null): array {
+	public function getRulesArray(string $title = "", string $description = "", string $object_type = "", /*?*/ bool $enabled = null): array {
 		$where = Rule::where([]);
 
 		if (!empty($title)) {
@@ -132,5 +147,13 @@ final class Rules {
 		}
 
 		return $rules;
+	}
+
+
+	/**
+	 * @param Rule $rule
+	 */
+	public function storeRule(Rule $rule)/*: void*/ {
+		$rule->store();
 	}
 }

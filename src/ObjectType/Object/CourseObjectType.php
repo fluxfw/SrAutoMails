@@ -4,7 +4,7 @@ namespace srag\Plugins\SrAutoMails\ObjectType\Object;
 
 use ilObjCourse;
 use ilObjUser;
-use srag\Plugins\SrAutoMails\ObjectType\ObjectTypes;
+use srag\Plugins\SrAutoMails\ObjectType\Repository;
 
 /**
  * Class CourseObjectType
@@ -15,7 +15,7 @@ use srag\Plugins\SrAutoMails\ObjectType\ObjectTypes;
  */
 class CourseObjectType extends ObjObjectType {
 
-	const OBJECT_TYPE = ObjectTypes::OBJECT_TYPE_COURSE;
+	const OBJECT_TYPE = Repository::OBJECT_TYPE_COURSE;
 	const OBJECT_PROPERTY_COUNT_COURSE_MEMBERS = "count_course_members";
 	const OBJECT_PROPERTY_COUNT_COURSE_MEMBERS_COMPLETED = "count_course_members_completed";
 	const OBJECT_PROPERTY_COUNT_COURSE_MEMBERS_NOT_COMPLETED = "count_course_members_not_completed";

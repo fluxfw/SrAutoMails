@@ -71,7 +71,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 			if (empty($rule->getMailTemplateName())) {
 				$rule->setMailTemplateName("rule_" . $rule->getRuleId());
 
-				$rule->store();
+				self::rules()->storeRule($rule);
 			}
 
 			$notification = self::notification(Notification::class, NotificationLanguage::class)->getNotificationByName($rule->getMailTemplateName());
@@ -104,7 +104,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 	protected function addRule()/*: void*/ {
 		self::dic()->tabs()->activateTab(self::TAB_RULES);
 
-		$form = $this->getRuleForm(new Rule());
+		$form = $this->getRuleForm(self::rules()->factory()->newInstance());
 
 		self::output()->output($form);
 	}
@@ -116,7 +116,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 	protected function createRule()/*: void*/ {
 		self::dic()->tabs()->activateTab(self::TAB_RULES);
 
-		$form = $this->getRuleForm(new Rule());
+		$form = $this->getRuleForm(self::rules()->factory()->newInstance());
 
 		if (!$form->storeForm()) {
 			self::output()->output($form);
@@ -203,7 +203,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 		$rule_id = intval(filter_input(INPUT_GET, self::GET_PARAM_RULE_ID));
 		$rule = self::rules()->getRuleById($rule_id);
 
-		$rule->delete();
+		self::rules()->deleteRule($rule);
 
 		ilUtil::sendSuccess(self::plugin()->translate("removed_rule", self::LANG_MODULE_CONFIG, [ $rule->getTitle() ]), true);
 
@@ -227,7 +227,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 		foreach ($rules as $rule) {
 			$rule->setEnabled(true);
 
-			$rule->store();
+			self::rules()->storeRule($rule);
 		}
 
 		ilUtil::sendSuccess($this->txt("enabled_rules"), true);
@@ -252,7 +252,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 		foreach ($rules as $rule) {
 			$rule->setEnabled(false);
 
-			$rule->store();
+			self::rules()->storeRule($rule);
 		}
 
 		ilUtil::sendSuccess($this->txt("disabled_rules"), true);
@@ -307,7 +307,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 		}, $rule_ids);
 
 		foreach ($rules as $rule) {
-			$rule->delete();
+			self::rules()->deleteRule($rule);
 		}
 
 		ilUtil::sendSuccess($this->txt("removed_rules"), true);

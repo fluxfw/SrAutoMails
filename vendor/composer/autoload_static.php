@@ -13,8 +13,8 @@ class ComposerStaticInitde97e8e8f91467d2f3d10c074b7e7a41
             'srag\\Plugins\\SrAutoMails\\' => 25,
             'srag\\Notifications4Plugin\\' => 26,
             'srag\\LibrariesNamespaceChanger\\' => 31,
-            'srag\\DIC\\SrAutoMails\\' => 21,
-            'srag\\CustomInputGUIs\\SrAutoMails\\' => 33,
+            'srag\\DIC\\' => 9,
+            'srag\\CustomInputGUIs\\' => 21,
             'srag\\ActiveRecordConfig\\SrAutoMails\\' => 36,
         ),
     );
@@ -36,11 +36,11 @@ class ComposerStaticInitde97e8e8f91467d2f3d10c074b7e7a41
         array (
             0 => __DIR__ . '/..' . '/srag/librariesnamespacechanger/src',
         ),
-        'srag\\DIC\\SrAutoMails\\' => 
+        'srag\\DIC\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/dic/src',
         ),
-        'srag\\CustomInputGUIs\\SrAutoMails\\' => 
+        'srag\\CustomInputGUIs\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/custominputguis/src',
         ),
@@ -292,10 +292,8 @@ class ComposerStaticInitde97e8e8f91467d2f3d10c074b7e7a41
         'srag\\DIC\\SrAutoMails\\DICTrait' => __DIR__ . '/..' . '/srag/dic/src/DICTrait.php',
         'srag\\DIC\\SrAutoMails\\DIC\\AbstractDIC' => __DIR__ . '/..' . '/srag/dic/src/DIC/AbstractDIC.php',
         'srag\\DIC\\SrAutoMails\\DIC\\DICInterface' => __DIR__ . '/..' . '/srag/dic/src/DIC/DICInterface.php',
-        'srag\\DIC\\SrAutoMails\\DIC\\Implementation\\ILIAS52DIC' => __DIR__ . '/..' . '/srag/dic/src/DIC/Implementation/ILIAS52DIC.php',
         'srag\\DIC\\SrAutoMails\\DIC\\Implementation\\ILIAS53DIC' => __DIR__ . '/..' . '/srag/dic/src/DIC/Implementation/ILIAS53DIC.php',
         'srag\\DIC\\SrAutoMails\\DIC\\Implementation\\ILIAS54DIC' => __DIR__ . '/..' . '/srag/dic/src/DIC/Implementation/ILIAS54DIC.php',
-        'srag\\DIC\\SrAutoMails\\DIC\\Implementation\\LegacyDIC' => __DIR__ . '/..' . '/srag/dic/src/DIC/Implementation/LegacyDIC.php',
         'srag\\DIC\\SrAutoMails\\Exception\\DICException' => __DIR__ . '/..' . '/srag/dic/src/Exception/DICException.php',
         'srag\\DIC\\SrAutoMails\\Output\\Output' => __DIR__ . '/..' . '/srag/dic/src/Output/Output.php',
         'srag\\DIC\\SrAutoMails\\Output\\OutputInterface' => __DIR__ . '/..' . '/srag/dic/src/Output/OutputInterface.php',
@@ -354,16 +352,19 @@ class ComposerStaticInitde97e8e8f91467d2f3d10c074b7e7a41
         'srag\\Plugins\\SrAutoMails\\Notification\\Ctrl\\Notifications4PluginCtrl' => __DIR__ . '/../..' . '/src/Notification/Ctrl/class.Notifications4PluginCtrl.php',
         'srag\\Plugins\\SrAutoMails\\Notification\\Notification\\Language\\NotificationLanguage' => __DIR__ . '/../..' . '/src/Notification/Notification/Language/NotificationLanguage.php',
         'srag\\Plugins\\SrAutoMails\\Notification\\Notification\\Notification' => __DIR__ . '/../..' . '/src/Notification/Notification/Notification.php',
+        'srag\\Plugins\\SrAutoMails\\ObjectType\\Factory' => __DIR__ . '/../..' . '/src/ObjectType/Factory.php',
         'srag\\Plugins\\SrAutoMails\\ObjectType\\ObjectType' => __DIR__ . '/../..' . '/src/ObjectType/ObjectType.php',
-        'srag\\Plugins\\SrAutoMails\\ObjectType\\ObjectTypes' => __DIR__ . '/../..' . '/src/ObjectType/ObjectTypes.php',
         'srag\\Plugins\\SrAutoMails\\ObjectType\\Object\\CourseObjectType' => __DIR__ . '/../..' . '/src/ObjectType/Object/CourseObjectType.php',
         'srag\\Plugins\\SrAutoMails\\ObjectType\\Object\\ObjObjectType' => __DIR__ . '/../..' . '/src/ObjectType/Object/ObjObjectType.php',
+        'srag\\Plugins\\SrAutoMails\\ObjectType\\Repository' => __DIR__ . '/../..' . '/src/ObjectType/Repository.php',
+        'srag\\Plugins\\SrAutoMails\\Rule\\Factory' => __DIR__ . '/../..' . '/src/Rule/Factory.php',
+        'srag\\Plugins\\SrAutoMails\\Rule\\Repository' => __DIR__ . '/../..' . '/src/Rule/Repository.php',
         'srag\\Plugins\\SrAutoMails\\Rule\\Rule' => __DIR__ . '/../..' . '/src/Rule/Rule.php',
         'srag\\Plugins\\SrAutoMails\\Rule\\RuleFormGUI' => __DIR__ . '/../..' . '/src/Rule/RuleFormGUI.php',
-        'srag\\Plugins\\SrAutoMails\\Rule\\Rules' => __DIR__ . '/../..' . '/src/Rule/Rules.php',
         'srag\\Plugins\\SrAutoMails\\Rule\\RulesTableGUI' => __DIR__ . '/../..' . '/src/Rule/RulesTableGUI.php',
+        'srag\\Plugins\\SrAutoMails\\Sent\\Factory' => __DIR__ . '/../..' . '/src/Sent/Factory.php',
+        'srag\\Plugins\\SrAutoMails\\Sent\\Repository' => __DIR__ . '/../..' . '/src/Sent/Repository.php',
         'srag\\Plugins\\SrAutoMails\\Sent\\Sent' => __DIR__ . '/../..' . '/src/Sent/Sent.php',
-        'srag\\Plugins\\SrAutoMails\\Sent\\Sents' => __DIR__ . '/../..' . '/src/Sent/Sents.php',
         'srag\\Plugins\\SrAutoMails\\Utils\\SrAutoMailsTrait' => __DIR__ . '/../..' . '/src/Utils/SrAutoMailsTrait.php',
         'srag\\RemovePluginDataConfirm\\SrAutoMails\\AbstractPluginUninstallTrait' => __DIR__ . '/..' . '/srag/removeplugindataconfirm/src/AbstractPluginUninstallTrait.php',
         'srag\\RemovePluginDataConfirm\\SrAutoMails\\AbstractRemovePluginDataConfirm' => __DIR__ . '/..' . '/srag/removeplugindataconfirm/src/AbstractRemovePluginDataConfirm.php',

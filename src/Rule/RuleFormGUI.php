@@ -111,7 +111,7 @@ class RuleFormGUI extends ActiveRecordObjectFormGUI {
 		];
 
 		if (!empty($this->object->getRuleId())) {
-			$object_type_definiton = self::objectTypes()->factory($this->object->getObjectType());
+			$object_type_definiton = self::objectTypes()->factory()->getByObjectType($this->object->getObjectType());
 			$object = $this->fields["object_type"][self::PROPERTY_OPTIONS][$this->object->getObjectType()];
 
 			$this->fields = array_merge($this->fields, [

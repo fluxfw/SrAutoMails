@@ -6,6 +6,7 @@ use ilADT;
 use ilADTInteger;
 use ilADTText;
 use ilAdvancedMDValues;
+use ilDBConstants;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
@@ -25,14 +26,14 @@ final class Metadata {
 	/**
 	 * @var self
 	 */
-	protected static $instance = NULL;
+	protected static $instance = null;
 
 
 	/**
 	 * @return self
 	 */
 	public static function getInstance(): self {
-		if (self::$instance === NULL) {
+		if (self::$instance === null) {
 			self::$instance = new self();
 		}
 
@@ -88,7 +89,7 @@ final class Metadata {
 				return $metadata->getNumber();
 
 			default:
-				return NULL;
+				return null;
 		}
 	}
 
@@ -99,7 +100,8 @@ final class Metadata {
 	 * @return int
 	 */
 	protected function getRecordOfField(int $field_id): int {
-		$result = self::dic()->database()->queryF('SELECT record_id FROM adv_mdf_definition WHERE field_id=%s', [ "integer" ], [ $field_id ]);
+		$result = self::dic()->database()
+			->queryF('SELECT record_id FROM adv_mdf_definition WHERE field_id=%s', [ ilDBConstants::T_INTEGER ], [ $field_id ]);
 
 		$record_id = intval($result->fetchAssoc()["record_id"]);
 

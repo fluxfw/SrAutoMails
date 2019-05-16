@@ -56,9 +56,9 @@ final class OrgUnits {
 				INNER JOIN il_orgu_ua ON il_orgu_ua.position_id=il_orgu_permissions.position_id
 				INNER JOIN il_orgu_op_contexts ON il_orgu_op_contexts.id=il_orgu_permissions.context_id AND il_orgu_op_contexts.context IS NOT NULL
 				WHERE il_orgu_ua.user_id=%s AND il_orgu_permissions.operations IS NOT NULL AND il_orgu_permissions.parent_id=%s AND il_orgu_permissions.position_id=%s', [
-			"integer",
-			"integer",
-			"integer"
+			ilDBConstants::T_INTEGER,
+			ilDBConstants::T_INTEGER,
+			ilDBConstants::T_INTEGER
 		], [
 			$user_id,
 			- 1,
@@ -82,12 +82,12 @@ final class OrgUnits {
 	 */
 	public function getSuperiorsOfOrgUnit(int $org_unit_ref_id): array {
 		$result = self::dic()->database()->queryF('SELECT user_id FROM il_orgu_ua WHERE il_orgu_ua.orgu_id=%s AND il_orgu_ua.position_id=%s', [
-				ilDBConstants::T_INTEGER,
-				ilDBConstants::T_INTEGER
-			], [
-				$org_unit_ref_id,
-				ilOrgUnitPosition::getCorePositionId(ilOrgUnitPosition::CORE_POSITION_SUPERIOR)
-			]);
+			ilDBConstants::T_INTEGER,
+			ilDBConstants::T_INTEGER
+		], [
+			$org_unit_ref_id,
+			ilOrgUnitPosition::getCorePositionId(ilOrgUnitPosition::CORE_POSITION_SUPERIOR)
+		]);
 
 		$users = [];
 

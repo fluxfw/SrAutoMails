@@ -2,6 +2,7 @@
 
 namespace srag\Plugins\SrAutoMails\Access;
 
+use ilDBConstants;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
@@ -21,14 +22,14 @@ final class Users {
 	/**
 	 * @var self
 	 */
-	protected static $instance = NULL;
+	protected static $instance = null;
 
 
 	/**
 	 * @return self
 	 */
 	public static function getInstance(): self {
-		if (self::$instance === NULL) {
+		if (self::$instance === null) {
 			self::$instance = new self();
 		}
 
@@ -48,7 +49,8 @@ final class Users {
 	 * @return array
 	 */
 	public function getUsers(): array {
-		$result = self::dic()->database()->queryF('SELECT usr_id, firstname, lastname FROM usr_data WHERE active=%s', [ "integer" ], [ 1 ]);
+		$result = self::dic()->database()
+			->queryF('SELECT usr_id, firstname, lastname FROM usr_data WHERE active=%s', [ ilDBConstants::T_INTEGER ], [ 1 ]);
 
 		$array = [];
 

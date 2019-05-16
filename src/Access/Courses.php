@@ -2,6 +2,7 @@
 
 namespace srag\Plugins\SrAutoMails\Access;
 
+use ilDBConstants;
 use ilLPStatusWrapper;
 use ilObjCourse;
 use ilSrAutoMailsPlugin;
@@ -23,14 +24,14 @@ final class Courses {
 	/**
 	 * @var self
 	 */
-	protected static $instance = NULL;
+	protected static $instance = null;
 
 
 	/**
 	 * @return self
 	 */
 	public static function getInstance(): self {
-		if (self::$instance === NULL) {
+		if (self::$instance === null) {
 			self::$instance = new self();
 		}
 
@@ -50,7 +51,7 @@ final class Courses {
 	 * @return ilObjCourse[]
 	 */
 	public function getCourses(): array {
-		$result = self::dic()->database()->queryF('SELECT obj_id FROM object_data WHERE type=%s', [ "text" ], [ "crs" ]);
+		$result = self::dic()->database()->queryF('SELECT obj_id FROM object_data WHERE type=%s', [ ilDBConstants::T_TEXT ], [ "crs" ]);
 
 		$array = [];
 

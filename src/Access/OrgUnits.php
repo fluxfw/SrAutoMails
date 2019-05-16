@@ -2,6 +2,7 @@
 
 namespace srag\Plugins\SrAutoMails\Access;
 
+use ilDBConstants;
 use ilOrgUnitPosition;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
@@ -22,14 +23,14 @@ final class OrgUnits {
 	/**
 	 * @var self
 	 */
-	protected static $instance = NULL;
+	protected static $instance = null;
 
 
 	/**
 	 * @return self
 	 */
 	public static function getInstance(): self {
-		if (self::$instance === NULL) {
+		if (self::$instance === null) {
 			self::$instance = new self();
 		}
 
@@ -80,8 +81,10 @@ final class OrgUnits {
 	 * @return int[]
 	 */
 	public function getSuperiorsOfOrgUnit(int $org_unit_ref_id): array {
-		$result = self::dic()->database()
-			->queryF('SELECT user_id FROM il_orgu_ua WHERE il_orgu_ua.orgu_id=%s AND il_orgu_ua.position_id=%s', [ "integer", "integer" ], [
+		$result = self::dic()->database()->queryF('SELECT user_id FROM il_orgu_ua WHERE il_orgu_ua.orgu_id=%s AND il_orgu_ua.position_id=%s', [
+				ilDBConstants::T_INTEGER,
+				ilDBConstants::T_INTEGER
+			], [
 				$org_unit_ref_id,
 				ilOrgUnitPosition::getCorePositionId(ilOrgUnitPosition::CORE_POSITION_SUPERIOR)
 			]);

@@ -65,7 +65,7 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
 	public function getRuleForm(Rule $rule): RuleFormGUI {
 		self::dic()->ctrl()->saveParameter($this, self::GET_PARAM_RULE_ID);
 
-		$form = new RuleFormGUI($this, self::TAB_RULES, $rule);
+		$form = new RuleFormGUI($this, $rule);
 
 		if (!empty($rule->getRuleId())) {
 			if (empty($rule->getMailTemplateName())) {

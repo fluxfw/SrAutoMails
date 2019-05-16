@@ -10,9 +10,8 @@ use ilSelectInputGUI;
 use ilSrAutoMailsConfigGUI;
 use ilSrAutoMailsPlugin;
 use ilTextInputGUI;
-use srag\ActiveRecordConfig\SrAutoMails\ActiveRecordConfigGUI;
-use srag\ActiveRecordConfig\SrAutoMails\ActiveRecordObjectFormGUI;
 use srag\CustomInputGUIs\SrAutoMails\MultiSelectSearchInputGUI\MultiSelectSearchInputGUI;
+use srag\CustomInputGUIs\SrAutoMails\PropertyFormGUI\ObjectPropertyFormGUI;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
@@ -22,10 +21,11 @@ use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-class RuleFormGUI extends ActiveRecordObjectFormGUI {
+class RuleFormGUI extends ObjectPropertyFormGUI {
 
 	use SrAutoMailsTrait;
 	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
+	const LANG_MODULE = ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG;
 	/**
 	 * @var Rule
 	 */
@@ -35,12 +35,11 @@ class RuleFormGUI extends ActiveRecordObjectFormGUI {
 	/**
 	 * RuleFormGUI constructor
 	 *
-	 * @param ActiveRecordConfigGUI $parent
-	 * @param string                $tab_id
-	 * @param Rule                  $object
+	 * @param ilSrAutoMailsConfigGUI $parent
+	 * @param Rule                   $object
 	 */
-	public function __construct(ActiveRecordConfigGUI $parent, string $tab_id, Rule $object) {
-		parent::__construct($parent, $tab_id, $object);
+	public function __construct(ilSrAutoMailsConfigGUI $parent, Rule $object) {
+		parent::__construct($parent, $object);
 	}
 
 
@@ -239,6 +238,14 @@ class RuleFormGUI extends ActiveRecordObjectFormGUI {
 				]
 			]);
 		}
+	}
+
+
+	/**
+	 * @inheritdoc
+	 */
+	protected function initId()/*: void*/ {
+
 	}
 
 

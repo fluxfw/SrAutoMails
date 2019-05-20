@@ -1,5 +1,8 @@
 # Changelog
 
+## [4.4]
+- Use database
+
 ## [4.3.11]
 - NotificationLanguageRepository::getLanguages
 

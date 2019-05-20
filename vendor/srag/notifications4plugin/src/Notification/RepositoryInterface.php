@@ -16,8 +16,7 @@ interface RepositoryInterface {
 	/**
 	 * @param Notification $notification
 	 */
-	public function deleteNotification(Notification $notification)/*: void*/
-	;
+	public function deleteNotification(Notification $notification)/*: void*/ ;
 
 
 	/**
@@ -44,20 +43,11 @@ interface RepositoryInterface {
 
 
 	/**
-	 * @param Notification[] $notifications
-	 *
-	 * @return array
-	 */
-	public function getArrayForTable(array $notifications): array;
-
-
-	/**
 	 * @param int $id
 	 *
 	 * @return Notification|null
 	 */
-	public function getNotificationById(int $id)/*: ?Notification*/
-	;
+	public function getNotificationById(int $id)/*: ?Notification*/ ;
 
 
 	/**
@@ -65,8 +55,7 @@ interface RepositoryInterface {
 	 *
 	 * @return Notification|null
 	 */
-	public function getNotificationByName(string $name)/*: ?Notification*/
-	;
+	public function getNotificationByName(string $name)/*: ?Notification*/ ;
 
 
 	/**
@@ -82,13 +71,11 @@ interface RepositoryInterface {
 	 *
 	 * @deprecated
 	 */
-	public function migrateFromOldGlobalPlugin(string $name = null)/*: ?Notification*/
-	;
+	public function migrateFromOldGlobalPlugin(string $name = null)/*: ?Notification*/ ;
 
 
 	/**
 	 * @param Notification $notification
 	 */
-	public function storeInstance(Notification $notification)/*: void*/
-	;
+	public function storeInstance(Notification $notification)/*: void*/ ;
 }

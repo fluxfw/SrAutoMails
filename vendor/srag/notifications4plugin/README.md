@@ -49,8 +49,8 @@ Add an update step to your `dbupdate.php`
 ...
 <#x>
 <?php
-\srag\Plugins\x\Notification\Notification::updateDB();
-\srag\Plugins\x\Notification\Language\NotificationLanguage::updateDB();
+\srag\Plugins\x\Notification\Notification::updateDB_();
+\srag\Plugins\x\Notification\Language\NotificationLanguage::updateDB_();
 ?>
 ```
 
@@ -60,8 +60,8 @@ and not forget to add an uninstaller step in your plugin class too
 use srag\Plugins\x\Notification\Notification;
 use srag\Plugins\x\Notification\Language\NotificationLanguage
 ...
-self::dic()->database()->dropTable(Notification::TABLE_NAME, false);
-self::dic()->database()->dropTable(NotificationLanguage::TABLE_NAME, false);
+Notification::dropDB_();
+NotificationLanguage::dropDB_();
 ...
 ```
 
@@ -147,9 +147,6 @@ Other
 // Get the notification by id
 $notification = self::notification(Notification::class, NotificationLanguage::class)->getNotificationById(self::MY_UNIQUE_ID);
 
-// Get notifications for a table
-$notifications = self::notification(Notification::class, NotificationLanguage::class)->getArrayForTable($notifications);
-
 // Get the notifications
 $notifications = self::notification(Notification::class, NotificationLanguage::class)->getNotifications();
 ```
@@ -170,7 +167,7 @@ $sender = self::sender()->factory()->vcalendar(...);
 ```
 
 ```php
-// Prepare placeholders, note that the keys are the same like deklared in the notification template
+// Prepare placeholders, note that the keys are the same like declared in the notification template
 $placeholders = [
   'user' => new ilObjUser(6),
   'course' => new ilObjCourse(12345)
@@ -250,8 +247,8 @@ protected static $tabs = [
 
 ```php
 // Table
-$table = self::notificationUI()->withPlugin(self::plugin())->withCtrlClass($this)->notificationTable($parent_cmd, function () {
-			return self::notification(Notification::class, NotificationLanguage::class)->getArrayForTable($notifications);
+$table = self::notificationUI()->withPlugin(self::plugin())->withCtrlClass($this)->notificationTable($parent_cmd, function (): array {
+			return self::notification()->getNotifications();
 		});
 		
 // Form

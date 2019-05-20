@@ -1,5 +1,32 @@
 # Changelog
 
+## [0.17.8]
+- `Database::store`
+
+## [0.17.7]
+- `Database::fetchObjectCallable`
+
+## [0.17.6]
+- `Database::fetchObjectClass`
+
+## [0.17.5]
+- DatabaseDetector readme
+
+## [0.17.4]
+- DatabaseDetector readme
+
+## [0.17.3]
+- Fix
+
+## [0.17.2]
+- Fix
+
+## [0.17.1]
+- Supports PostgreSQL
+
+## [0.17.0]
+- Custom DatabaseDetector
+
 ## [0.16.1]
 - Fix `self::dic()->log()` is an instance of `ilComponentLogger`
 

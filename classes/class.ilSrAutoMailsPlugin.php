@@ -72,8 +72,7 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin {
 	 *
 	 * @return ilCronJob|null
 	 */
-	public function getCronJobInstance(/*string*/
-		$a_job_id)/*: ?ilCronJob*/ {
+	public function getCronJobInstance(/*string*/ $a_job_id)/*: ?ilCronJob*/ {
 		switch ($a_job_id) {
 			case Job::CRON_JOB_ID:
 				return new Job();
@@ -103,8 +102,8 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin {
 	 */
 	protected function deleteData()/*: void*/ {
 		self::dic()->database()->dropTable(Config::TABLE_NAME, false);
-		self::dic()->database()->dropTable(Notification::TABLE_NAME, false);
-		self::dic()->database()->dropTable(NotificationLanguage::TABLE_NAME, false);
+		Notification::dropDB_();
+		NotificationLanguage::dropDB_();
 		self::dic()->database()->dropTable(Rule::TABLE_NAME, false);
 		self::dic()->database()->dropTable(Sent::TABLE_NAME, false);
 	}

@@ -13,8 +13,8 @@ class ComposerStaticInitde97e8e8f91467d2f3d10c074b7e7a41
             'srag\\Plugins\\SrAutoMails\\' => 25,
             'srag\\Notifications4Plugin\\' => 26,
             'srag\\LibrariesNamespaceChanger\\' => 31,
-            'srag\\DIC\\' => 9,
-            'srag\\CustomInputGUIs\\' => 21,
+            'srag\\DIC\\SrAutoMails\\' => 21,
+            'srag\\CustomInputGUIs\\SrAutoMails\\' => 33,
             'srag\\ActiveRecordConfig\\SrAutoMails\\' => 36,
         ),
     );
@@ -36,11 +36,11 @@ class ComposerStaticInitde97e8e8f91467d2f3d10c074b7e7a41
         array (
             0 => __DIR__ . '/..' . '/srag/librariesnamespacechanger/src',
         ),
-        'srag\\DIC\\' => 
+        'srag\\DIC\\SrAutoMails\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/dic/src',
         ),
-        'srag\\CustomInputGUIs\\' => 
+        'srag\\CustomInputGUIs\\SrAutoMails\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/custominputguis/src',
         ),

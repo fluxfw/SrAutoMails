@@ -181,16 +181,6 @@ abstract class AbstractNotification extends ActiveRecord implements Notification
 
 
 	/**
-	 *
-	 */
-	public function afterObjectLoad()/*: void*/ {
-		if (!empty($this->id)) {
-			$this->languages = self::notificationLanguage()->getLanguagesForNotification($this->id);
-		}
-	}
-
-
-	/**
 	 * @inheritdoc
 	 */
 	public function getId(): int {

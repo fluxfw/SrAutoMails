@@ -7,6 +7,7 @@ use srag\CustomInputGUIs\SrAutoMails\TableGUI\TableGUI;
 use srag\DIC\SrAutoMails\Plugin\PluginInterface;
 use srag\Notifications4Plugin\SrAutoMails\Ctrl\CtrlInterface;
 use srag\Notifications4Plugin\SrAutoMails\Notification\Language\NotificationLanguage;
+use srag\Notifications4Plugin\SrAutoMails\Notification\Notification;
 use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
 
 /**
@@ -29,6 +30,10 @@ class NotificationsTableGUI extends TableGUI {
 	 * @var callable
 	 */
 	protected $getNotifications;
+	/**
+	 * @var callable
+	 */
+	protected $getNotificationsCount;
 
 
 	/**
@@ -38,10 +43,12 @@ class NotificationsTableGUI extends TableGUI {
 	 * @param CtrlInterface   $parent
 	 * @param string          $parent_cmd
 	 * @param callable        $getNotifications
+	 * @param callable        $getNotificationsCount
 	 */
-	public function __construct(PluginInterface $plugin, CtrlInterface $parent, string $parent_cmd, callable $getNotifications) {
+	public function __construct(PluginInterface $plugin, CtrlInterface $parent, string $parent_cmd, callable $getNotifications, callable $getNotificationsCount) {
 		$this->plugin = $plugin;
 		$this->getNotifications = $getNotifications;
+		$this->getNotificationsCount = $getNotificationsCount;
 
 		parent::__construct($parent, $parent_cmd);
 	}
@@ -49,13 +56,15 @@ class NotificationsTableGUI extends TableGUI {
 
 	/**
 	 * @inheritdoc
+	 *
+	 * @param Notification $row
 	 */
 	protected function getColumnValue(/*string*/ $column, /*Notification*/ $row, /*int*/ $format = self::DEFAULT_FORMAT): string {
 		$value = Items::getter($row, $column);
 
 		switch ($column) {
 			case "languages":
-				implode(", ", array_map(function (NotificationLanguage $language): string {
+				$value = implode(", ", array_map(function (NotificationLanguage $language): string {
 					return $language->getLanguage();
 				}, $value));
 				break;
@@ -99,9 +108,6 @@ class NotificationsTableGUI extends TableGUI {
 		parent::initColumns();
 
 		$this->addColumn($this->txt("actions"));
-
-		$this->setDefaultOrderField("title");
-		$this->setDefaultOrderDirection("asc");
 	}
 
 
@@ -119,8 +125,21 @@ class NotificationsTableGUI extends TableGUI {
 	 */
 	protected function initData()/*: void*/ {
 		$getNotifications = $this->getNotifications;
+		$getNotificationsCount = $this->getNotificationsCount;
 
-		$this->setData($getNotifications());
+		$this->setExternalSegmentation(true);
+		$this->setExternalSorting(true);
+
+		$this->setDefaultOrderField("title");
+		$this->setDefaultOrderDirection("asc");
+
+		// Fix stupid ilTable2GUI !!! ...
+		$this->determineLimit();
+		$this->determineOffsetAndOrder();
+
+		$this->setData($getNotifications($this->getOrderField(), $this->getOrderDirection(), intval($this->getOffset()), intval($this->getLimit())));
+
+		$this->setMaxCount($getNotificationsCount());
 	}
 
 
@@ -149,10 +168,12 @@ class NotificationsTableGUI extends TableGUI {
 
 
 	/**
-	 * @param array $row
+	 * @inheritdoc
+	 *
+	 * @param Notification $row
 	 */
-	protected function fillRow(/*array*/ $row)/*: void*/ {
-		self::dic()->ctrl()->setParameter($this->parent_obj, CtrlInterface::GET_PARAM, $row["id"]);
+	protected function fillRow(/*Notification*/ $row)/*: void*/ {
+		self::dic()->ctrl()->setParameter($this->parent_obj, CtrlInterface::GET_PARAM, $row->getId());
 
 		parent::fillRow($row);
 

@@ -73,7 +73,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "srag\\CustomInputGUIs\\": "src/"
+                    "srag\\CustomInputGUIs\\SrAutoMails\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -119,7 +119,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "srag\\DIC\\": "src/"
+                    "srag\\DIC\\SrAutoMails\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -189,16 +189,16 @@
         },
         {
             "name": "srag/notifications4plugin",
-            "version": "v4.4",
+            "version": "v4.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/studer-raimann/Notifications4Plugin.git",
-                "reference": "e51b2eed6aff9562c44961f54ace3e9115884d63"
+                "reference": "2c5a47062b6bc0b975924f222d6701ec3b1c4c7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/studer-raimann/Notifications4Plugin/zipball/e51b2eed6aff9562c44961f54ace3e9115884d63",
-                "reference": "e51b2eed6aff9562c44961f54ace3e9115884d63",
+                "url": "https://api.github.com/repos/studer-raimann/Notifications4Plugin/zipball/2c5a47062b6bc0b975924f222d6701ec3b1c4c7a",
+                "reference": "2c5a47062b6bc0b975924f222d6701ec3b1c4c7a",
                 "shasum": ""
             },
             "require": {
@@ -231,7 +231,7 @@
                 "ILIAS",
                 "notifications"
             ],
-            "time": "2019-05-20T12:34:10+00:00"
+            "time": "2019-05-20T13:37:39+00:00"
         },
         {
             "name": "srag/removeplugindataconfirm",

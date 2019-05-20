@@ -247,9 +247,12 @@ protected static $tabs = [
 
 ```php
 // Table
-$table = self::notificationUI()->withPlugin(self::plugin())->withCtrlClass($this)->notificationTable($parent_cmd, function (): array {
-			return self::notification()->getNotifications();
-		});
+$table = self::notificationUI()->withPlugin(self::plugin())->withCtrlClass($this)
+			->notificationTable($parent_cmd, function (string $sort_by = null, string $sort_by_direction = null, int $limit_start = null, int $limit_end = null): array {
+				return $this->getNotifications($sort_by, $sort_by_direction, $limit_start, $limit_end);
+			}, function (): int {
+				return $this->getNotificationsCount();
+			});
 		
 // Form
 $form = self::notificationUI()->withPlugin(self::plugin())->withCtrlClass($this)->notificationForm($notification);

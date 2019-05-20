@@ -90,8 +90,8 @@ final class Repository implements RepositoryInterface {
 		/**
 		 * @var NotificationLanguage|null $language
 		 */
-		$language = self::dic()->database()->fetchObjectCallback(self::dic()->database()->queryF("SELECT * FROM " . self::dic()->database()
-				->quoteIdentifier($this->language_class::TABLE_NAME) . " WHERE id=%s", [ ilDBConstants::T_INTEGER ], [ $id ]), [
+		$language = self::dic()->database()->fetchObjectCallback(self::dic()->database()->queryF('SELECT * FROM ' . self::dic()->database()
+				->quoteIdentifier($this->language_class::TABLE_NAME) . ' WHERE id=%s', [ ilDBConstants::T_INTEGER ], [ $id ]), [
 			$this->factory(),
 			"fromDB"
 		]);
@@ -107,8 +107,8 @@ final class Repository implements RepositoryInterface {
 		/**
 		 * @var NotificationLanguage $l
 		 */
-		$l = self::dic()->database()->fetchObjectCallback(self::dic()->database()->queryF("SELECT * FROM " . self::dic()->database()
-				->quoteIdentifier($this->language_class::TABLE_NAME) . " WHERE notification_id=%s AND language=%s", [
+		$l = self::dic()->database()->fetchObjectCallback(self::dic()->database()->queryF('SELECT * FROM ' . self::dic()->database()
+				->quoteIdentifier($this->language_class::TABLE_NAME) . ' WHERE notification_id=%s AND language=%s', [
 			ilDBConstants::T_INTEGER,
 			ilDBConstants::T_TEXT
 		], [ $notification_id, $language ]), [
@@ -135,7 +135,7 @@ final class Repository implements RepositoryInterface {
 		/**
 		 * @var NotificationLanguage[] $languages
 		 */
-		$languages = self::dic()->database()->fetchAllCallback(self::dic()->database()->query("SELECT * FROM " . self::dic()->database()
+		$languages = self::dic()->database()->fetchAllCallback(self::dic()->database()->query('SELECT * FROM ' . self::dic()->database()
 				->quoteIdentifier($this->language_class::TABLE_NAME)), [ $this->factory(), "fromDB" ]);
 
 		return $languages;
@@ -149,9 +149,9 @@ final class Repository implements RepositoryInterface {
 		/**
 		 * @var NotificationLanguage[] $array
 		 */
-		$array = self::dic()->database()->fetchAllCallback(self::dic()->database()->queryF("SELECT * FROM " . self::dic()->database()
+		$array = self::dic()->database()->fetchAllCallback(self::dic()->database()->queryF('SELECT * FROM ' . self::dic()->database()
 				->quoteIdentifier($this->language_class::TABLE_NAME)
-			. " WHERE notification_id=%s", [ ilDBConstants::T_INTEGER ], [ $notification_id ]), [ $this->factory(), "fromDB" ]);
+			. ' WHERE notification_id=%s', [ ilDBConstants::T_INTEGER ], [ $notification_id ]), [ $this->factory(), "fromDB" ]);
 
 		$languages = [];
 

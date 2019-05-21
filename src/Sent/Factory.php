@@ -5,6 +5,7 @@ namespace srag\Plugins\SrAutoMails\Sent;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
+use stdClass;
 
 /**
  * Class Factory
@@ -41,6 +42,22 @@ final class Factory {
 	 */
 	private function __construct() {
 
+	}
+
+
+	/**
+	 * @param stdClass $data
+	 *
+	 * @return Sent
+	 */
+	public function fromDB(stdClass $data): Sent {
+		$sent = $this->newInstance();
+
+		$sent->setRuleId($data->rule_id);
+		$sent->setObjectId($data->object_id);
+		$sent->setUserId($data->user_id);
+
+		return $sent;
 	}
 
 

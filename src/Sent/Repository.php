@@ -2,6 +2,7 @@
 
 namespace srag\Plugins\SrAutoMails\Sent;
 
+use ilDBConstants;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
@@ -48,7 +49,12 @@ final class Repository {
 	 * @param Sent $sent
 	 */
 	protected function delete(Sent $sent)/*: void*/ {
-		$sent->delete();
+		self::dic()->database()->manipulateF('DELETE FROM ' . self::dic()->database()->quoteIdentifier(Sent::TABLE_NAME)
+			. " WHERE rule_id=%s AND object_id=%s AND user_id=%s", [
+			ilDBConstants::T_INTEGER,
+			ilDBConstants::T_INTEGER,
+			ilDBConstants::T_INTEGER
+		], [ $sent->getRuleId(), $sent->getObjectId(), $sent->getUserId() ]);
 	}
 
 
@@ -71,12 +77,12 @@ final class Repository {
 		/**
 		 * @var Sent|null $sent
 		 */
-
-		$sent = Sent::where([
-			"rule_id" => $rule_id,
-			"object_id" => $object_id,
-			"user_id" => $user_id
-		])->first();
+		$sent = self::dic()->database()->fetchObjectCallback(self::dic()->database()->queryF('SELECT * FROM ' . self::dic()->database()
+				->quoteIdentifier(Sent::TABLE_NAME) . " WHERE rule_id=%s AND object_id=%s AND user_id=%s", [
+			ilDBConstants::T_INTEGER,
+			ilDBConstants::T_INTEGER,
+			ilDBConstants::T_INTEGER
+		], [ $rule_id, $object_id, $user_id ]), [ $this->factory(), "fromDB" ]);
 
 		return $sent;
 	}
@@ -118,7 +124,11 @@ final class Repository {
 	 * @param Sent $sent
 	 */
 	protected function store(Sent $sent)/*: void*/ {
-		$sent->store();
+		self::dic()->database()->insert(Sent::TABLE_NAME, [
+			"rule_id" => [ ilDBConstants::T_INTEGER, $sent->getRuleId() ],
+			"object_id" => [ ilDBConstants::T_INTEGER, $sent->getObjectId() ],
+			"user_id" => [ ilDBConstants::T_INTEGER, $sent->getUserId() ]
+		]);
 	}
 
 

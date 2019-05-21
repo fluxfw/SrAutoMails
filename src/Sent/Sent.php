@@ -46,16 +46,6 @@ class Sent extends ActiveRecord {
 	 * @con_fieldtype   integer
 	 * @con_length      8
 	 * @con_is_notnull  true
-	 * @con_is_primary  true
-	 */
-	protected $id;
-	/**
-	 * @var int
-	 *
-	 * @con_has_field   true
-	 * @con_fieldtype   integer
-	 * @con_length      8
-	 * @con_is_notnull  true
 	 */
 	protected $rule_id;
 	/**
@@ -84,9 +74,7 @@ class Sent extends ActiveRecord {
 	 * @param int              $primary_key_value
 	 * @param arConnector|null $connector
 	 */
-	public function __construct(/*int*/
-		$primary_key_value = 0, /*?*/
-		arConnector $connector = null) {
+	public function __construct(/*int*/ $primary_key_value = 0, /*?*/ arConnector $connector = null) {
 		parent::__construct($primary_key_value, $connector);
 	}
 
@@ -96,8 +84,7 @@ class Sent extends ActiveRecord {
 	 *
 	 * @return mixed|null
 	 */
-	public function sleep(/*string*/
-		$field_name) {
+	public function sleep(/*string*/ $field_name) {
 		$field_value = $this->{$field_name};
 
 		switch ($field_name) {
@@ -113,10 +100,8 @@ class Sent extends ActiveRecord {
 	 *
 	 * @return mixed|null
 	 */
-	public function wakeUp(/*string*/
-		$field_name, $field_value) {
+	public function wakeUp(/*string*/ $field_name, $field_value) {
 		switch ($field_name) {
-			case "id":
 			case "rule_id":
 			case "object_id":
 			case "user_id":
@@ -125,22 +110,6 @@ class Sent extends ActiveRecord {
 			default:
 				return null;
 		}
-	}
-
-
-	/**
-	 * @return int
-	 */
-	public function getId(): int {
-		return $this->id;
-	}
-
-
-	/**
-	 * @param int $id
-	 */
-	public function setId(int $id)/*: void*/ {
-		$this->id = $id;
 	}
 
 

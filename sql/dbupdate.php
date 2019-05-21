@@ -47,3 +47,9 @@ foreach (\srag\Plugins\SrAutoMails\Rule\Rule::get() as $rule) {
 \srag\Plugins\SrAutoMails\Notification\Notification\Notification::updateDB_();
 \srag\Plugins\SrAutoMails\Notification\Notification\Language\NotificationLanguage::updateDB_();
 ?>
+<#6>
+<?php
+if (\srag\DIC\SrAutoMails\DICStatic::dic()->database()->tableColumnExists(\srag\Plugins\SrAutoMails\Sent\Sent::TABLE_NAME, "id")) {
+	\srag\DIC\SrAutoMails\DICStatic::dic()->database()->dropTableColumn(\srag\Plugins\SrAutoMails\Sent\Sent::TABLE_NAME, "id");
+}
+?>

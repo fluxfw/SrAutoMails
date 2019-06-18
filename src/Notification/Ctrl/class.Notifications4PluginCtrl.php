@@ -4,6 +4,7 @@ namespace srag\Plugins\SrAutoMails\Notification\Ctrl;
 
 use ilSrAutoMailsConfigGUI;
 use ilSrAutoMailsPlugin;
+use ilUtil;
 use srag\Notifications4Plugin\SrAutoMails\Ctrl\AbstractCtrl;
 use srag\Plugins\SrAutoMails\Notification\Notification\Language\NotificationLanguage;
 use srag\Plugins\SrAutoMails\Notification\Notification\Notification;
@@ -35,6 +36,16 @@ class Notifications4PluginCtrl extends AbstractCtrl {
 		(new ilSrAutoMailsConfigGUI())->getRuleForm($rule);
 
 		self::dic()->tabs()->activateSubTab(ilSrAutoMailsConfigGUI::TAB_NOTIFICATION);
+
+		if ($rule !== null) {
+
+			$object_type_definiton = self::objectTypes()->factory()->getByObjectType($rule->getObjectType());
+
+			if ($object_type_definiton !== null) {
+				ilUtil::sendInfo(current(self::notificationUI()->withPlugin(self::plugin())
+					->templateSelection([], "", $object_type_definiton->getMailPlaceholderKeyTypes()))["setInfo"]);
+			}
+		}
 
 		parent::executeCommand();
 	}

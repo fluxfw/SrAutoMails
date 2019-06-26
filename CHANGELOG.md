@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.4.2]
+- Display notification variables again
+- Fix `getUnixTime` is may `null`
+- Some other changes (libraries)
+
 ## [1.4.0]
 - Notifications4Plugin library
 

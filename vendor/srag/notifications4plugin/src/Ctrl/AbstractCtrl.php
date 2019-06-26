@@ -5,9 +5,11 @@ namespace srag\Notifications4Plugin\SrAutoMails\Ctrl;
 use ilConfirmationGUI;
 use ilUtil;
 use srag\DIC\SrAutoMails\DICTrait;
-use srag\Notifications4Plugin\SrAutoMails\Notification\AbstractNotification;
 use srag\Notifications4Plugin\SrAutoMails\Notification\Language\Repository as NotificationLanguageRepository;
+use srag\Notifications4Plugin\SrAutoMails\Notification\Language\RepositoryInterface as NotificationLanguageRepositoryInterface;
+use srag\Notifications4Plugin\SrAutoMails\Notification\Notification;
 use srag\Notifications4Plugin\SrAutoMails\Notification\Repository as NotificationRepository;
+use srag\Notifications4Plugin\SrAutoMails\Notification\RepositoryInterface as NotificationRepositoryInterface;
 use srag\Notifications4Plugin\SrAutoMails\UI\NotificationFormGUI;
 use srag\Notifications4Plugin\SrAutoMails\UI\NotificationsTableGUI;
 use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
@@ -20,25 +22,10 @@ use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  * @author  Stefan Wanzenried <sw@studer-raimann.ch>
  */
-abstract class AbstractCtrl {
+abstract class AbstractCtrl implements CtrlInterface {
 
 	use DICTrait;
 	use Notifications4PluginTrait;
-	const TAB_NOTIFICATIONS = "notifications";
-	const TAB_NOTIFICATION = "notification";
-	const LANG_MODULE_NOTIFICATIONS4PLUGIN = "notifications4plugin";
-	const NAME = "Notifications4Plugin";
-	const CMD_ADD_NOTIFICATION = "addNotification";
-	const CMD_APPLY_FILTER = "applyFilter";
-	const CMD_CREATE_NOTIFICATION = "createNotification";
-	const CMD_DELETE_NOTIFICATION = "deleteNotification";
-	const CMD_DELETE_NOTIFICATION_CONFIRM = "deleteNotificationConfirm";
-	const CMD_DUPLICATE_NOTIFICATION = "duplicateNotification";
-	const CMD_EDIT_NOTIFICATION = "editNotification";
-	const CMD_LIST_NOTIFICATIONS = "listNotifications";
-	const CMD_RESET_FILTER = "resetFilter";
-	const CMD_UPDATE_NOTIFICATION = "updateNotification";
-	const GET_PARAM = "notification_id";
 	/**
 	 * @var string
 	 *
@@ -56,7 +43,7 @@ abstract class AbstractCtrl {
 	/**
 	 * @inheritdoc
 	 */
-	protected static function notification(): NotificationRepository {
+	protected static function notification(): NotificationRepositoryInterface {
 		return NotificationRepository::getInstance(static::NOTIFICATION_CLASS_NAME, static::LANGUAGE_CLASS_NAME);
 	}
 
@@ -64,7 +51,7 @@ abstract class AbstractCtrl {
 	/**
 	 * @inheritdoc
 	 */
-	protected static function notificationLanguage(): NotificationLanguageRepository {
+	protected static function notificationLanguage(): NotificationLanguageRepositoryInterface {
 		return NotificationLanguageRepository::getInstance(static::LANGUAGE_CLASS_NAME);
 	}
 
@@ -78,7 +65,7 @@ abstract class AbstractCtrl {
 
 
 	/**
-	 *
+	 * @inheritdoc
 	 */
 	public function executeCommand()/*: void*/ {
 		$cmd = self::dic()->ctrl()->getCmd();
@@ -146,7 +133,7 @@ abstract class AbstractCtrl {
 	/**
 	 *
 	 */
-	public function addNotification()/*: void*/ {
+	protected function addNotification()/*: void*/ {
 		$notification = self::notification()->factory()->newInstance();
 
 		$form = $this->getNotificationForm($notification);
@@ -158,7 +145,7 @@ abstract class AbstractCtrl {
 	/**
 	 *
 	 */
-	public function createNotification()/*: void*/ {
+	protected function createNotification()/*: void*/ {
 		$notification = self::notification()->factory()->newInstance();
 
 		$form = $this->getNotificationForm($notification);
@@ -182,7 +169,7 @@ abstract class AbstractCtrl {
 	/**
 	 *
 	 */
-	public function editNotification()/*: void*/ {
+	protected function editNotification()/*: void*/ {
 		$notification = $this->getNotification();
 
 		$form = $this->getNotificationForm($notification);
@@ -194,7 +181,7 @@ abstract class AbstractCtrl {
 	/**
 	 *
 	 */
-	public function updateNotification()/*: void*/ {
+	protected function updateNotification()/*: void*/ {
 		$notification = $this->getNotification();
 
 		$form = $this->getNotificationForm($notification);
@@ -218,7 +205,7 @@ abstract class AbstractCtrl {
 	/**
 	 *
 	 */
-	public function duplicateNotification()/*: void*/ {
+	protected function duplicateNotification()/*: void*/ {
 		$notification = $this->getNotification();
 
 		$cloned_notification = self::notification()->duplicateNotification($notification, self::plugin());
@@ -235,7 +222,7 @@ abstract class AbstractCtrl {
 	/**
 	 *
 	 */
-	public function deleteNotificationConfirm()/*: void*/ {
+	protected function deleteNotificationConfirm()/*: void*/ {
 		$notification = $this->getNotification();
 
 		$confirmation = $this->getNotificationDeleteConfirmation($notification);
@@ -247,7 +234,7 @@ abstract class AbstractCtrl {
 	/**
 	 *
 	 */
-	public function deleteNotification()/*: void*/ {
+	protected function deleteNotification()/*: void*/ {
 		$notification = $this->getNotification();
 
 		self::notification()->deleteNotification($notification);
@@ -265,44 +252,60 @@ abstract class AbstractCtrl {
 	 * @return NotificationsTableGUI
 	 */
 	protected function getNotificationsTable(string $parent_cmd = self::CMD_LIST_NOTIFICATIONS): NotificationsTableGUI {
-		return self::notificationUI()->withPlugin(self::plugin())->notificationTable($this, $parent_cmd, function () {
-			return self::notification()->getArrayForTable($this->getNotifications());
-		});
+		return self::notificationUI()->withPlugin(self::plugin())->withCtrlClass($this)
+			->notificationTable($parent_cmd, function (string $sort_by = null, string $sort_by_direction = null, int $limit_start = null, int $limit_end = null): array {
+				return $this->getNotifications($sort_by, $sort_by_direction, $limit_start, $limit_end);
+			}, function (): int {
+				return $this->getNotificationsCount();
+			});
 	}
 
 
 	/**
-	 * @param AbstractNotification $notification
+	 * @param Notification $notification
 	 *
 	 * @return NotificationFormGUI
 	 */
-	protected function getNotificationForm(AbstractNotification $notification): NotificationFormGUI {
-		return self::notificationUI()->withPlugin(self::plugin())->notificationForm($this, $notification);
+	protected function getNotificationForm(Notification $notification): NotificationFormGUI {
+		return self::notificationUI()->withPlugin(self::plugin())->withCtrlClass($this)->notificationForm($notification);
 	}
 
 
 	/**
-	 * @param AbstractNotification $notification
+	 * @param Notification $notification
 	 *
 	 * @return ilConfirmationGUI
 	 */
-	protected function getNotificationDeleteConfirmation(AbstractNotification $notification): ilConfirmationGUI {
-		return self::notificationUI()->withPlugin(self::plugin())->notificationDeleteConfirmation($this, $notification);
+	protected function getNotificationDeleteConfirmation(Notification $notification): ilConfirmationGUI {
+		return self::notificationUI()->withPlugin(self::plugin())->withCtrlClass($this)->notificationDeleteConfirmation($notification);
 	}
 
 
 	/**
+	 * @param string|null $sort_by
+	 * @param string|null $sort_by_direction
+	 * @param int|null    $limit_start
+	 * @param int|null    $limit_end
+	 *
 	 * @return array
 	 */
-	protected function getNotifications(): array {
-		return self::notification()->getNotifications();
+	protected function getNotifications(string $sort_by = null, string $sort_by_direction = null, int $limit_start = null, int $limit_end = null): array {
+		return self::notification()->getNotifications($sort_by, $sort_by_direction, $limit_start, $limit_end);
 	}
 
 
 	/**
-	 * @return AbstractNotification
+	 * @return int
 	 */
-	protected function getNotification(): AbstractNotification {
+	protected function getNotificationsCount(): int {
+		return self::notification()->getNotificationsCount();
+	}
+
+
+	/**
+	 * @return Notification
+	 */
+	protected function getNotification(): Notification {
 		$notification_id = intval(filter_input(INPUT_GET, self::GET_PARAM));
 
 		return self::notification()->getNotificationById($notification_id);

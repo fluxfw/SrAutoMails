@@ -111,11 +111,13 @@ abstract class ObjectType {
 						break;
 
 					case Rule::OPERATOR_X_DAYS_BEFORE:
-						$check = ((($object_value->getUnixTime() - $time) / (60 * 60 * 24)) <= $metadata_value);
+						$check = ($object_value !== null && (($object_value->getUnixTime() - $time) / (60 * 60 * 24)) <= $metadata_value);
+
 						break;
 
 					case Rule::OPERATOR_X_DAYS_AFTER:
-						$check = ((($time - $object_value->getUnixTime()) / (60 * 60 * 24)) >= $metadata_value);
+						$check = ($object_value !== null && (($time - $object_value->getUnixTime()) / (60 * 60 * 24)) >= $metadata_value);
+
 						break;
 
 					default:
@@ -235,8 +237,7 @@ abstract class ObjectType {
 	 *
 	 * @return mixed
 	 */
-	protected abstract function applyMailPlaceholders($object, array &$placeholders)/*: void*/
-	;
+	protected abstract function applyMailPlaceholders($object, array &$placeholders)/*: void*/ ;
 
 
 	/**

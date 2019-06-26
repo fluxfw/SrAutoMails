@@ -10,10 +10,8 @@ use ilSelectInputGUI;
 use ilSrAutoMailsConfigGUI;
 use ilSrAutoMailsPlugin;
 use ilTextInputGUI;
-use srag\ActiveRecordConfig\SrAutoMails\ActiveRecordConfigFormGUI;
-use srag\ActiveRecordConfig\SrAutoMails\ActiveRecordConfigGUI;
 use srag\CustomInputGUIs\SrAutoMails\MultiSelectSearchInputGUI\MultiSelectSearchInputGUI;
-use srag\Plugins\SrAutoMails\Config\Config;
+use srag\CustomInputGUIs\SrAutoMails\PropertyFormGUI\ObjectPropertyFormGUI;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
@@ -23,106 +21,62 @@ use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-class RuleFormGUI extends ActiveRecordConfigFormGUI {
+class RuleFormGUI extends ObjectPropertyFormGUI {
 
 	use SrAutoMailsTrait;
 	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
-	const CONFIG_CLASS_NAME = Config::class;
+	const LANG_MODULE = ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG;
 	/**
-	 * @var Rule|null
+	 * @var Rule
 	 */
-	protected $rule;
+	protected $object;
 
 
 	/**
 	 * RuleFormGUI constructor
 	 *
-	 * @param ActiveRecordConfigGUI $parent
-	 * @param string                $tab_id
-	 * @param Rule|null             $rule
+	 * @param ilSrAutoMailsConfigGUI $parent
+	 * @param Rule                   $object
 	 */
-	public function __construct(ActiveRecordConfigGUI $parent, string $tab_id, /*?*/
-		Rule $rule = null) {
-
-		$this->rule = $rule;
-
-		parent::__construct($parent, $tab_id);
+	public function __construct(ilSrAutoMailsConfigGUI $parent, Rule $object) {
+		parent::__construct($parent, $object);
 	}
 
 
 	/**
 	 * @inheritdoc
 	 */
-	protected function getValue(/*string*/
-		$key) {
-		if ($this->rule !== null) {
-			switch ($key) {
-				case "object_type":
-					return $this->rule->getObjectType();
+	protected function getValue(/*string*/ $key) {
+		switch ($key) {
+			case "operator_value_text":
+				if ($this->object->getOperatorValueType() === Rule::OPERATOR_VALUE_TYPE_TEXT) {
+					return parent::getValue("operator_value");
+				}
+				break;
 
-				case "enabled":
-					return $this->rule->isEnabled();
+			case "operator_value_object_property":
+				if ($this->object->getOperatorValueType() === Rule::OPERATOR_VALUE_TYPE_OBJECT_PROPERTY) {
+					return parent::getValue("operator_value");
+				}
+				break;
 
-				case "interval_type":
-					return $this->rule->getIntervalType();
+			case "receiver":
+				return parent::getValue("receiver_type");
 
-				case "interval":
-					return $this->rule->getInterval();
+			case "receiver_object":
+				if ($this->object->getReceiverType() === Rule::RECEIVER_TYPE_OBJECT) {
+					return parent::getValue("receiver");
+				}
+				break;
 
-				case "title":
-					return $this->rule->getTitle();
+			case "receiver_users":
+				if ($this->object->getReceiverType() === Rule::RECEIVER_TYPE_USERS) {
+					return parent::getValue("receiver");
+				}
+				break;
 
-				case "description":
-					return $this->rule->getDescription();
-
-				case "match_type":
-					return $this->rule->getMatchType();
-
-				case "metadata":
-					return $this->rule->getMetadata();
-
-				case "operator":
-					return $this->rule->getOperator();
-
-				case "operator_negated":
-					return $this->rule->isOperatorNegated();
-
-				case "operator_case_sensitive":
-					return $this->rule->isOperatorCaseSensitive();
-
-				case "operator_value_type":
-					return $this->rule->getOperatorValueType();
-
-				case "operator_value_text":
-					if ($this->rule->getOperatorValueType() === Rule::OPERATOR_VALUE_TYPE_TEXT) {
-						return $this->rule->getOperatorValue();
-					}
-					break;
-
-				case "operator_value_object_property":
-					if ($this->rule->getOperatorValueType() === Rule::OPERATOR_VALUE_TYPE_OBJECT_PROPERTY) {
-						return $this->rule->getOperatorValue();
-					}
-					break;
-
-				case "receiver":
-					return $this->rule->getReceiverType();
-
-				case "receiver_object":
-					if ($this->rule->getReceiverType() === Rule::RECEIVER_TYPE_OBJECT) {
-						return $this->rule->getReceiver();
-					}
-					break;
-
-				case "receiver_users":
-					if ($this->rule->getReceiverType() === Rule::RECEIVER_TYPE_USERS) {
-						return $this->rule->getReceiver();
-					}
-					break;
-
-				default:
-					break;
-			}
+			default:
+				return parent::getValue($key);
 		}
 
 		return null;
@@ -133,7 +87,7 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 	 * @inheritdoc
 	 */
 	protected function initCommands()/*: void*/ {
-		if ($this->rule !== null) {
+		if (!empty($this->object->getRuleId())) {
 			$this->addCommandButton(ilSrAutoMailsConfigGUI::CMD_UPDATE_RULE, $this->txt("save"));
 		} else {
 			$this->addCommandButton(ilSrAutoMailsConfigGUI::CMD_CREATE_RULE, $this->txt("add"));
@@ -151,13 +105,13 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 				self::PROPERTY_CLASS => ilSelectInputGUI::class,
 				self::PROPERTY_REQUIRED => true,
 				self::PROPERTY_OPTIONS => [ "" => "" ] + self::objectTypes()->getObjectTypesText(),
-				self::PROPERTY_DISABLED => ($this->rule !== null)
+				self::PROPERTY_DISABLED => (!empty($this->object->getRuleId()))
 			]
 		];
 
-		if ($this->rule !== null) {
-			$object_type_definiton = self::objectTypes()->factory($this->rule->getObjectType());
-			$object = $this->fields["object_type"][self::PROPERTY_OPTIONS][$this->rule->getObjectType()];
+		if (!empty($this->object->getRuleId())) {
+			$object_type_definiton = self::objectTypes()->factory()->getByObjectType($this->object->getObjectType());
+			$object = $this->fields["object_type"][self::PROPERTY_OPTIONS][$this->object->getObjectType()];
 
 			$this->fields = array_merge($this->fields, [
 				"enabled" => [
@@ -290,127 +244,61 @@ class RuleFormGUI extends ActiveRecordConfigFormGUI {
 	/**
 	 * @inheritdoc
 	 */
+	protected function initId()/*: void*/ {
+
+	}
+
+
+	/**
+	 * @inheritdoc
+	 */
 	protected function initTitle()/*: void*/ {
-		$this->setTitle($this->txt($this->rule !== null ? "edit_rule" : "add_rule"));
+		$this->setTitle($this->txt(!empty($this->object->getRuleId()) ? "edit_rule" : "add_rule"));
 	}
 
 
 	/**
 	 * @inheritdoc
 	 */
-	public function storeForm(): bool {
-		if ($this->rule === null) {
-			$this->rule = new Rule();
-		}
-
-		if (!parent::storeForm()) {
-			return false;
-		}
-
-		$this->rule->store();
-
-		return true;
-	}
-
-
-	/**
-	 * @inheritdoc
-	 */
-	protected function storeValue(/*string*/
-		$key, $value)/*: void*/ {
+	protected function storeValue(/*string*/ $key, $value)/*: void*/ {
 		switch ($key) {
 			case "object_type":
-				if (empty($this->rule->getObjectType())) {
-					$this->rule->setObjectType(intval($value));
+				if (empty($this->object->getRuleId())) {
+					parent::storeValue("object_type", $value);
 				}
 				break;
 
-			case "enabled":
-				$this->rule->setEnabled($value);
-				break;
-
-			case "interval_type":
-				$this->rule->setIntervalType(intval($value));
-				break;
-
-			case "interval":
-				$this->rule->setInterval(intval($value));
-				break;
-
-			case "title":
-				$this->rule->setTitle(strval($value));
-				break;
-
-			case "description":
-				$this->rule->setDescription(strval($value));
-				break;
-
-			case "match_type":
-				$this->rule->setMatchType(intval($value));
-				break;
-
-			case "metadata":
-				$this->rule->setMetadata(intval($value));
-				break;
-
-			case "operator":
-				$this->rule->setOperator(intval($value));
-				break;
-
-			case "operator_negated":
-				$this->rule->setOperatorNegated($value);
-				break;
-
-			case "operator_case_sensitive":
-				$this->rule->setOperatorCaseSensitive($value);
-				break;
-
-			case "operator_value_type":
-				$this->rule->setOperatorValueType(intval($value));
-				break;
-
 			case "operator_value_text":
-				if ($this->rule->getOperatorValueType() === Rule::OPERATOR_VALUE_TYPE_TEXT) {
-					$this->rule->setOperatorValue(strval($value));
+				if ($this->object->getOperatorValueType() === Rule::OPERATOR_VALUE_TYPE_TEXT) {
+					parent::storeValue("operator_value", $value);
 				}
 				break;
 
 			case "operator_value_object_property":
-				if ($this->rule->getOperatorValueType() === Rule::OPERATOR_VALUE_TYPE_OBJECT_PROPERTY) {
-					$this->rule->setOperatorValue(strval($value));
+				if ($this->object->getOperatorValueType() === Rule::OPERATOR_VALUE_TYPE_OBJECT_PROPERTY) {
+					parent::storeValue("operator_value", $value);
 				}
 				break;
 
-			case "mail_template_name":
-				$this->rule->setMailTemplateName(strval($value));
-				break;
-
 			case "receiver":
-				$this->rule->setReceiverType(intval($value));
+				parent::storeValue("receiver_type", $value);
 				break;
 
 			case "receiver_object":
-				if ($this->rule->getReceiverType() === Rule::RECEIVER_TYPE_OBJECT) {
-					$this->rule->setReceiver($value);
+				if ($this->object->getReceiverType() === Rule::RECEIVER_TYPE_OBJECT) {
+					parent::storeValue("receiver", $value);
 				}
 				break;
 
 			case "receiver_users":
-				if ($this->rule->getReceiverType() === Rule::RECEIVER_TYPE_USERS) {
-					$this->rule->setReceiver($value);
+				if ($this->object->getReceiverType() === Rule::RECEIVER_TYPE_USERS) {
+					parent::storeValue("receiver", $value);
 				}
 				break;
 
 			default:
+				parent::storeValue($key, $value);
 				break;
 		}
-	}
-
-
-	/**
-	 * @return Rule
-	 */
-	public function getRule(): Rule {
-		return $this->rule;
 	}
 }

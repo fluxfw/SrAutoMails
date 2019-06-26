@@ -43,7 +43,6 @@ config_operator_less#:#Kleiner als
 config_operator_less_equals#:#Kleiner als oder ist gleich
 config_operator_negated#:#Negation
 config_operator_reg_ex#:#RegEx
-config_operator_reg_ex_info#:#Hinweis: RegExp muss in / / geschrieben werden
 config_operator_starts_with#:#Startet mit
 config_operator_value#:#Wert
 config_operator_value_object_property#:#%s-Eigenschaft

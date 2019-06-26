@@ -27,10 +27,7 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 	/**
 	 * @inheritdoc
 	 */
-	protected function getColumnValue(/*string*/
-		$column, /*array*/
-		$row, /*bool*/
-		$raw_export = false): string {
+	protected function getColumnValue(/*string*/ $column, /*array*/ $row, /*int*/ $format = self::DEFAULT_FORMAT): string {
 		switch ($column) {
 			case "object_type":
 				$column = self::objectTypes()->getObjectTypesText()[$row[$column]];
@@ -87,7 +84,7 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 		self::dic()->toolbar()->addComponent(self::dic()->ui()->factory()->button()->standard($this->txt("add_rule"), self::dic()->ctrl()
 			->getLinkTarget($this->parent_obj, ilSrAutoMailsConfigGUI::CMD_ADD_RULE)));
 
-		$this->setSelectAllCheckbox("srauma_rule_id");
+		$this->setSelectAllCheckbox(ilSrAutoMailsConfigGUI::GET_PARAM_RULE_ID);
 		$this->addMultiCommand(ilSrAutoMailsConfigGUI::CMD_ENABLE_RULES, $this->txt("enable_rules"));
 		$this->addMultiCommand(ilSrAutoMailsConfigGUI::CMD_DISABLE_RULES, $this->txt("disable_rules"));
 		$this->addMultiCommand(ilSrAutoMailsConfigGUI::CMD_REMOVE_RULES_CONFIRM, $this->txt("remove_rules"));
@@ -159,12 +156,11 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI {
 	/**
 	 * @param array $row
 	 */
-	protected function fillRow(/*array*/
-		$row)/*: void*/ {
-		self::dic()->ctrl()->setParameter($this->parent_obj, "srauma_rule_id", $row["rule_id"]);
+	protected function fillRow(/*array*/ $row)/*: void*/ {
+		self::dic()->ctrl()->setParameter($this->parent_obj, ilSrAutoMailsConfigGUI::GET_PARAM_RULE_ID, $row["rule_id"]);
 
 		$this->tpl->setCurrentBlock("checkbox");
-		$this->tpl->setVariable("CHECKBOX_POST_VAR", "srauma_rule_id");
+		$this->tpl->setVariable("CHECKBOX_POST_VAR", ilSrAutoMailsConfigGUI::GET_PARAM_RULE_ID);
 		$this->tpl->setVariable("ID", $row["rule_id"]);
 		$this->tpl->parseCurrentBlock();
 

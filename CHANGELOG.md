@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.4.3]
+- Menu entry
+
 ## [1.4.2]
 - Display notification variables again
 - Fix `getUnixTime` is may `null`

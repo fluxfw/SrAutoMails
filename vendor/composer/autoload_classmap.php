@@ -312,6 +312,7 @@ return array(
     'srag\\Plugins\\SrAutoMails\\Access\\Users' => $baseDir . '/src/Access/Users.php',
     'srag\\Plugins\\SrAutoMails\\Config\\Config' => $baseDir . '/src/Config/Config.php',
     'srag\\Plugins\\SrAutoMails\\Job\\Job' => $baseDir . '/src/Job/Job.php',
+    'srag\\Plugins\\SrAutoMails\\Menu\\Menu' => $baseDir . '/src/Menu/Menu.php',
     'srag\\Plugins\\SrAutoMails\\Notification\\Ctrl\\Notifications4PluginCtrl' => $baseDir . '/src/Notification/Ctrl/class.Notifications4PluginCtrl.php',
     'srag\\Plugins\\SrAutoMails\\Notification\\Notification\\Language\\NotificationLanguage' => $baseDir . '/src/Notification/Notification/Language/NotificationLanguage.php',
     'srag\\Plugins\\SrAutoMails\\Notification\\Notification\\Notification' => $baseDir . '/src/Notification/Notification/Notification.php',

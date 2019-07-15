@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.4.4]
+- Menu entry
+
 ## [1.4.3]
 - Menu entry
 

@@ -4,7 +4,6 @@ namespace srag\Plugins\SrAutoMails\Notification\Ctrl;
 
 use ilSrAutoMailsConfigGUI;
 use ilSrAutoMailsPlugin;
-use ilUtil;
 use srag\Notifications4Plugin\SrAutoMails\Ctrl\AbstractCtrl;
 use srag\Plugins\SrAutoMails\Notification\Notification\Language\NotificationLanguage;
 use srag\Plugins\SrAutoMails\Notification\Notification\Notification;
@@ -37,16 +36,6 @@ class Notifications4PluginCtrl extends AbstractCtrl {
 
 		self::dic()->tabs()->activateSubTab(ilSrAutoMailsConfigGUI::TAB_NOTIFICATION);
 
-		if ($rule !== null) {
-
-			$object_type_definiton = self::objectTypes()->factory()->getByObjectType($rule->getObjectType());
-
-			if ($object_type_definiton !== null) {
-				ilUtil::sendInfo(current(self::notificationUI()->withPlugin(self::plugin())
-					->templateSelection([], "", $object_type_definiton->getMailPlaceholderKeyTypes()))["setInfo"]);
-			}
-		}
-
 		parent::executeCommand();
 	}
 
@@ -56,5 +45,25 @@ class Notifications4PluginCtrl extends AbstractCtrl {
 	 */
 	protected function listNotifications()/*: void*/ {
 		self::dic()->ctrl()->redirectByClass(ilSrAutoMailsConfigGUI::class, ilSrAutoMailsConfigGUI::CMD_EDIT_RULE);
+	}
+
+
+	/**
+	 * @inheritdoc
+	 */
+	public function getPlaceholderTypes(): array {
+		$rule_id = intval(filter_input(INPUT_GET, ilSrAutoMailsConfigGUI::GET_PARAM_RULE_ID));
+		$rule = self::rules()->getRuleById($rule_id);
+
+		if ($rule !== null) {
+
+			$object_type_definiton = self::objectTypes()->factory()->getByObjectType($rule->getObjectType());
+
+			if ($object_type_definiton !== null) {
+				return $object_type_definiton->getMailPlaceholderKeyTypes();
+			}
+		}
+
+		return [];
 	}
 }

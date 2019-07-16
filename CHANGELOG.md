@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.4.5]
+- Display placeholder types in notification form
+
 ## [1.4.4]
 - Menu entry
 

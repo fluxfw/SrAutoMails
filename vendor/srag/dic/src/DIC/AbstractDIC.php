@@ -2,6 +2,7 @@
 
 namespace srag\DIC\SrAutoMails\DIC;
 
+use ILIAS\DI\Container;
 use srag\DIC\SrAutoMails\Database\DatabaseDetector;
 use srag\DIC\SrAutoMails\Database\DatabaseInterface;
 
@@ -15,10 +16,16 @@ use srag\DIC\SrAutoMails\Database\DatabaseInterface;
 abstract class AbstractDIC implements DICInterface {
 
 	/**
-	 * AbstractDIC constructor
+	 * @var Container
 	 */
-	protected function __construct() {
+	protected $dic;
 
+
+	/**
+	 * @inheritDoc
+	 */
+	public function __construct(Container &$dic) {
+		$this->dic = &$dic;
 	}
 
 

@@ -30,10 +30,6 @@ class Menu extends AbstractStaticPluginMainMenuProvider {
 	 * @inheritdoc
 	 */
 	public function getStaticTopItems(): array {
-		if (!self::plugin()->getPluginObject()->isActive()) {
-			return [];
-		}
-
 		return [
 			self::dic()->globalScreen()->mainmenu()->topParentItem(self::dic()->globalScreen()->identification()->plugin(self::plugin()
 				->getPluginObject(), $this)->identifier(ilSrAutoMailsPlugin::PLUGIN_ID . "_top"))->withTitle(ilSrAutoMailsPlugin::PLUGIN_NAME)
@@ -50,10 +46,6 @@ class Menu extends AbstractStaticPluginMainMenuProvider {
 	 * @inheritdoc
 	 */
 	public function getStaticSubItems(): array {
-		if (!self::plugin()->getPluginObject()->isActive()) {
-			return [];
-		}
-
 		$parent = $this->getStaticTopItems()[0];
 
 		self::dic()->ctrl()->setParameterByClass(ilSrAutoMailsConfigGUI::class, "ref_id", 31);

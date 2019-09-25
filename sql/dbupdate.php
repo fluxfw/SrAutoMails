@@ -4,8 +4,8 @@
 \srag\Plugins\SrAutoMails\Rule\Rule::updateDB();
 try {
     \srag\Plugins\SrAutoMails\Sent\Sent::updateDB();
-} catch (Throwable $ex) {
-    // Fix Call to a member function getName() on null (Because not use ILIAS primary key)
+} catch (\Throwable $ex) {
+    // Fix Call to a member function getName() on null (Because not use ILIAS sequence)
 }
 ?>
 <#2>

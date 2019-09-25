@@ -18,93 +18,99 @@ use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-final class Metadata {
+final class Metadata
+{
 
-	use DICTrait;
-	use SrAutoMailsTrait;
-	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
-	/**
-	 * @var self
-	 */
-	protected static $instance = null;
-
-
-	/**
-	 * @return self
-	 */
-	public static function getInstance(): self {
-		if (self::$instance === null) {
-			self::$instance = new self();
-		}
-
-		return self::$instance;
-	}
+    use DICTrait;
+    use SrAutoMailsTrait;
+    const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
+    /**
+     * @var self
+     */
+    protected static $instance = null;
 
 
-	/**
-	 * Metadata constructor
-	 */
-	private function __construct() {
+    /**
+     * @return self
+     */
+    public static function getInstance() : self
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
 
-	}
-
-
-	/**
-	 * @return array
-	 */
-	public function getMetadata(): array {
-		$result = self::dic()->database()->queryF('SELECT field_id, title FROM adv_mdf_definition', [], []);
-
-		$array = [];
-
-		while (($row = $result->fetchAssoc()) !== false) {
-			$array[$row["field_id"]] = $row["title"];
-		}
-
-		return $array;
-	}
+        return self::$instance;
+    }
 
 
-	/**
-	 * @param int $obj_id
-	 * @param int $metadata_id
-	 *
-	 * @return mixed
-	 */
-	public function getMetadataForObject(int $obj_id, int $metadata_id) {
-		$values = new ilAdvancedMDValues($this->getRecordOfField($metadata_id), $obj_id, "", "");
+    /**
+     * Metadata constructor
+     */
+    private function __construct()
+    {
 
-		$values->read();
-
-		/**
-		 * @var ilADT|null $metadata
-		 */
-		$metadata = $values->getADTGroup()->getElement($metadata_id);
-
-		switch (true) {
-			case ($metadata instanceof ilADTText):
-				return $metadata->getText();
-
-			case ($metadata instanceof ilADTInteger):
-				return $metadata->getNumber();
-
-			default:
-				return null;
-		}
-	}
+    }
 
 
-	/**
-	 * @param int $field_id
-	 *
-	 * @return int
-	 */
-	protected function getRecordOfField(int $field_id): int {
-		$result = self::dic()->database()
-			->queryF('SELECT record_id FROM adv_mdf_definition WHERE field_id=%s', [ ilDBConstants::T_INTEGER ], [ $field_id ]);
+    /**
+     * @return array
+     */
+    public function getMetadata() : array
+    {
+        $result = self::dic()->database()->queryF('SELECT field_id, title FROM adv_mdf_definition', [], []);
 
-		$record_id = intval($result->fetchAssoc()["record_id"]);
+        $array = [];
 
-		return $record_id;
-	}
+        while (($row = $result->fetchAssoc()) !== false) {
+            $array[$row["field_id"]] = $row["title"];
+        }
+
+        return $array;
+    }
+
+
+    /**
+     * @param int $obj_id
+     * @param int $metadata_id
+     *
+     * @return mixed
+     */
+    public function getMetadataForObject(int $obj_id, int $metadata_id)
+    {
+        $values = new ilAdvancedMDValues($this->getRecordOfField($metadata_id), $obj_id, "", "");
+
+        $values->read();
+
+        /**
+         * @var ilADT|null $metadata
+         */
+        $metadata = $values->getADTGroup()->getElement($metadata_id);
+
+        switch (true) {
+            case ($metadata instanceof ilADTText):
+                return $metadata->getText();
+
+            case ($metadata instanceof ilADTInteger):
+                return $metadata->getNumber();
+
+            default:
+                return null;
+        }
+    }
+
+
+    /**
+     * @param int $field_id
+     *
+     * @return int
+     */
+    protected function getRecordOfField(int $field_id) : int
+    {
+        $result = self::dic()->database()
+            ->queryF('SELECT record_id FROM adv_mdf_definition WHERE field_id=%s', [ilDBConstants::T_INTEGER], [$field_id]);
+
+        $record_id = intval($result->fetchAssoc()["record_id"]);
+
+        return $record_id;
+    }
 }

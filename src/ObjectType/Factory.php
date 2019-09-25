@@ -14,57 +14,62 @@ use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-final class Factory {
+final class Factory
+{
 
-	use DICTrait;
-	use SrAutoMailsTrait;
-	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
-	/**
-	 * @var self
-	 */
-	protected static $instance = null;
-
-
-	/**
-	 * @return self
-	 */
-	public static function getInstance(): self {
-		if (self::$instance === null) {
-			self::$instance = new self();
-		}
-
-		return self::$instance;
-	}
+    use DICTrait;
+    use SrAutoMailsTrait;
+    const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
+    /**
+     * @var self
+     */
+    protected static $instance = null;
 
 
-	/**
-	 * Factory constructor
-	 */
-	private function __construct() {
+    /**
+     * @return self
+     */
+    public static function getInstance() : self
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
 
-	}
-
-
-	/**
-	 * @return CourseObjectType
-	 */
-	public function course(): CourseObjectType {
-		return new CourseObjectType();
-	}
+        return self::$instance;
+    }
 
 
-	/**
-	 * @param string $object_type
-	 *
-	 * @return ObjectType|null
-	 */
-	public function getByObjectType(string $object_type)/*: ?ObjectType*/ {
-		switch ($object_type) {
-			case Repository::OBJECT_TYPE_COURSE:
-				return $this->course();
+    /**
+     * Factory constructor
+     */
+    private function __construct()
+    {
 
-			default:
-				return null;
-		}
-	}
+    }
+
+
+    /**
+     * @return CourseObjectType
+     */
+    public function course() : CourseObjectType
+    {
+        return new CourseObjectType();
+    }
+
+
+    /**
+     * @param string $object_type
+     *
+     * @return ObjectType|null
+     */
+    public function getByObjectType(string $object_type)/*: ?ObjectType*/
+    {
+        switch ($object_type) {
+            case Repository::OBJECT_TYPE_COURSE:
+                return $this->course();
+
+            default:
+                return null;
+        }
+    }
 }

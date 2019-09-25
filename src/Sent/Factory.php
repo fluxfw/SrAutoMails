@@ -14,59 +14,64 @@ use stdClass;
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-final class Factory {
+final class Factory
+{
 
-	use DICTrait;
-	use SrAutoMailsTrait;
-	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
-	/**
-	 * @var self
-	 */
-	protected static $instance = null;
-
-
-	/**
-	 * @return self
-	 */
-	public static function getInstance(): self {
-		if (self::$instance === null) {
-			self::$instance = new self();
-		}
-
-		return self::$instance;
-	}
+    use DICTrait;
+    use SrAutoMailsTrait;
+    const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
+    /**
+     * @var self
+     */
+    protected static $instance = null;
 
 
-	/**
-	 * Factory constructor
-	 */
-	private function __construct() {
+    /**
+     * @return self
+     */
+    public static function getInstance() : self
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
 
-	}
-
-
-	/**
-	 * @param stdClass $data
-	 *
-	 * @return Sent
-	 */
-	public function fromDB(stdClass $data): Sent {
-		$sent = $this->newInstance();
-
-		$sent->setRuleId($data->rule_id);
-		$sent->setObjectId($data->object_id);
-		$sent->setUserId($data->user_id);
-
-		return $sent;
-	}
+        return self::$instance;
+    }
 
 
-	/**
-	 * @return Sent
-	 */
-	public function newInstance(): Sent {
-		$rule = new Sent();
+    /**
+     * Factory constructor
+     */
+    private function __construct()
+    {
 
-		return $rule;
-	}
+    }
+
+
+    /**
+     * @param stdClass $data
+     *
+     * @return Sent
+     */
+    public function fromDB(stdClass $data) : Sent
+    {
+        $sent = $this->newInstance();
+
+        $sent->setRuleId($data->rule_id);
+        $sent->setObjectId($data->object_id);
+        $sent->setUserId($data->user_id);
+
+        return $sent;
+    }
+
+
+    /**
+     * @return Sent
+     */
+    public function newInstance() : Sent
+    {
+        $rule = new Sent();
+
+        return $rule;
+    }
 }

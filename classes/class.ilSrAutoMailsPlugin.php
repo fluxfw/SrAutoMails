@@ -19,102 +19,111 @@ use srag\RemovePluginDataConfirm\SrAutoMails\PluginUninstallTrait;
  *
  * @author studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-class ilSrAutoMailsPlugin extends ilCronHookPlugin {
+class ilSrAutoMailsPlugin extends ilCronHookPlugin
+{
 
-	use PluginUninstallTrait;
-	use SrAutoMailsTrait;
-	const PLUGIN_ID = "srauma";
-	const PLUGIN_NAME = "SrAutoMails";
-	const PLUGIN_CLASS_NAME = self::class;
-	const REMOVE_PLUGIN_DATA_CONFIRM_CLASS_NAME = SrAutoMailsRemoveDataConfirm::class;
-	/**
-	 * @var self|null
-	 */
-	protected static $instance = null;
-
-
-	/**
-	 * @return self
-	 */
-	public static function getInstance(): self {
-		if (self::$instance === null) {
-			self::$instance = new self();
-		}
-
-		return self::$instance;
-	}
+    use PluginUninstallTrait;
+    use SrAutoMailsTrait;
+    const PLUGIN_ID = "srauma";
+    const PLUGIN_NAME = "SrAutoMails";
+    const PLUGIN_CLASS_NAME = self::class;
+    const REMOVE_PLUGIN_DATA_CONFIRM_CLASS_NAME = SrAutoMailsRemoveDataConfirm::class;
+    /**
+     * @var self|null
+     */
+    protected static $instance = null;
 
 
-	/**
-	 * ilSrAutoMailsPlugin constructor
-	 */
-	public function __construct() {
-		parent::__construct();
-	}
+    /**
+     * @return self
+     */
+    public static function getInstance() : self
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
+    }
 
 
-	/**
-	 * @return string
-	 */
-	public function getPluginName(): string {
-		return self::PLUGIN_NAME;
-	}
+    /**
+     * ilSrAutoMailsPlugin constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
 
-	/**
-	 * @return ilCronJob[]
-	 */
-	public function getCronJobInstances(): array {
-		return [ new Job() ];
-	}
+    /**
+     * @return string
+     */
+    public function getPluginName() : string
+    {
+        return self::PLUGIN_NAME;
+    }
 
 
-	/**
-	 * @param string $a_job_id
-	 *
-	 * @return ilCronJob|null
-	 */
-	public function getCronJobInstance(/*string*/ $a_job_id)/*: ?ilCronJob*/ {
-		switch ($a_job_id) {
-			case Job::CRON_JOB_ID:
-				return new Job();
-
-			default:
-				return null;
-		}
-	}
+    /**
+     * @return ilCronJob[]
+     */
+    public function getCronJobInstances() : array
+    {
+        return [new Job()];
+    }
 
 
-	/**
-	 * @inheritdoc
-	 */
-	public function updateLanguages($a_lang_keys = null) {
-		parent::updateLanguages($a_lang_keys);
+    /**
+     * @param string $a_job_id
+     *
+     * @return ilCronJob|null
+     */
+    public function getCronJobInstance(/*string*/ $a_job_id)/*: ?ilCronJob*/
+    {
+        switch ($a_job_id) {
+            case Job::CRON_JOB_ID:
+                return new Job();
 
-		LibraryLanguageInstaller::getInstance()->withPlugin(self::plugin())->withLibraryLanguageDirectory(__DIR__
-			. "/../vendor/srag/removeplugindataconfirm/lang")->updateLanguages();
-
-		LibraryLanguageInstaller::getInstance()->withPlugin(self::plugin())->withLibraryLanguageDirectory(__DIR__
-			. "/../vendor/srag/notifications4plugin/lang")->updateLanguages();
-	}
-
-
-	/**
-	 * @inheritdoc
-	 */
-	public function promoteGlobalScreenProvider(): AbstractStaticPluginMainMenuProvider {
-		return new Menu(self::dic()->dic(), $this);
-	}
+            default:
+                return null;
+        }
+    }
 
 
-	/**
-	 * @inheritdoc
-	 */
-	protected function deleteData()/*: void*/ {
-		self::dic()->database()->dropTable(Config::TABLE_NAME, false);
-		Notification::dropDB_();
-		NotificationLanguage::dropDB_();
-		self::dic()->database()->dropTable(Rule::TABLE_NAME, false);
-		self::dic()->database()->dropTable(Sent::TABLE_NAME, false);
-	}
+    /**
+     * @inheritdoc
+     */
+    public function updateLanguages($a_lang_keys = null)
+    {
+        parent::updateLanguages($a_lang_keys);
+
+        LibraryLanguageInstaller::getInstance()->withPlugin(self::plugin())->withLibraryLanguageDirectory(__DIR__
+            . "/../vendor/srag/removeplugindataconfirm/lang")->updateLanguages();
+
+        LibraryLanguageInstaller::getInstance()->withPlugin(self::plugin())->withLibraryLanguageDirectory(__DIR__
+            . "/../vendor/srag/notifications4plugin/lang")->updateLanguages();
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function promoteGlobalScreenProvider() : AbstractStaticPluginMainMenuProvider
+    {
+        return new Menu(self::dic()->dic(), $this);
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    protected function deleteData()/*: void*/
+    {
+        self::dic()->database()->dropTable(Config::TABLE_NAME, false);
+        Notification::dropDB_();
+        NotificationLanguage::dropDB_();
+        self::dic()->database()->dropTable(Rule::TABLE_NAME, false);
+        self::dic()->database()->dropTable(Sent::TABLE_NAME, false);
+    }
 }

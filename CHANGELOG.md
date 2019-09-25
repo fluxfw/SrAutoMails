@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.4.6]
+- Fix install
+
 ## [1.4.5]
 - Display placeholder types in notification form
 

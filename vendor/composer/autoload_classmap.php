@@ -241,6 +241,7 @@ return array(
     'srag\\CustomInputGUIs\\SrAutoMails\\Template\\Template' => $vendorDir . '/srag/custominputguis/src/Template/Template.php',
     'srag\\CustomInputGUIs\\SrAutoMails\\TextAreaInputGUI\\TextAreaInputGUI' => $vendorDir . '/srag/custominputguis/src/TextAreaInputGUI/TextAreaInputGUI.php',
     'srag\\CustomInputGUIs\\SrAutoMails\\TextInputGUI\\TextInputGUI' => $vendorDir . '/srag/custominputguis/src/TextInputGUI/TextInputGUI.php',
+    'srag\\CustomInputGUIs\\SrAutoMails\\TextInputGUI\\TextInputGUIWithModernAutoComplete' => $vendorDir . '/srag/custominputguis/src/TextInputGUI/TextInputGUIWithModernAutoComplete.php',
     'srag\\CustomInputGUIs\\SrAutoMails\\ViewControlModeUI\\ViewControlModeUI' => $vendorDir . '/srag/custominputguis/src/ViewControlModeGUI/ViewControlModeUI.php',
     'srag\\CustomInputGUIs\\SrAutoMails\\Waiter\\Waiter' => $vendorDir . '/srag/custominputguis/src/Waiter/Waiter.php',
     'srag\\CustomInputGUIs\\SrAutoMails\\WeekdayInputGUI\\WeekdayInputGUI' => $vendorDir . '/srag/custominputguis/src/WeekdayInputGUI/WeekdayInputGUI.php',

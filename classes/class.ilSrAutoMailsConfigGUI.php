@@ -17,301 +17,314 @@ use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
  *
  * @author studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI {
-
-	use SrAutoMailsTrait;
-	use Notifications4PluginTrait;
-	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
-	const TAB_RULES = "rules";
-	const TAB_RULE = "rule";
-	const TAB_NOTIFICATION = Notifications4PluginCtrl::TAB_NOTIFICATION;
-	const CMD_ADD_RULE = "addRule";
-	const CMD_CREATE_RULE = "createRule";
-	const CMD_EDIT_RULE = "editRule";
-	const CMD_UPDATE_RULE = "updateRule";
-	const CMD_REMOVE_RULE_CONFIRM = "removeRuleConfirm";
-	const CMD_REMOVE_RULE = "removeRule";
-	const CMD_ENABLE_RULES = "enableRules";
-	const CMD_DISABLE_RULES = "disableRules";
-	const CMD_REMOVE_RULES_CONFIRM = "removeRulesConfirm";
-	const CMD_REMOVE_RULES = "removeRules";
-	const GET_PARAM_RULE_ID = "rule_id";
-	/**
-	 * @var array
-	 */
-	protected static $tabs = [ self::TAB_RULES => RulesTableGUI::class ];
-	/**
-	 * @var array
-	 */
-	protected static $custom_commands = [
-		self::CMD_ADD_RULE,
-		self::CMD_CREATE_RULE,
-		self::CMD_EDIT_RULE,
-		self::CMD_UPDATE_RULE,
-		self::CMD_REMOVE_RULE,
-		self::CMD_REMOVE_RULE_CONFIRM,
-		self::CMD_REMOVE_RULES_CONFIRM,
-		self::CMD_ENABLE_RULES,
-		self::CMD_DISABLE_RULES,
-		self::CMD_REMOVE_RULES
-	];
-
+class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI
+{
+
+    use SrAutoMailsTrait;
+    use Notifications4PluginTrait;
+    const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
+    const TAB_RULES = "rules";
+    const TAB_RULE = "rule";
+    const TAB_NOTIFICATION = Notifications4PluginCtrl::TAB_NOTIFICATION;
+    const CMD_ADD_RULE = "addRule";
+    const CMD_CREATE_RULE = "createRule";
+    const CMD_EDIT_RULE = "editRule";
+    const CMD_UPDATE_RULE = "updateRule";
+    const CMD_REMOVE_RULE_CONFIRM = "removeRuleConfirm";
+    const CMD_REMOVE_RULE = "removeRule";
+    const CMD_ENABLE_RULES = "enableRules";
+    const CMD_DISABLE_RULES = "disableRules";
+    const CMD_REMOVE_RULES_CONFIRM = "removeRulesConfirm";
+    const CMD_REMOVE_RULES = "removeRules";
+    const GET_PARAM_RULE_ID = "rule_id";
+    /**
+     * @var array
+     */
+    protected static $tabs = [self::TAB_RULES => RulesTableGUI::class];
+    /**
+     * @var array
+     */
+    protected static $custom_commands
+        = [
+            self::CMD_ADD_RULE,
+            self::CMD_CREATE_RULE,
+            self::CMD_EDIT_RULE,
+            self::CMD_UPDATE_RULE,
+            self::CMD_REMOVE_RULE,
+            self::CMD_REMOVE_RULE_CONFIRM,
+            self::CMD_REMOVE_RULES_CONFIRM,
+            self::CMD_ENABLE_RULES,
+            self::CMD_DISABLE_RULES,
+            self::CMD_REMOVE_RULES
+        ];
+
+
+    /**
+     * @param Rule $rule
+     *
+     * @return RuleFormGUI
+     */
+    public function getRuleForm(Rule $rule) : RuleFormGUI
+    {
+        self::dic()->ctrl()->saveParameter($this, self::GET_PARAM_RULE_ID);
+
+        $form = new RuleFormGUI($this, $rule);
+
+        if (!empty($rule->getRuleId())) {
+            if (empty($rule->getMailTemplateName())) {
+                $rule->setMailTemplateName("rule_" . $rule->getRuleId());
 
-	/**
-	 * @param Rule $rule
-	 *
-	 * @return RuleFormGUI
-	 */
-	public function getRuleForm(Rule $rule): RuleFormGUI {
-		self::dic()->ctrl()->saveParameter($this, self::GET_PARAM_RULE_ID);
+                self::rules()->storeRule($rule);
+            }
 
-		$form = new RuleFormGUI($this, $rule);
+            $notification = self::notification(Notification::class, NotificationLanguage::class)->getNotificationByName($rule->getMailTemplateName());
 
-		if (!empty($rule->getRuleId())) {
-			if (empty($rule->getMailTemplateName())) {
-				$rule->setMailTemplateName("rule_" . $rule->getRuleId());
+            if ($notification === null) {
+                $notification = self::notification(Notification::class, NotificationLanguage::class)->factory()->newInstance();
 
-				self::rules()->storeRule($rule);
-			}
+                $notification->setName($rule->getMailTemplateName());
+
+                self::notification(Notification::class, NotificationLanguage::class)->storeInstance($notification);
+            }
+
+            self::dic()->ctrl()->setParameterByClass(Notifications4PluginCtrl::class, Notifications4PluginCtrl::GET_PARAM, $notification->getId());
 
-			$notification = self::notification(Notification::class, NotificationLanguage::class)->getNotificationByName($rule->getMailTemplateName());
+            self::dic()->tabs()->addSubTab(self::TAB_RULE, $this->txt(self::TAB_RULE), self::dic()->ctrl()
+                ->getLinkTarget($this, self::CMD_EDIT_RULE));
+            self::dic()->tabs()->activateSubTab(self::TAB_RULE);
 
-			if ($notification === null) {
-				$notification = self::notification(Notification::class, NotificationLanguage::class)->factory()->newInstance();
+            self::dic()->tabs()->addSubTab(Notifications4PluginCtrl::TAB_NOTIFICATION, $this->txt(self::TAB_NOTIFICATION), self::dic()->ctrl()
+                ->getLinkTargetByClass(Notifications4PluginCtrl::class, Notifications4PluginCtrl::CMD_EDIT_NOTIFICATION));
+        }
 
-				$notification->setName($rule->getMailTemplateName());
+        return $form;
+    }
 
-				self::notification(Notification::class, NotificationLanguage::class)->storeInstance($notification);
-			}
 
-			self::dic()->ctrl()->setParameterByClass(Notifications4PluginCtrl::class, Notifications4PluginCtrl::GET_PARAM, $notification->getId());
+    /**
+     *
+     */
+    protected function addRule()/*: void*/
+    {
+        self::dic()->tabs()->activateTab(self::TAB_RULES);
 
-			self::dic()->tabs()->addSubTab(self::TAB_RULE, $this->txt(self::TAB_RULE), self::dic()->ctrl()
-				->getLinkTarget($this, self::CMD_EDIT_RULE));
-			self::dic()->tabs()->activateSubTab(self::TAB_RULE);
+        $form = $this->getRuleForm(self::rules()->factory()->newInstance());
 
-			self::dic()->tabs()->addSubTab(Notifications4PluginCtrl::TAB_NOTIFICATION, $this->txt(self::TAB_NOTIFICATION), self::dic()->ctrl()
-				->getLinkTargetByClass(Notifications4PluginCtrl::class, Notifications4PluginCtrl::CMD_EDIT_NOTIFICATION));
-		}
+        self::output()->output($form);
+    }
 
-		return $form;
-	}
 
+    /**
+     *
+     */
+    protected function createRule()/*: void*/
+    {
+        self::dic()->tabs()->activateTab(self::TAB_RULES);
 
-	/**
-	 *
-	 */
-	protected function addRule()/*: void*/ {
-		self::dic()->tabs()->activateTab(self::TAB_RULES);
+        $form = $this->getRuleForm(self::rules()->factory()->newInstance());
 
-		$form = $this->getRuleForm(self::rules()->factory()->newInstance());
+        if (!$form->storeForm()) {
+            self::output()->output($form);
 
-		self::output()->output($form);
-	}
+            return;
+        }
 
+        ilUtil::sendSuccess(self::plugin()->translate("added_rule", self::LANG_MODULE_CONFIG, [$form->getObject()->getTitle()]), true);
 
-	/**
-	 *
-	 */
-	protected function createRule()/*: void*/ {
-		self::dic()->tabs()->activateTab(self::TAB_RULES);
+        self::dic()->ctrl()->setParameter($this, self::GET_PARAM_RULE_ID, $form->getObject()->getRuleId());
 
-		$form = $this->getRuleForm(self::rules()->factory()->newInstance());
+        self::dic()->ctrl()->redirect($this, self::CMD_EDIT_RULE);
+    }
 
-		if (!$form->storeForm()) {
-			self::output()->output($form);
 
-			return;
-		}
+    /**
+     *
+     */
+    protected function editRule()/*: void*/
+    {
+        self::dic()->tabs()->activateTab(self::TAB_RULES);
 
-		ilUtil::sendSuccess(self::plugin()->translate("added_rule", self::LANG_MODULE_CONFIG, [ $form->getObject()->getTitle() ]), true);
+        $rule_id = intval(filter_input(INPUT_GET, self::GET_PARAM_RULE_ID));
+        $rule = self::rules()->getRuleById($rule_id);
 
-		self::dic()->ctrl()->setParameter($this, self::GET_PARAM_RULE_ID, $form->getObject()->getRuleId());
+        $form = $this->getRuleForm($rule);
 
-		self::dic()->ctrl()->redirect($this, self::CMD_EDIT_RULE);
-	}
+        self::output()->output($form);
+    }
 
 
-	/**
-	 *
-	 */
-	protected function editRule()/*: void*/ {
-		self::dic()->tabs()->activateTab(self::TAB_RULES);
+    /**
+     *
+     */
+    protected function updateRule()/*: void*/
+    {
+        self::dic()->tabs()->activateTab(self::TAB_RULES);
 
-		$rule_id = intval(filter_input(INPUT_GET, self::GET_PARAM_RULE_ID));
-		$rule = self::rules()->getRuleById($rule_id);
+        $rule_id = intval(filter_input(INPUT_GET, self::GET_PARAM_RULE_ID));
+        $rule = self::rules()->getRuleById($rule_id);
 
-		$form = $this->getRuleForm($rule);
+        $form = $this->getRuleForm($rule);
 
-		self::output()->output($form);
-	}
+        if (!$form->storeForm()) {
+            self::output()->output($form);
 
+            return;
+        }
 
-	/**
-	 *
-	 */
-	protected function updateRule()/*: void*/ {
-		self::dic()->tabs()->activateTab(self::TAB_RULES);
+        ilUtil::sendSuccess(self::plugin()->translate("saved_rule", self::LANG_MODULE_CONFIG, [$rule->getTitle()]), true);
 
-		$rule_id = intval(filter_input(INPUT_GET, self::GET_PARAM_RULE_ID));
-		$rule = self::rules()->getRuleById($rule_id);
+        $this->redirectToTab(self::TAB_RULES);
+    }
 
-		$form = $this->getRuleForm($rule);
 
-		if (!$form->storeForm()) {
-			self::output()->output($form);
+    /**
+     *
+     */
+    protected function removeRuleConfirm()/*: void*/
+    {
+        self::dic()->tabs()->activateTab(self::TAB_RULES);
 
-			return;
-		}
+        $rule_id = intval(filter_input(INPUT_GET, self::GET_PARAM_RULE_ID));
+        $rule = self::rules()->getRuleById($rule_id);
 
-		ilUtil::sendSuccess(self::plugin()->translate("saved_rule", self::LANG_MODULE_CONFIG, [ $rule->getTitle() ]), true);
+        $confirmation = new ilConfirmationGUI();
 
-		$this->redirectToTab(self::TAB_RULES);
-	}
+        self::dic()->ctrl()->setParameter($this, self::GET_PARAM_RULE_ID, $rule->getRuleId());
+        $confirmation->setFormAction(self::dic()->ctrl()->getFormAction($this));
+        self::dic()->ctrl()->setParameter($this, self::GET_PARAM_RULE_ID, null);
 
+        $confirmation->setHeaderText(self::plugin()->translate("remove_rule_confirm", self::LANG_MODULE_CONFIG, [$rule->getTitle()]));
 
-	/**
-	 *
-	 */
-	protected function removeRuleConfirm()/*: void*/ {
-		self::dic()->tabs()->activateTab(self::TAB_RULES);
+        $confirmation->addItem(self::GET_PARAM_RULE_ID, $rule->getRuleId(), $rule->getTitle());
 
-		$rule_id = intval(filter_input(INPUT_GET, self::GET_PARAM_RULE_ID));
-		$rule = self::rules()->getRuleById($rule_id);
+        $confirmation->setConfirm($this->txt("remove"), self::CMD_REMOVE_RULE);
+        $confirmation->setCancel($this->txt("cancel"), $this->getCmdForTab(self::TAB_RULES));
 
-		$confirmation = new ilConfirmationGUI();
+        self::output()->output($confirmation);
+    }
 
-		self::dic()->ctrl()->setParameter($this, self::GET_PARAM_RULE_ID, $rule->getRuleId());
-		$confirmation->setFormAction(self::dic()->ctrl()->getFormAction($this));
-		self::dic()->ctrl()->setParameter($this, self::GET_PARAM_RULE_ID, null);
 
-		$confirmation->setHeaderText(self::plugin()->translate("remove_rule_confirm", self::LANG_MODULE_CONFIG, [ $rule->getTitle() ]));
+    /**
+     *
+     */
+    protected function removeRule()/*: void*/
+    {
+        $rule_id = intval(filter_input(INPUT_GET, self::GET_PARAM_RULE_ID));
+        $rule = self::rules()->getRuleById($rule_id);
 
-		$confirmation->addItem(self::GET_PARAM_RULE_ID, $rule->getRuleId(), $rule->getTitle());
+        self::rules()->deleteRule($rule);
 
-		$confirmation->setConfirm($this->txt("remove"), self::CMD_REMOVE_RULE);
-		$confirmation->setCancel($this->txt("cancel"), $this->getCmdForTab(self::TAB_RULES));
+        ilUtil::sendSuccess(self::plugin()->translate("removed_rule", self::LANG_MODULE_CONFIG, [$rule->getTitle()]), true);
 
-		self::output()->output($confirmation);
-	}
+        $this->redirectToTab(self::TAB_RULES);
+    }
 
 
-	/**
-	 *
-	 */
-	protected function removeRule()/*: void*/ {
-		$rule_id = intval(filter_input(INPUT_GET, self::GET_PARAM_RULE_ID));
-		$rule = self::rules()->getRuleById($rule_id);
+    /**
+     *
+     */
+    protected function enableRules()/*: void*/
+    {
+        $rule_ids = filter_input(INPUT_POST, self::GET_PARAM_RULE_ID, FILTER_DEFAULT, FILTER_FORCE_ARRAY);
 
-		self::rules()->deleteRule($rule);
+        /**
+         * @var Rule[] $rules
+         */
+        $rules = array_map(function (int $rule_id)/*: ?Rule*/ {
+            return self::rules()->getRuleById($rule_id);
+        }, $rule_ids);
 
-		ilUtil::sendSuccess(self::plugin()->translate("removed_rule", self::LANG_MODULE_CONFIG, [ $rule->getTitle() ]), true);
+        foreach ($rules as $rule) {
+            $rule->setEnabled(true);
 
-		$this->redirectToTab(self::TAB_RULES);
-	}
+            self::rules()->storeRule($rule);
+        }
 
+        ilUtil::sendSuccess($this->txt("enabled_rules"), true);
 
-	/**
-	 *
-	 */
-	protected function enableRules()/*: void*/ {
-		$rule_ids = filter_input(INPUT_POST, self::GET_PARAM_RULE_ID, FILTER_DEFAULT, FILTER_FORCE_ARRAY);
+        $this->redirectToTab(self::TAB_RULES);
+    }
 
-		/**
-		 * @var Rule[] $rules
-		 */
-		$rules = array_map(function (int $rule_id)/*: ?Rule*/ {
-			return self::rules()->getRuleById($rule_id);
-		}, $rule_ids);
 
-		foreach ($rules as $rule) {
-			$rule->setEnabled(true);
+    /**
+     *
+     */
+    protected function disableRules()/*: void*/
+    {
+        $rule_ids = filter_input(INPUT_POST, self::GET_PARAM_RULE_ID, FILTER_DEFAULT, FILTER_FORCE_ARRAY);
 
-			self::rules()->storeRule($rule);
-		}
+        /**
+         * @var Rule[] $rules
+         */
+        $rules = array_map(function (int $rule_id)/*: ?Rule*/ {
+            return self::rules()->getRuleById($rule_id);
+        }, $rule_ids);
 
-		ilUtil::sendSuccess($this->txt("enabled_rules"), true);
+        foreach ($rules as $rule) {
+            $rule->setEnabled(false);
 
-		$this->redirectToTab(self::TAB_RULES);
-	}
+            self::rules()->storeRule($rule);
+        }
 
+        ilUtil::sendSuccess($this->txt("disabled_rules"), true);
 
-	/**
-	 *
-	 */
-	protected function disableRules()/*: void*/ {
-		$rule_ids = filter_input(INPUT_POST, self::GET_PARAM_RULE_ID, FILTER_DEFAULT, FILTER_FORCE_ARRAY);
+        $this->redirectToTab(self::TAB_RULES);
+    }
 
-		/**
-		 * @var Rule[] $rules
-		 */
-		$rules = array_map(function (int $rule_id)/*: ?Rule*/ {
-			return self::rules()->getRuleById($rule_id);
-		}, $rule_ids);
 
-		foreach ($rules as $rule) {
-			$rule->setEnabled(false);
+    /**
+     *
+     */
+    protected function removeRulesConfirm()/*: void*/
+    {
+        self::dic()->tabs()->activateTab(self::TAB_RULES);
 
-			self::rules()->storeRule($rule);
-		}
+        $rule_ids = filter_input(INPUT_POST, self::GET_PARAM_RULE_ID, FILTER_DEFAULT, FILTER_FORCE_ARRAY);
 
-		ilUtil::sendSuccess($this->txt("disabled_rules"), true);
+        /**
+         * @var Rule[] $rules
+         */
+        $rules = array_map(function (int $rule_id)/*: ?Rule*/ {
+            return self::rules()->getRuleById($rule_id);
+        }, $rule_ids);
 
-		$this->redirectToTab(self::TAB_RULES);
-	}
+        $confirmation = new ilConfirmationGUI();
 
+        $confirmation->setFormAction(self::dic()->ctrl()->getFormAction($this));
 
-	/**
-	 *
-	 */
-	protected function removeRulesConfirm()/*: void*/ {
-		self::dic()->tabs()->activateTab(self::TAB_RULES);
+        $confirmation->setHeaderText($this->txt("remove_rules_confirm"));
 
-		$rule_ids = filter_input(INPUT_POST, self::GET_PARAM_RULE_ID, FILTER_DEFAULT, FILTER_FORCE_ARRAY);
+        foreach ($rules as $rule) {
+            $confirmation->addItem("rule_id[]", $rule->getRuleId(), $rule->getTitle());
+        }
 
-		/**
-		 * @var Rule[] $rules
-		 */
-		$rules = array_map(function (int $rule_id)/*: ?Rule*/ {
-			return self::rules()->getRuleById($rule_id);
-		}, $rule_ids);
+        $confirmation->setConfirm($this->txt("remove"), self::CMD_REMOVE_RULES);
+        $confirmation->setCancel($this->txt("cancel"), $this->getCmdForTab(self::TAB_RULES));
 
-		$confirmation = new ilConfirmationGUI();
+        self::output()->output($confirmation);
+    }
 
-		$confirmation->setFormAction(self::dic()->ctrl()->getFormAction($this));
 
-		$confirmation->setHeaderText($this->txt("remove_rules_confirm"));
+    /**
+     *
+     */
+    protected function removeRules()/*: void*/
+    {
+        $rule_ids = filter_input(INPUT_POST, self::GET_PARAM_RULE_ID, FILTER_DEFAULT, FILTER_FORCE_ARRAY);
 
-		foreach ($rules as $rule) {
-			$confirmation->addItem("rule_id[]", $rule->getRuleId(), $rule->getTitle());
-		}
+        /**
+         * @var Rule[] $rules
+         */
+        $rules = array_map(function (int $rule_id)/*: ?Rule*/ {
+            return self::rules()->getRuleById($rule_id);
+        }, $rule_ids);
 
-		$confirmation->setConfirm($this->txt("remove"), self::CMD_REMOVE_RULES);
-		$confirmation->setCancel($this->txt("cancel"), $this->getCmdForTab(self::TAB_RULES));
+        foreach ($rules as $rule) {
+            self::rules()->deleteRule($rule);
+        }
 
-		self::output()->output($confirmation);
-	}
+        ilUtil::sendSuccess($this->txt("removed_rules"), true);
 
-
-	/**
-	 *
-	 */
-	protected function removeRules()/*: void*/ {
-		$rule_ids = filter_input(INPUT_POST, self::GET_PARAM_RULE_ID, FILTER_DEFAULT, FILTER_FORCE_ARRAY);
-
-		/**
-		 * @var Rule[] $rules
-		 */
-		$rules = array_map(function (int $rule_id)/*: ?Rule*/ {
-			return self::rules()->getRuleById($rule_id);
-		}, $rule_ids);
-
-		foreach ($rules as $rule) {
-			self::rules()->deleteRule($rule);
-		}
-
-		ilUtil::sendSuccess($this->txt("removed_rules"), true);
-
-		$this->redirectToTab(self::TAB_RULES);
-	}
+        $this->redirectToTab(self::TAB_RULES);
+    }
 }

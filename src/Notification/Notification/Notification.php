@@ -13,9 +13,10 @@ use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-class Notification extends AbstractNotification {
+class Notification extends AbstractNotification
+{
 
-	use SrAutoMailsTrait;
-	const TABLE_NAME = "srauma_not";
-	const LANGUAGE_CLASS_NAME = NotificationLanguage::class;
+    use SrAutoMailsTrait;
+    const TABLE_NAME = "srauma_not";
+    const LANGUAGE_CLASS_NAME = NotificationLanguage::class;
 }

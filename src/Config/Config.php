@@ -13,15 +13,17 @@ use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-class Config extends ActiveRecordConfig {
+class Config extends ActiveRecordConfig
+{
 
-	use SrAutoMailsTrait;
-	const TABLE_NAME = "srauma_config";
-	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
-	/**
-	 * @var array
-	 */
-	protected static $fields = [
+    use SrAutoMailsTrait;
+    const TABLE_NAME = "srauma_config";
+    const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
+    /**
+     * @var array
+     */
+    protected static $fields
+        = [
 
-	];
+        ];
 }

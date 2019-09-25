@@ -12,24 +12,27 @@ use srag\Plugins\SrAutoMails\ObjectType\ObjectType;
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-abstract class ObjObjectType extends ObjectType {
+abstract class ObjObjectType extends ObjectType
+{
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getMailPlaceholderKeyTypes(): array {
-		return array_merge(parent::getMailPlaceholderKeyTypes(), [
-			"object" => "object " . ilObject::class
-		]);
-	}
+    /**
+     * @inheritdoc
+     */
+    public function getMailPlaceholderKeyTypes() : array
+    {
+        return array_merge(parent::getMailPlaceholderKeyTypes(), [
+            "object" => "object " . ilObject::class
+        ]);
+    }
 
 
-	/**
-	 * @param ilObject $object
-	 *
-	 * @return int
-	 */
-	public final function getObjectId($object): int {
-		return intval($object->getId());
-	}
+    /**
+     * @param ilObject $object
+     *
+     * @return int
+     */
+    public final function getObjectId($object) : int
+    {
+        return intval($object->getId());
+    }
 }

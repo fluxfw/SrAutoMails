@@ -12,8 +12,9 @@ use srag\RemovePluginDataConfirm\SrAutoMails\AbstractRemovePluginDataConfirm;
  *
  * @ilCtrl_isCalledBy SrAutoMailsRemoveDataConfirm: ilUIPluginRouterGUI
  */
-class SrAutoMailsRemoveDataConfirm extends AbstractRemovePluginDataConfirm {
+class SrAutoMailsRemoveDataConfirm extends AbstractRemovePluginDataConfirm
+{
 
-	use SrAutoMailsTrait;
-	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
+    use SrAutoMailsTrait;
+    const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
 }

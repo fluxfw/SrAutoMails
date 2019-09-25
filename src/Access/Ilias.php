@@ -13,65 +13,72 @@ use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-final class Ilias {
+final class Ilias
+{
 
-	use DICTrait;
-	use SrAutoMailsTrait;
-	const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
-	/**
-	 * @var self
-	 */
-	protected static $instance = NULL;
-
-
-	/**
-	 * @return self
-	 */
-	public static function getInstance(): self {
-		if (self::$instance === NULL) {
-			self::$instance = new self();
-		}
-
-		return self::$instance;
-	}
+    use DICTrait;
+    use SrAutoMailsTrait;
+    const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
+    /**
+     * @var self
+     */
+    protected static $instance = null;
 
 
-	/**
-	 * Ilias constructor
-	 */
-	private function __construct() {
+    /**
+     * @return self
+     */
+    public static function getInstance() : self
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
 
-	}
-
-
-	/**
-	 * @return Courses
-	 */
-	public function courses(): Courses {
-		return Courses::getInstance();
-	}
+        return self::$instance;
+    }
 
 
-	/**
-	 * @return Metadata
-	 */
-	public function metadata(): Metadata {
-		return Metadata::getInstance();
-	}
+    /**
+     * Ilias constructor
+     */
+    private function __construct()
+    {
+
+    }
 
 
-	/**
-	 * @return OrgUnits
-	 */
-	public function orgUnits(): OrgUnits {
-		return OrgUnits::getInstance();
-	}
+    /**
+     * @return Courses
+     */
+    public function courses() : Courses
+    {
+        return Courses::getInstance();
+    }
 
 
-	/**
-	 * @return Users
-	 */
-	public function users(): Users {
-		return Users::getInstance();
-	}
+    /**
+     * @return Metadata
+     */
+    public function metadata() : Metadata
+    {
+        return Metadata::getInstance();
+    }
+
+
+    /**
+     * @return OrgUnits
+     */
+    public function orgUnits() : OrgUnits
+    {
+        return OrgUnits::getInstance();
+    }
+
+
+    /**
+     * @return Users
+     */
+    public function users() : Users
+    {
+        return Users::getInstance();
+    }
 }

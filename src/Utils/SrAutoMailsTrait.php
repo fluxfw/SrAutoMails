@@ -15,44 +15,50 @@ use srag\Plugins\SrAutoMails\Sent\Repository as SentRepository;
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-trait SrAutoMailsTrait {
+trait SrAutoMailsTrait
+{
 
-	/**
-	 * @return Access
-	 */
-	protected static function access(): Access {
-		return Access::getInstance();
-	}
-
-
-	/**
-	 * @return Ilias
-	 */
-	protected static function ilias(): Ilias {
-		return Ilias::getInstance();
-	}
+    /**
+     * @return Access
+     */
+    protected static function access() : Access
+    {
+        return Access::getInstance();
+    }
 
 
-	/**
-	 * @return ObjectTypeRepository
-	 */
-	protected static function objectTypes(): ObjectTypeRepository {
-		return ObjectTypeRepository::getInstance();
-	}
+    /**
+     * @return Ilias
+     */
+    protected static function ilias() : Ilias
+    {
+        return Ilias::getInstance();
+    }
 
 
-	/**
-	 * @return RuleRepository
-	 */
-	protected static function rules(): RuleRepository {
-		return RuleRepository::getInstance();
-	}
+    /**
+     * @return ObjectTypeRepository
+     */
+    protected static function objectTypes() : ObjectTypeRepository
+    {
+        return ObjectTypeRepository::getInstance();
+    }
 
 
-	/**
-	 * @return SentRepository
-	 */
-	protected static function sents(): SentRepository {
-		return SentRepository::getInstance();
-	}
+    /**
+     * @return RuleRepository
+     */
+    protected static function rules() : RuleRepository
+    {
+        return RuleRepository::getInstance();
+    }
+
+
+    /**
+     * @return SentRepository
+     */
+    protected static function sents() : SentRepository
+    {
+        return SentRepository::getInstance();
+    }
 }

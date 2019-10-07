@@ -62,9 +62,9 @@ config_receiver_course_tutors#:#To course tutors
 config_receiver_users#:#Users
 config_remove#:#Remove
 config_remove_rule#:#Remove rule
-config_remove_rule_confirm#:#Are you really want to delete the rule: %s ?
+config_remove_rule_confirm#:#Are you really want to remove the rule: %s ?
 config_remove_rules#:#Removes rules
-config_remove_rules_confirm#:#Are you really want to delete the follow rules?
+config_remove_rules_confirm#:#Are you really want to remove the follow rules?
 config_removed_rule#:#Rule %s removed
 config_removed_rules#:#Rules removed
 config_rule#:#Rule

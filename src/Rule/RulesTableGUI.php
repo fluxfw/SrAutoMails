@@ -3,12 +3,11 @@
 namespace srag\Plugins\SrAutoMails\Rule;
 
 use ilSelectInputGUI;
-use ilSrAutoMailsConfigGUI;
 use ilSrAutoMailsPlugin;
 use ilTextInputGUI;
 use ilUtil;
-use srag\ActiveRecordConfig\SrAutoMails\ActiveRecordConfigTableGUI;
 use srag\CustomInputGUIs\SrAutoMails\PropertyFormGUI\PropertyFormGUI;
+use srag\CustomInputGUIs\SrAutoMails\TableGUI\TableGUI;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
@@ -18,11 +17,24 @@ use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-class RulesTableGUI extends ActiveRecordConfigTableGUI
+class RulesTableGUI extends TableGUI
 {
 
     use SrAutoMailsTrait;
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
+    const LANG_MODULE = RulesConfigGUI::LANG_MODULE_RULES;
+
+
+    /**
+     * RulesTableGUI constructor
+     *
+     * @param RulesConfigGUI $parent
+     * @param string         $parent_cmd
+     */
+    public function __construct(RulesConfigGUI $parent, string $parent_cmd)
+    {
+        parent::__construct($parent, $parent_cmd);
+    }
 
 
     /**
@@ -87,12 +99,12 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI
     protected function initCommands()/*: void*/
     {
         self::dic()->toolbar()->addComponent(self::dic()->ui()->factory()->button()->standard($this->txt("add_rule"), self::dic()->ctrl()
-            ->getLinkTarget($this->parent_obj, ilSrAutoMailsConfigGUI::CMD_ADD_RULE)));
+            ->getLinkTarget($this->parent_obj, RulesConfigGUI::CMD_ADD_RULE)));
 
-        $this->setSelectAllCheckbox(ilSrAutoMailsConfigGUI::GET_PARAM_RULE_ID);
-        $this->addMultiCommand(ilSrAutoMailsConfigGUI::CMD_ENABLE_RULES, $this->txt("enable_rules"));
-        $this->addMultiCommand(ilSrAutoMailsConfigGUI::CMD_DISABLE_RULES, $this->txt("disable_rules"));
-        $this->addMultiCommand(ilSrAutoMailsConfigGUI::CMD_REMOVE_RULES_CONFIRM, $this->txt("remove_rules"));
+        $this->setSelectAllCheckbox(RulesConfigGUI::GET_PARAM_RULE_ID);
+        $this->addMultiCommand(RulesConfigGUI::CMD_ENABLE_RULES, $this->txt("enable_rules"));
+        $this->addMultiCommand(RulesConfigGUI::CMD_DISABLE_RULES, $this->txt("disable_rules"));
+        $this->addMultiCommand(RulesConfigGUI::CMD_REMOVE_RULES_CONFIRM, $this->txt("remove_rules"));
     }
 
 
@@ -131,8 +143,6 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI
      */
     protected function initFilterFields()/*: void*/
     {
-        parent::initFilterFields();
-
         $this->filter_fields = [
             "title"       => [
                 PropertyFormGUI::PROPERTY_CLASS => ilTextInputGUI::class
@@ -162,14 +172,23 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI
 
 
     /**
+     * @inheritdoc
+     */
+    protected function initTitle()/*: void*/
+    {
+        $this->setTitle($this->txt("rules"));
+    }
+
+
+    /**
      * @param array $row
      */
     protected function fillRow(/*array*/ $row)/*: void*/
     {
-        self::dic()->ctrl()->setParameter($this->parent_obj, ilSrAutoMailsConfigGUI::GET_PARAM_RULE_ID, $row["rule_id"]);
+        self::dic()->ctrl()->setParameter($this->parent_obj, RulesConfigGUI::GET_PARAM_RULE_ID, $row["rule_id"]);
 
         $this->tpl->setCurrentBlock("checkbox");
-        $this->tpl->setVariable("CHECKBOX_POST_VAR", ilSrAutoMailsConfigGUI::GET_PARAM_RULE_ID);
+        $this->tpl->setVariable("CHECKBOX_POST_VAR", RulesConfigGUI::GET_PARAM_RULE_ID);
         $this->tpl->setVariable("ID", $row["rule_id"]);
         $this->tpl->parseCurrentBlock();
 
@@ -177,9 +196,9 @@ class RulesTableGUI extends ActiveRecordConfigTableGUI
 
         $this->tpl->setVariable("COLUMN", self::output()->getHTML(self::dic()->ui()->factory()->dropdown()->standard([
             self::dic()->ui()->factory()->button()->shy($this->txt("edit_rule"), self::dic()->ctrl()
-                ->getLinkTarget($this->parent_obj, ilSrAutoMailsConfigGUI::CMD_EDIT_RULE)),
+                ->getLinkTarget($this->parent_obj, RulesConfigGUI::CMD_EDIT_RULE)),
             self::dic()->ui()->factory()->button()->shy($this->txt("remove_rule"), self::dic()->ctrl()
-                ->getLinkTarget($this->parent_obj, ilSrAutoMailsConfigGUI::CMD_REMOVE_RULE_CONFIRM))
+                ->getLinkTarget($this->parent_obj, RulesConfigGUI::CMD_REMOVE_RULE_CONFIRM))
         ])->withLabel($this->txt("actions"))));
     }
 }

@@ -3,10 +3,10 @@
 namespace srag\Plugins\SrAutoMails\ObjectType;
 
 use ilObjUser;
-use ilSrAutoMailsConfigGUI;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\Plugins\SrAutoMails\Rule\Rule;
+use srag\Plugins\SrAutoMails\Rule\RulesConfigGUI;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
@@ -157,7 +157,7 @@ abstract class ObjectType
     public final function getObjectPropertiesText()
     {
         return array_map(function (string $object_property) : string {
-            return self::plugin()->translate("object_property_" . $object_property, ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG);
+            return self::plugin()->translate("object_property_" . $object_property, RulesConfigGUI::LANG_MODULE_RULES);
         }, $this->getObjectProperties());
     }
 
@@ -226,7 +226,7 @@ abstract class ObjectType
     public final function getReceiverPropertiesText()
     {
         return array_map(function (string $object_property) : string {
-            return self::plugin()->translate("receiver_" . $object_property, ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG);
+            return self::plugin()->translate("receiver_" . $object_property, RulesConfigGUI::LANG_MODULE_RULES);
         }, $this->getReceiverProperties());
     }
 

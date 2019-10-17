@@ -2,7 +2,6 @@
 
 namespace srag\Plugins\SrAutoMails\Rule;
 
-use ilSrAutoMailsConfigGUI;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
@@ -72,7 +71,7 @@ final class Repository
     public function getOperatorsText() : array
     {
         return array_map(function (string $operator) : string {
-            return self::plugin()->translate("operator_" . $operator, ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG);
+            return self::plugin()->translate("operator_" . $operator, RulesConfigGUI::LANG_MODULE_RULES);
         }, Rule::$operators);
     }
 

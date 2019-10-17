@@ -7,7 +7,6 @@ use ilNumberInputGUI;
 use ilRadioGroupInputGUI;
 use ilRadioOption;
 use ilSelectInputGUI;
-use ilSrAutoMailsConfigGUI;
 use ilSrAutoMailsPlugin;
 use ilTextInputGUI;
 use srag\CustomInputGUIs\SrAutoMails\MultiSelectSearchInputGUI\MultiSelectSearchInputGUI;
@@ -26,7 +25,7 @@ class RuleFormGUI extends ObjectPropertyFormGUI
 
     use SrAutoMailsTrait;
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
-    const LANG_MODULE = ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG;
+    const LANG_MODULE = RulesConfigGUI::LANG_MODULE_RULES;
     /**
      * @var Rule
      */
@@ -36,10 +35,10 @@ class RuleFormGUI extends ObjectPropertyFormGUI
     /**
      * RuleFormGUI constructor
      *
-     * @param ilSrAutoMailsConfigGUI $parent
-     * @param Rule                   $object
+     * @param RulesConfigGUI $parent
+     * @param Rule           $object
      */
-    public function __construct(ilSrAutoMailsConfigGUI $parent, Rule $object)
+    public function __construct(RulesConfigGUI $parent, Rule $object)
     {
         parent::__construct($parent, $object);
     }
@@ -92,11 +91,11 @@ class RuleFormGUI extends ObjectPropertyFormGUI
     protected function initCommands()/*: void*/
     {
         if (!empty($this->object->getRuleId())) {
-            $this->addCommandButton(ilSrAutoMailsConfigGUI::CMD_UPDATE_RULE, $this->txt("save"));
+            $this->addCommandButton(RulesConfigGUI::CMD_UPDATE_RULE, $this->txt("save"));
         } else {
-            $this->addCommandButton(ilSrAutoMailsConfigGUI::CMD_CREATE_RULE, $this->txt("add"));
+            $this->addCommandButton(RulesConfigGUI::CMD_CREATE_RULE, $this->txt("add"));
         }
-        $this->addCommandButton($this->parent->getCmdForTab(ilSrAutoMailsConfigGUI::TAB_RULES), $this->txt("cancel"));
+        $this->addCommandButton(RulesConfigGUI::CMD_LIST_RULES, $this->txt("cancel"));
     }
 
 
@@ -199,11 +198,11 @@ class RuleFormGUI extends ObjectPropertyFormGUI
                                                     self::PROPERTY_CLASS   => ilSelectInputGUI::class,
                                                     self::PROPERTY_OPTIONS => ["" => ""] + $object_type_definiton->getObjectPropertiesText(),
                                                     "setTitle"             => self::plugin()
-                                                        ->translate("operator_value_object_property", ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG, [$object])
+                                                        ->translate("operator_value_object_property", self::LANG_MODULE, [$object])
                                                 ]
                                             ],
                                             "setTitle"              => self::plugin()
-                                                ->translate("operator_value_object_property", ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG, [$object])
+                                                ->translate("operator_value_object_property", self::LANG_MODULE, [$object])
                                         ]
                                     ]
                                 ]

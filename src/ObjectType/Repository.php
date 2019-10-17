@@ -2,9 +2,9 @@
 
 namespace srag\Plugins\SrAutoMails\ObjectType;
 
-use ilSrAutoMailsConfigGUI;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
+use srag\Plugins\SrAutoMails\Rule\RulesConfigGUI;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
@@ -82,7 +82,7 @@ final class Repository
     public function getObjectTypesText() : array
     {
         return array_map(function (string $object_type) : string {
-            return self::plugin()->translate("object_" . $object_type, ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG);
+            return self::plugin()->translate("object_" . $object_type, RulesConfigGUI::LANG_MODULE_RULES);
         }, self::$object_types);
     }
 }

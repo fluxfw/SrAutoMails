@@ -8,7 +8,7 @@ rules_configuration#:#Configuration
 rules_configuration_saved#:#Configuration saved
 rules_description#:#Description
 rules_disable_rules#:#Disable rules
-rules_disable_rules#:#Rules disabled
+rules_disabled_rules#:#Rules disabled
 rules_edit_rule#:#Edit rule
 rules_enable_rules#:#Enable rules
 rules_enabled#:#Enabled

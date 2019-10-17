@@ -352,7 +352,7 @@ class RulesConfigGUI
         $confirmation->setHeaderText(self::plugin()->translate("remove_rules_confirm", self::LANG_MODULE_RULES));
 
         foreach ($rules as $rule) {
-            $confirmation->addItem("rule_id[]", $rule->getRuleId(), $rule->getTitle());
+            $confirmation->addItem(self::GET_PARAM_RULE_ID . "[]", $rule->getRuleId(), $rule->getTitle());
         }
 
         $confirmation->setConfirm(self::plugin()->translate("remove", self::LANG_MODULE_RULES), self::CMD_REMOVE_RULES);

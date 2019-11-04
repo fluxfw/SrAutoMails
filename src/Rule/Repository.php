@@ -138,10 +138,10 @@ final class Repository
 
         $where = Rule::where([]);
         if (!empty($object_type)) {
-            $where = $where->where([["object_type" => $object_type]]);
+            $where = $where->where(["object_type" => $object_type]);
         }
         if ($only_enabled) {
-            $where = $where->where([["enabled" => $only_enabled]]);
+            $where = $where->where(["enabled" => $only_enabled]);
         }
 
         /**

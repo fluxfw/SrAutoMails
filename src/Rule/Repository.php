@@ -127,12 +127,12 @@ final class Repository
 
     /**
      * @param string $object_type
-     * @param bool   $enabled
+     * @param bool   $only_enabled
      * @param bool   $interval_check
      *
      * @return Rule[]
      */
-    public function getRules(string $object_type = "", bool $enabled = true, bool $interval_check = true) : array
+    public function getRules(string $object_type = "", bool $only_enabled = true, bool $interval_check = true) : array
     {
         $time = time();
 
@@ -140,8 +140,8 @@ final class Repository
         if (!empty($object_type)) {
             $where = $where->where([["object_type" => $object_type]]);
         }
-        if ($enabled) {
-            $where = $where->where([["enabled" => $enabled]]);
+        if ($only_enabled) {
+            $where = $where->where([["enabled" => $only_enabled]]);
         }
 
         /**

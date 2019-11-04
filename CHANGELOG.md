@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.4.7]
+- Fix disabled rules are ran
+
 ## [1.4.6]
 - Fix install
 

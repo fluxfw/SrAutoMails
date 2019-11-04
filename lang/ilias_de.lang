@@ -1,76 +1,77 @@
-config_actions#:#Aktionen
-config_add#:#Hinzufügen
-config_add_rule#:#Regel hinzufügen
-config_added_rule#:#Regel %s hinzugefügt
-config_cancel#:#Abbrechen
-config_configuration#:#Konfiguration
-config_configuration_saved#:#Konfiguration gespeichert
-config_description#:#Beschreibung
-config_disable_rules#:#Regeln deaktivieren
-config_disabled_rules#:#Regeln deaktiviert
-config_edit_rule#:#Regel bearbeiten
-config_enable_rules#:#Regeln aktivieren
-config_enabled_rules#:#Regeln aktiviert
-config_enabled#:#Aktiviert
-config_interval#:#Intervall
-config_interval_days#:#Tage
-config_interval_info#:#Überprüft diese Regel nur alle x Tage
-config_interval_type#:#Intervall
-config_interval_type_number#:#Zahl
-config_interval_type_once#:#Einmalig
-config_match_type#:#Übereinstimmungs-Typ
-config_match_type_always#:#Bei jedem Durchlauf
-config_match_type_match#:#Übereinstimmung setzen
-config_metadata#:#Metadaten
-config_no#:#Nein
-config_notification#:#Benachrichtigung
-config_object_property_count_course_members#:#Anzahl Mitglieder
-config_object_property_count_course_members_completed#:#Anzahl Mitglieder abgeschlossen
-config_object_property_count_course_members_not_completed#:#Anzahl Mitglieder nicht abgeschlossen
-config_object_property_course_end#:#Kurs-Ende
-config_object_property_course_start#:#Kurs-Start
-config_object_type#:#Objekt-Typ
-config_object_course#:#Kurs
-config_operator#:#Vergleicher
-config_operator_bigger#:#Grösser als
-config_operator_bigger_equals#:#Grösser als oder ist gleich
-config_operator_case_sensitive#:#Gross-/Kleinschreibung beachten
-config_operator_contains#:#Enthält
-config_operator_ends_with#:#Endet mit
-config_operator_equals#:#Ist gleich
-config_operator_is_empty#:#Ist leer
-config_operator_less#:#Kleiner als
-config_operator_less_equals#:#Kleiner als oder ist gleich
-config_operator_negated#:#Negation
-config_operator_reg_ex#:#RegEx
-config_operator_starts_with#:#Startet mit
-config_operator_value#:#Wert
-config_operator_value_object_property#:#%s-Eigenschaft
-config_operator_value_text#:#Text
-config_operator_value_type#:#Wert-Typ
-config_operator_x_days_after#:#X Tage nachher
-config_operator_x_days_before#:#X Tage vorher
-config_receiver#:#Empfänger
-config_receiver_course_administrators#:#An Kursadministratoren
-config_receiver_course_members#:#An Kursmitglieder
-config_receiver_course_members_completed#:#An abgeschlossene Kursmitglieder
-config_receiver_course_members_not_completed#:#An nicht abgeschlossene Kursmitglieder
-config_receiver_course_superior_of_members#:#An Vorgesetze von Kursmitgliedern
-config_receiver_course_superior_of_members_completed#:#An Vorgesetze von abgeschlossene Kursmitglieder
-config_receiver_course_superior_of_members_not_completed#:#An Vorgesetze von nicht abgeschlossene Kursmitglieder
-config_receiver_course_tutors#:#An Kurstutoren
-config_receiver_users#:#Benutzer
-config_remove#:#Entfernen
-config_remove_rule#:#Regel entfernen
-config_remove_rule_confirm#:#Möchten Sie die Regel wirklich entfernen: %s ?
-config_remove_rules#:#Regeln entfernen
-config_remove_rules_confirm#:#Möchten Sie die folgende Regeln wirklich entfernen?
-config_removed_rule#:#Regel %s entfernt
-config_removed_rules#:#Regeln entfernt
-config_rule#:#Regel
 config_rules#:#Regeln
-config_save#:#Speichern
-config_saved_rule#:#Regel %s gespeichert
-config_title#:#Titel
-config_yes#:#Ja
+rules_actions#:#Aktionen
+rules_add#:#Hinzufügen
+rules_add_rule#:#Regel hinzufügen
+rules_added_rule#:#Regel %s hinzugefügt
+rules_cancel#:#Abbrechen
+rules_configuration#:#Konfiguration
+rules_configuration_saved#:#Konfiguration gespeichert
+rules_description#:#Beschreibung
+rules_disable_rules#:#Regeln deaktivieren
+rules_disabled_rules#:#Regeln deaktiviert
+rules_edit_rule#:#Regel bearbeiten
+rules_enable_rules#:#Regeln aktivieren
+rules_enabled_rules#:#Regeln aktiviert
+rules_enabled#:#Aktiviert
+rules_interval#:#Intervall
+rules_interval_days#:#Tage
+rules_interval_info#:#Überprüft diese Regel nur alle x Tage
+rules_interval_type#:#Intervall
+rules_interval_type_number#:#Zahl
+rules_interval_type_once#:#Einmalig
+rules_match_type#:#Übereinstimmungs-Typ
+rules_match_type_always#:#Bei jedem Durchlauf
+rules_match_type_match#:#Übereinstimmung setzen
+rules_metadata#:#Metadaten
+rules_no#:#Nein
+rules_notification#:#Benachrichtigung
+rules_object_property_count_course_members#:#Anzahl Mitglieder
+rules_object_property_count_course_members_completed#:#Anzahl Mitglieder abgeschlossen
+rules_object_property_count_course_members_not_completed#:#Anzahl Mitglieder nicht abgeschlossen
+rules_object_property_course_end#:#Kurs-Ende
+rules_object_property_course_start#:#Kurs-Start
+rules_object_type#:#Objekt-Typ
+rules_object_course#:#Kurs
+rules_operator#:#Vergleicher
+rules_operator_bigger#:#Grösser als
+rules_operator_bigger_equals#:#Grösser als oder ist gleich
+rules_operator_case_sensitive#:#Gross-/Kleinschreibung beachten
+rules_operator_contains#:#Enthält
+rules_operator_ends_with#:#Endet mit
+rules_operator_equals#:#Ist gleich
+rules_operator_is_empty#:#Ist leer
+rules_operator_less#:#Kleiner als
+rules_operator_less_equals#:#Kleiner als oder ist gleich
+rules_operator_negated#:#Negation
+rules_operator_reg_ex#:#RegEx
+rules_operator_starts_with#:#Startet mit
+rules_operator_value#:#Wert
+rules_operator_value_object_property#:#%s-Eigenschaft
+rules_operator_value_text#:#Text
+rules_operator_value_type#:#Wert-Typ
+rules_operator_x_days_after#:#X Tage nachher
+rules_operator_x_days_before#:#X Tage vorher
+rules_receiver#:#Empfänger
+rules_receiver_course_administrators#:#An Kursadministratoren
+rules_receiver_course_members#:#An Kursmitglieder
+rules_receiver_course_members_completed#:#An abgeschlossene Kursmitglieder
+rules_receiver_course_members_not_completed#:#An nicht abgeschlossene Kursmitglieder
+rules_receiver_course_superior_of_members#:#An Vorgesetze von Kursmitgliedern
+rules_receiver_course_superior_of_members_completed#:#An Vorgesetze von abgeschlossene Kursmitglieder
+rules_receiver_course_superior_of_members_not_completed#:#An Vorgesetze von nicht abgeschlossene Kursmitglieder
+rules_receiver_course_tutors#:#An Kurstutoren
+rules_receiver_users#:#Benutzer
+rules_remove#:#Entfernen
+rules_remove_rule#:#Regel entfernen
+rules_remove_rule_confirm#:#Möchten Sie die Regel wirklich entfernen: %s ?
+rules_remove_rules#:#Regeln entfernen
+rules_remove_rules_confirm#:#Möchten Sie die folgende Regeln wirklich entfernen?
+rules_removed_rule#:#Regel %s entfernt
+rules_removed_rules#:#Regeln entfernt
+rules_rule#:#Regel
+rules_rules#:#Regeln
+rules_save#:#Speichern
+rules_saved_rule#:#Regel %s gespeichert
+rules_title#:#Titel
+rules_yes#:#Ja
 cron_status#:#%1$s Regel(n) geprüft\n%2$s Mail(s) versendet

@@ -1,76 +1,77 @@
-config_actions#:#Actions
-config_add#:#Add
-config_add_rule#:#Add rule
-config_added_rule#:#Rule %s added
-config_cancel#:#Cancel
-config_configuration#:#Configuration
-config_configuration_saved#:#Configuration saved
-config_description#:#Description
-config_disable_rules#:#Disable rules
-config_disable_rules#:#Rules disabled
-config_edit_rule#:#Edit rule
-config_enable_rules#:#Enable rules
-config_enabled#:#Enabled
-config_enabled_rules#:#Rules enabled
-config_interval#:#Interval
-config_interval_days#:#days
-config_interval_info#:#Checks this rule only all x days
-config_interval_type#:#Interval
-config_interval_type_number#:#Number
-config_interval_type_once#:#Once
-config_match_type#:#Match type
-config_match_type_always#:#Every run
-config_match_type_match#:#Set matcher
-config_metadata#:#Metadata
-config_no#:#No
-config_notification#:#Notification
-config_object_property_count_course_members#:#Count course members
-config_object_property_count_course_members_completed#:#Count members completed
-config_object_property_count_course_members_not_completed#:#Count members not completed
-config_object_property_course_end#:#Course end
-config_object_property_course_start#:#Course start
-config_object_type#:#Object type
-config_object_course#:#Course
-config_operator#:#Operator
-config_operator_bigger#:#Bigger than
-config_operator_bigger_equals#:#Bigger than or is equals
-config_operator_case_sensitive#:#Case sensitive
-config_operator_contains#:#Contanints
-config_operator_ends_with#:#Ends with
-config_operator_equals#:#Is equals
-config_operator_is_empty#:#Is empty
-config_operator_less#:#Less than
-config_operator_less_equals#:#Less than or is equals
-config_operator_negated#:#Negation
-config_operator_reg_ex#:#RegEx
-config_operator_starts_with#:#Starts with
-config_operator_value#:#Value
-config_operator_value_object_property#:#%s propert
-config_operator_value_text#:#Text
-config_operator_value_type#:#Value type
-config_operator_x_days_after#:#X days after
-config_operator_x_days_before#:#X days before
-config_receiver#:#Receiver
-config_receiver_course_administrators#:#To course administrators
-config_receiver_course_members#:#To course members
-config_receiver_course_members_completed#:#To completed course members
-config_receiver_course_members_not_completed#:#To not completed course members
-config_receiver_course_superior_of_members#:#To superior of course members
-config_receiver_course_superior_of_members_completed#:#To superior of completed course members
-config_receiver_course_superior_of_members_not_completed#:#To superior of not completed course members
-config_receiver_course_tutors#:#To course tutors
-config_receiver_users#:#Users
-config_remove#:#Remove
-config_remove_rule#:#Remove rule
-config_remove_rule_confirm#:#Are you really want to delete the rule: %s ?
-config_remove_rules#:#Removes rules
-config_remove_rules_confirm#:#Are you really want to delete the follow rules?
-config_removed_rule#:#Rule %s removed
-config_removed_rules#:#Rules removed
-config_rule#:#Rule
 config_rules#:#Rules
-config_save#:#Save
-config_saved_rule#:#Rule %s saved
-config_title#:#Title
-config_yes#:#Yes
+rules_actions#:#Actions
+rules_add#:#Add
+rules_add_rule#:#Add rule
+rules_added_rule#:#Rule %s added
+rules_cancel#:#Cancel
+rules_configuration#:#Configuration
+rules_configuration_saved#:#Configuration saved
+rules_description#:#Description
+rules_disable_rules#:#Disable rules
+rules_disabled_rules#:#Rules disabled
+rules_edit_rule#:#Edit rule
+rules_enable_rules#:#Enable rules
+rules_enabled#:#Enabled
+rules_enabled_rules#:#Rules enabled
+rules_interval#:#Interval
+rules_interval_days#:#days
+rules_interval_info#:#Checks this rule only all x days
+rules_interval_type#:#Interval
+rules_interval_type_number#:#Number
+rules_interval_type_once#:#Once
+rules_match_type#:#Match type
+rules_match_type_always#:#Every run
+rules_match_type_match#:#Set matcher
+rules_metadata#:#Metadata
+rules_no#:#No
+rules_notification#:#Notification
+rules_object_property_count_course_members#:#Count course members
+rules_object_property_count_course_members_completed#:#Count members completed
+rules_object_property_count_course_members_not_completed#:#Count members not completed
+rules_object_property_course_end#:#Course end
+rules_object_property_course_start#:#Course start
+rules_object_type#:#Object type
+rules_object_course#:#Course
+rules_operator#:#Operator
+rules_operator_bigger#:#Bigger than
+rules_operator_bigger_equals#:#Bigger than or is equals
+rules_operator_case_sensitive#:#Case sensitive
+rules_operator_contains#:#Contanints
+rules_operator_ends_with#:#Ends with
+rules_operator_equals#:#Is equals
+rules_operator_is_empty#:#Is empty
+rules_operator_less#:#Less than
+rules_operator_less_equals#:#Less than or is equals
+rules_operator_negated#:#Negation
+rules_operator_reg_ex#:#RegEx
+rules_operator_starts_with#:#Starts with
+rules_operator_value#:#Value
+rules_operator_value_object_property#:#%s propert
+rules_operator_value_text#:#Text
+rules_operator_value_type#:#Value type
+rules_operator_x_days_after#:#X days after
+rules_operator_x_days_before#:#X days before
+rules_receiver#:#Receiver
+rules_receiver_course_administrators#:#To course administrators
+rules_receiver_course_members#:#To course members
+rules_receiver_course_members_completed#:#To completed course members
+rules_receiver_course_members_not_completed#:#To not completed course members
+rules_receiver_course_superior_of_members#:#To superior of course members
+rules_receiver_course_superior_of_members_completed#:#To superior of completed course members
+rules_receiver_course_superior_of_members_not_completed#:#To superior of not completed course members
+rules_receiver_course_tutors#:#To course tutors
+rules_receiver_users#:#Users
+rules_remove#:#Remove
+rules_remove_rule#:#Remove rule
+rules_remove_rule_confirm#:#Are you really want to remove the rule: %s ?
+rules_remove_rules#:#Removes rules
+rules_remove_rules_confirm#:#Are you really want to remove the follow rules?
+rules_removed_rule#:#Rule %s removed
+rules_removed_rules#:#Rules removed
+rules_rule#:#Rule
+rules_rules#:#Rules
+rules_save#:#Save
+rules_saved_rule#:#Rule %s saved
+rules_title#:#Title
+rules_yes#:#Yes
 cron_status#:#%1$s rule(s) checked\n%2$s mail(s) sent

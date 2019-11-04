@@ -11,7 +11,7 @@ class ComposerStaticInitde97e8e8f91467d2f3d10c074b7e7a41
         array (
             'srag\\RemovePluginDataConfirm\\SrAutoMails\\' => 41,
             'srag\\Plugins\\SrAutoMails\\' => 25,
-            'srag\\Notifications4Plugin\\' => 26,
+            'srag\\Notifications4Plugin\\SrAutoMails\\' => 38,
             'srag\\LibrariesNamespaceChanger\\' => 31,
             'srag\\DIC\\SrAutoMails\\' => 21,
             'srag\\CustomInputGUIs\\SrAutoMails\\' => 33,
@@ -28,7 +28,7 @@ class ComposerStaticInitde97e8e8f91467d2f3d10c074b7e7a41
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
-        'srag\\Notifications4Plugin\\' => 
+        'srag\\Notifications4Plugin\\SrAutoMails\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/notifications4plugin/src',
         ),
@@ -381,6 +381,7 @@ class ComposerStaticInitde97e8e8f91467d2f3d10c074b7e7a41
         'srag\\Plugins\\SrAutoMails\\Rule\\Repository' => __DIR__ . '/../..' . '/src/Rule/Repository.php',
         'srag\\Plugins\\SrAutoMails\\Rule\\Rule' => __DIR__ . '/../..' . '/src/Rule/Rule.php',
         'srag\\Plugins\\SrAutoMails\\Rule\\RuleFormGUI' => __DIR__ . '/../..' . '/src/Rule/RuleFormGUI.php',
+        'srag\\Plugins\\SrAutoMails\\Rule\\RulesConfigGUI' => __DIR__ . '/../..' . '/src/Rule/class.RulesConfigGUI.php',
         'srag\\Plugins\\SrAutoMails\\Rule\\RulesTableGUI' => __DIR__ . '/../..' . '/src/Rule/RulesTableGUI.php',
         'srag\\Plugins\\SrAutoMails\\Sent\\Factory' => __DIR__ . '/../..' . '/src/Sent/Factory.php',
         'srag\\Plugins\\SrAutoMails\\Sent\\Repository' => __DIR__ . '/../..' . '/src/Sent/Repository.php',

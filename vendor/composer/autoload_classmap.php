@@ -326,6 +326,7 @@ return array(
     'srag\\Plugins\\SrAutoMails\\Rule\\Repository' => $baseDir . '/src/Rule/Repository.php',
     'srag\\Plugins\\SrAutoMails\\Rule\\Rule' => $baseDir . '/src/Rule/Rule.php',
     'srag\\Plugins\\SrAutoMails\\Rule\\RuleFormGUI' => $baseDir . '/src/Rule/RuleFormGUI.php',
+    'srag\\Plugins\\SrAutoMails\\Rule\\RulesConfigGUI' => $baseDir . '/src/Rule/class.RulesConfigGUI.php',
     'srag\\Plugins\\SrAutoMails\\Rule\\RulesTableGUI' => $baseDir . '/src/Rule/RulesTableGUI.php',
     'srag\\Plugins\\SrAutoMails\\Sent\\Factory' => $baseDir . '/src/Sent/Factory.php',
     'srag\\Plugins\\SrAutoMails\\Sent\\Repository' => $baseDir . '/src/Sent/Repository.php',

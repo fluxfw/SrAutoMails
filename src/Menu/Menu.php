@@ -33,8 +33,7 @@ class Menu extends AbstractStaticPluginMainMenuProvider
     public function getStaticTopItems() : array
     {
         return [
-            self::dic()->globalScreen()->mainmenu()->topParentItem(self::dic()->globalScreen()->identification()->plugin(self::plugin()
-                ->getPluginObject(), $this)->identifier(ilSrAutoMailsPlugin::PLUGIN_ID . "_top"))->withTitle(ilSrAutoMailsPlugin::PLUGIN_NAME)
+            $this->mainmenu->topParentItem($this->if->identifier(ilSrAutoMailsPlugin::PLUGIN_ID . "_top"))->withTitle(ilSrAutoMailsPlugin::PLUGIN_NAME)
                 ->withAvailableCallable(function () : bool {
                     return self::plugin()->getPluginObject()->isActive();
                 })->withVisibilityCallable(function () : bool {
@@ -58,8 +57,7 @@ class Menu extends AbstractStaticPluginMainMenuProvider
         self::dic()->ctrl()->setParameterByClass(ilSrAutoMailsConfigGUI::class, "pname", ilSrAutoMailsPlugin::PLUGIN_NAME);
 
         return [
-            self::dic()->globalScreen()->mainmenu()->link(self::dic()->globalScreen()->identification()->plugin(self::plugin()
-                ->getPluginObject(), $this)->identifier(ilSrAutoMailsPlugin::PLUGIN_ID . "_configuration"))
+            $this->mainmenu->link($this->if->identifier(ilSrAutoMailsPlugin::PLUGIN_ID . "_configuration"))
                 ->withParent($parent->getProviderIdentification())->withTitle(ilSrAutoMailsPlugin::PLUGIN_NAME)->withAction(self::dic()->ctrl()
                     ->getLinkTargetByClass([
                         ilAdministrationGUI::class,

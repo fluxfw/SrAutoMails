@@ -2,7 +2,6 @@
 
 namespace srag\Plugins\SrAutoMails\Rule;
 
-use ilSrAutoMailsConfigGUI;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
@@ -72,7 +71,7 @@ final class Repository
     public function getOperatorsText() : array
     {
         return array_map(function (string $operator) : string {
-            return self::plugin()->translate("operator_" . $operator, ilSrAutoMailsConfigGUI::LANG_MODULE_CONFIG);
+            return self::plugin()->translate("operator_" . $operator, RulesConfigGUI::LANG_MODULE_RULES);
         }, Rule::$operators);
     }
 
@@ -128,18 +127,27 @@ final class Repository
 
     /**
      * @param string $object_type
+     * @param bool   $enabled
      * @param bool   $interval_check
      *
      * @return Rule[]
      */
-    public function getRulesForObjectType(string $object_type, bool $interval_check = true) : array
+    public function getRules(string $object_type = "", bool $enabled = true, bool $interval_check = true) : array
     {
         $time = time();
+
+        $where = Rule::where([]);
+        if (!empty($object_type)) {
+            $where = $where->where([["object_type" => $object_type]]);
+        }
+        if ($enabled) {
+            $where = $where->where([["enabled" => $enabled]]);
+        }
 
         /**
          * @var Rule[] $rules
          */
-        $rules = Rule::where(["object_type" => $object_type])->get();
+        $rules = $where->get();
 
         if ($interval_check) {
             $rules = array_filter($rules, function (Rule $rule) use ($time): bool {

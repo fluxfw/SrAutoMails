@@ -139,7 +139,7 @@ class Job extends ilCronJob
         foreach ($object_types as $object_type) {
             $objects = $object_type->getObjects();
 
-            $rules = self::rules()->getRulesForObjectType($object_type->getObjectType());
+            $rules = self::rules()->getRules($object_type->getObjectType());
 
             foreach ($objects as $object) {
 

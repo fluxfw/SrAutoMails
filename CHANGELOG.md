@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.4.8]
+- Update `Notifications4Plugin` library
+
 ## [1.4.7]
 - Fix disabled rules are ran
 

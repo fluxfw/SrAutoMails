@@ -45,7 +45,7 @@ class StaticHTMLPresentationInputGUI extends ilFormPropertyGUI {
 	 * @return string
 	 */
 	protected function getDataUrl(): string {
-		return "data:text/html;base64," . base64_encode($this->html);
+		return "data:text/html;charset=UTF-8;base64," . base64_encode($this->html);
 	}
 
 

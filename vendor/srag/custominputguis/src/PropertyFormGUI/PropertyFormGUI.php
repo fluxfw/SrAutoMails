@@ -12,6 +12,8 @@ use ilSubEnabledFormPropertyGUI;
 use srag\CustomInputGUIs\SrAutoMails\MultiLineInputGUI\MultiLineInputGUI;
 use srag\CustomInputGUIs\SrAutoMails\PropertyFormGUI\Exception\PropertyFormGUIException;
 use srag\CustomInputGUIs\SrAutoMails\PropertyFormGUI\Items\Items;
+use srag\CustomInputGUIs\SrAutoMails\TabsInputGUI\TabsInputGUI;
+use srag\CustomInputGUIs\SrAutoMails\TabsInputGUI\TabsInputGUITab;
 use srag\DIC\SrAutoMails\DICTrait;
 
 /**
@@ -115,7 +117,7 @@ abstract class PropertyFormGUI extends ilPropertyFormGUI {
 
 			$item = Items::getItem($key, $field, $parent_item, $this);
 
-			if (!($item instanceof ilFormPropertyGUI || $item instanceof ilFormSectionHeaderGUI || $item instanceof ilRadioOption)) {
+			if (!($item instanceof ilFormPropertyGUI || $item instanceof ilFormSectionHeaderGUI || $item instanceof ilRadioOption || $item instanceof TabsInputGUITab)) {
 				throw new PropertyFormGUIException("\$item must be an instance of ilFormPropertyGUI, ilFormSectionHeaderGUI or ilRadioOption!", PropertyFormGUIException::CODE_INVALID_FIELD);
 			}
 
@@ -135,26 +137,31 @@ abstract class PropertyFormGUI extends ilPropertyFormGUI {
 				$this->getFields($field[self::PROPERTY_SUBITEMS], $item);
 			}
 
-			if ($parent_item instanceof MultiLineInputGUI) {
-				$parent_item->addInput($item);
-			} else {
-				if ($parent_item instanceof ilRadioGroupInputGUI) {
-					$parent_item->addOption($item);
-				} else {
-					if ($parent_item instanceof ilPropertyFormGUI) {
-						$parent_item->addItem($item);
-					} else {
-						if ($item instanceof ilFormSectionHeaderGUI) {
-							// Fix 'Call to undefined method ilFormSectionHeaderGUI::setParent()'
-							Closure::bind(function (ilFormSectionHeaderGUI $item)/*:void*/ {
-								$this->sub_items[] = $item; // https://github.com/ILIAS-eLearning/ILIAS/blob/b8a2a3a203d8fb5bab988849ab43616be7379551/Services/Form/classes/class.ilSubEnabledFormPropertyGUI.php#L45
-							}, $parent_item, ilSubEnabledFormPropertyGUI::class)($item);
-						} else {
-							$parent_item->addSubItem($item);
-						}
-					}
-				}
-			}
+            if ($parent_item instanceof TabsInputGUI) {
+                $parent_item->addTab($item);
+            } else {
+                if ($parent_item instanceof TabsInputGUITab || $parent_item instanceof MultiLineInputGUI) {
+                    $parent_item->addInput($item);
+                } else {
+                    if ($parent_item instanceof ilRadioGroupInputGUI) {
+                        $parent_item->addOption($item);
+                    } else {
+                        if ($parent_item instanceof ilPropertyFormGUI) {
+                            $parent_item->addItem($item);
+                        } else {
+                            if ($item instanceof ilFormSectionHeaderGUI) {
+                                // Fix 'Call to undefined method ilFormSectionHeaderGUI::setParent()'
+                                Closure::bind(function (ilFormSectionHeaderGUI $item)/*:void*/ {
+                                    $this->sub_items[]
+                                        = $item; // https://github.com/ILIAS-eLearning/ILIAS/blob/b8a2a3a203d8fb5bab988849ab43616be7379551/Services/Form/classes/class.ilSubEnabledFormPropertyGUI.php#L45
+                                }, $parent_item, ilSubEnabledFormPropertyGUI::class)($item);
+                            } else {
+                                $parent_item->addSubItem($item);
+                            }
+                        }
+                    }
+                }
+            }
 		}
 	}
 
@@ -207,8 +214,8 @@ abstract class PropertyFormGUI extends ilPropertyFormGUI {
 			if (isset($this->items_cache[$key])) {
 				$item = $this->items_cache[$key];
 
-				if ($item instanceof ilFormPropertyGUI) {
-					$value = Items::getValueFromItem($item);
+                if ($item instanceof ilFormPropertyGUI) {
+                    $value = Items::getValueFromItem($item);
 
 					$this->storeValue($key, $value);
 				}

@@ -24,6 +24,7 @@ So I recommand to use [srag/librariesnamespacechanger](https://packagist.org/pac
 * [GlyphGUI](./src/GlyphGUI/doc/GlyphGUI.md)
 * [HiddenInputGUI](./src/HiddenInputGUI/doc/HiddenInputGUI.md)
 * [LearningProgressPieUI](./src/LearningProgressPieUI/doc/LearningProgressPieUI.md)
+* [MultilangualTabsInputGUI](./src/TabsInputGUI/doc/MultilangualTabsInputGUI.md)
 * [MultiLineInputGUI](./src/MultiLineInputGUI/doc/MultiLineInputGUI.md)
 * [MultiSelectSearchInputGUI](./src/MultiSelectSearchInputGUI/doc/MultiSelectSearchInputGUI.md)
 * [MultiSelectSearchInput2GUI](./src/MultiSelectSearchInputGUI/doc/MultiSelectSearchInput2GUI.md)
@@ -33,6 +34,7 @@ So I recommand to use [srag/librariesnamespacechanger](https://packagist.org/pac
 * [PropertyFormGUI](./src/PropertyFormGUI/doc/PropertyFormGUI.md)
 * [ScreenshotsInputGUI](./src/ScreenshotsInputGUI/doc/ScreenshotsInputGUI.md)
 * [StaticHTMLPresentationInputGUI](./src/StaticHTMLPresentationInputGUI/doc/StaticHTMLPresentationInputGUI.md)
+* [TabsInputGUI](./src/TabsInputGUI/doc/TabsInputGUI.md)
 * [TableGUI](./src/TableGUI/doc/TableGUI.md)
 * [Template](./src/Template/doc/Template.md)
 * [TextAreaInputGUI](./src/TextAreaInputGUI/doc/TextAreaInputGUI.md)
@@ -47,7 +49,8 @@ So I recommand to use [srag/librariesnamespacechanger](https://packagist.org/pac
 * PHP >=5.6
 
 ### Adjustment suggestions
-* Adjustment suggestions by pull requests
-* Adjustment suggestions which are not yet worked out in detail by Jira tasks under https://jira.studer-raimann.ch/projects/LINP
-* Bug reports under https://jira.studer-raimann.ch/projects/LINP
-* For external users you can report it at https://plugins.studer-raimann.ch/goto.php?target=uihk_srsu_LINP
+* External users can report suggestions and bugs at https://plugins.studer-raimann.ch/goto.php?target=uihk_srsu_LINP
+* Adjustment suggestions by pull requests via github
+* Customer of studer + raimann ag: 
+	* Adjustment suggestions which are not yet worked out in detail by Jira tasks under https://jira.studer-raimann.ch/projects/LINP
+	* Bug reports under https://jira.studer-raimann.ch/projects/LINP

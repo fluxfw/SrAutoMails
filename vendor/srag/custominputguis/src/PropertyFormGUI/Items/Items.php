@@ -11,6 +11,7 @@ use srag\CustomInputGUIs\SrAutoMails\MultiLineInputGUI\MultiLineInputGUI;
 use srag\CustomInputGUIs\SrAutoMails\PropertyFormGUI\Exception\PropertyFormGUIException;
 use srag\CustomInputGUIs\SrAutoMails\PropertyFormGUI\PropertyFormGUI;
 use srag\CustomInputGUIs\SrAutoMails\TableGUI\TableGUI;
+use srag\CustomInputGUIs\SrAutoMails\TabsInputGUI\TabsInputGUITab;
 use TypeError;
 
 /**
@@ -59,7 +60,9 @@ final class Items {
 					$item->setTitle($parent->txt($key));
 				}
 
-				$item->setPostVar($key);
+                if(!($item instanceof TabsInputGUITab)) {
+                    $item->setPostVar($key);
+                }
 			}
 		}
 

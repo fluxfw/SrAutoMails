@@ -82,7 +82,7 @@ abstract class AbstractNotification extends ActiveRecord implements Notification
         try {
             self::updateDB();
         } catch (Throwable $ex) {
-            // Fix Call to a member function getName() on null (Because not use ILIAS primary key)
+            // Fix Call to a member function getName() on null (Because not use ILIAS sequence)
         }
 
         if (self::dic()->database()->sequenceExists(static::TABLE_NAME)) {
@@ -190,6 +190,7 @@ abstract class AbstractNotification extends ActiveRecord implements Notification
     public function __construct(/*int*/ $primary_key_value = 0, /*?*/ arConnector $connector = null)
     {
         //parent::__construct($primary_key_value, $connector);
+        $this->default_language = self::dic()->language()->getLangKey();
     }
 
 

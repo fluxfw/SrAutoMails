@@ -71,7 +71,7 @@ final class Repository
     public function getOperatorsText() : array
     {
         return array_map(function (string $operator) : string {
-            return self::plugin()->translate("operator_" . $operator, RulesConfigGUI::LANG_MODULE_RULES);
+            return self::plugin()->translate("operator_" . $operator, RulesMailConfigGUI::LANG_MODULE_RULES);
         }, Rule::$operators);
     }
 

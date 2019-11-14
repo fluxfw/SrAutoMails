@@ -13,15 +13,15 @@ use srag\Plugins\SrAutoMails\Notification\Notification\Notification;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
- * Class RulesConfigGUI
+ * Class RulesMailConfigGUI
  *
  * @package           srag\Plugins\SrAutoMails\Rule
  *
  * @author            studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  *
- * @ilCtrl_isCalledBy srag\Plugins\SrAutoMails\Rule\RulesConfigGUI: ilSrAutoMailsConfigGUI
+ * @ilCtrl_isCalledBy srag\Plugins\SrAutoMails\Rule\RulesMailConfigGUI: ilSrAutoMailsConfigGUI
  */
-class RulesConfigGUI
+class RulesMailConfigGUI
 {
 
     use DICTrait;
@@ -47,7 +47,7 @@ class RulesConfigGUI
 
 
     /**
-     * RulesConfigGUI constructor
+     * RulesMailConfigGUI constructor
      */
     public function __construct()
     {

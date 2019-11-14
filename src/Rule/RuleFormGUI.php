@@ -25,7 +25,7 @@ class RuleFormGUI extends ObjectPropertyFormGUI
 
     use SrAutoMailsTrait;
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
-    const LANG_MODULE = RulesConfigGUI::LANG_MODULE_RULES;
+    const LANG_MODULE = RulesMailConfigGUI::LANG_MODULE_RULES;
     /**
      * @var Rule
      */
@@ -35,10 +35,10 @@ class RuleFormGUI extends ObjectPropertyFormGUI
     /**
      * RuleFormGUI constructor
      *
-     * @param RulesConfigGUI $parent
-     * @param Rule           $object
+     * @param RulesMailConfigGUI $parent
+     * @param Rule               $object
      */
-    public function __construct(RulesConfigGUI $parent, Rule $object)
+    public function __construct(RulesMailConfigGUI $parent, Rule $object)
     {
         parent::__construct($parent, $object);
     }
@@ -91,11 +91,11 @@ class RuleFormGUI extends ObjectPropertyFormGUI
     protected function initCommands()/*: void*/
     {
         if (!empty($this->object->getRuleId())) {
-            $this->addCommandButton(RulesConfigGUI::CMD_UPDATE_RULE, $this->txt("save"));
+            $this->addCommandButton(RulesMailConfigGUI::CMD_UPDATE_RULE, $this->txt("save"));
         } else {
-            $this->addCommandButton(RulesConfigGUI::CMD_CREATE_RULE, $this->txt("add"));
+            $this->addCommandButton(RulesMailConfigGUI::CMD_CREATE_RULE, $this->txt("add"));
         }
-        $this->addCommandButton(RulesConfigGUI::CMD_LIST_RULES, $this->txt("cancel"));
+        $this->addCommandButton(RulesMailConfigGUI::CMD_LIST_RULES, $this->txt("cancel"));
     }
 
 

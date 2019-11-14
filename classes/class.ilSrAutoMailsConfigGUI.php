@@ -3,7 +3,7 @@
 require_once __DIR__ . "/../vendor/autoload.php";
 
 use srag\ActiveRecordConfig\SrAutoMails\ActiveRecordConfigGUI;
-use srag\Plugins\SrAutoMails\Rule\RulesConfigGUI;
+use srag\Plugins\SrAutoMails\Rule\RulesMailConfigGUI;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
@@ -21,9 +21,9 @@ class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI
      */
     protected static $tabs
         = [
-            RulesConfigGUI::TAB_RULES => [
-                RulesConfigGUI::class,
-                RulesConfigGUI::CMD_LIST_RULES
+            RulesMailConfigGUI::TAB_RULES => [
+                RulesMailConfigGUI::class,
+                RulesMailConfigGUI::CMD_LIST_RULES
             ]
         ];
 }

@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.4.9]
+- Fix conflict with `SrUserEnrolment` plugin
+
 ## [1.4.8]
 - Update `Notifications4Plugin` library
 

@@ -151,7 +151,7 @@ class RulesMailConfigGUI
 
                 $notification->setName($rule->getMailTemplateName());
 
-                self::notifications4plugin()->notifications()->storeInstance($notification);
+                self::notifications4plugin()->notifications()->storeNotification($notification);
             }
 
             self::dic()->ctrl()->setParameterByClass(NotificationCtrl::class, NotificationCtrl::GET_PARAM, $notification->getId());

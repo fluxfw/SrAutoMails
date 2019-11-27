@@ -34,14 +34,16 @@ class NotificationCtrl extends AbstractNotificationCtrl
 
         self::dic()->tabs()->activateSubTab(RulesMailConfigGUI::TAB_NOTIFICATION);
 
+        $this->setPlaceholderTypes();
+
         parent::executeCommand();
     }
 
 
     /**
-     * @inheritdoc
+     *
      */
-    public function getPlaceholderTypes() : array
+    protected function setPlaceholderTypes()/* : void*/
     {
         $rule_id = intval(filter_input(INPUT_GET, RulesMailConfigGUI::GET_PARAM_RULE_ID));
         $rule = self::rules()->getRuleById($rule_id);
@@ -51,10 +53,8 @@ class NotificationCtrl extends AbstractNotificationCtrl
             $object_type_definiton = self::objectTypes()->factory()->getByObjectType($rule->getObjectType());
 
             if ($object_type_definiton !== null) {
-                return $object_type_definiton->getMailPlaceholderKeyTypes();
+                self::notifications4plugin()->withPlaceholderTypes($object_type_definiton->getMailPlaceholderKeyTypes());
             }
         }
-
-        return [];
     }
 }

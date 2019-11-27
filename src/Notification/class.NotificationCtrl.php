@@ -1,29 +1,25 @@
 <?php
 
-namespace srag\Plugins\SrAutoMails\Notification\Ctrl;
+namespace srag\Plugins\SrAutoMails\Notification;
 
 use ilSrAutoMailsPlugin;
-use srag\Notifications4Plugin\SrAutoMails\Ctrl\AbstractCtrl;
-use srag\Plugins\SrAutoMails\Notification\Notification\Language\NotificationLanguage;
-use srag\Plugins\SrAutoMails\Notification\Notification\Notification;
+use srag\Notifications4Plugin\SrAutoMails\Notification\AbstractNotificationCtrl;
 use srag\Plugins\SrAutoMails\Rule\RulesMailConfigGUI;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
- * Class Notifications4PluginCtrl
+ * Class NotificationCtrl
  *
- * @package           srag\Plugins\SrAutoMails\Notification\Ctrl
+ * @package           srag\Plugins\SrAutoMails\Notification
  *
  * @author            studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  *
- * @ilCtrl_isCalledBy srag\Plugins\SrAutoMails\Notification\Ctrl\Notifications4PluginCtrl: srag\Plugins\SrAutoMails\Rule\RulesMailConfigGUI
+ * @ilCtrl_isCalledBy srag\Plugins\SrAutoMails\Notification\NotificationCtrl: ilSrAutoMailsConfigGUI
  */
-class Notifications4PluginCtrl extends AbstractCtrl
+class NotificationCtrl extends AbstractNotificationCtrl
 {
 
     use SrAutoMailsTrait;
-    const NOTIFICATION_CLASS_NAME = Notification::class;
-    const LANGUAGE_CLASS_NAME = NotificationLanguage::class;
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
 
 
@@ -39,15 +35,6 @@ class Notifications4PluginCtrl extends AbstractCtrl
         self::dic()->tabs()->activateSubTab(RulesMailConfigGUI::TAB_NOTIFICATION);
 
         parent::executeCommand();
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    protected function listNotifications()/*: void*/
-    {
-        self::dic()->ctrl()->redirectByClass(RulesMailConfigGUI::class, RulesMailConfigGUI::CMD_EDIT_RULE);
     }
 
 

@@ -7,9 +7,7 @@ use ilSrAutoMailsPlugin;
 use ilUtil;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
-use srag\Plugins\SrAutoMails\Notification\Ctrl\Notifications4PluginCtrl;
-use srag\Plugins\SrAutoMails\Notification\Notification\Language\NotificationLanguage;
-use srag\Plugins\SrAutoMails\Notification\Notification\Notification;
+use srag\Plugins\SrAutoMails\Notification\NotificationCtrl;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
@@ -30,7 +28,7 @@ class RulesMailConfigGUI
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     const TAB_RULES = "rules";
     const TAB_RULE = "rule";
-    const TAB_NOTIFICATION = Notifications4PluginCtrl::TAB_NOTIFICATION;
+    const TAB_NOTIFICATION = NotificationCtrl::TAB_NOTIFICATION;
     const CMD_LIST_RULES = "listRules";
     const CMD_ADD_RULE = "addRule";
     const CMD_CREATE_RULE = "createRule";
@@ -65,8 +63,8 @@ class RulesMailConfigGUI
         $next_class = self::dic()->ctrl()->getNextClass($this);
 
         switch (strtolower($next_class)) {
-            case strtolower(Notifications4PluginCtrl::class):
-                self::dic()->ctrl()->forwardCommand(new Notifications4PluginCtrl());
+            case strtolower(NotificationCtrl::class):
+                self::dic()->ctrl()->forwardCommand(new NotificationCtrl());
                 break;
 
             default:
@@ -146,24 +144,24 @@ class RulesMailConfigGUI
                 self::rules()->storeRule($rule);
             }
 
-            $notification = self::notification(Notification::class, NotificationLanguage::class)->getNotificationByName($rule->getMailTemplateName());
+            $notification = self::notifications4plugin()->notifications()->getNotificationByName($rule->getMailTemplateName());
 
             if ($notification === null) {
-                $notification = self::notification(Notification::class, NotificationLanguage::class)->factory()->newInstance();
+                $notification = self::notifications4plugin()->notifications()->factory()->newInstance();
 
                 $notification->setName($rule->getMailTemplateName());
 
-                self::notification(Notification::class, NotificationLanguage::class)->storeInstance($notification);
+                self::notifications4plugin()->notifications()->storeInstance($notification);
             }
 
-            self::dic()->ctrl()->setParameterByClass(Notifications4PluginCtrl::class, Notifications4PluginCtrl::GET_PARAM, $notification->getId());
+            self::dic()->ctrl()->setParameterByClass(NotificationCtrl::class, NotificationCtrl::GET_PARAM, $notification->getId());
 
             self::dic()->tabs()->addSubTab(self::TAB_RULE, self::plugin()->translate(self::TAB_RULE, self::LANG_MODULE_RULES), self::dic()->ctrl()
                 ->getLinkTarget($this, self::CMD_EDIT_RULE));
             self::dic()->tabs()->activateSubTab(self::TAB_RULE);
 
-            self::dic()->tabs()->addSubTab(Notifications4PluginCtrl::TAB_NOTIFICATION, self::plugin()->translate(self::TAB_NOTIFICATION, self::LANG_MODULE_RULES), self::dic()->ctrl()
-                ->getLinkTargetByClass(Notifications4PluginCtrl::class, Notifications4PluginCtrl::CMD_EDIT_NOTIFICATION));
+            self::dic()->tabs()->addSubTab(NotificationCtrl::TAB_NOTIFICATION, self::plugin()->translate(self::TAB_NOTIFICATION, self::LANG_MODULE_RULES), self::dic()->ctrl()
+                ->getLinkTargetByClass(NotificationCtrl::class, NotificationCtrl::CMD_EDIT_NOTIFICATION));
         }
 
         return $form;

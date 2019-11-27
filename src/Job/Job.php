@@ -10,8 +10,6 @@ use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\Notifications4Plugin\SrAutoMails\Exception\Notifications4PluginException;
 use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
-use srag\Plugins\SrAutoMails\Notification\Notification\Language\NotificationLanguage;
-use srag\Plugins\SrAutoMails\Notification\Notification\Notification;
 use srag\Plugins\SrAutoMails\ObjectType\ObjectType;
 use srag\Plugins\SrAutoMails\Rule\Rule;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
@@ -200,12 +198,12 @@ class Job extends ilCronJob
      */
     protected function sendNotification(Rule $rule, ObjectType $object_type, $object, int $user_id)/*: void*/
     {
-        $notification = self::notification(Notification::class, NotificationLanguage::class)->getNotificationByName($rule->getMailTemplateName());
+        $notification = self::notifications4plugin()->notifications()->getNotificationByName($rule->getMailTemplateName());
 
-        $sender = self::sender()->factory()->internalMail(ANONYMOUS_USER_ID, $user_id);
+        $sender = self::notifications4plugin()->sender()->factory()->internalMail(ANONYMOUS_USER_ID, $user_id);
 
         $placeholders = $object_type->getPlaceholdersForMail($object, $user_id, $rule);
 
-        self::sender()->send($sender, $notification, $placeholders, $placeholders["receiver"]->getLanguage());
+        self::notifications4plugin()->sender()->send($sender, $notification, $placeholders, $placeholders["receiver"]->getLanguage());
     }
 }

@@ -154,7 +154,7 @@ class RulesMailConfigGUI
                 self::notifications4plugin()->notifications()->storeNotification($notification);
             }
 
-            self::dic()->ctrl()->setParameterByClass(NotificationCtrl::class, NotificationCtrl::GET_PARAM, $notification->getId());
+            self::dic()->ctrl()->setParameterByClass(NotificationCtrl::class, NotificationCtrl::GET_PARAM_NOTIFICATION_ID, $notification->getId());
 
             self::dic()->tabs()->addSubTab(self::TAB_RULE, self::plugin()->translate(self::TAB_RULE, self::LANG_MODULE_RULES), self::dic()->ctrl()
                 ->getLinkTarget($this, self::CMD_EDIT_RULE));

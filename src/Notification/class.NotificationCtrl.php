@@ -14,7 +14,7 @@ use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
  *
  * @author            studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  *
- * @ilCtrl_isCalledBy srag\Plugins\SrAutoMails\Notification\NotificationCtrl: ilSrAutoMailsConfigGUI
+ * @ilCtrl_isCalledBy srag\Plugins\SrAutoMails\Notification\NotificationCtrl: srag\Plugins\SrAutoMails\Rule\RulesMailConfigGUI
  */
 class NotificationCtrl extends AbstractNotificationCtrl
 {

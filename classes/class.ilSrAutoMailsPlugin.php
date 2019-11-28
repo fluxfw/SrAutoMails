@@ -3,7 +3,9 @@
 require_once __DIR__ . "/../vendor/autoload.php";
 
 use ILIAS\GlobalScreen\Scope\MainMenu\Provider\AbstractStaticPluginMainMenuProvider;
+use srag\DIC\SrAutoMails\DICStatic;
 use srag\DIC\SrAutoMails\Util\LibraryLanguageInstaller;
+use srag\Notifications4Plugin\SrAutoMails\Notification\Repository;
 use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
 use srag\Plugins\SrAutoMails\Config\Config;
 use srag\Plugins\SrAutoMails\Job\Job;
@@ -41,8 +43,6 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin
     {
         if (self::$instance === null) {
             self::$instance = new self();
-
-            self::notifications4plugin()->withTableNamePrefix(self::PLUGIN_ID)->withPlugin(self::plugin());
         }
 
         return self::$instance;
@@ -127,3 +127,5 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin
         self::dic()->database()->dropTable(Sent::TABLE_NAME, false);
     }
 }
+
+Repository::getInstance()->withTableNamePrefix(ilSrAutoMailsPlugin::PLUGIN_ID)->withPlugin(DICStatic::plugin(ilSrAutoMailsPlugin::class)); // TODO: Find a better place

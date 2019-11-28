@@ -6,6 +6,7 @@ use ilConfirmationGUI;
 use ilSrAutoMailsPlugin;
 use ilUtil;
 use srag\DIC\SrAutoMails\DICTrait;
+use srag\Notifications4Plugin\SrAutoMails\Notification\AbstractNotificationsCtrl;
 use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
 use srag\Plugins\SrAutoMails\Notification\NotificationCtrl;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
@@ -28,7 +29,6 @@ class RulesMailConfigGUI
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     const TAB_RULES = "rules";
     const TAB_RULE = "rule";
-    const TAB_NOTIFICATION = NotificationCtrl::TAB_NOTIFICATION;
     const CMD_LIST_RULES = "listRules";
     const CMD_ADD_RULE = "addRule";
     const CMD_CREATE_RULE = "createRule";
@@ -160,7 +160,7 @@ class RulesMailConfigGUI
                 ->getLinkTarget($this, self::CMD_EDIT_RULE));
             self::dic()->tabs()->activateSubTab(self::TAB_RULE);
 
-            self::dic()->tabs()->addSubTab(NotificationCtrl::TAB_NOTIFICATION, self::plugin()->translate(self::TAB_NOTIFICATION, self::LANG_MODULE_RULES), self::dic()->ctrl()
+            self::dic()->tabs()->addSubTab(AbstractNotificationsCtrl::TAB_NOTIFICATIONS, self::plugin()->translate(AbstractNotificationsCtrl::TAB_NOTIFICATIONS, self::LANG_MODULE_RULES), self::dic()->ctrl()
                 ->getLinkTargetByClass(NotificationCtrl::class, NotificationCtrl::CMD_EDIT_NOTIFICATION));
         }
 

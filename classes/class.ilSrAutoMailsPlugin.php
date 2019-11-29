@@ -5,7 +5,7 @@ require_once __DIR__ . "/../vendor/autoload.php";
 use ILIAS\GlobalScreen\Scope\MainMenu\Provider\AbstractStaticPluginMainMenuProvider;
 use srag\DIC\SrAutoMails\DICStatic;
 use srag\DIC\SrAutoMails\Util\LibraryLanguageInstaller;
-use srag\Notifications4Plugin\SrAutoMails\Notification\Repository;
+use srag\Notifications4Plugin\SrAutoMails\Repository;
 use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
 use srag\Plugins\SrAutoMails\Config\Config;
 use srag\Plugins\SrAutoMails\Job\Job;

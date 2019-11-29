@@ -4,6 +4,7 @@ namespace srag\Plugins\SrAutoMails\Notification;
 
 use ilSrAutoMailsPlugin;
 use srag\Notifications4Plugin\SrAutoMails\Notification\AbstractNotificationCtrl;
+use srag\Notifications4Plugin\SrAutoMails\Notification\AbstractNotificationsCtrl;
 use srag\Plugins\SrAutoMails\Rule\RulesMailConfigGUI;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
@@ -32,7 +33,7 @@ class NotificationCtrl extends AbstractNotificationCtrl
         $rule = self::rules()->getRuleById($rule_id);
         (new RulesMailConfigGUI())->getRuleForm($rule);
 
-        self::dic()->tabs()->activateSubTab(RulesMailConfigGUI::TAB_NOTIFICATION);
+        self::dic()->tabs()->activateSubTab(AbstractNotificationsCtrl::TAB_NOTIFICATIONS);
 
         $this->setPlaceholderTypes();
 

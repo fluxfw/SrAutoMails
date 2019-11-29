@@ -64,7 +64,7 @@ class RulesMailConfigGUI
 
         switch (strtolower($next_class)) {
             case strtolower(NotificationCtrl::class):
-                self::dic()->ctrl()->forwardCommand(new NotificationCtrl());
+                self::dic()->ctrl()->forwardCommand(new NotificationCtrl($this));
                 break;
 
             default:
@@ -160,7 +160,7 @@ class RulesMailConfigGUI
                 ->getLinkTarget($this, self::CMD_EDIT_RULE));
             self::dic()->tabs()->activateSubTab(self::TAB_RULE);
 
-            self::dic()->tabs()->addSubTab(AbstractNotificationsCtrl::TAB_NOTIFICATIONS, self::plugin()->translate(AbstractNotificationsCtrl::TAB_NOTIFICATIONS, self::LANG_MODULE_RULES), self::dic()->ctrl()
+            self::dic()->tabs()->addSubTab(AbstractNotificationsCtrl::TAB_NOTIFICATIONS, self::plugin()->translate("notification", self::LANG_MODULE_RULES), self::dic()->ctrl()
                 ->getLinkTargetByClass(NotificationCtrl::class, NotificationCtrl::CMD_EDIT_NOTIFICATION));
         }
 

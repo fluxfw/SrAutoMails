@@ -6,9 +6,9 @@ use ilConfirmationGUI;
 use ilSrAutoMailsPlugin;
 use ilUtil;
 use srag\DIC\SrAutoMails\DICTrait;
-use srag\Notifications4Plugin\SrAutoMails\Notification\AbstractNotificationsCtrl;
 use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
 use srag\Plugins\SrAutoMails\Notification\NotificationCtrl;
+use srag\Plugins\SrAutoMails\Notification\NotificationsCtrl;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
@@ -63,8 +63,8 @@ class RulesMailConfigGUI
         $next_class = self::dic()->ctrl()->getNextClass($this);
 
         switch (strtolower($next_class)) {
-            case strtolower(NotificationCtrl::class):
-                self::dic()->ctrl()->forwardCommand(new NotificationCtrl($this));
+            case strtolower(NotificationsCtrl::class):
+                self::dic()->ctrl()->forwardCommand(new NotificationsCtrl());
                 break;
 
             default:
@@ -160,8 +160,8 @@ class RulesMailConfigGUI
                 ->getLinkTarget($this, self::CMD_EDIT_RULE));
             self::dic()->tabs()->activateSubTab(self::TAB_RULE);
 
-            self::dic()->tabs()->addSubTab(AbstractNotificationsCtrl::TAB_NOTIFICATIONS, self::plugin()->translate("notification", self::LANG_MODULE_RULES), self::dic()->ctrl()
-                ->getLinkTargetByClass(NotificationCtrl::class, NotificationCtrl::CMD_EDIT_NOTIFICATION));
+            self::dic()->tabs()->addSubTab(NotificationsCtrl::TAB_NOTIFICATIONS, self::plugin()->translate("notification", self::LANG_MODULE_RULES), self::dic()->ctrl()
+                ->getLinkTargetByClass([NotificationsCtrl::class, NotificationCtrl::class], NotificationCtrl::CMD_EDIT_NOTIFICATION));
         }
 
         return $form;

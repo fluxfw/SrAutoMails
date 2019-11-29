@@ -4,7 +4,6 @@ namespace srag\Plugins\SrAutoMails\Notification;
 
 use ilSrAutoMailsPlugin;
 use srag\Notifications4Plugin\SrAutoMails\Notification\AbstractNotificationCtrl;
-use srag\Notifications4Plugin\SrAutoMails\Notification\AbstractNotificationsCtrl;
 use srag\Plugins\SrAutoMails\Rule\RulesMailConfigGUI;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
@@ -15,7 +14,7 @@ use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
  *
  * @author            studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  *
- * @ilCtrl_isCalledBy srag\Plugins\SrAutoMails\Notification\NotificationCtrl: srag\Plugins\SrAutoMails\Rule\RulesMailConfigGUI
+ * @ilCtrl_isCalledBy srag\Plugins\SrAutoMails\Notification\NotificationCtrl: srag\Plugins\SrAutoMails\Notification\NotificationsCtrl
  */
 class NotificationCtrl extends AbstractNotificationCtrl
 {
@@ -33,7 +32,7 @@ class NotificationCtrl extends AbstractNotificationCtrl
         $rule = self::rules()->getRuleById($rule_id);
         (new RulesMailConfigGUI())->getRuleForm($rule);
 
-        self::dic()->tabs()->activateSubTab(AbstractNotificationsCtrl::TAB_NOTIFICATIONS);
+        self::dic()->tabs()->activateSubTab(NotificationsCtrl::TAB_NOTIFICATIONS);
 
         $this->setPlaceholderTypes();
 
@@ -57,5 +56,14 @@ class NotificationCtrl extends AbstractNotificationCtrl
                 self::notifications4plugin()->withPlaceholderTypes($object_type_definiton->getMailPlaceholderKeyTypes());
             }
         }
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    protected function back()/*: void*/
+    {
+        self::dic()->ctrl()->redirectByClass(RulesMailConfigGUI::class, RulesMailConfigGUI::CMD_EDIT_RULE);
     }
 }

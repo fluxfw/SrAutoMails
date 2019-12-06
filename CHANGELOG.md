@@ -1,5 +1,8 @@
 # Changelog
 
+## [x]
+- New org unit member
+
 ## [1.4.9]
 - Fix conflict with `SrUserEnrolment` plugin
 

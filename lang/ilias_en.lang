@@ -47,7 +47,7 @@ rules_operator_negated#:#Negation
 rules_operator_reg_ex#:#RegEx
 rules_operator_starts_with#:#Starts with
 rules_operator_value#:#Value
-rules_operator_value_object_property#:#%s propert
+rules_operator_value_object_property#:#%s property
 rules_operator_value_text#:#Text
 rules_operator_value_type#:#Value type
 rules_operator_x_days_after#:#X days after

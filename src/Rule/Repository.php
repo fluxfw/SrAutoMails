@@ -206,9 +206,7 @@ final class Repository
              * @var Rule $rule
              */
 
-            \srag\Notifications4Plugin\SrAutoMails\Notification\Repository::getInstance(Notification::class,
-                NotificationLanguage::class)
-                ->migrateFromOldGlobalPlugin($rule->getMailTemplateName());
+            self::srAutoMails()->notifications4plugin()->notifications()->migrateFromOldGlobalPlugin($rule->getMailTemplateName());
         }
     }
 

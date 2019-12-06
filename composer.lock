@@ -1,23 +1,23 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "7f9f4a3daa99971f09b8a986f2b144d6",
     "packages": [
         {
             "name": "srag/activerecordconfig",
-            "version": "v0.16.3",
+            "version": "v0.16.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/studer-raimann/ActiveRecordConfig.git",
-                "reference": "e9fdbeff6e2b2a05aca25d03e625ae9de98ea9ed"
+                "reference": "c5b2b1c8bf52617e35b4fdda080ea75a89f5b0de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/studer-raimann/ActiveRecordConfig/zipball/e9fdbeff6e2b2a05aca25d03e625ae9de98ea9ed",
-                "reference": "e9fdbeff6e2b2a05aca25d03e625ae9de98ea9ed",
+                "url": "https://api.github.com/repos/studer-raimann/ActiveRecordConfig/zipball/c5b2b1c8bf52617e35b4fdda080ea75a89f5b0de",
+                "reference": "c5b2b1c8bf52617e35b4fdda080ea75a89f5b0de",
                 "shasum": ""
             },
             "require": {
@@ -28,7 +28,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "srag\\ActiveRecordConfig\\SrAutoMails\\": "src/"
+                    "srag\\ActiveRecordConfig\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -50,20 +50,20 @@
                 "activerecord",
                 "config"
             ],
-            "time": "2019-09-03T08:14:04+00:00"
+            "time": "2019-11-15T13:00:26+00:00"
         },
         {
             "name": "srag/custominputguis",
-            "version": "v0.52.3",
+            "version": "v0.27.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/studer-raimann/CustomInputGUIs.git",
-                "reference": "8099c71c21d684d519548e9f4586480f8ac97d94"
+                "reference": "6c03e2aff2725f8e9e59b69515d52174b7f96dc7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/studer-raimann/CustomInputGUIs/zipball/8099c71c21d684d519548e9f4586480f8ac97d94",
-                "reference": "8099c71c21d684d519548e9f4586480f8ac97d94",
+                "url": "https://api.github.com/repos/studer-raimann/CustomInputGUIs/zipball/6c03e2aff2725f8e9e59b69515d52174b7f96dc7",
+                "reference": "6c03e2aff2725f8e9e59b69515d52174b7f96dc7",
                 "shasum": ""
             },
             "require": {
@@ -97,20 +97,20 @@
                 "input",
                 "table"
             ],
-            "time": "2019-10-31T06:28:57+00:00"
+            "time": "2019-12-05T12:53:08+00:00"
         },
         {
             "name": "srag/dic",
-            "version": "v0.18.5",
+            "version": "v0.19.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/studer-raimann/DIC.git",
-                "reference": "d33475080cab8446bf05b8cb1593aea39ba68d23"
+                "reference": "a991dc3e9b9df58aa9fe4ce40e8fbbc4a904d14f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/studer-raimann/DIC/zipball/d33475080cab8446bf05b8cb1593aea39ba68d23",
-                "reference": "d33475080cab8446bf05b8cb1593aea39ba68d23",
+                "url": "https://api.github.com/repos/studer-raimann/DIC/zipball/a991dc3e9b9df58aa9fe4ce40e8fbbc4a904d14f",
+                "reference": "a991dc3e9b9df58aa9fe4ce40e8fbbc4a904d14f",
                 "shasum": ""
             },
             "require": {
@@ -142,20 +142,20 @@
                 "globals",
                 "trait"
             ],
-            "time": "2019-10-11T12:15:38+00:00"
+            "time": "2019-11-15T12:49:24+00:00"
         },
         {
             "name": "srag/librariesnamespacechanger",
-            "version": "v0.6.13",
+            "version": "v0.6.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/studer-raimann/LibrariesNamespaceChanger.git",
-                "reference": "b90172668c936568dc0b6a992a7ac046b3fc5546"
+                "reference": "920c07b7c98c5b7a0af64084f4719db0086a9ff9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/studer-raimann/LibrariesNamespaceChanger/zipball/b90172668c936568dc0b6a992a7ac046b3fc5546",
-                "reference": "b90172668c936568dc0b6a992a7ac046b3fc5546",
+                "url": "https://api.github.com/repos/studer-raimann/LibrariesNamespaceChanger/zipball/920c07b7c98c5b7a0af64084f4719db0086a9ff9",
+                "reference": "920c07b7c98c5b7a0af64084f4719db0086a9ff9",
                 "shasum": ""
             },
             "require": {
@@ -185,20 +185,20 @@
                 "ILIAS",
                 "libraries"
             ],
-            "time": "2019-09-19T08:53:12+00:00"
+            "time": "2019-12-06T09:47:33+00:00"
         },
         {
             "name": "srag/notifications4plugin",
-            "version": "v4.6.1",
+            "version": "v5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/studer-raimann/Notifications4Plugin.git",
-                "reference": "389b9fe6701f65ae60dae325b282c0a8ffdf3502"
+                "reference": "b71bb53f7702a90941ecc5b8a9f5bcf97acc412b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/studer-raimann/Notifications4Plugin/zipball/389b9fe6701f65ae60dae325b282c0a8ffdf3502",
-                "reference": "389b9fe6701f65ae60dae325b282c0a8ffdf3502",
+                "url": "https://api.github.com/repos/studer-raimann/Notifications4Plugin/zipball/b71bb53f7702a90941ecc5b8a9f5bcf97acc412b",
+                "reference": "b71bb53f7702a90941ecc5b8a9f5bcf97acc412b",
                 "shasum": ""
             },
             "require": {
@@ -231,7 +231,7 @@
                 "ILIAS",
                 "notifications"
             ],
-            "time": "2019-10-30T11:56:59+00:00"
+            "time": "2019-12-06T09:34:41+00:00"
         },
         {
             "name": "srag/removeplugindataconfirm",
@@ -254,7 +254,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "srag\\RemovePluginDataConfirm\\SrAutoMails\\": "src/"
+                    "srag\\RemovePluginDataConfirm\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",

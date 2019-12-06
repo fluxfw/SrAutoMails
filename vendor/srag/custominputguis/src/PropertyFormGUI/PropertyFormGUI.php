@@ -10,6 +10,7 @@ use ilRadioGroupInputGUI;
 use ilRadioOption;
 use ilSubEnabledFormPropertyGUI;
 use srag\CustomInputGUIs\SrAutoMails\MultiLineInputGUI\MultiLineInputGUI;
+use srag\CustomInputGUIs\SrAutoMails\MultiLineNewInputGUI\MultiLineNewInputGUI;
 use srag\CustomInputGUIs\SrAutoMails\PropertyFormGUI\Exception\PropertyFormGUIException;
 use srag\CustomInputGUIs\SrAutoMails\PropertyFormGUI\Items\Items;
 use srag\CustomInputGUIs\SrAutoMails\TabsInputGUI\TabsInputGUI;
@@ -23,124 +24,129 @@ use srag\DIC\SrAutoMails\DICTrait;
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-abstract class PropertyFormGUI extends ilPropertyFormGUI {
+abstract class PropertyFormGUI extends ilPropertyFormGUI
+{
 
-	use DICTrait;
-	/**
-	 * @var string
-	 */
-	const PROPERTY_CLASS = "class";
-	/**
-	 * @var string
-	 */
-	const PROPERTY_DISABLED = "disabled";
-	/**
-	 * @var string
-	 */
-	const PROPERTY_MULTI = "multi";
-	/**
-	 * @var string
-	 */
-	const PROPERTY_NOT_ADD = "not_add";
-	/**
-	 * @var string
-	 */
-	const PROPERTY_OPTIONS = "options";
-	/**
-	 * @var string
-	 */
-	const PROPERTY_REQUIRED = "required";
-	/**
-	 * @var string
-	 */
-	const PROPERTY_SUBITEMS = "subitems";
-	/**
-	 * @var string
-	 */
-	const PROPERTY_VALUE = "value";
-	/**
-	 * @var string
-	 */
-	const LANG_MODULE = "";
-	/**
-	 * @var array
-	 */
-	protected $fields = [];
-	/**
-	 * @var ilFormPropertyGUI[]|ilFormSectionHeaderGUI[]
-	 */
-	private $items_cache = [];
-	/**
-	 * @var object
-	 */
-	protected $parent;
-
-
-	/**
-	 * PropertyFormGUI constructor
-	 *
-	 * @param object $parent
-	 */
-	public function __construct($parent) {
-		$this->initId();
-
-		parent::__construct();
-
-		$this->parent = $parent;
-
-		$this->initForm();
-	}
+    use DICTrait;
+    /**
+     * @var string
+     */
+    const PROPERTY_CLASS = "class";
+    /**
+     * @var string
+     */
+    const PROPERTY_DISABLED = "disabled";
+    /**
+     * @var string
+     */
+    const PROPERTY_MULTI = "multi";
+    /**
+     * @var string
+     */
+    const PROPERTY_NOT_ADD = "not_add";
+    /**
+     * @var string
+     */
+    const PROPERTY_OPTIONS = "options";
+    /**
+     * @var string
+     */
+    const PROPERTY_REQUIRED = "required";
+    /**
+     * @var string
+     */
+    const PROPERTY_SUBITEMS = "subitems";
+    /**
+     * @var string
+     */
+    const PROPERTY_VALUE = "value";
+    /**
+     * @var string
+     */
+    const LANG_MODULE = "";
+    /**
+     * @var array
+     */
+    protected $fields = [];
+    /**
+     * @var ilFormPropertyGUI[]|ilFormSectionHeaderGUI[]
+     */
+    private $items_cache = [];
+    /**
+     * @var object
+     */
+    protected $parent;
 
 
-	/**
-	 * @param array                               $fields
-	 * @param ilPropertyFormGUI|ilFormPropertyGUI $parent_item
-	 *
-	 * @throws PropertyFormGUIException $fields needs to be an array!
-	 * @throws PropertyFormGUIException Class $class not exists!
-	 * @throws PropertyFormGUIException $item must be an instance of ilFormPropertyGUI, ilFormSectionHeaderGUI or ilRadioOption!
-	 * @throws PropertyFormGUIException $options needs to be an array!
-	 */
-	private final function getFields(array $fields, $parent_item)/*: void*/ {
-		if (!is_array($fields)) {
-			throw new PropertyFormGUIException("\$fields needs to be an array!", PropertyFormGUIException::CODE_INVALID_FIELD);
-		}
+    /**
+     * PropertyFormGUI constructor
+     *
+     * @param object $parent
+     */
+    public function __construct($parent)
+    {
+        $this->initId();
 
-		foreach ($fields as $key => $field) {
-			if (!is_array($field)) {
-				throw new PropertyFormGUIException("\$fields needs to be an array!", PropertyFormGUIException::CODE_INVALID_FIELD);
-			}
+        parent::__construct();
 
-			if ($field[self::PROPERTY_NOT_ADD]) {
-				continue;
-			}
+        $this->parent = $parent;
 
-			$item = Items::getItem($key, $field, $parent_item, $this);
+        $this->initForm();
+    }
 
-			if (!($item instanceof ilFormPropertyGUI || $item instanceof ilFormSectionHeaderGUI || $item instanceof ilRadioOption || $item instanceof TabsInputGUITab)) {
-				throw new PropertyFormGUIException("\$item must be an instance of ilFormPropertyGUI, ilFormSectionHeaderGUI or ilRadioOption!", PropertyFormGUIException::CODE_INVALID_FIELD);
-			}
 
-			$this->items_cache[$key] = $item;
+    /**
+     * @param array                               $fields
+     * @param ilPropertyFormGUI|ilFormPropertyGUI $parent_item
+     *
+     * @throws PropertyFormGUIException $fields needs to be an array!
+     * @throws PropertyFormGUIException Class $class not exists!
+     * @throws PropertyFormGUIException $item must be an instance of ilFormPropertyGUI, ilFormSectionHeaderGUI or ilRadioOption!
+     * @throws PropertyFormGUIException $options needs to be an array!
+     */
+    private final function getFields(array $fields, $parent_item)/*: void*/
+    {
+        if (!is_array($fields)) {
+            throw new PropertyFormGUIException("\$fields needs to be an array!", PropertyFormGUIException::CODE_INVALID_FIELD);
+        }
 
-			if ($item instanceof ilFormPropertyGUI) {
-				if (!isset($field[self::PROPERTY_VALUE])) {
-					if (!($parent_item instanceof MultiLineInputGUI)) {
-						$value = $this->getValue($key);
+        foreach ($fields as $key => $field) {
+            if (!is_array($field)) {
+                throw new PropertyFormGUIException("\$fields needs to be an array!", PropertyFormGUIException::CODE_INVALID_FIELD);
+            }
 
-						Items::setValueToItem($item, $value);
-					}
-				}
-			}
+            if ($field[self::PROPERTY_NOT_ADD]) {
+                continue;
+            }
 
-			if (is_array($field[self::PROPERTY_SUBITEMS])) {
-				$this->getFields($field[self::PROPERTY_SUBITEMS], $item);
-			}
+            $item = Items::getItem($key, $field, $parent_item, $this);
+
+            if (!($item instanceof ilFormPropertyGUI || $item instanceof ilFormSectionHeaderGUI || $item instanceof ilRadioOption || $item instanceof TabsInputGUITab)) {
+                throw new PropertyFormGUIException("\$item must be an instance of ilFormPropertyGUI, ilFormSectionHeaderGUI or ilRadioOption!", PropertyFormGUIException::CODE_INVALID_FIELD);
+            }
+
+            $this->items_cache[$key] = $item;
+
+            if ($item instanceof ilFormPropertyGUI) {
+                if (!isset($field[self::PROPERTY_VALUE])) {
+                    if (!($parent_item instanceof MultiLineInputGUI) && !($parent_item instanceof MultiLineNewInputGUI) && !($parent_item instanceof TabsInputGUI)
+                        && !($parent_item instanceof TabsInputGUITab)
+                    ) {
+                        $value = $this->getValue($key);
+
+                        Items::setValueToItem($item, $value);
+                    }
+                }
+            }
+
+            if (is_array($field[self::PROPERTY_SUBITEMS])) {
+                $this->getFields($field[self::PROPERTY_SUBITEMS], $item);
+            }
 
             if ($parent_item instanceof TabsInputGUI) {
                 $parent_item->addTab($item);
             } else {
-                if ($parent_item instanceof TabsInputGUITab || $parent_item instanceof MultiLineInputGUI) {
+                if ($parent_item instanceof TabsInputGUITab || $parent_item instanceof MultiLineInputGUI || $parent_item instanceof MultiLineNewInputGUI) {
                     $parent_item->addInput($item);
                 } else {
                     if ($parent_item instanceof ilRadioGroupInputGUI) {
@@ -162,154 +168,162 @@ abstract class PropertyFormGUI extends ilPropertyFormGUI {
                     }
                 }
             }
-		}
-	}
+        }
+    }
 
 
-	/**
-	 *
-	 */
-	private final function initForm()/*: void*/ {
-		$this->initAction();
+    /**
+     *
+     */
+    private final function initForm()/*: void*/
+    {
+        $this->initAction();
 
-		$this->initCommands();
+        $this->initCommands();
 
-		$this->initTitle();
+        $this->initTitle();
 
-		$this->initItems();
-	}
-
-
-	/**
-	 *
-	 */
-	private final function initItems()/*: void*/ {
-		$this->initFields();
-
-		$this->getFields($this->fields, $this);
-	}
+        $this->initItems();
+    }
 
 
-	/**
-	 * @return bool
-	 */
-	protected final function storeFormCheck()/*: bool*/ {
-		$this->setValuesByPost();
+    /**
+     *
+     */
+    private final function initItems()/*: void*/
+    {
+        $this->initFields();
 
-		$this->check_input_called = false; // Fix 'Error: ilPropertyFormGUI->checkInput() called twice.'
-
-		if (!$this->checkInput()) {
-			return false;
-		}
-
-		return true;
-	}
+        $this->getFields($this->fields, $this);
+    }
 
 
-	/**
-	 * @param array $fields
-	 */
-	private final function storeFormItems(array $fields)/*: void*/ {
-		foreach ($fields as $key => $field) {
-			if (isset($this->items_cache[$key])) {
-				$item = $this->items_cache[$key];
+    /**
+     * @return bool
+     */
+    protected final function storeFormCheck()/*: bool*/
+    {
+        $this->setValuesByPost();
+
+        $this->check_input_called = false; // Fix 'Error: ilPropertyFormGUI->checkInput() called twice.'
+
+        if (!$this->checkInput()) {
+            return false;
+        }
+
+        return true;
+    }
+
+
+    /**
+     * @param array $fields
+     */
+    private final function storeFormItems(array $fields)/*: void*/
+    {
+        foreach ($fields as $key => $field) {
+            if (isset($this->items_cache[$key])) {
+                $item = $this->items_cache[$key];
 
                 if ($item instanceof ilFormPropertyGUI) {
                     $value = Items::getValueFromItem($item);
 
-					$this->storeValue($key, $value);
-				}
+                    $this->storeValue($key, $value);
+                }
 
-				if (is_array($field[self::PROPERTY_SUBITEMS])) {
-					if (!($item instanceof MultiLineInputGUI)) {
-						$this->storeFormItems($field[self::PROPERTY_SUBITEMS]);
-					}
-				}
-			}
-		}
-	}
-
-
-	/**
-	 * @param string      $key
-	 * @param string|null $default
-	 *
-	 * @return string
-	 */
-	public function txt(/*string*/ $key,/*?string*/ $default = null)/*: string*/ {
-		if ($default !== null) {
-			return self::plugin()->translate($key, static::LANG_MODULE, [], true, "", $default);
-		} else {
-			return self::plugin()->translate($key, static::LANG_MODULE);
-		}
-	}
+                if (is_array($field[self::PROPERTY_SUBITEMS])) {
+                    if (!($item instanceof MultiLineInputGUI) && !($item instanceof MultiLineNewInputGUI) && !($item instanceof TabsInputGUI) && !($item instanceof TabsInputGUITab)) {
+                        $this->storeFormItems($field[self::PROPERTY_SUBITEMS]);
+                    }
+                }
+            }
+        }
+    }
 
 
-	/**
-	 * @return bool
-	 */
-	public function checkInput()/*: bool*/ {
-		return parent::checkInput();
-	}
+    /**
+     * @param string      $key
+     * @param string|null $default
+     *
+     * @return string
+     */
+    public function txt(/*string*/ $key,/*?string*/ $default = null)/*: string*/
+    {
+        if ($default !== null) {
+            return self::plugin()->translate($key, static::LANG_MODULE, [], true, "", $default);
+        } else {
+            return self::plugin()->translate($key, static::LANG_MODULE);
+        }
+    }
 
 
-	/**
-	 *
-	 */
-	protected function initAction()/*: void*/ {
-		$this->setFormAction(self::dic()->ctrl()->getFormAction($this->parent));
-	}
+    /**
+     * @return bool
+     */
+    public function checkInput()/*: bool*/
+    {
+        return parent::checkInput();
+    }
 
 
-	/**
-	 * @return bool
-	 */
-	public function storeForm()/*: bool*/ {
-		if (!$this->storeFormCheck()) {
-			return false;
-		}
-
-		$this->storeFormItems($this->fields);
-
-		return true;
-	}
+    /**
+     *
+     */
+    protected function initAction()/*: void*/
+    {
+        $this->setFormAction(self::dic()->ctrl()->getFormAction($this->parent));
+    }
 
 
-	/**
-	 * @param string $key
-	 *
-	 * @return mixed
-	 */
-	protected abstract function getValue(/*string*/ $key);
+    /**
+     * @return bool
+     */
+    public function storeForm()/*: bool*/
+    {
+        if (!$this->storeFormCheck()) {
+            return false;
+        }
+
+        $this->storeFormItems($this->fields);
+
+        return true;
+    }
 
 
-	/**
-	 *
-	 */
-	protected abstract function initCommands()/*: void*/ ;
+    /**
+     * @param string $key
+     *
+     * @return mixed
+     */
+    protected abstract function getValue(/*string*/ $key);
 
 
-	/**
-	 *
-	 */
-	protected abstract function initFields()/*: void*/ ;
+    /**
+     *
+     */
+    protected abstract function initCommands()/*: void*/ ;
 
 
-	/**
-	 *
-	 */
-	protected abstract function initId()/*: void*/ ;
+    /**
+     *
+     */
+    protected abstract function initFields()/*: void*/ ;
 
 
-	/**
-	 *
-	 */
-	protected abstract function initTitle()/*: void*/ ;
+    /**
+     *
+     */
+    protected abstract function initId()/*: void*/ ;
 
 
-	/**
-	 * @param string $key
-	 * @param mixed  $value
-	 */
-	protected abstract function storeValue(/*string*/ $key, $value)/*: void*/ ;
+    /**
+     *
+     */
+    protected abstract function initTitle()/*: void*/ ;
+
+
+    /**
+     * @param string $key
+     * @param mixed  $value
+     */
+    protected abstract function storeValue(/*string*/ $key, $value)/*: void*/ ;
 }

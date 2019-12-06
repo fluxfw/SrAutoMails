@@ -4,23 +4,23 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitde97e8e8f91467d2f3d10c074b7e7a41
+class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
 {
     public static $prefixLengthsPsr4 = array (
         's' => 
         array (
-            'srag\\RemovePluginDataConfirm\\SrAutoMails\\' => 41,
+            'srag\\RemovePluginDataConfirm\\' => 29,
             'srag\\Plugins\\SrAutoMails\\' => 25,
-            'srag\\Notifications4Plugin\\SrAutoMails\\' => 38,
+            'srag\\Notifications4Plugin\\' => 26,
             'srag\\LibrariesNamespaceChanger\\' => 31,
-            'srag\\DIC\\SrAutoMails\\' => 21,
-            'srag\\CustomInputGUIs\\SrAutoMails\\' => 33,
-            'srag\\ActiveRecordConfig\\SrAutoMails\\' => 36,
+            'srag\\DIC\\' => 9,
+            'srag\\CustomInputGUIs\\' => 21,
+            'srag\\ActiveRecordConfig\\' => 24,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'srag\\RemovePluginDataConfirm\\SrAutoMails\\' => 
+        'srag\\RemovePluginDataConfirm\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/removeplugindataconfirm/src',
         ),
@@ -28,7 +28,7 @@ class ComposerStaticInitde97e8e8f91467d2f3d10c074b7e7a41
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
-        'srag\\Notifications4Plugin\\SrAutoMails\\' => 
+        'srag\\Notifications4Plugin\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/notifications4plugin/src',
         ),
@@ -36,15 +36,15 @@ class ComposerStaticInitde97e8e8f91467d2f3d10c074b7e7a41
         array (
             0 => __DIR__ . '/..' . '/srag/librariesnamespacechanger/src',
         ),
-        'srag\\DIC\\SrAutoMails\\' => 
+        'srag\\DIC\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/dic/src',
         ),
-        'srag\\CustomInputGUIs\\SrAutoMails\\' => 
+        'srag\\CustomInputGUIs\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/custominputguis/src',
         ),
-        'srag\\ActiveRecordConfig\\SrAutoMails\\' => 
+        'srag\\ActiveRecordConfig\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/activerecordconfig/src',
         ),
@@ -253,12 +253,18 @@ class ComposerStaticInitde97e8e8f91467d2f3d10c074b7e7a41
         'srag\\CustomInputGUIs\\SrAutoMails\\DateDurationInputGUI\\DateDurationInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/DateDurationInputGUI/DateDurationInputGUI.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\GlyphGUI\\GlyphGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/GlyphGUI/GlyphGUI.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\HiddenInputGUI\\HiddenInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/HiddenInputGUI/HiddenInputGUI.php',
+        'srag\\CustomInputGUIs\\SrAutoMails\\InputGUIWrapperUIInputComponent\\InputGUIWrapperConstraint' => __DIR__ . '/..' . '/srag/custominputguis/src/InputGUIWrapperUIInputComponent/InputGUIWrapperConstraint.php',
+        'srag\\CustomInputGUIs\\SrAutoMails\\InputGUIWrapperUIInputComponent\\InputGUIWrapperConstraint54' => __DIR__ . '/..' . '/srag/custominputguis/src/InputGUIWrapperUIInputComponent/InputGUIWrapperConstraint54.php',
+        'srag\\CustomInputGUIs\\SrAutoMails\\InputGUIWrapperUIInputComponent\\InputGUIWrapperConstraintTrait' => __DIR__ . '/..' . '/srag/custominputguis/src/InputGUIWrapperUIInputComponent/InputGUIWrapperConstraintTrait.php',
+        'srag\\CustomInputGUIs\\SrAutoMails\\InputGUIWrapperUIInputComponent\\InputGUIWrapperUIInputComponent' => __DIR__ . '/..' . '/srag/custominputguis/src/InputGUIWrapperUIInputComponent/InputGUIWrapperUIInputComponent.php',
+        'srag\\CustomInputGUIs\\SrAutoMails\\InputGUIWrapperUIInputComponent\\Renderer' => __DIR__ . '/..' . '/srag/custominputguis/src/InputGUIWrapperUIInputComponent/Renderer.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\LearningProgressPieUI\\AbstractLearningProgressPieUI' => __DIR__ . '/..' . '/srag/custominputguis/src/LearningProgressPieUI/AbstractLearningProgressPieUI.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\LearningProgressPieUI\\CountLearningProgressPieUI' => __DIR__ . '/..' . '/srag/custominputguis/src/LearningProgressPieUI/CountLearningProgressPieUI.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\LearningProgressPieUI\\LearningProgressPieUI' => __DIR__ . '/..' . '/srag/custominputguis/src/LearningProgressPieUI/LearningProgressPieUI.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\LearningProgressPieUI\\ObjIdsLearningProgressPieUI' => __DIR__ . '/..' . '/srag/custominputguis/src/LearningProgressPieUI/ObjIdsLearningProgressPieUI.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\LearningProgressPieUI\\UsrIdsLearningProgressPieUI' => __DIR__ . '/..' . '/srag/custominputguis/src/LearningProgressPieUI/UsrIdsLearningProgressPieUI.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\MultiLineInputGUI\\MultiLineInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/MultiLineInputGUI/MultiLineInputGUI.php',
+        'srag\\CustomInputGUIs\\SrAutoMails\\MultiLineNewInputGUI\\MultiLineNewInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/MultiLineNewInputGUI/MultiLineNewInputGUI.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\MultiSelectSearchInputGUI\\MultiSelectSearchInput2GUI' => __DIR__ . '/..' . '/srag/custominputguis/src/MultiSelectSearchInputGUI/MultiSelectSearchInput2GUI.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\MultiSelectSearchInputGUI\\MultiSelectSearchInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/MultiSelectSearchInputGUI/MultiSelectSearchInputGUI.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\NumberInputGUI\\NumberInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/NumberInputGUI/NumberInputGUI.php',
@@ -300,6 +306,8 @@ class ComposerStaticInitde97e8e8f91467d2f3d10c074b7e7a41
         'srag\\CustomInputGUIs\\SrAutoMails\\TextAreaInputGUI\\TextAreaInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/TextAreaInputGUI/TextAreaInputGUI.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\TextInputGUI\\TextInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/TextInputGUI/TextInputGUI.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\TextInputGUI\\TextInputGUIWithModernAutoComplete' => __DIR__ . '/..' . '/srag/custominputguis/src/TextInputGUI/TextInputGUIWithModernAutoComplete.php',
+        'srag\\CustomInputGUIs\\SrAutoMails\\UIInputComponentWrapperInputGUI\\UIInputComponentWrapperInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/UIInputComponentWrapperInputGUI/UIInputComponentWrapperInputGUI.php',
+        'srag\\CustomInputGUIs\\SrAutoMails\\UIInputComponentWrapperInputGUI\\UIInputComponentWrapperNameSource' => __DIR__ . '/..' . '/srag/custominputguis/src/UIInputComponentWrapperInputGUI/UIInputComponentWrapperNameSource.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\ViewControlModeUI\\ViewControlModeUI' => __DIR__ . '/..' . '/srag/custominputguis/src/ViewControlModeGUI/ViewControlModeUI.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\Waiter\\Waiter' => __DIR__ . '/..' . '/srag/custominputguis/src/Waiter/Waiter.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\WeekdayInputGUI\\WeekdayInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/WeekdayInputGUI/WeekdayInputGUI.php',
@@ -329,19 +337,16 @@ class ComposerStaticInitde97e8e8f91467d2f3d10c074b7e7a41
         'srag\\LibrariesNamespaceChanger\\Libraries' => __DIR__ . '/..' . '/srag/librariesnamespacechanger/src/Libraries.php',
         'srag\\LibrariesNamespaceChanger\\LibrariesNamespaceChanger' => __DIR__ . '/..' . '/srag/librariesnamespacechanger/src/LibrariesNamespaceChanger.php',
         'srag\\LibrariesNamespaceChanger\\PHP7Backport' => __DIR__ . '/..' . '/srag/librariesnamespacechanger/src/PHP7Backport.php',
-        'srag\\Notifications4Plugin\\SrAutoMails\\Ctrl\\AbstractCtrl' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Ctrl/AbstractCtrl.php',
-        'srag\\Notifications4Plugin\\SrAutoMails\\Ctrl\\CtrlInterface' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Ctrl/CtrlInterface.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Exception\\Notifications4PluginException' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Exception/Notifications4PluginException.php',
-        'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\AbstractNotification' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/AbstractNotification.php',
+        'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\AbstractNotificationCtrl' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/AbstractNotificationCtrl.php',
+        'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\AbstractNotificationsCtrl' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/AbstractNotificationsCtrl.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\Factory' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/Factory.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\FactoryInterface' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/FactoryInterface.php',
-        'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\Language\\AbstractNotificationLanguage' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/Language/AbstractNotificationLanguage.php',
-        'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\Language\\Factory' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/Language/Factory.php',
-        'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\Language\\FactoryInterface' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/Language/FactoryInterface.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\Language\\NotificationLanguage' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/Language/NotificationLanguage.php',
-        'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\Language\\Repository' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/Language/Repository.php',
-        'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\Language\\RepositoryInterface' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/Language/RepositoryInterface.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\Notification' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/Notification.php',
+        'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\NotificationFormGUI' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/NotificationFormGUI.php',
+        'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\NotificationInterface' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/NotificationInterface.php',
+        'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\NotificationsTableGUI' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/NotificationsTableGUI.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\Repository' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/Repository.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\RepositoryInterface' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/RepositoryInterface.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Parser\\Factory' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Parser/Factory.php',
@@ -350,6 +355,8 @@ class ComposerStaticInitde97e8e8f91467d2f3d10c074b7e7a41
         'srag\\Notifications4Plugin\\SrAutoMails\\Parser\\Repository' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Parser/Repository.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Parser\\RepositoryInterface' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Parser/RepositoryInterface.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Parser\\twigParser' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Parser/twigParser.php',
+        'srag\\Notifications4Plugin\\SrAutoMails\\Repository' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Repository.php',
+        'srag\\Notifications4Plugin\\SrAutoMails\\RepositoryInterface' => __DIR__ . '/..' . '/srag/notifications4plugin/src/RepositoryInterface.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Sender\\ExternalMailSender' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Sender/ExternalMailSender.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Sender\\Factory' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Sender/Factory.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Sender\\FactoryInterface' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Sender/FactoryInterface.php',
@@ -358,10 +365,6 @@ class ComposerStaticInitde97e8e8f91467d2f3d10c074b7e7a41
         'srag\\Notifications4Plugin\\SrAutoMails\\Sender\\RepositoryInterface' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Sender/RepositoryInterface.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Sender\\Sender' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Sender/Sender.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Sender\\vcalendarSender' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Sender/vcalendarSender.php',
-        'srag\\Notifications4Plugin\\SrAutoMails\\UI\\NotificationFormGUI' => __DIR__ . '/..' . '/srag/notifications4plugin/src/UI/NotificationFormGUI.php',
-        'srag\\Notifications4Plugin\\SrAutoMails\\UI\\NotificationsTableGUI' => __DIR__ . '/..' . '/srag/notifications4plugin/src/UI/NotificationsTableGUI.php',
-        'srag\\Notifications4Plugin\\SrAutoMails\\UI\\UI' => __DIR__ . '/..' . '/srag/notifications4plugin/src/UI/UI.php',
-        'srag\\Notifications4Plugin\\SrAutoMails\\UI\\UIInterface' => __DIR__ . '/..' . '/srag/notifications4plugin/src/UI/UIInterface.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Utils\\Notifications4PluginTrait' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Utils/Notifications4PluginTrait.php',
         'srag\\Plugins\\SrAutoMails\\Access\\Courses' => __DIR__ . '/../..' . '/src/Access/Courses.php',
         'srag\\Plugins\\SrAutoMails\\Access\\Ilias' => __DIR__ . '/../..' . '/src/Access/Ilias.php',
@@ -371,9 +374,8 @@ class ComposerStaticInitde97e8e8f91467d2f3d10c074b7e7a41
         'srag\\Plugins\\SrAutoMails\\Config\\Config' => __DIR__ . '/../..' . '/src/Config/Config.php',
         'srag\\Plugins\\SrAutoMails\\Job\\Job' => __DIR__ . '/../..' . '/src/Job/Job.php',
         'srag\\Plugins\\SrAutoMails\\Menu\\Menu' => __DIR__ . '/../..' . '/src/Menu/Menu.php',
-        'srag\\Plugins\\SrAutoMails\\Notification\\Ctrl\\Notifications4PluginCtrl' => __DIR__ . '/../..' . '/src/Notification/Ctrl/class.Notifications4PluginCtrl.php',
-        'srag\\Plugins\\SrAutoMails\\Notification\\Notification\\Language\\NotificationLanguage' => __DIR__ . '/../..' . '/src/Notification/Notification/Language/NotificationLanguage.php',
-        'srag\\Plugins\\SrAutoMails\\Notification\\Notification\\Notification' => __DIR__ . '/../..' . '/src/Notification/Notification/Notification.php',
+        'srag\\Plugins\\SrAutoMails\\Notification\\NotificationCtrl' => __DIR__ . '/../..' . '/src/Notification/class.NotificationCtrl.php',
+        'srag\\Plugins\\SrAutoMails\\Notification\\NotificationsCtrl' => __DIR__ . '/../..' . '/src/Notification/class.NotificationsCtrl.php',
         'srag\\Plugins\\SrAutoMails\\ObjectType\\Factory' => __DIR__ . '/../..' . '/src/ObjectType/Factory.php',
         'srag\\Plugins\\SrAutoMails\\ObjectType\\ObjectType' => __DIR__ . '/../..' . '/src/ObjectType/ObjectType.php',
         'srag\\Plugins\\SrAutoMails\\ObjectType\\Object\\CourseObjectType' => __DIR__ . '/../..' . '/src/ObjectType/Object/CourseObjectType.php',
@@ -401,10 +403,10 @@ class ComposerStaticInitde97e8e8f91467d2f3d10c074b7e7a41
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitde97e8e8f91467d2f3d10c074b7e7a41::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitde97e8e8f91467d2f3d10c074b7e7a41::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitde97e8e8f91467d2f3d10c074b7e7a41::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitde97e8e8f91467d2f3d10c074b7e7a41::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59::$classMap;
 
         }, null, ClassLoader::class);
     }

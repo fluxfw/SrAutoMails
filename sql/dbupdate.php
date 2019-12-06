@@ -22,3 +22,7 @@
 <?php
 \srag\Plugins\SrAutoMails\Repository::getInstance()->installTables();
 ?>
+<#7>
+<?php
+\srag\Plugins\SrAutoMails\Repository::getInstance()->installTables();
+?>

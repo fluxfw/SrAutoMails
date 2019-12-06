@@ -17,13 +17,31 @@ interface FactoryInterface
     /**
      * @param stdClass $data
      *
-     * @return Notification
+     * @return NotificationInterface
      */
-    public function fromDB(stdClass $data) : Notification;
+    public function fromDB(stdClass $data) : NotificationInterface;
 
 
     /**
-     * @return Notification
+     * @return NotificationInterface
      */
-    public function newInstance() : Notification;
+    public function newInstance() : NotificationInterface;
+
+
+    /**
+     * @param AbstractNotificationsCtrl $parent
+     * @param string                    $parent_cmd
+     *
+     * @return NotificationsTableGUI
+     */
+    public function newTableInstance(AbstractNotificationsCtrl $parent, string $parent_cmd = AbstractNotificationsCtrl::CMD_LIST_NOTIFICATIONS) : NotificationsTableGUI;
+
+
+    /**
+     * @param AbstractNotificationCtrl $parent
+     * @param NotificationInterface    $notification
+     *
+     * @return NotificationFormGUI
+     */
+    public function newFormInstance(AbstractNotificationCtrl $parent, NotificationInterface $notification) : NotificationFormGUI;
 }

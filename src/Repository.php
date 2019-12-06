@@ -4,10 +4,10 @@ namespace srag\Plugins\SrAutoMails;
 
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
+use srag\Notifications4Plugin\SrAutoMails\RepositoryInterface as NotificationRepositoryInterface;
+use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
 use srag\Plugins\SrAutoMails\Access\Ilias;
 use srag\Plugins\SrAutoMails\Config\Config;
-use srag\Plugins\SrAutoMails\Notification\Notification\Language\NotificationLanguage;
-use srag\Plugins\SrAutoMails\Notification\Notification\Notification;
 use srag\Plugins\SrAutoMails\ObjectType\Repository as ObjectTypeRepository;
 use srag\Plugins\SrAutoMails\Rule\Repository as RuleRepository;
 use srag\Plugins\SrAutoMails\Sent\Repository as SentRepository;
@@ -25,6 +25,9 @@ final class Repository
 
     use DICTrait;
     use SrAutoMailsTrait;
+    use Notifications4PluginTrait {
+        notifications4plugin as protected _notifications4plugin;
+    }
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     /**
      * @var self
@@ -50,7 +53,7 @@ final class Repository
      */
     private function __construct()
     {
-
+        $this->notifications4plugin()->withTableNamePrefix(ilSrAutoMailsPlugin::PLUGIN_ID)->withPlugin(self::plugin());
     }
 
 
@@ -60,8 +63,7 @@ final class Repository
     public function dropTables()/*: void*/
     {
         self::dic()->database()->dropTable(Config::TABLE_NAME, false);
-        Notification::dropDB_();
-        NotificationLanguage::dropDB_();
+        $this->notifications4plugin()->dropTables();
         $this->objectTypes()->dropTables();
         $this->rules()->dropTables();
         $this->sents()->dropTables();
@@ -83,11 +85,19 @@ final class Repository
     public function installTables()/*: void*/
     {
         Config::updateDB();
-        Notification::updateDB_();
-        NotificationLanguage::updateDB_();
+        $this->notifications4plugin()->installTables();
         $this->objectTypes()->installTables();
         $this->rules()->installTables();
         $this->sents()->installTables();
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function notifications4plugin() : NotificationRepositoryInterface
+    {
+        return self::_notifications4plugin();
     }
 
 

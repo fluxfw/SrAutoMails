@@ -42,7 +42,7 @@ class CourseObjectType extends ObjObjectType
             return new ilObjUser($user_id);
         }, $object->getMembersObject()->getMembers());
 
-        $completed = self::ilias()->courses()->getCompletedUsers($object->getId());
+        $completed = self::srAutoMails()->ilias()->courses()->getCompletedUsers($object->getId());
 
         $placeholders = array_merge($placeholders, [
             "members"               => $members,
@@ -104,7 +104,7 @@ class CourseObjectType extends ObjObjectType
                 return $object->getCourseEnd();
 
             case self::OBJECT_PROPERTY_COUNT_COURSE_MEMBERS_COMPLETED:
-                $completed = self::ilias()->courses()->getCompletedUsers($object->getId());
+                $completed = self::srAutoMails()->ilias()->courses()->getCompletedUsers($object->getId());
 
                 $completed = array_filter($object->getMembersObject()->getMembers(), function (int $user_id) use ($completed): bool {
                     return in_array($user_id, $completed);
@@ -113,7 +113,7 @@ class CourseObjectType extends ObjObjectType
                 return count($completed);
 
             case self::OBJECT_PROPERTY_COUNT_COURSE_MEMBERS_NOT_COMPLETED:
-                $completed = self::ilias()->courses()->getCompletedUsers($object->getId());
+                $completed = self::srAutoMails()->ilias()->courses()->getCompletedUsers($object->getId());
 
                 $not_completed = array_filter($object->getMembersObject()->getMembers(), function (int $user_id) use ($completed): bool {
                     return !in_array($user_id, $completed);
@@ -132,7 +132,7 @@ class CourseObjectType extends ObjObjectType
      */
     public function getObjects() : array
     {
-        return self::ilias()->courses()->getCourses();
+        return self::srAutoMails()->ilias()->courses()->getCourses();
     }
 
 
@@ -162,7 +162,7 @@ class CourseObjectType extends ObjObjectType
      */
     protected function getReceiverForObject(array $receivers, $object) : array
     {
-        $completed = self::ilias()->courses()->getCompletedUsers($object->getId());
+        $completed = self::srAutoMails()->ilias()->courses()->getCompletedUsers($object->getId());
 
         $array = [];
 
@@ -191,18 +191,18 @@ class CourseObjectType extends ObjObjectType
                     break;
 
                 case self::RECEIVER_COURSE_SUPERIOR_OF_MEMBERS:
-                    $array = array_merge($array, self::ilias()->orgUnits()->getSuperiorsOfUsers($object->getMembersObject()->getMembers()));
+                    $array = array_merge($array, self::srAutoMails()->ilias()->orgUnits()->getSuperiorsOfUsers($object->getMembersObject()->getMembers()));
                     break;
 
                 case self::RECEIVER_COURSE_SUPERIOR_OF_MEMBERS_COMPLETED:
-                    $array = array_merge($array, self::ilias()->orgUnits()->getSuperiorsOfUsers(array_filter($object->getMembersObject()
+                    $array = array_merge($array, self::srAutoMails()->ilias()->orgUnits()->getSuperiorsOfUsers(array_filter($object->getMembersObject()
                         ->getMembers(), function (int $user_id) use ($completed): bool {
                         return in_array($user_id, $completed);
                     })));
                     break;
 
                 case self::RECEIVER_COURSE_SUPERIOR_OF_MEMBERS_NOT_COMPLETED:
-                    $array = array_merge($array, self::ilias()->orgUnits()->getSuperiorsOfUsers(array_filter($object->getMembersObject()
+                    $array = array_merge($array, self::srAutoMails()->ilias()->orgUnits()->getSuperiorsOfUsers(array_filter($object->getMembersObject()
                         ->getMembers(), function (int $user_id) use ($completed): bool {
                         return !in_array($user_id, $completed);
                     })));

@@ -33,7 +33,7 @@ class Notifications4PluginCtrl extends AbstractCtrl
     public function executeCommand()/*: void*/
     {
         $rule_id = intval(filter_input(INPUT_GET, RulesMailConfigGUI::GET_PARAM_RULE_ID));
-        $rule = self::rules()->getRuleById($rule_id);
+        $rule = self::srAutoMails()->rules()->getRuleById($rule_id);
         (new RulesMailConfigGUI())->getRuleForm($rule);
 
         self::dic()->tabs()->activateSubTab(RulesMailConfigGUI::TAB_NOTIFICATION);
@@ -57,11 +57,11 @@ class Notifications4PluginCtrl extends AbstractCtrl
     public function getPlaceholderTypes() : array
     {
         $rule_id = intval(filter_input(INPUT_GET, RulesMailConfigGUI::GET_PARAM_RULE_ID));
-        $rule = self::rules()->getRuleById($rule_id);
+        $rule = self::srAutoMails()->rules()->getRuleById($rule_id);
 
         if ($rule !== null) {
 
-            $object_type_definiton = self::objectTypes()->factory()->getByObjectType($rule->getObjectType());
+            $object_type_definiton = self::srAutoMails()->objectTypes()->factory()->getByObjectType($rule->getObjectType());
 
             if ($object_type_definiton !== null) {
                 return $object_type_definiton->getMailPlaceholderKeyTypes();

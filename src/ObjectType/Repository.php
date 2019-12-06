@@ -21,12 +21,14 @@ final class Repository
     use SrAutoMailsTrait;
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     const OBJECT_TYPE_COURSE = 1;
+    const OBJECT_TYPE_ORG_UNIT = 2;
     /**
      * @var array
      */
     protected static $object_types
         = [
-            self::OBJECT_TYPE_COURSE => "course"
+            self::OBJECT_TYPE_COURSE   => "course",
+            self::OBJECT_TYPE_ORG_UNIT => "org_unit"
         ];
     /**
      * @var self
@@ -51,6 +53,15 @@ final class Repository
      * Repository constructor
      */
     private function __construct()
+    {
+
+    }
+
+
+    /**
+     * @internal
+     */
+    public function dropTables()/*: void*/
     {
 
     }
@@ -84,5 +95,14 @@ final class Repository
         return array_map(function (string $object_type) : string {
             return self::plugin()->translate("object_" . $object_type, RulesMailConfigGUI::LANG_MODULE_RULES);
         }, self::$object_types);
+    }
+
+
+    /**
+     * @internal
+     */
+    public function installTables()/*: void*/
+    {
+
     }
 }

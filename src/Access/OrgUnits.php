@@ -3,6 +3,7 @@
 namespace srag\Plugins\SrAutoMails\Access;
 
 use ilDBConstants;
+use ilObjOrgUnit;
 use ilOrgUnitPosition;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
@@ -76,6 +77,23 @@ final class OrgUnits
         }
 
         return $org_units;
+    }
+
+
+    /**
+     * @return ilObjOrgUnit[]
+     */
+    public function getOrgUnits() : array
+    {
+        $result = self::dic()->database()->queryF('SELECT obj_id FROM object_data WHERE type=%s', [ilDBConstants::T_TEXT], ["orgu"]);
+
+        $array = [];
+
+        while (($row = $result->fetchAssoc()) !== false) {
+            $array[] = new ilObjOrgUnit($row["obj_id"], false);
+        }
+
+        return $array;
     }
 
 

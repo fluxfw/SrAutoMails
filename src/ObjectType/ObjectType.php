@@ -39,7 +39,7 @@ abstract class ObjectType
                 return true;
 
             case Rule::MATCH_TYPE_MATCH:
-                $metadata_value = self::ilias()->metadata()->getMetadataForObject($this->getObjectId($object), $rule->getMetadata());
+                $metadata_value = self::srAutoMails()->ilias()->metadata()->getMetadataForObject($this->getObjectId($object), $rule->getMetadata());
 
                 if (empty($metadata_value)) {
                     return false;

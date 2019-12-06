@@ -25,13 +25,14 @@ rules_match_type_match#:#Übereinstimmung setzen
 rules_metadata#:#Metadaten
 rules_no#:#Nein
 rules_notification#:#Benachrichtigung
+rules_object_course#:#Kurs
+rules_object_org_unit#:#Organisationseinheit
 rules_object_property_count_course_members#:#Anzahl Mitglieder
 rules_object_property_count_course_members_completed#:#Anzahl Mitglieder abgeschlossen
 rules_object_property_count_course_members_not_completed#:#Anzahl Mitglieder nicht abgeschlossen
 rules_object_property_course_end#:#Kurs-Ende
 rules_object_property_course_start#:#Kurs-Start
 rules_object_type#:#Objekt-Typ
-rules_object_course#:#Kurs
 rules_operator#:#Vergleicher
 rules_operator_bigger#:#Grösser als
 rules_operator_bigger_equals#:#Grösser als oder ist gleich

@@ -120,10 +120,6 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin
      */
     protected function deleteData()/*: void*/
     {
-        self::dic()->database()->dropTable(Config::TABLE_NAME, false);
-        Notification::dropDB_();
-        NotificationLanguage::dropDB_();
-        self::dic()->database()->dropTable(Rule::TABLE_NAME, false);
-        self::dic()->database()->dropTable(Sent::TABLE_NAME, false);
+        self::srAutoMails()->dropTables();
     }
 }

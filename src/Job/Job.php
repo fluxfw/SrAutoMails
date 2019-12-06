@@ -129,7 +129,7 @@ class Job extends ilCronJob
 
         $result = new ilCronJobResult();
 
-        $object_types = self::objectTypes()->getObjectTypes();
+        $object_types = self::srAutoMails()->objectTypes()->getObjectTypes();
 
         /**
          * @var Rule[] $checked_rules
@@ -139,7 +139,7 @@ class Job extends ilCronJob
         foreach ($object_types as $object_type) {
             $objects = $object_type->getObjects();
 
-            $rules = self::rules()->getRules($object_type->getObjectType());
+            $rules = self::srAutoMails()->rules()->getRules($object_type->getObjectType());
 
             foreach ($objects as $object) {
 
@@ -150,13 +150,13 @@ class Job extends ilCronJob
 
                         foreach ($receivers as $user_id) {
                             if ($rule->getIntervalType() === Rule::INTERVAL_TYPE_NUMBER
-                                || !self::sents()->hasSent($rule->getRuleId(), $object_type->getObjectId($object), $user_id)
+                                || !self::srAutoMails()->sents()->hasSent($rule->getRuleId(), $object_type->getObjectId($object), $user_id)
                             ) {
 
                                 try {
                                     $this->sendNotification($rule, $object_type, $object, $user_id);
 
-                                    self::sents()->sent($rule->getRuleId(), $object_type->getObjectId($object), $user_id);
+                                    self::srAutoMails()->sents()->sent($rule->getRuleId(), $object_type->getObjectId($object), $user_id);
 
                                     $sent_mails_count++;
                                 } catch (Throwable $ex) {
@@ -176,7 +176,7 @@ class Job extends ilCronJob
         foreach ($checked_rules as $rule) {
             $rule->setLastCheck(new ilDateTime($time, IL_CAL_UNIX));
 
-            self::rules()->storeRule($rule);
+            self::srAutoMails()->rules()->storeRule($rule);
         }
 
         $result->setStatus(ilCronJobResult::STATUS_OK);

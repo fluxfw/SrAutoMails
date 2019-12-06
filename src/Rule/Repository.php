@@ -4,6 +4,8 @@ namespace srag\Plugins\SrAutoMails\Rule;
 
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
+use srag\Plugins\SrAutoMails\Notification\Notification\Language\NotificationLanguage;
+use srag\Plugins\SrAutoMails\Notification\Notification\Notification;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
@@ -53,6 +55,15 @@ final class Repository
     public function deleteRule(Rule $rule)/*: void*/
     {
         $rule->delete();
+    }
+
+
+    /**
+     * @internal
+     */
+    public function dropTables()/*: void*/
+    {
+
     }
 
 
@@ -164,6 +175,41 @@ final class Repository
         }
 
         return $rules;
+    }
+
+
+    /**
+     * @internal
+     */
+    public function installTables()/*: void*/
+    {
+        Rule::updateDB();
+
+        foreach (Rule::where(["interval_type" => 0])->get() as $rule) {
+            /**
+             * @var Rule $rule
+             */
+            $rule->setIntervalType(!empty($rule->getInterval()) ? Rule::INTERVAL_TYPE_NUMBER : Rule::INTERVAL_TYPE_ONCE);
+            $rule->store();
+        }
+
+        foreach (Rule::where(["match_type" => 0])->get() as $rule) {
+            /**
+             * @var Rule $rule
+             */
+            $rule->setMatchType(Rule::MATCH_TYPE_MATCH);
+            $rule->store();
+        }
+
+        foreach (Rule::get() as $rule) {
+            /**
+             * @var Rule $rule
+             */
+
+            \srag\Notifications4Plugin\SrAutoMails\Notification\Repository::getInstance(Notification::class,
+                NotificationLanguage::class)
+                ->migrateFromOldGlobalPlugin($rule->getMailTemplateName());
+        }
     }
 
 

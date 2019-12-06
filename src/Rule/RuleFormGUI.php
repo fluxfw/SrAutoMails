@@ -108,13 +108,13 @@ class RuleFormGUI extends ObjectPropertyFormGUI
             "object_type" => [
                 self::PROPERTY_CLASS    => ilSelectInputGUI::class,
                 self::PROPERTY_REQUIRED => true,
-                self::PROPERTY_OPTIONS  => ["" => ""] + self::objectTypes()->getObjectTypesText(),
+                self::PROPERTY_OPTIONS  => ["" => ""] + self::srAutoMails()->objectTypes()->getObjectTypesText(),
                 self::PROPERTY_DISABLED => (!empty($this->object->getRuleId()))
             ]
         ];
 
         if (!empty($this->object->getRuleId())) {
-            $object_type_definiton = self::objectTypes()->factory()->getByObjectType($this->object->getObjectType());
+            $object_type_definiton = self::srAutoMails()->objectTypes()->factory()->getByObjectType($this->object->getObjectType());
             $object = $this->fields["object_type"][self::PROPERTY_OPTIONS][$this->object->getObjectType()];
 
             $this->fields = array_merge($this->fields, [
@@ -165,12 +165,12 @@ class RuleFormGUI extends ObjectPropertyFormGUI
                                 "metadata"                => [
                                     self::PROPERTY_CLASS    => ilSelectInputGUI::class,
                                     self::PROPERTY_REQUIRED => true,
-                                    self::PROPERTY_OPTIONS  => ["" => ""] + self::ilias()->metadata()->getMetadata()
+                                    self::PROPERTY_OPTIONS  => ["" => ""] + self::srAutoMails()->ilias()->metadata()->getMetadata()
                                 ],
                                 "operator"                => [
                                     self::PROPERTY_CLASS    => ilSelectInputGUI::class,
                                     self::PROPERTY_REQUIRED => true,
-                                    self::PROPERTY_OPTIONS  => ["" => ""] + self::rules()->getOperatorsText()
+                                    self::PROPERTY_OPTIONS  => ["" => ""] + self::srAutoMails()->rules()->getOperatorsText()
                                 ],
                                 "operator_negated"        => [
                                     self::PROPERTY_CLASS => ilCheckboxInputGUI::class
@@ -233,7 +233,7 @@ class RuleFormGUI extends ObjectPropertyFormGUI
                                 "receiver_users" => [
                                     self::PROPERTY_CLASS    => MultiSelectSearchInputGUI::class,
                                     self::PROPERTY_REQUIRED => true,
-                                    self::PROPERTY_OPTIONS  => self::ilias()->users()->getUsers()
+                                    self::PROPERTY_OPTIONS  => self::srAutoMails()->ilias()->users()->getUsers()
                                 ]
                             ],
                             "setTitle"              => $this->txt("receiver_users")

@@ -44,7 +44,7 @@ class RulesTableGUI extends TableGUI
     {
         switch ($column) {
             case "object_type":
-                $column = self::objectTypes()->getObjectTypesText()[$row[$column]];
+                $column = self::srAutoMails()->objectTypes()->getObjectTypesText()[$row[$column]];
                 break;
 
             default:
@@ -134,7 +134,7 @@ class RulesTableGUI extends TableGUI
             $row["enabled"] = self::output()->getHTML(self::dic()->ui()->factory()->image()->standard($enabled, ""));
 
             return $row;
-        }, self::rules()->getRulesArray($title, $description, $object_type, $enabled)));
+        }, self::srAutoMails()->rules()->getRulesArray($title, $description, $object_type, $enabled)));
     }
 
 
@@ -152,7 +152,7 @@ class RulesTableGUI extends TableGUI
             ],
             "object_type" => [
                 PropertyFormGUI::PROPERTY_CLASS   => ilSelectInputGUI::class,
-                PropertyFormGUI::PROPERTY_OPTIONS => ["" => ""] + self::objectTypes()->getObjectTypesText()
+                PropertyFormGUI::PROPERTY_OPTIONS => ["" => ""] + self::srAutoMails()->objectTypes()->getObjectTypesText()
             ],
             "enabled"     => [
                 PropertyFormGUI::PROPERTY_CLASS   => ilSelectInputGUI::class,

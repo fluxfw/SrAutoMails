@@ -143,7 +143,7 @@ class RulesMailConfigGUI
             if (empty($rule->getMailTemplateName())) {
                 $rule->setMailTemplateName("rule_" . $rule->getRuleId());
 
-                self::rules()->storeRule($rule);
+                self::srAutoMails()->rules()->storeRule($rule);
             }
 
             $notification = self::notification(Notification::class, NotificationLanguage::class)->getNotificationByName($rule->getMailTemplateName());
@@ -175,7 +175,7 @@ class RulesMailConfigGUI
      */
     protected function addRule()/*: void*/
     {
-        $form = $this->getRuleForm(self::rules()->factory()->newInstance());
+        $form = $this->getRuleForm(self::srAutoMails()->rules()->factory()->newInstance());
 
         self::output()->output($form);
     }
@@ -186,7 +186,7 @@ class RulesMailConfigGUI
      */
     protected function createRule()/*: void*/
     {
-        $form = $this->getRuleForm(self::rules()->factory()->newInstance());
+        $form = $this->getRuleForm(self::srAutoMails()->rules()->factory()->newInstance());
 
         if (!$form->storeForm()) {
             self::output()->output($form);
@@ -208,7 +208,7 @@ class RulesMailConfigGUI
     protected function editRule()/*: void*/
     {
         $rule_id = intval(filter_input(INPUT_GET, self::GET_PARAM_RULE_ID));
-        $rule = self::rules()->getRuleById($rule_id);
+        $rule = self::srAutoMails()->rules()->getRuleById($rule_id);
 
         $form = $this->getRuleForm($rule);
 
@@ -222,7 +222,7 @@ class RulesMailConfigGUI
     protected function updateRule()/*: void*/
     {
         $rule_id = intval(filter_input(INPUT_GET, self::GET_PARAM_RULE_ID));
-        $rule = self::rules()->getRuleById($rule_id);
+        $rule = self::srAutoMails()->rules()->getRuleById($rule_id);
 
         $form = $this->getRuleForm($rule);
 
@@ -244,7 +244,7 @@ class RulesMailConfigGUI
     protected function removeRuleConfirm()/*: void*/
     {
         $rule_id = intval(filter_input(INPUT_GET, self::GET_PARAM_RULE_ID));
-        $rule = self::rules()->getRuleById($rule_id);
+        $rule = self::srAutoMails()->rules()->getRuleById($rule_id);
 
         $confirmation = new ilConfirmationGUI();
 
@@ -269,9 +269,9 @@ class RulesMailConfigGUI
     protected function removeRule()/*: void*/
     {
         $rule_id = intval(filter_input(INPUT_GET, self::GET_PARAM_RULE_ID));
-        $rule = self::rules()->getRuleById($rule_id);
+        $rule = self::srAutoMails()->rules()->getRuleById($rule_id);
 
-        self::rules()->deleteRule($rule);
+        self::srAutoMails()->rules()->deleteRule($rule);
 
         ilUtil::sendSuccess(self::plugin()->translate("removed_rule", self::LANG_MODULE_RULES, [$rule->getTitle()]), true);
 
@@ -290,13 +290,13 @@ class RulesMailConfigGUI
          * @var Rule[] $rules
          */
         $rules = array_map(function (int $rule_id)/*: ?Rule*/ {
-            return self::rules()->getRuleById($rule_id);
+            return self::srAutoMails()->rules()->getRuleById($rule_id);
         }, $rule_ids);
 
         foreach ($rules as $rule) {
             $rule->setEnabled(true);
 
-            self::rules()->storeRule($rule);
+            self::srAutoMails()->rules()->storeRule($rule);
         }
 
         ilUtil::sendSuccess(self::plugin()->translate("enabled_rules", self::LANG_MODULE_RULES), true);
@@ -316,13 +316,13 @@ class RulesMailConfigGUI
          * @var Rule[] $rules
          */
         $rules = array_map(function (int $rule_id)/*: ?Rule*/ {
-            return self::rules()->getRuleById($rule_id);
+            return self::srAutoMails()->rules()->getRuleById($rule_id);
         }, $rule_ids);
 
         foreach ($rules as $rule) {
             $rule->setEnabled(false);
 
-            self::rules()->storeRule($rule);
+            self::srAutoMails()->rules()->storeRule($rule);
         }
 
         ilUtil::sendSuccess(self::plugin()->translate("disabled_rules", self::LANG_MODULE_RULES), true);
@@ -342,7 +342,7 @@ class RulesMailConfigGUI
          * @var Rule[] $rules
          */
         $rules = array_map(function (int $rule_id)/*: ?Rule*/ {
-            return self::rules()->getRuleById($rule_id);
+            return self::srAutoMails()->rules()->getRuleById($rule_id);
         }, $rule_ids);
 
         $confirmation = new ilConfirmationGUI();
@@ -373,11 +373,11 @@ class RulesMailConfigGUI
          * @var Rule[] $rules
          */
         $rules = array_map(function (int $rule_id)/*: ?Rule*/ {
-            return self::rules()->getRuleById($rule_id);
+            return self::srAutoMails()->rules()->getRuleById($rule_id);
         }, $rule_ids);
 
         foreach ($rules as $rule) {
-            self::rules()->deleteRule($rule);
+            self::srAutoMails()->rules()->deleteRule($rule);
         }
 
         ilUtil::sendSuccess(self::plugin()->translate("removed_rules", self::LANG_MODULE_RULES), true);

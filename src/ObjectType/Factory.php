@@ -5,6 +5,7 @@ namespace srag\Plugins\SrAutoMails\ObjectType;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\Plugins\SrAutoMails\ObjectType\Object\CourseObjectType;
+use srag\Plugins\SrAutoMails\ObjectType\Object\OrgUnitObjectType;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
@@ -68,8 +69,19 @@ final class Factory
             case Repository::OBJECT_TYPE_COURSE:
                 return $this->course();
 
+            case Repository::OBJECT_TYPE_ORG_UNIT:
+                return $this->orgUnit();
+
             default:
                 return null;
         }
+    }
+
+    /**
+     * @return OrgUnitObjectType
+     */
+    public function orgUnit() : OrgUnitObjectType
+    {
+        return new OrgUnitObjectType();
     }
 }

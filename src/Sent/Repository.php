@@ -6,6 +6,7 @@ use ilDBConstants;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
+use Throwable;
 
 /**
  * Class Repository
@@ -63,6 +64,15 @@ final class Repository
 
 
     /**
+     * @internal
+     */
+    public function dropTables()/*: void*/
+    {
+
+    }
+
+
+    /**
      * @return Factory
      */
     protected function factory() : Factory
@@ -106,6 +116,23 @@ final class Repository
         $sent = $this->getSent($rule_id, $object_id, $user_id);
 
         return ($sent !== null);
+    }
+
+
+    /**
+     * @internal
+     */
+    public function installTables()/*: void*/
+    {
+        try {
+            Sent::updateDB();
+        } catch (Throwable $ex) {
+            // Fix Call to a member function getName() on null (Because not use ILIAS sequence)
+        }
+
+        if (self::dic()->database()->tableColumnExists(Sent::TABLE_NAME, "id")) {
+            self::dic()->database()->dropTableColumn(Sent::TABLE_NAME, "id");
+        }
     }
 
 

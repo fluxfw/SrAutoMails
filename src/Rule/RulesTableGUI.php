@@ -56,7 +56,7 @@ class RulesTableGUI extends TableGUI
                 break;
 
             case "object_type":
-                $column = self::srAutoMails()->objectTypes()->getObjectTypesText()[Items::getter($rule, $column)];
+                $column = self::srAutoMails()->objectTypes()->getObjectTypesText()[$rule->getObjectType()];
                 break;
 
             default:

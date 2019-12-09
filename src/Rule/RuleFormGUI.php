@@ -25,7 +25,7 @@ class RuleFormGUI extends ObjectPropertyFormGUI
 
     use SrAutoMailsTrait;
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
-    const LANG_MODULE = RulesMailConfigGUI::LANG_MODULE_RULES;
+    const LANG_MODULE = RulesMailConfigGUI::LANG_MODULE;
     /**
      * @var Rule
      */
@@ -35,12 +35,12 @@ class RuleFormGUI extends ObjectPropertyFormGUI
     /**
      * RuleFormGUI constructor
      *
-     * @param RulesMailConfigGUI $parent
-     * @param Rule               $object
+     * @param RuleMailConfigGUI $parent
+     * @param Rule              $object
      */
-    public function __construct(RulesMailConfigGUI $parent, Rule $object)
+    public function __construct(RuleMailConfigGUI $parent, Rule $object)
     {
-        parent::__construct($parent, $object);
+        parent::__construct($parent, $object, false);
     }
 
 
@@ -91,11 +91,11 @@ class RuleFormGUI extends ObjectPropertyFormGUI
     protected function initCommands()/*: void*/
     {
         if (!empty($this->object->getRuleId())) {
-            $this->addCommandButton(RulesMailConfigGUI::CMD_UPDATE_RULE, $this->txt("save"));
+            $this->addCommandButton(RuleMailConfigGUI::CMD_UPDATE_RULE, $this->txt("save"));
         } else {
-            $this->addCommandButton(RulesMailConfigGUI::CMD_CREATE_RULE, $this->txt("add"));
+            $this->addCommandButton(RuleMailConfigGUI::CMD_CREATE_RULE, $this->txt("add"));
         }
-        $this->addCommandButton(RulesMailConfigGUI::CMD_LIST_RULES, $this->txt("cancel"));
+        $this->addCommandButton(RuleMailConfigGUI::CMD_BACK, $this->txt("cancel"));
     }
 
 
@@ -307,5 +307,20 @@ class RuleFormGUI extends ObjectPropertyFormGUI
                 parent::storeValue($key, $value);
                 break;
         }
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function storeForm() : bool
+    {
+        if (!parent::storeForm()) {
+            return false;
+        }
+
+        self::srAutoMails()->rules()->storeRule($this->object);
+
+        return true;
     }
 }

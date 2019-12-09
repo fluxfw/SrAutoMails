@@ -157,7 +157,7 @@ abstract class ObjectType
     public final function getObjectPropertiesText()
     {
         return array_map(function (string $object_property) : string {
-            return self::plugin()->translate("object_property_" . $object_property, RulesMailConfigGUI::LANG_MODULE_RULES);
+            return self::plugin()->translate("object_property_" . $object_property, RulesMailConfigGUI::LANG_MODULE);
         }, $this->getObjectProperties());
     }
 
@@ -226,7 +226,7 @@ abstract class ObjectType
     public final function getReceiverPropertiesText()
     {
         return array_map(function (string $object_property) : string {
-            return self::plugin()->translate("receiver_" . $object_property, RulesMailConfigGUI::LANG_MODULE_RULES);
+            return self::plugin()->translate("receiver_" . $object_property, RulesMailConfigGUI::LANG_MODULE);
         }, $this->getReceiverProperties());
     }
 

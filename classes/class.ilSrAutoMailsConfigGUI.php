@@ -2,28 +2,77 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-use srag\ActiveRecordConfig\SrAutoMails\ActiveRecordConfigGUI;
+use srag\DIC\SrUserEnrolment\DICTrait;
 use srag\Plugins\SrAutoMails\Rule\RulesMailConfigGUI;
-use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
+use srag\Plugins\SrUserEnrolment\Utils\SrUserEnrolmentTrait;
 
 /**
  * Class ilSrAutoMailsConfigGUI
  *
  * @author studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-class ilSrAutoMailsConfigGUI extends ActiveRecordConfigGUI
+class ilSrAutoMailsConfigGUI extends ilPluginConfigGUI
 {
 
-    use SrAutoMailsTrait;
+    use DICTrait;
+    use SrUserEnrolmentTrait;
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
+    const CMD_CONFIGURE = "configure";
+
+
     /**
-     * @var array
+     * ilSrAutoMailsConfigGUI constructor
      */
-    protected static $tabs
-        = [
-            RulesMailConfigGUI::TAB_RULES => [
-                RulesMailConfigGUI::class,
-                RulesMailConfigGUI::CMD_LIST_RULES
-            ]
-        ];
+    public function __construct()
+    {
+
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function performCommand(/*string*/ $cmd)/*:void*/
+    {
+        $this->setTabs();
+
+        $next_class = self::dic()->ctrl()->getNextClass($this);
+
+        switch (strtolower($next_class)) {
+            case strtolower(RulesMailConfigGUI::class);
+                self::dic()->ctrl()->forwardCommand(new RulesMailConfigGUI());
+                break;
+
+            default:
+                $cmd = self::dic()->ctrl()->getCmd();
+
+                switch ($cmd) {
+                    case self::CMD_CONFIGURE:
+                        $this->{$cmd}();
+                        break;
+
+                    default:
+                        break;
+                }
+                break;
+        }
+    }
+
+
+    /**
+     *
+     */
+    protected function setTabs()/*: void*/
+    {
+        RulesMailConfigGUI::addTabs();
+    }
+
+
+    /**
+     *
+     */
+    protected function configure()/*: void*/
+    {
+        self::dic()->ctrl()->redirectByClass(RulesMailConfigGUI::class, RulesMailConfigGUI::CMD_LIST_RULES);
+    }
 }

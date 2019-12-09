@@ -88,7 +88,7 @@ final class Factory implements FactoryInterface
     /**
      * @inheritdoc
      */
-    public function newTableInstance(AbstractNotificationsCtrl $parent, string $parent_cmd = AbstractNotificationsCtrl::CMD_LIST_NOTIFICATIONS) : NotificationsTableGUI
+    public function newTableInstance(NotificationsCtrl $parent, string $parent_cmd = NotificationsCtrl::CMD_LIST_NOTIFICATIONS) : NotificationsTableGUI
     {
         $table = new NotificationsTableGUI($parent, $parent_cmd);
 
@@ -99,10 +99,10 @@ final class Factory implements FactoryInterface
     /**
      * @inheritdoc
      */
-    public function newFormInstance(AbstractNotificationCtrl $parent, NotificationInterface $notification) : NotificationFormGUI
+    public function newFormInstance(NotificationCtrl $parent, NotificationInterface $notification) : NotificationFormGUI
     {
         ilUtil::sendInfo(self::output()->getHTML([
-            self::notifications4plugin()->getPlugin()->translate("placeholder_types_info", AbstractNotificationsCtrl::LANG_MODULE),
+            self::notifications4plugin()->getPlugin()->translate("placeholder_types_info", NotificationsCtrl::LANG_MODULE),
             "<br><br>",
             self::dic()->ui()->factory()->listing()->descriptive(self::notifications4plugin()->getPlaceholderTypes())
         ]));

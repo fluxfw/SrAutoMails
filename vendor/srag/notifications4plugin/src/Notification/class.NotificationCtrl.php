@@ -8,13 +8,15 @@ use srag\DIC\SrAutoMails\DICTrait;
 use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
 
 /**
- * Class AbstractNotificationCtrl
+ * Class NotificationCtrl
  *
- * @package srag\Notifications4Plugin\SrAutoMails\Notification
+ * @package           srag\Notifications4Plugin\SrAutoMails\Notification
  *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
+ * @author            studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
+ *
+ * @ilCtrl_isCalledBy srag\Notifications4Plugin\SrAutoMails\Notification\NotificationCtrl: srag\Notifications4Plugin\SrAutoMails\Notification\NotificationsCtrl
  */
-abstract class AbstractNotificationCtrl
+class NotificationCtrl
 {
 
     use DICTrait;
@@ -29,7 +31,7 @@ abstract class AbstractNotificationCtrl
     const CMD_UPDATE_NOTIFICATION = "updateNotification";
     const GET_PARAM_NOTIFICATION_ID = "notification_id";
     /**
-     * @var AbstractNotificationsCtrl
+     * @var NotificationsCtrl
      */
     protected $parent;
     /**
@@ -39,11 +41,11 @@ abstract class AbstractNotificationCtrl
 
 
     /**
-     * AbstractNotificationCtrl constructor
+     * NotificationCtrl constructor
      *
-     * @param AbstractNotificationsCtrl $parent
+     * @param NotificationsCtrl $parent
      */
-    public function __construct(AbstractNotificationsCtrl $parent)
+    public function __construct(NotificationsCtrl $parent)
     {
         $this->parent = $parent;
     }
@@ -103,7 +105,7 @@ abstract class AbstractNotificationCtrl
      */
     protected function back()/*: void*/
     {
-        self::dic()->ctrl()->redirect($this->parent, AbstractNotificationsCtrl::CMD_LIST_NOTIFICATIONS);
+        self::dic()->ctrl()->redirect($this->parent, NotificationsCtrl::CMD_LIST_NOTIFICATIONS);
     }
 
 
@@ -135,7 +137,7 @@ abstract class AbstractNotificationCtrl
 
         self::dic()->ctrl()->setParameter($this, self::GET_PARAM_NOTIFICATION_ID, $this->notification->getId());
 
-        ilUtil::sendSuccess(self::plugin()->translate("added_notification", AbstractNotificationsCtrl::LANG_MODULE, [$this->notification->getTitle()]), true);
+        ilUtil::sendSuccess(self::notifications4plugin()->getPlugin()->translate("added_notification", NotificationsCtrl::LANG_MODULE, [$this->notification->getTitle()]), true);
 
         self::dic()->ctrl()->redirect($this, self::CMD_EDIT_NOTIFICATION);
     }
@@ -165,7 +167,7 @@ abstract class AbstractNotificationCtrl
             return;
         }
 
-        ilUtil::sendSuccess(self::plugin()->translate("saved_notification", AbstractNotificationsCtrl::LANG_MODULE, [$this->notification->getTitle()]), true);
+        ilUtil::sendSuccess(self::notifications4plugin()->getPlugin()->translate("saved_notification", NotificationsCtrl::LANG_MODULE, [$this->notification->getTitle()]), true);
 
         self::dic()->ctrl()->redirect($this, self::CMD_EDIT_NOTIFICATION);
     }
@@ -180,8 +182,8 @@ abstract class AbstractNotificationCtrl
 
         self::notifications4plugin()->notifications()->storeNotification($cloned_notification);
 
-        ilUtil::sendSuccess(self::plugin()
-            ->translate("duplicated_notification", AbstractNotificationsCtrl::LANG_MODULE, [$cloned_notification->getTitle()]), true);
+        ilUtil::sendSuccess(self::notifications4plugin()->getPlugin()
+            ->translate("duplicated_notification", NotificationsCtrl::LANG_MODULE, [$cloned_notification->getTitle()]), true);
 
         self::dic()->ctrl()->redirect($this, self::CMD_BACK);
     }
@@ -196,13 +198,13 @@ abstract class AbstractNotificationCtrl
 
         $confirmation->setFormAction(self::dic()->ctrl()->getFormAction($this));
 
-        $confirmation->setHeaderText(self::plugin()
-            ->translate("delete_notification_confirm", AbstractNotificationsCtrl::LANG_MODULE, [$this->notification->getTitle()]));
+        $confirmation->setHeaderText(self::notifications4plugin()->getPlugin()
+            ->translate("delete_notification_confirm", NotificationsCtrl::LANG_MODULE, [$this->notification->getTitle()]));
 
         $confirmation->addItem(self::GET_PARAM_NOTIFICATION_ID, $this->notification->getId(), $this->notification->getTitle());
 
-        $confirmation->setConfirm(self::plugin()->translate("delete", AbstractNotificationsCtrl::LANG_MODULE), self::CMD_DELETE_NOTIFICATION);
-        $confirmation->setCancel(self::plugin()->translate("cancel", AbstractNotificationsCtrl::LANG_MODULE), self::CMD_BACK);
+        $confirmation->setConfirm(self::notifications4plugin()->getPlugin()->translate("delete", NotificationsCtrl::LANG_MODULE), self::CMD_DELETE_NOTIFICATION);
+        $confirmation->setCancel(self::notifications4plugin()->getPlugin()->translate("cancel", NotificationsCtrl::LANG_MODULE), self::CMD_BACK);
 
         self::output()->output($confirmation);
     }
@@ -215,16 +217,16 @@ abstract class AbstractNotificationCtrl
     {
         self::notifications4plugin()->notifications()->deleteNotification($this->notification);
 
-        ilUtil::sendSuccess(self::plugin()->translate("deleted_notification", AbstractNotificationsCtrl::LANG_MODULE, [$this->notification->getTitle()]), true);
+        ilUtil::sendSuccess(self::notifications4plugin()->getPlugin()->translate("deleted_notification", NotificationsCtrl::LANG_MODULE, [$this->notification->getTitle()]), true);
 
         self::dic()->ctrl()->redirect($this, self::CMD_BACK);
     }
 
 
     /**
-     * @return AbstractNotificationsCtrl
+     * @return NotificationsCtrl
      */
-    public function getParent() : AbstractNotificationsCtrl
+    public function getParent() : NotificationsCtrl
     {
         return $this->parent;
     }

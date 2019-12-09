@@ -63,35 +63,10 @@ self::notifications4plugin()->notifications()->dropTables();
 /**
  * ...
  *
- * @ilCtrl_isCalledBy srag\Plugins\x\Notification\NotificationsCtrl: x
+ * @ilCtrl_isCalledBy srag\Notifications4Plugin\SrAutoMails\x\Notification\NotificationsCtrl: x
  */
-class NotificationsCtrl extends AbstractNotificationsCtrl
+class x
 {
-    ...
-    const PLUGIN_CLASS_NAME = ilXPlugin::class;
-    ...
-    /**
-     * @inheritDoc
-     */
-    public function getNotificationCtrlClass() : string
-    {
-        return NotificationCtrl::class;
-    }
-    ...
-}
-```
-
-```php
-...
-/**
- * ...
- *
- * @ilCtrl_isCalledBy srag\Plugins\x\Notification\NotificationCtrl: srag\Plugins\x\Notification\NotificationsCtrl
- */
-class NotificationCtrl extends AbstractNotificationCtrl
-{
-    ...
-    const PLUGIN_CLASS_NAME = ilXPlugin::class;
     ...
 }
 ```

@@ -18,16 +18,16 @@ class NotificationsTableGUI extends TableGUI
 {
 
     use Notifications4PluginTrait;
-    const LANG_MODULE = AbstractNotificationsCtrl::LANG_MODULE;
+    const LANG_MODULE = NotificationsCtrl::LANG_MODULE;
 
 
     /**
      * NotificationsTableGUI constructor
      *
-     * @param AbstractNotificationsCtrl $parent
-     * @param string                    $parent_cmd
+     * @param NotificationsCtrl $parent
+     * @param string            $parent_cmd
      */
-    public function __construct(AbstractNotificationsCtrl $parent, string $parent_cmd)
+    public function __construct(NotificationsCtrl $parent, string $parent_cmd)
     {
         parent::__construct($parent, $parent_cmd);
     }
@@ -94,7 +94,7 @@ class NotificationsTableGUI extends TableGUI
     protected function initCommands()/*: void*/
     {
         self::dic()->toolbar()->addComponent(self::dic()->ui()->factory()->button()->standard($this->txt("add_notification"), self::dic()->ctrl()
-            ->getLinkTargetByClass($this->parent_obj->getNotificationCtrlClass(), AbstractNotificationCtrl::CMD_ADD_NOTIFICATION)));
+            ->getLinkTargetByClass(NotificationCtrl::class, NotificationCtrl::CMD_ADD_NOTIFICATION)));
     }
 
 
@@ -153,17 +153,17 @@ class NotificationsTableGUI extends TableGUI
      */
     protected function fillRow(/*NotificationInterface*/ $notification)/*: void*/
     {
-        self::dic()->ctrl()->setParameterByClass($this->parent_obj->getNotificationCtrlClass(), AbstractNotificationCtrl::GET_PARAM_NOTIFICATION_ID, $notification->getId());
+        self::dic()->ctrl()->setParameterByClass(NotificationCtrl::class, NotificationCtrl::GET_PARAM_NOTIFICATION_ID, $notification->getId());
 
         parent::fillRow($notification);
 
         $this->tpl->setVariable("COLUMN", self::output()->getHTML(self::dic()->ui()->factory()->dropdown()->standard([
             self::dic()->ui()->factory()->button()->shy($this->txt("edit"), self::dic()->ctrl()
-                ->getLinkTargetByClass($this->parent_obj->getNotificationCtrlClass(), AbstractNotificationCtrl::CMD_EDIT_NOTIFICATION)),
+                ->getLinkTargetByClass(NotificationCtrl::class, NotificationCtrl::CMD_EDIT_NOTIFICATION)),
             self::dic()->ui()->factory()->button()->shy($this->txt("duplicate"), self::dic()->ctrl()
-                ->getLinkTargetByClass($this->parent_obj->getNotificationCtrlClass(), AbstractNotificationCtrl::CMD_DUPLICATE_NOTIFICATION)),
+                ->getLinkTargetByClass(NotificationCtrl::class, NotificationCtrl::CMD_DUPLICATE_NOTIFICATION)),
             self::dic()->ui()->factory()->button()->shy($this->txt("delete"), self::dic()->ctrl()
-                ->getLinkTargetByClass($this->parent_obj->getNotificationCtrlClass(), AbstractNotificationCtrl::CMD_DELETE_NOTIFICATION_CONFIRM))
+                ->getLinkTargetByClass(NotificationCtrl::class, NotificationCtrl::CMD_DELETE_NOTIFICATION_CONFIRM))
         ])->withLabel($this->txt("actions"))));
     }
 

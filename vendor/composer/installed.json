@@ -1,17 +1,17 @@
 [
     {
         "name": "srag/activerecordconfig",
-        "version": "v0.16.4",
-        "version_normalized": "0.16.4.0",
+        "version": "v0.17.0",
+        "version_normalized": "0.17.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/studer-raimann/ActiveRecordConfig.git",
-            "reference": "c5b2b1c8bf52617e35b4fdda080ea75a89f5b0de"
+            "reference": "7f1ce2b9e78a1fae9b90fc479f905ddc886d6b6f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/studer-raimann/ActiveRecordConfig/zipball/c5b2b1c8bf52617e35b4fdda080ea75a89f5b0de",
-            "reference": "c5b2b1c8bf52617e35b4fdda080ea75a89f5b0de",
+            "url": "https://api.github.com/repos/studer-raimann/ActiveRecordConfig/zipball/7f1ce2b9e78a1fae9b90fc479f905ddc886d6b6f",
+            "reference": "7f1ce2b9e78a1fae9b90fc479f905ddc886d6b6f",
             "shasum": ""
         },
         "require": {
@@ -19,7 +19,7 @@
             "srag/custominputguis": ">=0.1.0",
             "srag/dic": ">=0.1.0"
         },
-        "time": "2019-11-15T13:00:26+00:00",
+        "time": "2019-12-09T08:40:21+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -190,17 +190,17 @@
     },
     {
         "name": "srag/notifications4plugin",
-        "version": "v5.0.0",
-        "version_normalized": "5.0.0.0",
+        "version": "v5.1.0",
+        "version_normalized": "5.1.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/studer-raimann/Notifications4Plugin.git",
-            "reference": "b71bb53f7702a90941ecc5b8a9f5bcf97acc412b"
+            "reference": "42576bda289c1151d716e87025effbdda217b928"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/studer-raimann/Notifications4Plugin/zipball/b71bb53f7702a90941ecc5b8a9f5bcf97acc412b",
-            "reference": "b71bb53f7702a90941ecc5b8a9f5bcf97acc412b",
+            "url": "https://api.github.com/repos/studer-raimann/Notifications4Plugin/zipball/42576bda289c1151d716e87025effbdda217b928",
+            "reference": "42576bda289c1151d716e87025effbdda217b928",
             "shasum": ""
         },
         "require": {
@@ -209,7 +209,7 @@
             "srag/dic": ">=0.1.0",
             "twig/twig": "1.18.0"
         },
-        "time": "2019-12-06T09:34:41+00:00",
+        "time": "2019-12-09T07:43:58+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {

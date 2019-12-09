@@ -93,7 +93,7 @@ final class Repository
     public function getObjectTypesText() : array
     {
         return array_map(function (string $object_type) : string {
-            return self::plugin()->translate("object_" . $object_type, RulesMailConfigGUI::LANG_MODULE_RULES);
+            return self::plugin()->translate("object_" . $object_type, RulesMailConfigGUI::LANG_MODULE);
         }, self::$object_types);
     }
 

@@ -29,19 +29,19 @@ interface FactoryInterface
 
 
     /**
-     * @param AbstractNotificationsCtrl $parent
-     * @param string                    $parent_cmd
+     * @param NotificationsCtrl $parent
+     * @param string            $parent_cmd
      *
      * @return NotificationsTableGUI
      */
-    public function newTableInstance(AbstractNotificationsCtrl $parent, string $parent_cmd = AbstractNotificationsCtrl::CMD_LIST_NOTIFICATIONS) : NotificationsTableGUI;
+    public function newTableInstance(NotificationsCtrl $parent, string $parent_cmd = NotificationsCtrl::CMD_LIST_NOTIFICATIONS) : NotificationsTableGUI;
 
 
     /**
-     * @param AbstractNotificationCtrl $parent
-     * @param NotificationInterface    $notification
+     * @param NotificationCtrl      $parent
+     * @param NotificationInterface $notification
      *
      * @return NotificationFormGUI
      */
-    public function newFormInstance(AbstractNotificationCtrl $parent, NotificationInterface $notification) : NotificationFormGUI;
+    public function newFormInstance(NotificationCtrl $parent, NotificationInterface $notification) : NotificationFormGUI;
 }

@@ -25,7 +25,7 @@ class NotificationFormGUI extends ObjectPropertyFormGUI
 {
 
     use Notifications4PluginTrait;
-    const LANG_MODULE = AbstractNotificationsCtrl::LANG_MODULE;
+    const LANG_MODULE = NotificationsCtrl::LANG_MODULE;
     /**
      * @var NotificationInterface
      */
@@ -35,10 +35,10 @@ class NotificationFormGUI extends ObjectPropertyFormGUI
     /**
      * NotificationFormGUI constructor
      *
-     * @param AbstractNotificationCtrl $parent
-     * @param NotificationInterface    $object
+     * @param NotificationCtrl      $parent
+     * @param NotificationInterface $object
      */
-    public function __construct(AbstractNotificationCtrl $parent, NotificationInterface $object)
+    public function __construct(NotificationCtrl $parent, NotificationInterface $object)
     {
         parent::__construct($parent, $object, false);
     }
@@ -62,12 +62,12 @@ class NotificationFormGUI extends ObjectPropertyFormGUI
     protected function initCommands()/*: void*/
     {
         if (!empty($this->object->getId())) {
-            $this->addCommandButton(AbstractNotificationCtrl::CMD_UPDATE_NOTIFICATION, $this->txt("save"));
+            $this->addCommandButton(NotificationCtrl::CMD_UPDATE_NOTIFICATION, $this->txt("save"));
         } else {
-            $this->addCommandButton(AbstractNotificationCtrl::CMD_CREATE_NOTIFICATION, $this->txt("add"));
+            $this->addCommandButton(NotificationCtrl::CMD_CREATE_NOTIFICATION, $this->txt("add"));
         }
 
-        $this->addCommandButton(AbstractNotificationCtrl::CMD_BACK, $this->txt("cancel"));
+        $this->addCommandButton(NotificationCtrl::CMD_BACK, $this->txt("cancel"));
     }
 
 

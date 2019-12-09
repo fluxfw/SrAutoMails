@@ -82,7 +82,7 @@ final class Repository
     public function getOperatorsText() : array
     {
         return array_map(function (string $operator) : string {
-            return self::plugin()->translate("operator_" . $operator, RulesMailConfigGUI::LANG_MODULE_RULES);
+            return self::plugin()->translate("operator_" . $operator, RulesMailConfigGUI::LANG_MODULE);
         }, Rule::$operators);
     }
 
@@ -216,6 +216,24 @@ final class Repository
      */
     public function storeRule(Rule $rule)/*: void*/
     {
+        $is_new = (empty($rule->getRuleId()));
+
         $rule->store();
+
+        if ($is_new) {
+            $rule->setMailTemplateName("rule_" . $rule->getRuleId());
+
+            $rule->store();
+
+            $notification = self::srAutoMails()->notifications4plugin()->notifications()->getNotificationByName($rule->getMailTemplateName());
+
+            if ($notification === null) {
+                $notification = self::srAutoMails()->notifications4plugin()->notifications()->factory()->newInstance();
+
+                $notification->setName($rule->getMailTemplateName());
+
+                self::srAutoMails()->notifications4plugin()->notifications()->storeNotification($notification);
+            }
+        }
     }
 }

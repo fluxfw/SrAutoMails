@@ -119,7 +119,7 @@ final class Repository implements RepositoryInterface
         $duplicated_notification->setId(0);
 
         $duplicated_notification->setTitle($duplicated_notification->getTitle() . " ("
-            . self::notifications4plugin()->getPlugin()->translate("duplicated", AbstractNotificationsCtrl::LANG_MODULE) . ")");
+            . self::notifications4plugin()->getPlugin()->translate("duplicated", NotificationsCtrl::LANG_MODULE) . ")");
 
         return $duplicated_notification;
     }

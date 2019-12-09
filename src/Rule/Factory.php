@@ -56,4 +56,32 @@ final class Factory
 
         return $rule;
     }
+
+
+    /**
+     * @param RulesMailConfigGUI $parent
+     * @param string             $cmd
+     *
+     * @return RulesTableGUI
+     */
+    public function newTableInstance(RulesMailConfigGUI $parent, string $cmd = RulesMailConfigGUI::CMD_LIST_RULES) : RulesTableGUI
+    {
+        $table = new RulesTableGUI($parent, $cmd);
+
+        return $table;
+    }
+
+
+    /**
+     * @param RuleMailConfigGUI $parent
+     * @param Rule              $rule
+     *
+     * @return RuleFormGUI
+     */
+    public function newFormInstance(RuleMailConfigGUI $parent, Rule $rule) : RuleFormGUI
+    {
+        $form = new RuleFormGUI($parent, $rule);
+
+        return $form;
+    }
 }

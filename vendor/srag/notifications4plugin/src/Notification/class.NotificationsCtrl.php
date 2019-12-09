@@ -6,13 +6,13 @@ use srag\DIC\SrAutoMails\DICTrait;
 use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
 
 /**
- * Class AbstractNotificationsCtrl
+ * Class NotificationsCtrl
  *
  * @package srag\Notifications4Plugin\SrAutoMails\Notification
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-abstract class AbstractNotificationsCtrl
+class NotificationsCtrl
 {
 
     use DICTrait;
@@ -23,7 +23,7 @@ abstract class AbstractNotificationsCtrl
 
 
     /**
-     * AbstractNotificationsCtrl constructor
+     * NotificationsCtrl constructor
      */
     public function __construct()
     {
@@ -41,9 +41,8 @@ abstract class AbstractNotificationsCtrl
         $next_class = self::dic()->ctrl()->getNextClass($this);
 
         switch (strtolower($next_class)) {
-            case strtolower($this->getNotificationCtrlClass());
-                $class = $this->getNotificationCtrlClass();
-                self::dic()->ctrl()->forwardCommand(new $class($this));
+            case strtolower(NotificationCtrl::class);
+                self::dic()->ctrl()->forwardCommand(new NotificationCtrl($this));
                 break;
 
             default:
@@ -67,7 +66,7 @@ abstract class AbstractNotificationsCtrl
      */
     protected function setTabs()/*: void*/
     {
-        self::dic()->tabs()->activateTab(self::TAB_NOTIFICATIONS);
+
     }
 
 
@@ -80,10 +79,4 @@ abstract class AbstractNotificationsCtrl
 
         self::output()->output($table);
     }
-
-
-    /**
-     * @return string
-     */
-    public abstract function getNotificationCtrlClass() : string;
 }

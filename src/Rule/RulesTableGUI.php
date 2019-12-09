@@ -6,6 +6,7 @@ use ilSelectInputGUI;
 use ilSrAutoMailsPlugin;
 use ilTextInputGUI;
 use ilUtil;
+use srag\CustomInputGUIs\SrAutoMails\PropertyFormGUI\Items\Items;
 use srag\CustomInputGUIs\SrAutoMails\PropertyFormGUI\PropertyFormGUI;
 use srag\CustomInputGUIs\SrAutoMails\TableGUI\TableGUI;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
@@ -39,16 +40,27 @@ class RulesTableGUI extends TableGUI
 
     /**
      * @inheritdoc
+     *
+     * @param Rule $rule
      */
-    protected function getColumnValue(/*string*/ $column, /*array*/ $row, /*int*/ $format = self::DEFAULT_FORMAT) : string
+    protected function getColumnValue(/*string*/ $column, /*Rule*/ $rule, /*int*/ $format = self::DEFAULT_FORMAT) : string
     {
         switch ($column) {
+            case "enabled":
+                if ($rule->isEnabled()) {
+                    $column = ilUtil::getImagePath("icon_ok.svg");
+                } else {
+                    $column = ilUtil::getImagePath("icon_not_ok.svg");
+                }
+                $column = self::output()->getHTML(self::dic()->ui()->factory()->image()->standard($column, ""));
+                break;
+
             case "object_type":
-                $column = self::srAutoMails()->objectTypes()->getObjectTypesText()[$row[$column]];
+                $column = self::srAutoMails()->objectTypes()->getObjectTypesText()[Items::getter($rule, $column)];
                 break;
 
             default:
-                $column = $row[$column];
+                $column = Items::getter($rule, $column);
                 break;
         }
 
@@ -62,19 +74,27 @@ class RulesTableGUI extends TableGUI
     public function getSelectableColumns2() : array
     {
         $columns = [
-            "enabled"     => "enabled",
-            "title"       => "title",
-            "description" => "description",
-            "object_type" => "object_type"
-        ];
-
-        $columns = array_map(function (string $key) : array {
-            return [
-                "id"      => $key,
+            "enabled"     => [
+                "id"      => "enabled",
                 "default" => true,
-                "sort"    => ($key !== "enabled" && $key !== "description")
-            ];
-        }, $columns);
+                "sort"    => false
+            ],
+            "title"       => [
+                "id"      => "title",
+                "default" => true,
+                "sort"    => false
+            ],
+            "description" => [
+                "id"      => "description",
+                "default" => true,
+                "sort"    => false
+            ],
+            "object_type" => [
+                "id"      => "object_type",
+                "default" => true,
+                "sort"    => false
+            ]
+        ];
 
         return $columns;
     }
@@ -113,6 +133,9 @@ class RulesTableGUI extends TableGUI
      */
     protected function initData()/*: void*/
     {
+        $this->setExternalSegmentation(true);
+        $this->setExternalSorting(true);
+
         $filter = $this->getFilterValues();
 
         $title = $filter["title"];
@@ -125,16 +148,7 @@ class RulesTableGUI extends TableGUI
             $enabled = null;
         }
 
-        $this->setData(array_map(function (array &$row) : array {
-            if ($row["enabled"]) {
-                $enabled = ilUtil::getImagePath("icon_ok.svg");
-            } else {
-                $enabled = ilUtil::getImagePath("icon_not_ok.svg");
-            }
-            $row["enabled"] = self::output()->getHTML(self::dic()->ui()->factory()->image()->standard($enabled, ""));
-
-            return $row;
-        }, self::srAutoMails()->rules()->getRulesArray($title, $description, $object_type, $enabled)));
+        $this->setData(self::srAutoMails()->rules()->getRules(false, $object_type, $enabled, $title, $description));
     }
 
 
@@ -181,18 +195,18 @@ class RulesTableGUI extends TableGUI
 
 
     /**
-     * @param array $row
+     * @param Rule $rule
      */
-    protected function fillRow(/*array*/ $row)/*: void*/
+    protected function fillRow(/*Rule*/ $rule)/*: void*/
     {
-        self::dic()->ctrl()->setParameterByClass(RuleMailConfigGUI::class, RuleMailConfigGUI::GET_PARAM_RULE_ID, $row["rule_id"]);
+        self::dic()->ctrl()->setParameterByClass(RuleMailConfigGUI::class, RuleMailConfigGUI::GET_PARAM_RULE_ID, $rule->getRuleId());
 
         $this->tpl->setCurrentBlock("checkbox");
         $this->tpl->setVariable("CHECKBOX_POST_VAR", RuleMailConfigGUI::GET_PARAM_RULE_ID);
-        $this->tpl->setVariable("ID", $row["rule_id"]);
+        $this->tpl->setVariable("ID", $rule->getRuleId());
         $this->tpl->parseCurrentBlock();
 
-        parent::fillRow($row);
+        parent::fillRow($rule);
 
         $this->tpl->setVariable("COLUMN", self::output()->getHTML(self::dic()->ui()->factory()->dropdown()->standard([
             self::dic()->ui()->factory()->button()->shy($this->txt("edit_rule"), self::dic()->ctrl()

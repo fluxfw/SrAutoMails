@@ -88,16 +88,25 @@ final class Repository
 
 
     /**
-     * @param string    $title
-     * @param string    $description
-     * @param string    $object_type
-     * @param bool|null $enabled
+     * @param bool        $interval_check
+     * @param string|null $object_type
+     * @param bool|null   $enabled
+     * @param string|null $title
+     * @param string|null $description
      *
-     * @return array
+     * @return Rule[]
      */
-    public function getRulesArray(string $title = "", string $description = "", string $object_type = "", /*?*/ bool $enabled = null) : array
+    public function getRules(bool $interval_check,/*?*/ string $object_type = null, /*?*/ bool $enabled = null,/*?*/ string $title = null, /*?*/ string $description = null) : array
     {
         $where = Rule::where([]);
+
+        if (!empty($object_type)) {
+            $where = $where->where(["object_type" => $object_type]);
+        }
+
+        if ($enabled !== null) {
+            $where = $where->where(["enabled" => $enabled]);
+        }
 
         if (!empty($title)) {
             $where = $where->where(["title" => '%' . $title . '%'], "LIKE");
@@ -107,15 +116,28 @@ final class Repository
             $where = $where->where(["description" => '%' . $description . '%'], "LIKE");
         }
 
-        if (!empty($object_type)) {
-            $where = $where->where(["object_type" => '%' . $object_type . '%'], "LIKE");
+        /**
+         * @var Rule[] $rules
+         */
+        $rules = $where->orderBy("title", "ASC")->get();
+
+        if ($interval_check) {
+            $time = time();
+
+            $rules = array_filter($rules, function (Rule $rule) use ($time): bool {
+                if ($rule->getLastCheck() === null) {
+                    return true;
+                }
+
+                if ($rule->getIntervalType() !== Rule::INTERVAL_TYPE_NUMBER) {
+                    return true;
+                }
+
+                return ((($time - $rule->getLastCheck()->getUnixTime()) / (60 * 60 * 24)) >= $rule->getInterval());
+            });
         }
 
-        if ($enabled !== null) {
-            $where = $where->where(["enabled" => $enabled]);
-        }
-
-        return $where->getArray();
+        return $rules;
     }
 
 
@@ -133,48 +155,6 @@ final class Repository
         $rule = Rule::where(["rule_id" => $rule_id])->first();
 
         return $rule;
-    }
-
-
-    /**
-     * @param string $object_type
-     * @param bool   $only_enabled
-     * @param bool   $interval_check
-     *
-     * @return Rule[]
-     */
-    public function getRules(string $object_type = "", bool $only_enabled = true, bool $interval_check = true) : array
-    {
-        $time = time();
-
-        $where = Rule::where([]);
-        if (!empty($object_type)) {
-            $where = $where->where(["object_type" => $object_type]);
-        }
-        if ($only_enabled) {
-            $where = $where->where(["enabled" => $only_enabled]);
-        }
-
-        /**
-         * @var Rule[] $rules
-         */
-        $rules = $where->get();
-
-        if ($interval_check) {
-            $rules = array_filter($rules, function (Rule $rule) use ($time): bool {
-                if ($rule->getLastCheck() === null) {
-                    return true;
-                }
-
-                if ($rule->getIntervalType() !== Rule::INTERVAL_TYPE_NUMBER) {
-                    return true;
-                }
-
-                return ((($time - $rule->getLastCheck()->getUnixTime()) / (60 * 60 * 24)) >= $rule->getInterval());
-            });
-        }
-
-        return $rules;
     }
 
 

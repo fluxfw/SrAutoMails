@@ -135,7 +135,7 @@ class Job extends ilCronJob
         foreach ($object_types as $object_type) {
             $objects = $object_type->getObjects();
 
-            $rules = self::srAutoMails()->rules()->getRules($object_type->getObjectType());
+            $rules = self::srAutoMails()->rules()->getRules(true, $object_type->getObjectType(), true, null, null);
 
             foreach ($objects as $object) {
 

@@ -65,6 +65,8 @@ class ilSrAutoMailsConfigGUI extends ilPluginConfigGUI
     protected function setTabs()/*: void*/
     {
         RulesMailConfigGUI::addTabs();
+
+        self::dic()->locator()->addItem(ilSrAutoMailsPlugin::PLUGIN_NAME, self::dic()->ctrl()->getLinkTarget($this, self::CMD_CONFIGURE));
     }
 
 

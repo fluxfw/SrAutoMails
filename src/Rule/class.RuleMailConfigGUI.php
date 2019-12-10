@@ -132,6 +132,8 @@ class RuleMailConfigGUI
 
                 self::dic()->tabs()->addSubTab(NotificationsCtrl::TAB_NOTIFICATIONS, self::plugin()->translate("notification", RulesMailConfigGUI::LANG_MODULE), self::dic()->ctrl()
                     ->getLinkTargetByClass([NotificationsCtrl::class, NotificationCtrl::class], NotificationCtrl::CMD_EDIT_NOTIFICATION));
+
+                self::dic()->locator()->addItem($this->rule->getTitle(), self::dic()->ctrl()->getLinkTarget($this, self::CMD_EDIT_RULE));
             }
         } else {
             $this->rule = self::srAutoMails()->rules()->factory()->newInstance();

@@ -32,8 +32,8 @@ class RuleMailConfigGUI
     const CMD_EDIT_RULE = "editRule";
     const CMD_REMOVE_RULE = "removeRule";
     const CMD_REMOVE_RULE_CONFIRM = "removeRuleConfirm";
-    const GET_PARAM_RULE_ID = "rule_id";
     const CMD_UPDATE_RULE = "updateRule";
+    const GET_PARAM_RULE_ID = "rule_id";
     const TAB_EDIT_RULE = "edit_rule";
     /**
      * @var RulesMailConfigGUI

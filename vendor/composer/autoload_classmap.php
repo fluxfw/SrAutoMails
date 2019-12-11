@@ -279,7 +279,6 @@ return array(
     'srag\\DIC\\SrAutoMails\\Util\\LibraryLanguageInstaller' => $vendorDir . '/srag/dic/src/Util/LibraryLanguageInstaller.php',
     'srag\\DIC\\SrAutoMails\\Version\\Version' => $vendorDir . '/srag/dic/src/Version/Version.php',
     'srag\\DIC\\SrAutoMails\\Version\\VersionInterface' => $vendorDir . '/srag/dic/src/Version/VersionInterface.php',
-    'srag\\LibrariesNamespaceChanger\\Libraries' => $vendorDir . '/srag/librariesnamespacechanger/src/Libraries.php',
     'srag\\LibrariesNamespaceChanger\\LibrariesNamespaceChanger' => $vendorDir . '/srag/librariesnamespacechanger/src/LibrariesNamespaceChanger.php',
     'srag\\LibrariesNamespaceChanger\\PHP7Backport' => $vendorDir . '/srag/librariesnamespacechanger/src/PHP7Backport.php',
     'srag\\Notifications4Plugin\\SrAutoMails\\Exception\\Notifications4PluginException' => $vendorDir . '/srag/notifications4plugin/src/Exception/Notifications4PluginException.php',

@@ -71,6 +71,11 @@ class RuleMailConfigGUI
 
         switch (strtolower($next_class)) {
             case strtolower(NotificationsCtrl::class):
+                if (self::dic()->ctrl()->getCmd() === NotificationsCtrl::CMD_LIST_NOTIFICATIONS) {
+                    self::dic()->ctrl()->redirect($this, self::CMD_EDIT_RULE);
+
+                    return;
+                }
                 self::dic()->tabs()->activateTab(self::TAB_EDIT_RULE);
                 self::dic()->tabs()->activateSubTab(NotificationsCtrl::TAB_NOTIFICATIONS);
                 self::dic()->ctrl()->forwardCommand(new NotificationsCtrl());

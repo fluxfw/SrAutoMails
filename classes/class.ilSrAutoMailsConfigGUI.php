@@ -2,9 +2,9 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-use srag\DIC\SrUserEnrolment\DICTrait;
+use srag\DIC\SrAutoMails\DICTrait;
 use srag\Plugins\SrAutoMails\Rule\RulesMailConfigGUI;
-use srag\Plugins\SrUserEnrolment\Utils\SrUserEnrolmentTrait;
+use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
  * Class ilSrAutoMailsConfigGUI
@@ -15,7 +15,7 @@ class ilSrAutoMailsConfigGUI extends ilPluginConfigGUI
 {
 
     use DICTrait;
-    use SrUserEnrolmentTrait;
+    use SrAutoMailsTrait;
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     const CMD_CONFIGURE = "configure";
 

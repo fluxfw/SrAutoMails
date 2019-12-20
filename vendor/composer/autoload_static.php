@@ -9,18 +9,18 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
     public static $prefixLengthsPsr4 = array (
         's' => 
         array (
-            'srag\\RemovePluginDataConfirm\\SrAutoMails\\' => 41,
+            'srag\\RemovePluginDataConfirm\\' => 29,
             'srag\\Plugins\\SrAutoMails\\' => 25,
             'srag\\Notifications4Plugin\\SrAutoMails\\' => 38,
             'srag\\LibrariesNamespaceChanger\\' => 31,
-            'srag\\DIC\\SrAutoMails\\' => 21,
+            'srag\\DIC\\' => 9,
             'srag\\CustomInputGUIs\\SrAutoMails\\' => 33,
-            'srag\\ActiveRecordConfig\\SrAutoMails\\' => 36,
+            'srag\\ActiveRecordConfig\\' => 24,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'srag\\RemovePluginDataConfirm\\SrAutoMails\\' => 
+        'srag\\RemovePluginDataConfirm\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/removeplugindataconfirm/src',
         ),
@@ -36,7 +36,7 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         array (
             0 => __DIR__ . '/..' . '/srag/librariesnamespacechanger/src',
         ),
-        'srag\\DIC\\SrAutoMails\\' => 
+        'srag\\DIC\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/dic/src',
         ),
@@ -44,7 +44,7 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         array (
             0 => __DIR__ . '/..' . '/srag/custominputguis/src',
         ),
-        'srag\\ActiveRecordConfig\\SrAutoMails\\' => 
+        'srag\\ActiveRecordConfig\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/activerecordconfig/src',
         ),
@@ -61,7 +61,6 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
     );
 
     public static $classMap = array (
-        'SrAutoMailsRemoveDataConfirm' => __DIR__ . '/../..' . '/classes/uninstall/class.SrAutoMailsRemoveDataConfirm.php',
         'Twig_Autoloader' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Autoloader.php',
         'Twig_Compiler' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Compiler.php',
         'Twig_CompilerInterface' => __DIR__ . '/..' . '/twig/twig/lib/Twig/CompilerInterface.php',
@@ -391,10 +390,9 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         'srag\\Plugins\\SrAutoMails\\Sent\\Repository' => __DIR__ . '/../..' . '/src/Sent/Repository.php',
         'srag\\Plugins\\SrAutoMails\\Sent\\Sent' => __DIR__ . '/../..' . '/src/Sent/Sent.php',
         'srag\\Plugins\\SrAutoMails\\Utils\\SrAutoMailsTrait' => __DIR__ . '/../..' . '/src/Utils/SrAutoMailsTrait.php',
-        'srag\\RemovePluginDataConfirm\\SrAutoMails\\AbstractPluginUninstallTrait' => __DIR__ . '/..' . '/srag/removeplugindataconfirm/src/AbstractPluginUninstallTrait.php',
-        'srag\\RemovePluginDataConfirm\\SrAutoMails\\AbstractRemovePluginDataConfirm' => __DIR__ . '/..' . '/srag/removeplugindataconfirm/src/AbstractRemovePluginDataConfirm.php',
-        'srag\\RemovePluginDataConfirm\\SrAutoMails\\Exception\\RemovePluginDataConfirmException' => __DIR__ . '/..' . '/srag/removeplugindataconfirm/src/Exception/RemovePluginDataConfirmException.php',
+        'srag\\RemovePluginDataConfirm\\SrAutoMails\\BasePluginUninstallTrait' => __DIR__ . '/..' . '/srag/removeplugindataconfirm/src/BasePluginUninstallTrait.php',
         'srag\\RemovePluginDataConfirm\\SrAutoMails\\PluginUninstallTrait' => __DIR__ . '/..' . '/srag/removeplugindataconfirm/src/PluginUninstallTrait.php',
+        'srag\\RemovePluginDataConfirm\\SrAutoMails\\RemovePluginDataConfirmCtrl' => __DIR__ . '/..' . '/srag/removeplugindataconfirm/src/class.RemovePluginDataConfirmCtrl.php',
         'srag\\RemovePluginDataConfirm\\SrAutoMails\\RepositoryObjectPluginUninstallTrait' => __DIR__ . '/..' . '/srag/removeplugindataconfirm/src/RepositoryObjectPluginUninstallTrait.php',
     );
 

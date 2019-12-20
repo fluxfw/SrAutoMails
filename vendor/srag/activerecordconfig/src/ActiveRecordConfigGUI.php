@@ -10,11 +10,11 @@ use srag\DIC\SrAutoMails\DICTrait;
 /**
  * Class ActiveRecordConfigGUI
  *
- * @package srag\ActiveRecordConfig\SrAutoMails
+ * @package    srag\ActiveRecordConfig\SrAutoMails
  *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
+ * @author     studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  *
- * @deprecated
+ * @deprecated Please use ilPluginConfigGUI from ILIAS core instead
  */
 abstract class ActiveRecordConfigGUI extends ilPluginConfigGUI
 {

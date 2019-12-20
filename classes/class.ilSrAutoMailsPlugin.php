@@ -22,7 +22,6 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin
     const PLUGIN_ID = "srauma";
     const PLUGIN_NAME = "SrAutoMails";
     const PLUGIN_CLASS_NAME = self::class;
-    const REMOVE_PLUGIN_DATA_CONFIRM_CLASS_NAME = SrAutoMailsRemoveDataConfirm::class;
     /**
      * @var self|null
      */

@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'SrAutoMailsRemoveDataConfirm' => $baseDir . '/classes/uninstall/class.SrAutoMailsRemoveDataConfirm.php',
     'Twig_Autoloader' => $vendorDir . '/twig/twig/lib/Twig/Autoloader.php',
     'Twig_Compiler' => $vendorDir . '/twig/twig/lib/Twig/Compiler.php',
     'Twig_CompilerInterface' => $vendorDir . '/twig/twig/lib/Twig/CompilerInterface.php',
@@ -336,9 +335,8 @@ return array(
     'srag\\Plugins\\SrAutoMails\\Sent\\Repository' => $baseDir . '/src/Sent/Repository.php',
     'srag\\Plugins\\SrAutoMails\\Sent\\Sent' => $baseDir . '/src/Sent/Sent.php',
     'srag\\Plugins\\SrAutoMails\\Utils\\SrAutoMailsTrait' => $baseDir . '/src/Utils/SrAutoMailsTrait.php',
-    'srag\\RemovePluginDataConfirm\\SrAutoMails\\AbstractPluginUninstallTrait' => $vendorDir . '/srag/removeplugindataconfirm/src/AbstractPluginUninstallTrait.php',
-    'srag\\RemovePluginDataConfirm\\SrAutoMails\\AbstractRemovePluginDataConfirm' => $vendorDir . '/srag/removeplugindataconfirm/src/AbstractRemovePluginDataConfirm.php',
-    'srag\\RemovePluginDataConfirm\\SrAutoMails\\Exception\\RemovePluginDataConfirmException' => $vendorDir . '/srag/removeplugindataconfirm/src/Exception/RemovePluginDataConfirmException.php',
+    'srag\\RemovePluginDataConfirm\\SrAutoMails\\BasePluginUninstallTrait' => $vendorDir . '/srag/removeplugindataconfirm/src/BasePluginUninstallTrait.php',
     'srag\\RemovePluginDataConfirm\\SrAutoMails\\PluginUninstallTrait' => $vendorDir . '/srag/removeplugindataconfirm/src/PluginUninstallTrait.php',
+    'srag\\RemovePluginDataConfirm\\SrAutoMails\\RemovePluginDataConfirmCtrl' => $vendorDir . '/srag/removeplugindataconfirm/src/class.RemovePluginDataConfirmCtrl.php',
     'srag\\RemovePluginDataConfirm\\SrAutoMails\\RepositoryObjectPluginUninstallTrait' => $vendorDir . '/srag/removeplugindataconfirm/src/RepositoryObjectPluginUninstallTrait.php',
 );

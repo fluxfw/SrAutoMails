@@ -209,9 +209,9 @@ class RulesTableGUI extends TableGUI
         parent::fillRow($rule);
 
         $this->tpl->setVariable("COLUMN", self::output()->getHTML(self::dic()->ui()->factory()->dropdown()->standard([
-            self::dic()->ui()->factory()->button()->shy($this->txt("edit_rule"), self::dic()->ctrl()
+            self::dic()->ui()->factory()->link()->standard($this->txt("edit_rule"), self::dic()->ctrl()
                 ->getLinkTargetByClass(RuleMailConfigGUI::class, RuleMailConfigGUI::CMD_EDIT_RULE)),
-            self::dic()->ui()->factory()->button()->shy($this->txt("remove_rule"), self::dic()->ctrl()
+            self::dic()->ui()->factory()->link()->standard($this->txt("remove_rule"), self::dic()->ctrl()
                 ->getLinkTargetByClass(RuleMailConfigGUI::class, RuleMailConfigGUI::CMD_REMOVE_RULE_CONFIRM))
         ])->withLabel($this->txt("actions"))));
     }

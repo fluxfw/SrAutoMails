@@ -765,9 +765,7 @@ abstract class ActiveRecordConfig extends ActiveRecord
      *
      * @access protected
      */
-    public final function sleep(/*string*/
-        $field_name
-    ) {
+    public final function sleep(/*string*/ $field_name) {
         $field_value = $this->{$field_name};
 
         switch ($field_name) {
@@ -785,10 +783,7 @@ abstract class ActiveRecordConfig extends ActiveRecord
      *
      * @access protected
      */
-    public final function wakeUp(/*string*/
-        $field_name,
-        $field_value
-    ) {
+    public final function wakeUp(/*string*/ $field_name, $field_value) {
         switch ($field_name) {
             default:
                 return null;

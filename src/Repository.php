@@ -4,13 +4,13 @@ namespace srag\Plugins\SrAutoMails;
 
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
-use srag\Notifications4Plugin\SrAutoMails\RepositoryInterface as NotificationRepositoryInterface;
+use srag\Notifications4Plugin\SrAutoMails\RepositoryInterface as Notifications4PluginRepositoryInterface;
 use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
 use srag\Plugins\SrAutoMails\Access\Ilias;
 use srag\Plugins\SrAutoMails\Config\Config;
-use srag\Plugins\SrAutoMails\ObjectType\Repository as ObjectTypeRepository;
-use srag\Plugins\SrAutoMails\Rule\Repository as RuleRepository;
-use srag\Plugins\SrAutoMails\Sent\Repository as SentRepository;
+use srag\Plugins\SrAutoMails\ObjectType\Repository as ObjectTypesRepository;
+use srag\Plugins\SrAutoMails\Rule\Repository as RulesRepository;
+use srag\Plugins\SrAutoMails\Sent\Repository as SentsRepository;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
@@ -95,35 +95,35 @@ final class Repository
     /**
      * @inheritDoc
      */
-    public function notifications4plugin() : NotificationRepositoryInterface
+    public function notifications4plugin() : Notifications4PluginRepositoryInterface
     {
         return self::_notifications4plugin();
     }
 
 
     /**
-     * @return ObjectTypeRepository
+     * @return ObjectTypesRepository
      */
-    public function objectTypes() : ObjectTypeRepository
+    public function objectTypes() : ObjectTypesRepository
     {
-        return ObjectTypeRepository::getInstance();
+        return ObjectTypesRepository::getInstance();
     }
 
 
     /**
-     * @return RuleRepository
+     * @return RulesRepository
      */
-    public function rules() : RuleRepository
+    public function rules() : RulesRepository
     {
-        return RuleRepository::getInstance();
+        return RulesRepository::getInstance();
     }
 
 
     /**
-     * @return SentRepository
+     * @return SentsRepository
      */
-    public function sents() : SentRepository
+    public function sents() : SentsRepository
     {
-        return SentRepository::getInstance();
+        return SentsRepository::getInstance();
     }
 }

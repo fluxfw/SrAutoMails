@@ -51,7 +51,7 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin
 
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getPluginName() : string
     {
@@ -60,7 +60,7 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin
 
 
     /**
-     * @return ilCronJob[]
+     * @inheritDoc
      */
     public function getCronJobInstances() : array
     {
@@ -69,9 +69,7 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin
 
 
     /**
-     * @param string $a_job_id
-     *
-     * @return ilCronJob|null
+     * @inheritDoc
      */
     public function getCronJobInstance(/*string*/ $a_job_id)/*: ?ilCronJob*/
     {
@@ -86,9 +84,9 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function updateLanguages($a_lang_keys = null)
+    public function updateLanguages(/*?array*/ $a_lang_keys = null)/*:void*/
     {
         parent::updateLanguages($a_lang_keys);
 

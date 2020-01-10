@@ -39,7 +39,7 @@ class RulesTableGUI extends TableGUI
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      *
      * @param Rule $rule
      */
@@ -69,7 +69,7 @@ class RulesTableGUI extends TableGUI
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function getSelectableColumns2() : array
     {
@@ -101,7 +101,7 @@ class RulesTableGUI extends TableGUI
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function initColumns()/*: void*/
     {
@@ -114,7 +114,7 @@ class RulesTableGUI extends TableGUI
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function initCommands()/*: void*/
     {
@@ -129,7 +129,7 @@ class RulesTableGUI extends TableGUI
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function initData()/*: void*/
     {
@@ -153,7 +153,7 @@ class RulesTableGUI extends TableGUI
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function initFilterFields()/*: void*/
     {
@@ -177,7 +177,7 @@ class RulesTableGUI extends TableGUI
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function initId()/*: void*/
     {
@@ -186,7 +186,7 @@ class RulesTableGUI extends TableGUI
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function initTitle()/*: void*/
     {

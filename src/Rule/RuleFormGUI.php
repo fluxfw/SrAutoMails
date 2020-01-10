@@ -45,7 +45,7 @@ class RuleFormGUI extends ObjectPropertyFormGUI
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function getValue(/*string*/ $key)
     {
@@ -86,7 +86,7 @@ class RuleFormGUI extends ObjectPropertyFormGUI
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function initCommands()/*: void*/
     {
@@ -100,7 +100,7 @@ class RuleFormGUI extends ObjectPropertyFormGUI
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function initFields()/*: void*/
     {
@@ -246,7 +246,7 @@ class RuleFormGUI extends ObjectPropertyFormGUI
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function initId()/*: void*/
     {
@@ -255,7 +255,7 @@ class RuleFormGUI extends ObjectPropertyFormGUI
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function initTitle()/*: void*/
     {
@@ -264,7 +264,7 @@ class RuleFormGUI extends ObjectPropertyFormGUI
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function storeValue(/*string*/ $key, $value)/*: void*/
     {

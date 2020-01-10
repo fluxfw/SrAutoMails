@@ -32,7 +32,7 @@ class OrgUnitObjectType extends ObjObjectType
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function getMailPlaceholderKeyTypes() : array
     {
@@ -43,7 +43,7 @@ class OrgUnitObjectType extends ObjObjectType
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function getObjectProperties() : array
     {
@@ -69,7 +69,7 @@ class OrgUnitObjectType extends ObjObjectType
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function getObjects() : array
     {
@@ -78,7 +78,7 @@ class OrgUnitObjectType extends ObjObjectType
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function getReceiverProperties() : array
     {

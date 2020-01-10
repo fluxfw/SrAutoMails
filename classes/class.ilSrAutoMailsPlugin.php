@@ -98,7 +98,7 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function promoteGlobalScreenProvider() : AbstractStaticPluginMainMenuProvider
     {
@@ -107,7 +107,7 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected function deleteData()/*: void*/
     {

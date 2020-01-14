@@ -36,7 +36,7 @@ class Notification extends ActiveRecord implements NotificationInterface
 
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getConnectorContainerName()
     {
@@ -45,7 +45,7 @@ class Notification extends ActiveRecord implements NotificationInterface
 
 
     /**
-     * @return string
+     * @inheritDoc
      *
      * @deprecated
      */

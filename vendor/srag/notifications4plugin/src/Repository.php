@@ -6,8 +6,8 @@ use LogicException;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\DIC\SrAutoMails\Plugin\PluginInterface;
 use srag\DIC\SrAutoMails\Util\LibraryLanguageInstaller;
-use srag\Notifications4Plugin\SrAutoMails\Notification\Repository as NotificationRepository;
-use srag\Notifications4Plugin\SrAutoMails\Notification\RepositoryInterface as NotificationRepositoryInterface;
+use srag\Notifications4Plugin\SrAutoMails\Notification\Repository as NotificationsRepository;
+use srag\Notifications4Plugin\SrAutoMails\Notification\RepositoryInterface as NotificationsRepositoryInterface;
 use srag\Notifications4Plugin\SrAutoMails\Parser\Repository as ParserRepository;
 use srag\Notifications4Plugin\SrAutoMails\Parser\RepositoryInterface as ParserRepositoryInterface;
 use srag\Notifications4Plugin\SrAutoMails\Sender\Repository as SenderRepository;
@@ -41,6 +41,20 @@ final class Repository implements RepositoryInterface
 
         return self::$instance;
     }
+
+
+    /**
+     * @var string
+     */
+    protected $table_name_prefix = "";
+    /**
+     * @var PluginInterface
+     */
+    protected $plugin;
+    /**
+     * @var array
+     */
+    protected $placeholder_types;
 
 
     /**
@@ -126,9 +140,9 @@ final class Repository implements RepositoryInterface
     /**
      * @inheritDoc
      */
-    public function notifications() : NotificationRepositoryInterface
+    public function notifications() : NotificationsRepositoryInterface
     {
-        return NotificationRepository::getInstance();
+        return NotificationsRepository::getInstance();
     }
 
 

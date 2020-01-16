@@ -318,7 +318,6 @@ return array(
     'srag\\Plugins\\SrAutoMails\\Access\\Metadata' => $baseDir . '/src/Access/Metadata.php',
     'srag\\Plugins\\SrAutoMails\\Access\\OrgUnits' => $baseDir . '/src/Access/OrgUnits.php',
     'srag\\Plugins\\SrAutoMails\\Access\\Users' => $baseDir . '/src/Access/Users.php',
-    'srag\\Plugins\\SrAutoMails\\Config\\Config' => $baseDir . '/src/Config/Config.php',
     'srag\\Plugins\\SrAutoMails\\Job\\Job' => $baseDir . '/src/Job/Job.php',
     'srag\\Plugins\\SrAutoMails\\Menu\\Menu' => $baseDir . '/src/Menu/Menu.php',
     'srag\\Plugins\\SrAutoMails\\ObjectType\\Factory' => $baseDir . '/src/ObjectType/Factory.php',

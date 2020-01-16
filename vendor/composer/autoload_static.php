@@ -373,7 +373,6 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         'srag\\Plugins\\SrAutoMails\\Access\\Metadata' => __DIR__ . '/../..' . '/src/Access/Metadata.php',
         'srag\\Plugins\\SrAutoMails\\Access\\OrgUnits' => __DIR__ . '/../..' . '/src/Access/OrgUnits.php',
         'srag\\Plugins\\SrAutoMails\\Access\\Users' => __DIR__ . '/../..' . '/src/Access/Users.php',
-        'srag\\Plugins\\SrAutoMails\\Config\\Config' => __DIR__ . '/../..' . '/src/Config/Config.php',
         'srag\\Plugins\\SrAutoMails\\Job\\Job' => __DIR__ . '/../..' . '/src/Job/Job.php',
         'srag\\Plugins\\SrAutoMails\\Menu\\Menu' => __DIR__ . '/../..' . '/src/Menu/Menu.php',
         'srag\\Plugins\\SrAutoMails\\ObjectType\\Factory' => __DIR__ . '/../..' . '/src/ObjectType/Factory.php',

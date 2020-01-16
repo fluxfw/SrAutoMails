@@ -184,7 +184,7 @@ class RuleMailConfigGUI
 
         self::dic()->ctrl()->setParameter($this, self::GET_PARAM_RULE_ID, $this->rule->getRuleId());
 
-        ilUtil::sendSuccess(self::plugin()->translate("added_rule", RulesMailConfigGUI::LANG_MODULE, [$form->getObject()->getTitle()]), true);
+        ilUtil::sendSuccess(self::plugin()->translate("added_rule", RulesMailConfigGUI::LANG_MODULE, [$this->rule->getTitle()]), true);
 
         self::dic()->ctrl()->redirect($this, self::CMD_EDIT_RULE);
     }

@@ -10,7 +10,8 @@ use ilSelectInputGUI;
 use ilSrAutoMailsPlugin;
 use ilTextInputGUI;
 use srag\CustomInputGUIs\SrAutoMails\MultiSelectSearchInputGUI\MultiSelectSearchInputGUI;
-use srag\CustomInputGUIs\SrAutoMails\PropertyFormGUI\ObjectPropertyFormGUI;
+use srag\CustomInputGUIs\SrAutoMails\PropertyFormGUI\Items\Items;
+use srag\CustomInputGUIs\SrAutoMails\PropertyFormGUI\PropertyFormGUI;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
@@ -20,7 +21,7 @@ use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-class RuleFormGUI extends ObjectPropertyFormGUI
+class RuleFormGUI extends PropertyFormGUI
 {
 
     use SrAutoMailsTrait;
@@ -29,18 +30,20 @@ class RuleFormGUI extends ObjectPropertyFormGUI
     /**
      * @var Rule
      */
-    protected $object;
+    protected $rule;
 
 
     /**
      * RuleFormGUI constructor
      *
      * @param RuleMailConfigGUI $parent
-     * @param Rule              $object
+     * @param Rule              $rule
      */
-    public function __construct(RuleMailConfigGUI $parent, Rule $object)
+    public function __construct(RuleMailConfigGUI $parent, Rule $rule)
     {
-        parent::__construct($parent, $object, false);
+        $this->rule = $rule;
+
+        parent::__construct($parent);
     }
 
 
@@ -51,34 +54,34 @@ class RuleFormGUI extends ObjectPropertyFormGUI
     {
         switch ($key) {
             case "operator_value_text":
-                if ($this->object->getOperatorValueType() === Rule::OPERATOR_VALUE_TYPE_TEXT) {
-                    return parent::getValue("operator_value");
+                if ($this->rule->getOperatorValueType() === Rule::OPERATOR_VALUE_TYPE_TEXT) {
+                    return Items::getter($this->rule, "operator_value");
                 }
                 break;
 
             case "operator_value_object_property":
-                if ($this->object->getOperatorValueType() === Rule::OPERATOR_VALUE_TYPE_OBJECT_PROPERTY) {
-                    return parent::getValue("operator_value");
+                if ($this->rule->getOperatorValueType() === Rule::OPERATOR_VALUE_TYPE_OBJECT_PROPERTY) {
+                    return Items::getter($this->rule, "operator_value");
                 }
                 break;
 
             case "receiver":
-                return parent::getValue("receiver_type");
+                return Items::getter($this->rule, "receiver_type");
 
             case "receiver_object":
-                if ($this->object->getReceiverType() === Rule::RECEIVER_TYPE_OBJECT) {
-                    return parent::getValue("receiver");
+                if ($this->rule->getReceiverType() === Rule::RECEIVER_TYPE_OBJECT) {
+                    return Items::getter($this->rule, "receiver");
                 }
                 break;
 
             case "receiver_users":
-                if ($this->object->getReceiverType() === Rule::RECEIVER_TYPE_USERS) {
-                    return parent::getValue("receiver");
+                if ($this->rule->getReceiverType() === Rule::RECEIVER_TYPE_USERS) {
+                    return Items::getter($this->rule, "receiver");
                 }
                 break;
 
             default:
-                return parent::getValue($key);
+                return Items::getter($this->rule, $key);
         }
 
         return null;
@@ -90,7 +93,7 @@ class RuleFormGUI extends ObjectPropertyFormGUI
      */
     protected function initCommands()/*: void*/
     {
-        if (!empty($this->object->getRuleId())) {
+        if (!empty($this->rule->getRuleId())) {
             $this->addCommandButton(RuleMailConfigGUI::CMD_UPDATE_RULE, $this->txt("save"));
         } else {
             $this->addCommandButton(RuleMailConfigGUI::CMD_CREATE_RULE, $this->txt("add"));
@@ -109,13 +112,13 @@ class RuleFormGUI extends ObjectPropertyFormGUI
                 self::PROPERTY_CLASS    => ilSelectInputGUI::class,
                 self::PROPERTY_REQUIRED => true,
                 self::PROPERTY_OPTIONS  => ["" => ""] + self::srAutoMails()->objectTypes()->getObjectTypesText(),
-                self::PROPERTY_DISABLED => (!empty($this->object->getRuleId()))
+                self::PROPERTY_DISABLED => (!empty($this->rule->getRuleId()))
             ]
         ];
 
-        if (!empty($this->object->getRuleId())) {
-            $object_type_definiton = self::srAutoMails()->objectTypes()->factory()->getByObjectType($this->object->getObjectType());
-            $object = $this->fields["object_type"][self::PROPERTY_OPTIONS][$this->object->getObjectType()];
+        if (!empty($this->rule->getRuleId())) {
+            $object_type_definiton = self::srAutoMails()->objectTypes()->factory()->getByObjectType($this->rule->getObjectType());
+            $object = $this->fields["object_type"][self::PROPERTY_OPTIONS][$this->rule->getObjectType()];
 
             $this->fields = array_merge($this->fields, [
                 "enabled"       => [
@@ -259,7 +262,7 @@ class RuleFormGUI extends ObjectPropertyFormGUI
      */
     protected function initTitle()/*: void*/
     {
-        $this->setTitle($this->txt(!empty($this->object->getRuleId()) ? "edit_rule" : "add_rule"));
+        $this->setTitle($this->txt(!empty($this->rule->getRuleId()) ? "edit_rule" : "add_rule"));
     }
 
 
@@ -270,41 +273,41 @@ class RuleFormGUI extends ObjectPropertyFormGUI
     {
         switch ($key) {
             case "object_type":
-                if (empty($this->object->getRuleId())) {
-                    parent::storeValue("object_type", $value);
+                if (empty($this->rule->getRuleId())) {
+                    Items::setter($this->rule, "object_type", $value);
                 }
                 break;
 
             case "operator_value_text":
-                if ($this->object->getOperatorValueType() === Rule::OPERATOR_VALUE_TYPE_TEXT) {
-                    parent::storeValue("operator_value", $value);
+                if ($this->rule->getOperatorValueType() === Rule::OPERATOR_VALUE_TYPE_TEXT) {
+                    Items::setter($this->rule, "operator_value", $value);
                 }
                 break;
 
             case "operator_value_object_property":
-                if ($this->object->getOperatorValueType() === Rule::OPERATOR_VALUE_TYPE_OBJECT_PROPERTY) {
-                    parent::storeValue("operator_value", $value);
+                if ($this->rule->getOperatorValueType() === Rule::OPERATOR_VALUE_TYPE_OBJECT_PROPERTY) {
+                    Items::setter($this->rule, "operator_value", $value);
                 }
                 break;
 
             case "receiver":
-                parent::storeValue("receiver_type", $value);
+                Items::setter($this->rule, "receiver_type", $value);
                 break;
 
             case "receiver_object":
-                if ($this->object->getReceiverType() === Rule::RECEIVER_TYPE_OBJECT) {
-                    parent::storeValue("receiver", $value);
+                if ($this->rule->getReceiverType() === Rule::RECEIVER_TYPE_OBJECT) {
+                    Items::setter($this->rule, "receiver", $value);
                 }
                 break;
 
             case "receiver_users":
-                if ($this->object->getReceiverType() === Rule::RECEIVER_TYPE_USERS) {
-                    parent::storeValue("receiver", $value);
+                if ($this->rule->getReceiverType() === Rule::RECEIVER_TYPE_USERS) {
+                    Items::setter($this->rule, "receiver", $value);
                 }
                 break;
 
             default:
-                parent::storeValue($key, $value);
+                Items::setter($this->rule, $key, $value);
                 break;
         }
     }
@@ -319,7 +322,7 @@ class RuleFormGUI extends ObjectPropertyFormGUI
             return false;
         }
 
-        self::srAutoMails()->rules()->storeRule($this->object);
+        self::srAutoMails()->rules()->storeRule($this->rule);
 
         return true;
     }

@@ -12,5 +12,5 @@ return array(
     'srag\\LibrariesNamespaceChanger\\' => array($vendorDir . '/srag/librariesnamespacechanger/src'),
     'srag\\DIC\\SrAutoMails\\' => array($vendorDir . '/srag/dic/src'),
     'srag\\CustomInputGUIs\\SrAutoMails\\' => array($vendorDir . '/srag/custominputguis/src'),
-    'srag\\ActiveRecordConfig\\' => array($vendorDir . '/srag/activerecordconfig/src'),
+    'srag\\ActiveRecordConfig\\SrAutoMails\\' => array($vendorDir . '/srag/activerecordconfig/src'),
 );

@@ -3,12 +3,11 @@
 namespace srag\Plugins\SrAutoMails;
 
 use ilSrAutoMailsPlugin;
-use srag\ActiveRecordConfig\SrAutoMails\Config\Repository as ConfigRepository;
-use srag\ActiveRecordConfig\SrAutoMails\Utils\ConfigTrait;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\Notifications4Plugin\SrAutoMails\RepositoryInterface as Notifications4PluginRepositoryInterface;
 use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
 use srag\Plugins\SrAutoMails\Access\Ilias;
+use srag\Plugins\SrAutoMails\Config\Repository as ConfigRepository;
 use srag\Plugins\SrAutoMails\ObjectType\Repository as ObjectTypesRepository;
 use srag\Plugins\SrAutoMails\Rule\Repository as RulesRepository;
 use srag\Plugins\SrAutoMails\Sent\Repository as SentsRepository;
@@ -26,9 +25,6 @@ final class Repository
 
     use DICTrait;
     use SrAutoMailsTrait;
-    use ConfigTrait {
-        config as protected _config;
-    }
     use Notifications4PluginTrait {
         notifications4plugin as protected _notifications4plugin;
     }
@@ -57,18 +53,16 @@ final class Repository
      */
     private function __construct()
     {
-        $this->config()->withTableName(ilSrAutoMailsPlugin::PLUGIN_ID . "_config")->withFields([]);
-
         $this->notifications4plugin()->withTableNamePrefix(ilSrAutoMailsPlugin::PLUGIN_ID)->withPlugin(self::plugin());
     }
 
 
     /**
-     * @inheritDoc
+     * @return ConfigRepository
      */
     public function config() : ConfigRepository
     {
-        return self::_config();
+        return ConfigRepository::getInstance();
     }
 
 

@@ -15,7 +15,7 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
             'srag\\LibrariesNamespaceChanger\\' => 31,
             'srag\\DIC\\SrAutoMails\\' => 21,
             'srag\\CustomInputGUIs\\SrAutoMails\\' => 33,
-            'srag\\ActiveRecordConfig\\' => 24,
+            'srag\\ActiveRecordConfig\\SrAutoMails\\' => 36,
         ),
     );
 
@@ -44,7 +44,7 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         array (
             0 => __DIR__ . '/..' . '/srag/custominputguis/src',
         ),
-        'srag\\ActiveRecordConfig\\' => 
+        'srag\\ActiveRecordConfig\\SrAutoMails\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/activerecordconfig/src',
         ),
@@ -241,15 +241,16 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         'ilSrAutoMailsConfigGUI' => __DIR__ . '/../..' . '/classes/class.ilSrAutoMailsConfigGUI.php',
         'ilSrAutoMailsPlugin' => __DIR__ . '/../..' . '/classes/class.ilSrAutoMailsPlugin.php',
         'srag\\ActiveRecordConfig\\SrAutoMails\\ActiveRecordConfig' => __DIR__ . '/..' . '/srag/activerecordconfig/src/ActiveRecordConfig.php',
+        'srag\\ActiveRecordConfig\\SrAutoMails\\ActiveRecordConfigFactory' => __DIR__ . '/..' . '/srag/activerecordconfig/src/ActiveRecordConfig.php',
         'srag\\ActiveRecordConfig\\SrAutoMails\\ActiveRecordConfigFormGUI' => __DIR__ . '/..' . '/srag/activerecordconfig/src/ActiveRecordConfigFormGUI.php',
         'srag\\ActiveRecordConfig\\SrAutoMails\\ActiveRecordConfigGUI' => __DIR__ . '/..' . '/srag/activerecordconfig/src/ActiveRecordConfigGUI.php',
+        'srag\\ActiveRecordConfig\\SrAutoMails\\ActiveRecordConfigRepository' => __DIR__ . '/..' . '/srag/activerecordconfig/src/ActiveRecordConfig.php',
         'srag\\ActiveRecordConfig\\SrAutoMails\\ActiveRecordConfigTableGUI' => __DIR__ . '/..' . '/srag/activerecordconfig/src/ActiveRecordConfigTableGUI.php',
         'srag\\ActiveRecordConfig\\SrAutoMails\\ActiveRecordObjectFormGUI' => __DIR__ . '/..' . '/srag/activerecordconfig/src/ActiveRecordObjectFormGUI.php',
+        'srag\\ActiveRecordConfig\\SrAutoMails\\Config\\AbstractFactory' => __DIR__ . '/..' . '/srag/activerecordconfig/src/Config/AbstractFactory.php',
+        'srag\\ActiveRecordConfig\\SrAutoMails\\Config\\AbstractRepository' => __DIR__ . '/..' . '/srag/activerecordconfig/src/Config/AbstractRepository.php',
         'srag\\ActiveRecordConfig\\SrAutoMails\\Config\\Config' => __DIR__ . '/..' . '/srag/activerecordconfig/src/Config/Config.php',
-        'srag\\ActiveRecordConfig\\SrAutoMails\\Config\\Factory' => __DIR__ . '/..' . '/srag/activerecordconfig/src/Config/Factory.php',
-        'srag\\ActiveRecordConfig\\SrAutoMails\\Config\\Repository' => __DIR__ . '/..' . '/srag/activerecordconfig/src/Config/Repository.php',
         'srag\\ActiveRecordConfig\\SrAutoMails\\Exception\\ActiveRecordConfigException' => __DIR__ . '/..' . '/srag/activerecordconfig/src/Exception/ActiveRecordConfigException.php',
-        'srag\\ActiveRecordConfig\\SrAutoMails\\Utils\\ConfigTrait' => __DIR__ . '/..' . '/srag/activerecordconfig/src/Utils/ConfigTrait.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\CheckboxInputGUI\\CheckboxInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/CheckboxInputGUI/CheckboxInputGUI.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\CustomInputGUIs' => __DIR__ . '/..' . '/srag/custominputguis/src/CustomInputGUIs.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\CustomInputGUIsTrait' => __DIR__ . '/..' . '/srag/custominputguis/src/CustomInputGUIsTrait.php',
@@ -373,6 +374,8 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         'srag\\Plugins\\SrAutoMails\\Access\\Metadata' => __DIR__ . '/../..' . '/src/Access/Metadata.php',
         'srag\\Plugins\\SrAutoMails\\Access\\OrgUnits' => __DIR__ . '/../..' . '/src/Access/OrgUnits.php',
         'srag\\Plugins\\SrAutoMails\\Access\\Users' => __DIR__ . '/../..' . '/src/Access/Users.php',
+        'srag\\Plugins\\SrAutoMails\\Config\\Factory' => __DIR__ . '/../..' . '/src/Config/Factory.php',
+        'srag\\Plugins\\SrAutoMails\\Config\\Repository' => __DIR__ . '/../..' . '/src/Config/Repository.php',
         'srag\\Plugins\\SrAutoMails\\Job\\Job' => __DIR__ . '/../..' . '/src/Job/Job.php',
         'srag\\Plugins\\SrAutoMails\\Menu\\Menu' => __DIR__ . '/../..' . '/src/Menu/Menu.php',
         'srag\\Plugins\\SrAutoMails\\ObjectType\\Factory' => __DIR__ . '/../..' . '/src/ObjectType/Factory.php',

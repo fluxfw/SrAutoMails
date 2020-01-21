@@ -1,6 +1,6 @@
 <?php
 
-namespace srag\Plugins\SrAutoMails\Job;
+namespace srag\Plugins\SrAutoMails\Rule;
 
 use ilCronJob;
 use ilCronJobResult;
@@ -10,15 +10,13 @@ use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\Notifications4Plugin\SrAutoMails\Exception\Notifications4PluginException;
 use srag\Plugins\SrAutoMails\ObjectType\ObjectType;
-use srag\Plugins\SrAutoMails\Rule\Rule;
-use srag\Plugins\SrAutoMails\Rule\RulesMailConfigGUI;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 use Throwable;
 
 /**
  * Class RulesJob
  *
- * @package srag\Plugins\SrAutoMails\Job
+ * @package srag\Plugins\SrAutoMails\Rule
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */

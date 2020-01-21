@@ -4,7 +4,6 @@ namespace srag\Plugins\SrAutoMails\Rule;
 
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
-use srag\Plugins\SrAutoMails\Job\RulesJob;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**

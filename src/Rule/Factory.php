@@ -4,6 +4,7 @@ namespace srag\Plugins\SrAutoMails\Rule;
 
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
+use srag\Plugins\SrAutoMails\Job\RulesJob;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
@@ -83,5 +84,16 @@ final class Factory
         $form = new RuleFormGUI($parent, $rule);
 
         return $form;
+    }
+
+
+    /**
+     * @return RulesJob
+     */
+    public function newJobInstance() : RulesJob
+    {
+        $job = new RulesJob();
+
+        return $job;
     }
 }

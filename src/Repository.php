@@ -8,6 +8,7 @@ use srag\Notifications4Plugin\SrAutoMails\RepositoryInterface as Notifications4P
 use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
 use srag\Plugins\SrAutoMails\Access\Ilias;
 use srag\Plugins\SrAutoMails\Config\Repository as ConfigRepository;
+use srag\Plugins\SrAutoMails\Job\Repository as JobsRepository;
 use srag\Plugins\SrAutoMails\ObjectType\Repository as ObjectTypesRepository;
 use srag\Plugins\SrAutoMails\Rule\Repository as RulesRepository;
 use srag\Plugins\SrAutoMails\Sent\Repository as SentsRepository;
@@ -72,6 +73,7 @@ final class Repository
     public function dropTables()/*: void*/
     {
         $this->config()->dropTables();
+        $this->jobs()->dropTables();
         $this->notifications4plugin()->dropTables();
         $this->objectTypes()->dropTables();
         $this->rules()->dropTables();
@@ -94,10 +96,20 @@ final class Repository
     public function installTables()/*: void*/
     {
         $this->config()->installTables();
+        $this->jobs()->installTables();
         $this->notifications4plugin()->installTables();
         $this->objectTypes()->installTables();
         $this->rules()->installTables();
         $this->sents()->installTables();
+    }
+
+
+    /**
+     * @return JobsRepository
+     */
+    public function jobs() : JobsRepository
+    {
+        return JobsRepository::getInstance();
     }
 
 

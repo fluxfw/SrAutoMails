@@ -11,28 +11,28 @@ use srag\DIC\SrAutoMails\DICTrait;
 use srag\Notifications4Plugin\SrAutoMails\Exception\Notifications4PluginException;
 use srag\Plugins\SrAutoMails\ObjectType\ObjectType;
 use srag\Plugins\SrAutoMails\Rule\Rule;
+use srag\Plugins\SrAutoMails\Rule\RulesMailConfigGUI;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 use Throwable;
 
 /**
- * Class Job
+ * Class RulesJob
  *
  * @package srag\Plugins\SrAutoMails\Job
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-class Job extends ilCronJob
+class RulesJob extends ilCronJob
 {
 
     use DICTrait;
     use SrAutoMailsTrait;
     const CRON_JOB_ID = ilSrAutoMailsPlugin::PLUGIN_ID;
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
-    const LANG_MODULE_CRON = "cron";
 
 
     /**
-     * Job constructor
+     * RulesJob constructor
      */
     public function __construct()
     {
@@ -165,7 +165,7 @@ class Job extends ilCronJob
 
         $result->setStatus(ilCronJobResult::STATUS_OK);
 
-        $result->setMessage(nl2br(str_replace("\\n", "\n", self::plugin()->translate("status", self::LANG_MODULE_CRON, [
+        $result->setMessage(nl2br(str_replace("\\n", "\n", self::plugin()->translate("cron_status", RulesMailConfigGUI::LANG_MODULE, [
             count($rules),
             $sent_mails_count
         ])), false));

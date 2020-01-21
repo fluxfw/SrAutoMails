@@ -9,18 +9,18 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
     public static $prefixLengthsPsr4 = array (
         's' => 
         array (
-            'srag\\RemovePluginDataConfirm\\SrAutoMails\\' => 41,
+            'srag\\RemovePluginDataConfirm\\' => 29,
             'srag\\Plugins\\SrAutoMails\\' => 25,
             'srag\\Notifications4Plugin\\SrAutoMails\\' => 38,
             'srag\\LibrariesNamespaceChanger\\' => 31,
             'srag\\DIC\\SrAutoMails\\' => 21,
             'srag\\CustomInputGUIs\\SrAutoMails\\' => 33,
-            'srag\\ActiveRecordConfig\\SrAutoMails\\' => 36,
+            'srag\\ActiveRecordConfig\\' => 24,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'srag\\RemovePluginDataConfirm\\SrAutoMails\\' => 
+        'srag\\RemovePluginDataConfirm\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/removeplugindataconfirm/src',
         ),
@@ -44,7 +44,7 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         array (
             0 => __DIR__ . '/..' . '/srag/custominputguis/src',
         ),
-        'srag\\ActiveRecordConfig\\SrAutoMails\\' => 
+        'srag\\ActiveRecordConfig\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/activerecordconfig/src',
         ),
@@ -376,7 +376,9 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         'srag\\Plugins\\SrAutoMails\\Access\\Users' => __DIR__ . '/../..' . '/src/Access/Users.php',
         'srag\\Plugins\\SrAutoMails\\Config\\Factory' => __DIR__ . '/../..' . '/src/Config/Factory.php',
         'srag\\Plugins\\SrAutoMails\\Config\\Repository' => __DIR__ . '/../..' . '/src/Config/Repository.php',
-        'srag\\Plugins\\SrAutoMails\\Job\\Job' => __DIR__ . '/../..' . '/src/Job/Job.php',
+        'srag\\Plugins\\SrAutoMails\\Job\\Factory' => __DIR__ . '/../..' . '/src/Job/Factory.php',
+        'srag\\Plugins\\SrAutoMails\\Job\\Repository' => __DIR__ . '/../..' . '/src/Job/Repository.php',
+        'srag\\Plugins\\SrAutoMails\\Job\\RulesJob' => __DIR__ . '/../..' . '/src/Rule/RulesJob.php',
         'srag\\Plugins\\SrAutoMails\\Menu\\Menu' => __DIR__ . '/../..' . '/src/Menu/Menu.php',
         'srag\\Plugins\\SrAutoMails\\ObjectType\\Factory' => __DIR__ . '/../..' . '/src/ObjectType/Factory.php',
         'srag\\Plugins\\SrAutoMails\\ObjectType\\ObjectType' => __DIR__ . '/../..' . '/src/ObjectType/ObjectType.php',

@@ -3,8 +3,6 @@
 require_once __DIR__ . "/../vendor/autoload.php";
 
 use ILIAS\GlobalScreen\Scope\MainMenu\Provider\AbstractStaticPluginMainMenuProvider;
-use srag\DIC\SrAutoMails\Util\LibraryLanguageInstaller;
-use srag\Plugins\SrAutoMails\Job\Job;
 use srag\Plugins\SrAutoMails\Menu\Menu;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 use srag\RemovePluginDataConfirm\SrAutoMails\PluginUninstallTrait;
@@ -64,7 +62,7 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin
      */
     public function getCronJobInstances() : array
     {
-        return [new Job()];
+        return self::srAutoMails()->jobs()->factory()->newInstances();
     }
 
 
@@ -73,13 +71,7 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin
      */
     public function getCronJobInstance(/*string*/ $a_job_id)/*: ?ilCronJob*/
     {
-        switch ($a_job_id) {
-            case Job::CRON_JOB_ID:
-                return new Job();
-
-            default:
-                return null;
-        }
+        return self::srAutoMails()->jobs()->factory()->newInstanceById($a_job_id);
     }
 
 
@@ -90,8 +82,7 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin
     {
         parent::updateLanguages($a_lang_keys);
 
-        LibraryLanguageInstaller::getInstance()->withPlugin(self::plugin())->withLibraryLanguageDirectory(__DIR__
-            . "/../vendor/srag/removeplugindataconfirm/lang")->updateLanguages();
+        $this->installRemovePluginDataConfirmLanguages();
 
         self::srAutoMails()->notifications4plugin()->installLanguages();
     }

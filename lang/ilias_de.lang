@@ -5,6 +5,7 @@ rules_added_rule#:#Regel %s hinzugefügt
 rules_cancel#:#Abbrechen
 rules_configuration#:#Konfiguration
 rules_configuration_saved#:#Konfiguration gespeichert
+rules_cron_status#:#%1$s Regel(n) geprüft\n%2$s Mail(s) versendet
 rules_description#:#Beschreibung
 rules_disable_rules#:#Regeln deaktivieren
 rules_disabled_rules#:#Regeln deaktiviert
@@ -74,4 +75,3 @@ rules_save#:#Speichern
 rules_saved_rule#:#Regel %s gespeichert
 rules_title#:#Titel
 rules_yes#:#Ja
-cron_status#:#%1$s Regel(n) geprüft\n%2$s Mail(s) versendet

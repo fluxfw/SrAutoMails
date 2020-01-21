@@ -5,6 +5,7 @@ rules_added_rule#:#Rule %s added
 rules_cancel#:#Cancel
 rules_configuration#:#Configuration
 rules_configuration_saved#:#Configuration saved
+rules_cron_status#:#%1$s rule(s) checked\n%2$s mail(s) sent
 rules_description#:#Description
 rules_disable_rules#:#Disable rules
 rules_disabled_rules#:#Rules disabled
@@ -74,4 +75,3 @@ rules_save#:#Save
 rules_saved_rule#:#Rule %s saved
 rules_title#:#Title
 rules_yes#:#Yes
-cron_status#:#%1$s rule(s) checked\n%2$s mail(s) sent

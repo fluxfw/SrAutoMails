@@ -9,7 +9,7 @@ use ilRadioOption;
 use ilSelectInputGUI;
 use ilSrAutoMailsPlugin;
 use ilTextInputGUI;
-use srag\CustomInputGUIs\SrAutoMails\MultiSelectSearchInputGUI\MultiSelectSearchInputGUI;
+use srag\CustomInputGUIs\SrAutoMails\MultiSelectSearchNewInputGUI\MultiSelectSearchNewInputGUI;
 use srag\CustomInputGUIs\SrAutoMails\PropertyFormGUI\Items\Items;
 use srag\CustomInputGUIs\SrAutoMails\PropertyFormGUI\PropertyFormGUI;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
@@ -222,7 +222,7 @@ class RuleFormGUI extends PropertyFormGUI
                             self::PROPERTY_CLASS    => ilRadioOption::class,
                             self::PROPERTY_SUBITEMS => [
                                 "receiver_object" => [
-                                    self::PROPERTY_CLASS    => MultiSelectSearchInputGUI::class,
+                                    self::PROPERTY_CLASS    => MultiSelectSearchNewInputGUI::class,
                                     self::PROPERTY_REQUIRED => true,
                                     self::PROPERTY_OPTIONS  => $object_type_definiton->getReceiverPropertiesText(),
                                     "setTitle"              => $object
@@ -234,7 +234,7 @@ class RuleFormGUI extends PropertyFormGUI
                             self::PROPERTY_CLASS    => ilRadioOption::class,
                             self::PROPERTY_SUBITEMS => [
                                 "receiver_users" => [
-                                    self::PROPERTY_CLASS    => MultiSelectSearchInputGUI::class,
+                                    self::PROPERTY_CLASS    => MultiSelectSearchNewInputGUI::class,
                                     self::PROPERTY_REQUIRED => true,
                                     self::PROPERTY_OPTIONS  => self::srAutoMails()->ilias()->users()->getUsers()
                                 ]

@@ -56,11 +56,11 @@ class RulesTableGUI extends TableGUI
                 break;
 
             case "object_type":
-                $column = self::srAutoMails()->objectTypes()->getObjectTypesText()[$rule->getObjectType()];
+                $column = htmlspecialchars(self::srAutoMails()->objectTypes()->getObjectTypesText()[$rule->getObjectType()]);
                 break;
 
             default:
-                $column = Items::getter($rule, $column);
+                $column = htmlspecialchars(Items::getter($rule, $column));
                 break;
         }
 

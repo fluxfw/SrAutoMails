@@ -202,8 +202,8 @@ class RulesTableGUI extends TableGUI
         self::dic()->ctrl()->setParameterByClass(RuleMailConfigGUI::class, RuleMailConfigGUI::GET_PARAM_RULE_ID, $rule->getRuleId());
 
         $this->tpl->setCurrentBlock("checkbox");
-        $this->tpl->setVariable("CHECKBOX_POST_VAR", RuleMailConfigGUI::GET_PARAM_RULE_ID);
-        $this->tpl->setVariable("ID", $rule->getRuleId());
+        $this->tpl->setVariableEscaped("CHECKBOX_POST_VAR", RuleMailConfigGUI::GET_PARAM_RULE_ID);
+        $this->tpl->setVariableEscaped("ID", $rule->getRuleId());
         $this->tpl->parseCurrentBlock();
 
         parent::fillRow($rule);

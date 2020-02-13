@@ -13,7 +13,7 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
             'srag\\Plugins\\SrAutoMails\\' => 25,
             'srag\\Notifications4Plugin\\' => 26,
             'srag\\LibrariesNamespaceChanger\\' => 31,
-            'srag\\DIC\\SrAutoMails\\' => 21,
+            'srag\\DIC\\' => 9,
             'srag\\CustomInputGUIs\\' => 21,
             'srag\\ActiveRecordConfig\\' => 24,
         ),
@@ -36,7 +36,7 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         array (
             0 => __DIR__ . '/..' . '/srag/librariesnamespacechanger/src',
         ),
-        'srag\\DIC\\SrAutoMails\\' => 
+        'srag\\DIC\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/dic/src',
         ),
@@ -353,6 +353,7 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\NotificationsTableGUI' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/NotificationsTableGUI.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\Repository' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/Repository.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\RepositoryInterface' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/RepositoryInterface.php',
+        'srag\\Notifications4Plugin\\SrAutoMails\\Parser\\AbstractParser' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Parser/AbstractParser.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Parser\\Factory' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Parser/Factory.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Parser\\FactoryInterface' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Parser/FactoryInterface.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Parser\\Parser' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Parser/Parser.php',

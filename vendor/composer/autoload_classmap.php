@@ -298,6 +298,7 @@ return array(
     'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\NotificationsTableGUI' => $vendorDir . '/srag/notifications4plugin/src/Notification/NotificationsTableGUI.php',
     'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\Repository' => $vendorDir . '/srag/notifications4plugin/src/Notification/Repository.php',
     'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\RepositoryInterface' => $vendorDir . '/srag/notifications4plugin/src/Notification/RepositoryInterface.php',
+    'srag\\Notifications4Plugin\\SrAutoMails\\Parser\\AbstractParser' => $vendorDir . '/srag/notifications4plugin/src/Parser/AbstractParser.php',
     'srag\\Notifications4Plugin\\SrAutoMails\\Parser\\Factory' => $vendorDir . '/srag/notifications4plugin/src/Parser/Factory.php',
     'srag\\Notifications4Plugin\\SrAutoMails\\Parser\\FactoryInterface' => $vendorDir . '/srag/notifications4plugin/src/Parser/FactoryInterface.php',
     'srag\\Notifications4Plugin\\SrAutoMails\\Parser\\Parser' => $vendorDir . '/srag/notifications4plugin/src/Parser/Parser.php',

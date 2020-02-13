@@ -163,10 +163,10 @@ class RulesJob extends ilCronJob
 
         $result->setStatus(ilCronJobResult::STATUS_OK);
 
-        $result->setMessage(nl2br(str_replace("\\n", "\n", self::plugin()->translate("cron_status", RulesMailConfigGUI::LANG_MODULE, [
+        $result->setMessage(nl2br(self::plugin()->translate("cron_status", RulesMailConfigGUI::LANG_MODULE, [
             count($rules),
             $sent_mails_count
-        ])), false));
+        ]), false));
 
         return $result;
     }

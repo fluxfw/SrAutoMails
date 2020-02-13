@@ -21,14 +21,12 @@ final class Repository
     use SrAutoMailsTrait;
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     const OBJECT_TYPE_COURSE = 1;
-    const OBJECT_TYPE_ORG_UNIT = 2;
     /**
      * @var array
      */
     protected static $object_types
         = [
-            self::OBJECT_TYPE_COURSE   => "course",
-            self::OBJECT_TYPE_ORG_UNIT => "org_unit"
+            self::OBJECT_TYPE_COURSE   => "course"
         ];
     /**
      * @var self

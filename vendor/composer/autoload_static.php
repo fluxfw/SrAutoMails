@@ -385,7 +385,6 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         'srag\\Plugins\\SrAutoMails\\ObjectType\\ObjectType' => __DIR__ . '/../..' . '/src/ObjectType/ObjectType.php',
         'srag\\Plugins\\SrAutoMails\\ObjectType\\Object\\CourseObjectType' => __DIR__ . '/../..' . '/src/ObjectType/Object/CourseObjectType.php',
         'srag\\Plugins\\SrAutoMails\\ObjectType\\Object\\ObjObjectType' => __DIR__ . '/../..' . '/src/ObjectType/Object/ObjObjectType.php',
-        'srag\\Plugins\\SrAutoMails\\ObjectType\\Object\\OrgUnitObjectType' => __DIR__ . '/../..' . '/src/ObjectType/Object/OrgUnitObjectType.php',
         'srag\\Plugins\\SrAutoMails\\ObjectType\\Repository' => __DIR__ . '/../..' . '/src/ObjectType/Repository.php',
         'srag\\Plugins\\SrAutoMails\\Repository' => __DIR__ . '/../..' . '/src/Repository.php',
         'srag\\Plugins\\SrAutoMails\\Rule\\Factory' => __DIR__ . '/../..' . '/src/Rule/Factory.php',

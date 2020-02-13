@@ -32,7 +32,6 @@ rules_object_property_count_course_members_not_completed#:#Count members not com
 rules_object_property_course_end#:#Course end
 rules_object_property_course_start#:#Course start
 rules_object_type#:#Object type
-rules_object_org_unit#:#Org unit
 rules_operator#:#Operator
 rules_operator_bigger#:#Bigger than
 rules_operator_bigger_equals#:#Bigger than or is equals

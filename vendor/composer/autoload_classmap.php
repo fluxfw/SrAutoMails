@@ -330,7 +330,6 @@ return array(
     'srag\\Plugins\\SrAutoMails\\ObjectType\\ObjectType' => $baseDir . '/src/ObjectType/ObjectType.php',
     'srag\\Plugins\\SrAutoMails\\ObjectType\\Object\\CourseObjectType' => $baseDir . '/src/ObjectType/Object/CourseObjectType.php',
     'srag\\Plugins\\SrAutoMails\\ObjectType\\Object\\ObjObjectType' => $baseDir . '/src/ObjectType/Object/ObjObjectType.php',
-    'srag\\Plugins\\SrAutoMails\\ObjectType\\Object\\OrgUnitObjectType' => $baseDir . '/src/ObjectType/Object/OrgUnitObjectType.php',
     'srag\\Plugins\\SrAutoMails\\ObjectType\\Repository' => $baseDir . '/src/ObjectType/Repository.php',
     'srag\\Plugins\\SrAutoMails\\Repository' => $baseDir . '/src/Repository.php',
     'srag\\Plugins\\SrAutoMails\\Rule\\Factory' => $baseDir . '/src/Rule/Factory.php',

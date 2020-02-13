@@ -26,7 +26,6 @@ rules_metadata#:#Metadaten
 rules_no#:#Nein
 rules_notification#:#Benachrichtigung
 rules_object_course#:#Kurs
-rules_object_org_unit#:#Organisationseinheit
 rules_object_property_count_course_members#:#Anzahl Mitglieder
 rules_object_property_count_course_members_completed#:#Anzahl Mitglieder abgeschlossen
 rules_object_property_count_course_members_not_completed#:#Anzahl Mitglieder nicht abgeschlossen

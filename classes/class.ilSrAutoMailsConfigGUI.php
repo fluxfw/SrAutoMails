@@ -39,7 +39,7 @@ class ilSrAutoMailsConfigGUI extends ilPluginConfigGUI
         $next_class = self::dic()->ctrl()->getNextClass($this);
 
         switch (strtolower($next_class)) {
-            case strtolower(RulesMailConfigGUI::class);
+            case strtolower(RulesMailConfigGUI::class):
                 self::dic()->ctrl()->forwardCommand(new RulesMailConfigGUI());
                 break;
 

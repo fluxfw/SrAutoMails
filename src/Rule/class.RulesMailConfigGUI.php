@@ -53,7 +53,7 @@ class RulesMailConfigGUI
         $next_class = self::dic()->ctrl()->getNextClass($this);
 
         switch (strtolower($next_class)) {
-            case strtolower(RuleMailConfigGUI::class);
+            case strtolower(RuleMailConfigGUI::class):
                 self::dic()->ctrl()->forwardCommand(new RuleMailConfigGUI($this));
                 break;
 

@@ -181,7 +181,7 @@ class RulesTableGUI extends TableGUI
      */
     protected function initId()/*: void*/
     {
-        $this->setId("srauma_rules");
+        $this->setId(ilSrAutoMailsPlugin::PLUGIN_ID . "_rules");
     }
 
 

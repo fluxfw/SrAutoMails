@@ -23,7 +23,7 @@ final class Courses
     use SrAutoMailsTrait;
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     /**
-     * @var self
+     * @var self|null
      */
     protected static $instance = null;
 

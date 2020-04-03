@@ -29,7 +29,7 @@ final class Repository
             self::OBJECT_TYPE_COURSE   => "course"
         ];
     /**
-     * @var self
+     * @var self|null
      */
     protected static $instance = null;
 

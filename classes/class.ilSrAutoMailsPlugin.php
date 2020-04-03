@@ -3,7 +3,6 @@
 require_once __DIR__ . "/../vendor/autoload.php";
 
 use ILIAS\GlobalScreen\Scope\MainMenu\Provider\AbstractStaticPluginMainMenuProvider;
-use srag\Plugins\SrAutoMails\Menu\Menu;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 use srag\RemovePluginDataConfirm\SrAutoMails\PluginUninstallTrait;
 
@@ -93,7 +92,7 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin
      */
     public function promoteGlobalScreenProvider() : AbstractStaticPluginMainMenuProvider
     {
-        return new Menu(self::dic()->dic(), $this);
+        return self::srAutoMails()->menu();
     }
 
 

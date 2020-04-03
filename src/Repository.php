@@ -9,6 +9,7 @@ use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
 use srag\Plugins\SrAutoMails\Access\Ilias;
 use srag\Plugins\SrAutoMails\Config\Repository as ConfigRepository;
 use srag\Plugins\SrAutoMails\Job\Repository as JobsRepository;
+use srag\Plugins\SrAutoMails\Menu\Menu;
 use srag\Plugins\SrAutoMails\ObjectType\Repository as ObjectTypesRepository;
 use srag\Plugins\SrAutoMails\Rule\Repository as RulesRepository;
 use srag\Plugins\SrAutoMails\Sent\Repository as SentsRepository;
@@ -110,6 +111,15 @@ final class Repository
     public function jobs() : JobsRepository
     {
         return JobsRepository::getInstance();
+    }
+
+
+    /**
+     * @return Menu
+     */
+    public function menu() : Menu
+    {
+        return new Menu(self::dic()->dic(), self::plugin()->getPluginObject());
     }
 
 

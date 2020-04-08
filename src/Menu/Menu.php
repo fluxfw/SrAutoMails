@@ -37,7 +37,7 @@ class Menu extends AbstractStaticPluginMainMenuProvider
                 ->withAvailableCallable(function () : bool {
                     return self::plugin()->getPluginObject()->isActive();
                 })->withVisibilityCallable(function () : bool {
-                    return self::dic()->rbacreview()->isAssigned(self::dic()->user()->getId(), 2); // Default admin role
+                    return self::dic()->rbac()->review()->isAssigned(self::dic()->user()->getId(), 2); // Default admin role
                 })
         ];
     }
@@ -66,7 +66,7 @@ class Menu extends AbstractStaticPluginMainMenuProvider
                     ], ilSrAutoMailsConfigGUI::CMD_CONFIGURE))->withAvailableCallable(function () : bool {
                     return self::plugin()->getPluginObject()->isActive();
                 })->withVisibilityCallable(function () : bool {
-                    return self::dic()->rbacreview()->isAssigned(self::dic()->user()->getId(), 2); // Default admin role
+                    return self::dic()->rbac()->review()->isAssigned(self::dic()->user()->getId(), 2); // Default admin role
                 })
         ];
     }

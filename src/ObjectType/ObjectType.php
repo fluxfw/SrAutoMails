@@ -21,6 +21,7 @@ abstract class ObjectType
 
     use DICTrait;
     use SrAutoMailsTrait;
+
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
 
 

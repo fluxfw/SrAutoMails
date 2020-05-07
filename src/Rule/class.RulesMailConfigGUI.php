@@ -22,6 +22,7 @@ class RulesMailConfigGUI
 
     use DICTrait;
     use SrAutoMailsTrait;
+
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     const CMD_APPLY_FILTER = "applyFilter";
     const CMD_DISABLE_RULES = "disableRules";

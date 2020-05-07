@@ -25,6 +25,7 @@ class RulesJob extends ilCronJob
 
     use DICTrait;
     use SrAutoMailsTrait;
+
     const CRON_JOB_ID = ilSrAutoMailsPlugin::PLUGIN_ID;
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
 

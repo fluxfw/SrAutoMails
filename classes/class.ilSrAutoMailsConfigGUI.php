@@ -16,6 +16,7 @@ class ilSrAutoMailsConfigGUI extends ilPluginConfigGUI
 
     use DICTrait;
     use SrAutoMailsTrait;
+
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     const CMD_CONFIGURE = "configure";
 

@@ -18,6 +18,7 @@ class Sent extends ActiveRecord
 {
 
     use DICTrait;
+
     const TABLE_NAME = ilSrAutoMailsPlugin::PLUGIN_ID . "_sent";
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
 

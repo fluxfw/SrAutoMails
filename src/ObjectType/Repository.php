@@ -19,6 +19,7 @@ final class Repository
 
     use DICTrait;
     use SrAutoMailsTrait;
+
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     const OBJECT_TYPE_COURSE = 1;
     /**
@@ -26,7 +27,7 @@ final class Repository
      */
     protected static $object_types
         = [
-            self::OBJECT_TYPE_COURSE   => "course"
+            self::OBJECT_TYPE_COURSE => "course"
         ];
     /**
      * @var self|null

@@ -18,6 +18,7 @@ final class Repository extends AbstractRepository
 {
 
     use SrAutoMailsTrait;
+
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     /**
      * @var self|null

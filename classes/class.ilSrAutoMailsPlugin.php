@@ -16,6 +16,7 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin
 
     use PluginUninstallTrait;
     use SrAutoMailsTrait;
+
     const PLUGIN_ID = "srauma";
     const PLUGIN_NAME = "SrAutoMails";
     const PLUGIN_CLASS_NAME = self::class;

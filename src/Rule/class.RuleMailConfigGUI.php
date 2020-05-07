@@ -25,6 +25,7 @@ class RuleMailConfigGUI
 
     use DICTrait;
     use SrAutoMailsTrait;
+
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     const CMD_ADD_RULE = "addRule";
     const CMD_BACK = "back";

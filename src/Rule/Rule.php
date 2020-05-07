@@ -21,6 +21,7 @@ class Rule extends ActiveRecord
 
     use DICTrait;
     use SrAutoMailsTrait;
+
     const TABLE_NAME = ilSrAutoMailsPlugin::PLUGIN_ID . "_rule";
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     const MATCH_TYPE_ALWAYS = 1;

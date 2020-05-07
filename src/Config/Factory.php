@@ -17,6 +17,7 @@ final class Factory extends AbstractFactory
 {
 
     use SrAutoMailsTrait;
+
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     /**
      * @var self|null

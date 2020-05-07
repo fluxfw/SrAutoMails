@@ -22,6 +22,7 @@ class RulesTableGUI extends TableGUI
 {
 
     use SrAutoMailsTrait;
+
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     const LANG_MODULE = RulesMailConfigGUI::LANG_MODULE;
 

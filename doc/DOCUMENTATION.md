@@ -1,1 +1,1 @@
-## SrAutoMails Documentation
+# SrAutoMails ILIAS Plugin Documentation

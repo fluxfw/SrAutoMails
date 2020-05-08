@@ -1,8 +1,14 @@
 This is an OpenSource project by studer + raimann ag, CH-Burgdorf (https://studer-raimann.ch)
 
+## Description
+See in [doc/DESCRIPTION.md](./doc/DESCRIPTION.md)
+
+## Documentation
+See in [doc/DOCUMENTATION.md](./doc/DOCUMENTATION.md)
+
 ## Installation
 
-### Install SrAutoMails-Plugin
+### Install SrAutoMails Plugin
 Start at your ILIAS root directory
 ```bash
 mkdir -p Customizing/global/plugins/Services/Cron/CronHook
@@ -10,10 +16,6 @@ cd Customizing/global/plugins/Services/Cron/CronHook
 git clone https://github.com/studer-raimann/SrAutoMails.git SrAutoMails
 ```
 Update and activate the plugin in the ILIAS Plugin Administration
-
-### Some screenshots
-Rule:
-![Rule](./doc/screenshots/rule.png)
 
 ### Requirements
 * ILIAS 5.3 or ILIAS 5.4

@@ -3,6 +3,7 @@
 namespace srag\Notifications4Plugin\SrAutoMails;
 
 use LogicException;
+use srag\DataTableUI\SrAutoMails\Implementation\Utils\DataTableUITrait;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\DIC\SrAutoMails\Plugin\PluginInterface;
 use srag\DIC\SrAutoMails\Util\LibraryLanguageInstaller;
@@ -12,6 +13,7 @@ use srag\Notifications4Plugin\SrAutoMails\Parser\Repository as ParserRepository;
 use srag\Notifications4Plugin\SrAutoMails\Parser\RepositoryInterface as ParserRepositoryInterface;
 use srag\Notifications4Plugin\SrAutoMails\Sender\Repository as SenderRepository;
 use srag\Notifications4Plugin\SrAutoMails\Sender\RepositoryInterface as SenderRepositoryInterface;
+use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
 
 /**
  * Class Repository
@@ -24,6 +26,8 @@ final class Repository implements RepositoryInterface
 {
 
     use DICTrait;
+    use Notifications4PluginTrait;
+    use DataTableUITrait;
     /**
      * @var RepositoryInterface|null
      */
@@ -123,6 +127,8 @@ final class Repository implements RepositoryInterface
     {
         LibraryLanguageInstaller::getInstance()->withPlugin($this->getPlugin())->withLibraryLanguageDirectory(__DIR__
             . "/../lang")->updateLanguages();
+
+        self::dataTableUI()->installLanguages($this->plugin);
     }
 
 

@@ -11,10 +11,10 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         array (
             'srag\\RemovePluginDataConfirm\\SrAutoMails\\' => 41,
             'srag\\Plugins\\SrAutoMails\\' => 25,
-            'srag\\Notifications4Plugin\\' => 26,
+            'srag\\Notifications4Plugin\\SrAutoMails\\' => 38,
             'srag\\LibrariesNamespaceChanger\\' => 31,
-            'srag\\DataTableUI\\' => 17,
-            'srag\\DIC\\' => 9,
+            'srag\\DataTableUI\\SrAutoMails\\' => 29,
+            'srag\\DIC\\SrAutoMails\\' => 21,
             'srag\\CustomInputGUIs\\' => 21,
             'srag\\ActiveRecordConfig\\SrAutoMails\\' => 36,
         ),
@@ -29,7 +29,7 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
-        'srag\\Notifications4Plugin\\' => 
+        'srag\\Notifications4Plugin\\SrAutoMails\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/notifications4plugin/src',
         ),
@@ -37,11 +37,11 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         array (
             0 => __DIR__ . '/..' . '/srag/librariesnamespacechanger/src',
         ),
-        'srag\\DataTableUI\\' => 
+        'srag\\DataTableUI\\SrAutoMails\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/datatable/src',
         ),
-        'srag\\DIC\\' => 
+        'srag\\DIC\\SrAutoMails\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/dic/src',
         ),
@@ -265,6 +265,7 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         'srag\\CustomInputGUIs\\SrAutoMails\\FormBuilder\\FormBuilder' => __DIR__ . '/..' . '/srag/custominputguis/src/FormBuilder/FormBuilder.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\GlyphGUI\\GlyphGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/GlyphGUI/GlyphGUI.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\HiddenInputGUI\\HiddenInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/HiddenInputGUI/HiddenInputGUI.php',
+        'srag\\CustomInputGUIs\\SrAutoMails\\InputGUIWrapperUIInputComponent\\AbstractRenderer' => __DIR__ . '/..' . '/srag/custominputguis/src/InputGUIWrapperUIInputComponent/Renderer.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\InputGUIWrapperUIInputComponent\\InputGUIWrapperConstraint' => __DIR__ . '/..' . '/srag/custominputguis/src/InputGUIWrapperUIInputComponent/InputGUIWrapperConstraint.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\InputGUIWrapperUIInputComponent\\InputGUIWrapperConstraint54' => __DIR__ . '/..' . '/srag/custominputguis/src/InputGUIWrapperUIInputComponent/InputGUIWrapperConstraint54.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\InputGUIWrapperUIInputComponent\\InputGUIWrapperConstraintTrait' => __DIR__ . '/..' . '/srag/custominputguis/src/InputGUIWrapperUIInputComponent/InputGUIWrapperConstraintTrait.php',

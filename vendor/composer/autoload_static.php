@@ -15,7 +15,7 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
             'srag\\LibrariesNamespaceChanger\\' => 31,
             'srag\\DataTableUI\\SrAutoMails\\' => 29,
             'srag\\DIC\\SrAutoMails\\' => 21,
-            'srag\\CustomInputGUIs\\' => 21,
+            'srag\\CustomInputGUIs\\SrAutoMails\\' => 33,
             'srag\\ActiveRecordConfig\\SrAutoMails\\' => 36,
         ),
     );
@@ -45,7 +45,7 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         array (
             0 => __DIR__ . '/..' . '/srag/dic/src',
         ),
-        'srag\\CustomInputGUIs\\' => 
+        'srag\\CustomInputGUIs\\SrAutoMails\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/custominputguis/src',
         ),

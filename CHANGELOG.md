@@ -2,6 +2,8 @@
 
 ## [x]
 - New org unit member
+- ILIAS 6 support
+- Remove ILIAS 5.3 support
 
 ## [1.4.9]
 - Fix conflict with `SrUserEnrolment` plugin

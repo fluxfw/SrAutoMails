@@ -11,11 +11,11 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         array (
             'srag\\RemovePluginDataConfirm\\SrAutoMails\\' => 41,
             'srag\\Plugins\\SrAutoMails\\' => 25,
-            'srag\\Notifications4Plugin\\SrAutoMails\\' => 38,
+            'srag\\Notifications4Plugin\\' => 26,
             'srag\\LibrariesNamespaceChanger\\' => 31,
             'srag\\DataTableUI\\SrAutoMails\\' => 29,
-            'srag\\DIC\\SrAutoMails\\' => 21,
-            'srag\\CustomInputGUIs\\SrAutoMails\\' => 33,
+            'srag\\DIC\\' => 9,
+            'srag\\CustomInputGUIs\\' => 21,
             'srag\\ActiveRecordConfig\\SrAutoMails\\' => 36,
         ),
     );
@@ -29,7 +29,7 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
-        'srag\\Notifications4Plugin\\SrAutoMails\\' => 
+        'srag\\Notifications4Plugin\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/notifications4plugin/src',
         ),
@@ -41,11 +41,11 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         array (
             0 => __DIR__ . '/..' . '/srag/datatable/src',
         ),
-        'srag\\DIC\\SrAutoMails\\' => 
+        'srag\\DIC\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/dic/src',
         ),
-        'srag\\CustomInputGUIs\\SrAutoMails\\' => 
+        'srag\\CustomInputGUIs\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/custominputguis/src',
         ),
@@ -265,7 +265,7 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         'srag\\CustomInputGUIs\\SrAutoMails\\FormBuilder\\FormBuilder' => __DIR__ . '/..' . '/srag/custominputguis/src/FormBuilder/FormBuilder.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\GlyphGUI\\GlyphGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/GlyphGUI/GlyphGUI.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\HiddenInputGUI\\HiddenInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/HiddenInputGUI/HiddenInputGUI.php',
-        'srag\\CustomInputGUIs\\SrAutoMails\\InputGUIWrapperUIInputComponent\\AbstractRenderer' => __DIR__ . '/..' . '/srag/custominputguis/src/InputGUIWrapperUIInputComponent/Renderer.php',
+        'srag\\CustomInputGUIs\\SrAutoMails\\InputGUIWrapperUIInputComponent\\AbstractRenderer' => __DIR__ . '/..' . '/srag/custominputguis/src/InputGUIWrapperUIInputComponent/AbstractRenderer.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\InputGUIWrapperUIInputComponent\\InputGUIWrapperConstraint' => __DIR__ . '/..' . '/srag/custominputguis/src/InputGUIWrapperUIInputComponent/InputGUIWrapperConstraint.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\InputGUIWrapperUIInputComponent\\InputGUIWrapperConstraint54' => __DIR__ . '/..' . '/srag/custominputguis/src/InputGUIWrapperUIInputComponent/InputGUIWrapperConstraint54.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\InputGUIWrapperUIInputComponent\\InputGUIWrapperConstraintTrait' => __DIR__ . '/..' . '/srag/custominputguis/src/InputGUIWrapperUIInputComponent/InputGUIWrapperConstraintTrait.php',
@@ -430,10 +430,10 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         'srag\\Notifications4Plugin\\SrAutoMails\\Exception\\Notifications4PluginException' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Exception/Notifications4PluginException.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\Factory' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/Factory.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\FactoryInterface' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/FactoryInterface.php',
+        'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\Form\\FormBuilder' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/Form/FormBuilder.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\Language\\NotificationLanguage' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/Language/NotificationLanguage.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\Notification' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/Notification.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\NotificationCtrl' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/class.NotificationCtrl.php',
-        'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\NotificationFormGUI' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/NotificationFormGUI.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\NotificationInterface' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/NotificationInterface.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\NotificationsCtrl' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/class.NotificationsCtrl.php',
         'srag\\Notifications4Plugin\\SrAutoMails\\Notification\\Repository' => __DIR__ . '/..' . '/srag/notifications4plugin/src/Notification/Repository.php',

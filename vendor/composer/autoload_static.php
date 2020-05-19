@@ -11,7 +11,7 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         array (
             'srag\\RemovePluginDataConfirm\\SrAutoMails\\' => 41,
             'srag\\Plugins\\SrAutoMails\\' => 25,
-            'srag\\Notifications4Plugin\\' => 26,
+            'srag\\Notifications4Plugin\\SrAutoMails\\' => 38,
             'srag\\LibrariesNamespaceChanger\\' => 31,
             'srag\\DataTableUI\\SrAutoMails\\' => 29,
             'srag\\DIC\\' => 9,
@@ -29,7 +29,7 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
-        'srag\\Notifications4Plugin\\' => 
+        'srag\\Notifications4Plugin\\SrAutoMails\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/notifications4plugin/src',
         ),

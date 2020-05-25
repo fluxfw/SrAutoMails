@@ -13,8 +13,8 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
             'srag\\Plugins\\SrAutoMails\\' => 25,
             'srag\\Notifications4Plugin\\SrAutoMails\\' => 38,
             'srag\\LibrariesNamespaceChanger\\' => 31,
-            'srag\\DataTableUI\\SrAutoMails\\' => 29,
-            'srag\\DIC\\' => 9,
+            'srag\\DataTableUI\\' => 17,
+            'srag\\DIC\\SrAutoMails\\' => 21,
             'srag\\CustomInputGUIs\\' => 21,
             'srag\\ActiveRecordConfig\\SrAutoMails\\' => 36,
         ),
@@ -37,11 +37,11 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         array (
             0 => __DIR__ . '/..' . '/srag/librariesnamespacechanger/src',
         ),
-        'srag\\DataTableUI\\SrAutoMails\\' => 
+        'srag\\DataTableUI\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/datatable/src',
         ),
-        'srag\\DIC\\' => 
+        'srag\\DIC\\SrAutoMails\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/dic/src',
         ),
@@ -258,6 +258,7 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         'srag\\ActiveRecordConfig\\SrAutoMails\\Exception\\ActiveRecordConfigException' => __DIR__ . '/..' . '/srag/activerecordconfig/src/Exception/ActiveRecordConfigException.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\CheckboxInputGUI\\AjaxCheckbox' => __DIR__ . '/..' . '/srag/custominputguis/src/AjaxCheckbox/AjaxCheckbox.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\CheckboxInputGUI\\CheckboxInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/CheckboxInputGUI/CheckboxInputGUI.php',
+        'srag\\CustomInputGUIs\\SrAutoMails\\ColorPickerInputGUI\\ColorPickerInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/ColorPickerInputGUI/ColorPickerInputGUI.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\CustomInputGUIs' => __DIR__ . '/..' . '/srag/custominputguis/src/CustomInputGUIs.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\CustomInputGUIsTrait' => __DIR__ . '/..' . '/srag/custominputguis/src/CustomInputGUIsTrait.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\DateDurationInputGUI\\DateDurationInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/DateDurationInputGUI/DateDurationInputGUI.php',

@@ -198,6 +198,7 @@ return array(
     'srag\\ActiveRecordConfig\\SrAutoMails\\Exception\\ActiveRecordConfigException' => $vendorDir . '/srag/activerecordconfig/src/Exception/ActiveRecordConfigException.php',
     'srag\\CustomInputGUIs\\SrAutoMails\\CheckboxInputGUI\\AjaxCheckbox' => $vendorDir . '/srag/custominputguis/src/AjaxCheckbox/AjaxCheckbox.php',
     'srag\\CustomInputGUIs\\SrAutoMails\\CheckboxInputGUI\\CheckboxInputGUI' => $vendorDir . '/srag/custominputguis/src/CheckboxInputGUI/CheckboxInputGUI.php',
+    'srag\\CustomInputGUIs\\SrAutoMails\\ColorPickerInputGUI\\ColorPickerInputGUI' => $vendorDir . '/srag/custominputguis/src/ColorPickerInputGUI/ColorPickerInputGUI.php',
     'srag\\CustomInputGUIs\\SrAutoMails\\CustomInputGUIs' => $vendorDir . '/srag/custominputguis/src/CustomInputGUIs.php',
     'srag\\CustomInputGUIs\\SrAutoMails\\CustomInputGUIsTrait' => $vendorDir . '/srag/custominputguis/src/CustomInputGUIsTrait.php',
     'srag\\CustomInputGUIs\\SrAutoMails\\DateDurationInputGUI\\DateDurationInputGUI' => $vendorDir . '/srag/custominputguis/src/DateDurationInputGUI/DateDurationInputGUI.php',

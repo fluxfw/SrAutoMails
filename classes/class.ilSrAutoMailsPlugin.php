@@ -2,7 +2,9 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
+use ILIAS\DI\Container;
 use ILIAS\GlobalScreen\Scope\MainMenu\Provider\AbstractStaticPluginMainMenuProvider;
+use srag\CustomInputGUIs\SrAutoMails\Loader\CustomInputGUIsLoaderDetector;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 use srag\RemovePluginDataConfirm\SrAutoMails\PluginUninstallTrait;
 
@@ -103,5 +105,14 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin
     protected function deleteData()/*: void*/
     {
         self::srAutoMails()->dropTables();
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function exchangeUIRendererAfterInitialization(Container $dic) : Closure
+    {
+        return CustomInputGUIsLoaderDetector::exchangeUIRendererAfterInitialization();
     }
 }

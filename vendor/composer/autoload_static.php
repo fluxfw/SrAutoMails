@@ -11,7 +11,7 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         array (
             'srag\\RemovePluginDataConfirm\\SrAutoMails\\' => 41,
             'srag\\Plugins\\SrAutoMails\\' => 25,
-            'srag\\Notifications4Plugin\\' => 26,
+            'srag\\Notifications4Plugin\\SrAutoMails\\' => 38,
             'srag\\LibrariesNamespaceChanger\\' => 31,
             'srag\\DataTableUI\\SrAutoMails\\' => 29,
             'srag\\DIC\\SrAutoMails\\' => 21,
@@ -29,7 +29,7 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
-        'srag\\Notifications4Plugin\\' => 
+        'srag\\Notifications4Plugin\\SrAutoMails\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/notifications4plugin/src',
         ),
@@ -277,6 +277,7 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         'srag\\CustomInputGUIs\\SrAutoMails\\LearningProgressPieUI\\LearningProgressPieUI' => __DIR__ . '/..' . '/srag/custominputguis/src/LearningProgressPieUI/LearningProgressPieUI.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\LearningProgressPieUI\\ObjIdsLearningProgressPieUI' => __DIR__ . '/..' . '/srag/custominputguis/src/LearningProgressPieUI/ObjIdsLearningProgressPieUI.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\LearningProgressPieUI\\UsrIdsLearningProgressPieUI' => __DIR__ . '/..' . '/srag/custominputguis/src/LearningProgressPieUI/UsrIdsLearningProgressPieUI.php',
+        'srag\\CustomInputGUIs\\SrAutoMails\\Loader\\CustomInputGUIsLoaderDetector' => __DIR__ . '/..' . '/srag/custominputguis/src/Loader/CustomInputGUIsLoaderDetector.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\MultiLineInputGUI\\MultiLineInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/MultiLineInputGUI/MultiLineInputGUI.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\MultiLineNewInputGUI\\MultiLineNewInputGUI' => __DIR__ . '/..' . '/srag/custominputguis/src/MultiLineNewInputGUI/MultiLineNewInputGUI.php',
         'srag\\CustomInputGUIs\\SrAutoMails\\MultiSelectSearchInputGUI\\MultiSelectSearchInput2GUI' => __DIR__ . '/..' . '/srag/custominputguis/src/MultiSelectSearchInputGUI/MultiSelectSearchInput2GUI.php',
@@ -344,6 +345,7 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         'srag\\DIC\\SrAutoMails\\Database\\PdoContextHelper' => __DIR__ . '/..' . '/srag/dic/src/Database/PdoContextHelper.php',
         'srag\\DIC\\SrAutoMails\\Database\\PdoStatementContextHelper' => __DIR__ . '/..' . '/srag/dic/src/Database/PdoStatementContextHelper.php',
         'srag\\DIC\\SrAutoMails\\Exception\\DICException' => __DIR__ . '/..' . '/srag/dic/src/Exception/DICException.php',
+        'srag\\DIC\\SrAutoMails\\Loader\\AbstractLoaderDetector' => __DIR__ . '/..' . '/srag/dic/src/Loader/AbstractLoaderDetector.php',
         'srag\\DIC\\SrAutoMails\\Output\\Output' => __DIR__ . '/..' . '/srag/dic/src/Output/Output.php',
         'srag\\DIC\\SrAutoMails\\Output\\OutputInterface' => __DIR__ . '/..' . '/srag/dic/src/Output/OutputInterface.php',
         'srag\\DIC\\SrAutoMails\\PHPVersionChecker' => __DIR__ . '/..' . '/srag/dic/src/PHPVersionChecker.php',

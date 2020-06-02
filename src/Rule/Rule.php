@@ -278,11 +278,11 @@ class Rule extends ActiveRecord
                 if ($field_value !== null) {
                     return $field_value->get(IL_CAL_DATETIME);
                 } else {
-                    return null;
+                    return parent::sleep($field_name);
                 }
 
             default:
-                return null;
+                return parent::sleep($field_name);
         }
     }
 
@@ -316,11 +316,11 @@ class Rule extends ActiveRecord
                 if ($field_value !== null) {
                     return new ilDateTime($field_value, IL_CAL_DATETIME);
                 } else {
-                    return null;
+                    return parent::wakeUp($field_name, $field_value);
                 }
 
             default:
-                return null;
+                return parent::wakeUp($field_name, $field_value);
         }
     }
 

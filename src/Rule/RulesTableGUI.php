@@ -44,7 +44,7 @@ class RulesTableGUI extends TableGUI
      *
      * @param Rule $rule
      */
-    protected function getColumnValue(/*string*/ $column, /*Rule*/ $rule, /*int*/ $format = self::DEFAULT_FORMAT) : string
+    protected function getColumnValue(string $column, /*Rule*/ $rule, int $format = self::DEFAULT_FORMAT) : string
     {
         switch ($column) {
             case "enabled":

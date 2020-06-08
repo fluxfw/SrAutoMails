@@ -6,12 +6,12 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'srag\\RemovePluginDataConfirm\\' => array($vendorDir . '/srag/removeplugindataconfirm/src'),
+    'srag\\RemovePluginDataConfirm\\SrAutoMails\\' => array($vendorDir . '/srag/removeplugindataconfirm/src'),
     'srag\\Plugins\\SrAutoMails\\' => array($baseDir . '/src'),
-    'srag\\Notifications4Plugin\\SrAutoMails\\' => array($vendorDir . '/srag/notifications4plugin/src'),
+    'srag\\Notifications4Plugin\\' => array($vendorDir . '/srag/notifications4plugin/src'),
     'srag\\LibrariesNamespaceChanger\\' => array($vendorDir . '/srag/librariesnamespacechanger/src'),
-    'srag\\DataTableUI\\SrAutoMails\\' => array($vendorDir . '/srag/datatable/src'),
+    'srag\\DataTableUI\\' => array($vendorDir . '/srag/datatable/src'),
     'srag\\DIC\\SrAutoMails\\' => array($vendorDir . '/srag/dic/src'),
-    'srag\\CustomInputGUIs\\SrAutoMails\\' => array($vendorDir . '/srag/custominputguis/src'),
-    'srag\\ActiveRecordConfig\\SrAutoMails\\' => array($vendorDir . '/srag/activerecordconfig/src'),
+    'srag\\CustomInputGUIs\\' => array($vendorDir . '/srag/custominputguis/src'),
+    'srag\\ActiveRecordConfig\\' => array($vendorDir . '/srag/activerecordconfig/src'),
 );

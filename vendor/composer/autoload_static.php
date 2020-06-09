@@ -419,7 +419,7 @@ class ComposerStaticInit021c25a266159d0ffa1c3637e9ac8d59
         'srag\\DataTableUI\\SrAutoMails\\Implementation\\Table' => __DIR__ . '/..' . '/srag/datatable/src/Implementation/Table.php',
         'srag\\DataTableUI\\SrAutoMails\\Implementation\\Utils\\AbstractTableBuilder' => __DIR__ . '/..' . '/srag/datatable/src/Implementation/Utils/AbstractTableBuilder.php',
         'srag\\DataTableUI\\SrAutoMails\\Implementation\\Utils\\DataTableUITrait' => __DIR__ . '/..' . '/srag/datatable/src/Implementation/Utils/DataTableUITrait.php',
-        'srag\\LibrariesNamespaceChanger\\GeneratePluginPhp' => __DIR__ . '/..' . '/srag/librariesnamespacechanger/src/GeneratePluginPhp.php',
+        'srag\\LibrariesNamespaceChanger\\GeneratePluginPhpAndXml' => __DIR__ . '/..' . '/srag/librariesnamespacechanger/src/GeneratePluginPhpAndXml.php',
         'srag\\LibrariesNamespaceChanger\\LibrariesNamespaceChanger' => __DIR__ . '/..' . '/srag/librariesnamespacechanger/src/LibrariesNamespaceChanger.php',
         'srag\\LibrariesNamespaceChanger\\PHP72Backport' => __DIR__ . '/..' . '/srag/librariesnamespacechanger/src/PHP72Backport.php',
         'srag\\LibrariesNamespaceChanger\\PHP7Backport' => __DIR__ . '/..' . '/srag/librariesnamespacechanger/src/PHP7Backport.php',

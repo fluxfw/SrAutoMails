@@ -30,6 +30,15 @@ final class Courses
 
 
     /**
+     * Courses constructor
+     */
+    private function __construct()
+    {
+
+    }
+
+
+    /**
      * @return self
      */
     public static function getInstance() : self
@@ -43,11 +52,13 @@ final class Courses
 
 
     /**
-     * Courses constructor
+     * @param int $obj_id
+     *
+     * @return array
      */
-    private function __construct()
+    public function getCompletedUsers(int $obj_id) : array
     {
-
+        return ilLPStatusWrapper::_lookupCompletedForObject($obj_id);
     }
 
 
@@ -65,16 +76,5 @@ final class Courses
         }
 
         return $array;
-    }
-
-
-    /**
-     * @param int $obj_id
-     *
-     * @return array
-     */
-    public function getCompletedUsers(int $obj_id) : array
-    {
-        return ilLPStatusWrapper::_lookupCompletedForObject($obj_id);
     }
 }

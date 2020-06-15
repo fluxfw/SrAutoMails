@@ -31,22 +31,6 @@ class Menu extends AbstractStaticPluginMainMenuProvider
     /**
      * @inheritDoc
      */
-    public function getStaticTopItems() : array
-    {
-        return [
-            $this->mainmenu->topParentItem($this->if->identifier(ilSrAutoMailsPlugin::PLUGIN_ID . "_top"))->withTitle(ilSrAutoMailsPlugin::PLUGIN_NAME)
-                ->withAvailableCallable(function () : bool {
-                    return self::plugin()->getPluginObject()->isActive();
-                })->withVisibilityCallable(function () : bool {
-                    return self::dic()->rbac()->review()->isAssigned(self::dic()->user()->getId(), 2); // Default admin role
-                })
-        ];
-    }
-
-
-    /**
-     * @inheritDoc
-     */
     public function getStaticSubItems() : array
     {
         $parent = $this->getStaticTopItems()[0];
@@ -65,6 +49,22 @@ class Menu extends AbstractStaticPluginMainMenuProvider
                         ilObjComponentSettingsGUI::class,
                         ilSrAutoMailsConfigGUI::class
                     ], ilSrAutoMailsConfigGUI::CMD_CONFIGURE))->withAvailableCallable(function () : bool {
+                    return self::plugin()->getPluginObject()->isActive();
+                })->withVisibilityCallable(function () : bool {
+                    return self::dic()->rbac()->review()->isAssigned(self::dic()->user()->getId(), 2); // Default admin role
+                })
+        ];
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function getStaticTopItems() : array
+    {
+        return [
+            $this->mainmenu->topParentItem($this->if->identifier(ilSrAutoMailsPlugin::PLUGIN_ID . "_top"))->withTitle(ilSrAutoMailsPlugin::PLUGIN_NAME)
+                ->withAvailableCallable(function () : bool {
                     return self::plugin()->getPluginObject()->isActive();
                 })->withVisibilityCallable(function () : bool {
                     return self::dic()->rbac()->review()->isAssigned(self::dic()->user()->getId(), 2); // Default admin role

@@ -26,8 +26,8 @@ class RuleFormGUI extends PropertyFormGUI
 
     use SrAutoMailsTrait;
 
-    const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     const LANG_MODULE = RulesMailConfigGUI::LANG_MODULE;
+    const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     /**
      * @var Rule
      */
@@ -45,6 +45,21 @@ class RuleFormGUI extends PropertyFormGUI
         $this->rule = $rule;
 
         parent::__construct($parent);
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function storeForm() : bool
+    {
+        if (!parent::storeForm()) {
+            return false;
+        }
+
+        self::srAutoMails()->rules()->storeRule($this->rule);
+
+        return true;
     }
 
 
@@ -311,20 +326,5 @@ class RuleFormGUI extends PropertyFormGUI
                 Items::setter($this->rule, $key, $value);
                 break;
         }
-    }
-
-
-    /**
-     * @inheritDoc
-     */
-    public function storeForm() : bool
-    {
-        if (!parent::storeForm()) {
-            return false;
-        }
-
-        self::srAutoMails()->rules()->storeRule($this->rule);
-
-        return true;
     }
 }

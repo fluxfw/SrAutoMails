@@ -32,6 +32,15 @@ final class Metadata
 
 
     /**
+     * Metadata constructor
+     */
+    private function __construct()
+    {
+
+    }
+
+
+    /**
      * @return self
      */
     public static function getInstance() : self
@@ -41,15 +50,6 @@ final class Metadata
         }
 
         return self::$instance;
-    }
-
-
-    /**
-     * Metadata constructor
-     */
-    private function __construct()
-    {
-
     }
 
 

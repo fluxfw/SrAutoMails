@@ -23,7 +23,6 @@ class RulesMailConfigGUI
     use DICTrait;
     use SrAutoMailsTrait;
 
-    const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     const CMD_APPLY_FILTER = "applyFilter";
     const CMD_DISABLE_RULES = "disableRules";
     const CMD_ENABLE_RULES = "enableRules";
@@ -32,6 +31,7 @@ class RulesMailConfigGUI
     const CMD_REMOVE_RULES_CONFIRM = "removeRulesConfirm";
     const CMD_RESET_FILTER = "resetFilter";
     const LANG_MODULE = "rules";
+    const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     const TAB_LIST_RULES = "list_rules";
 
 
@@ -41,6 +41,16 @@ class RulesMailConfigGUI
     public function __construct()
     {
 
+    }
+
+
+    /**
+     *
+     */
+    public static function addTabs()/*: void*/
+    {
+        self::dic()->tabs()->addTab(self::TAB_LIST_RULES, self::plugin()->translate("rules", self::LANG_MODULE), self::dic()->ctrl()
+            ->getLinkTargetByClass(self::class, self::CMD_LIST_RULES));
     }
 
 
@@ -83,36 +93,6 @@ class RulesMailConfigGUI
     /**
      *
      */
-    public static function addTabs()/*: void*/
-    {
-        self::dic()->tabs()->addTab(self::TAB_LIST_RULES, self::plugin()->translate("rules", self::LANG_MODULE), self::dic()->ctrl()
-            ->getLinkTargetByClass(self::class, self::CMD_LIST_RULES));
-    }
-
-
-    /**
-     *
-     */
-    protected function setTabs()/*: void*/
-    {
-
-    }
-
-
-    /**
-     *
-     */
-    protected function listRules()/*: void*/
-    {
-        $table = self::srAutoMails()->rules()->factory()->newTableInstance($this);
-
-        self::output()->output($table);
-    }
-
-
-    /**
-     *
-     */
     protected function applyFilter()/*: void*/
     {
         $table = self::srAutoMails()->rules()->factory()->newTableInstance($this, self::CMD_APPLY_FILTER);
@@ -129,16 +109,26 @@ class RulesMailConfigGUI
     /**
      *
      */
-    protected function resetFilter()/*: void*/
+    protected function disableRules()/*: void*/
     {
-        $table = self::srAutoMails()->rules()->factory()->newTableInstance($this, self::CMD_RESET_FILTER);
+        $rule_ids = filter_input(INPUT_POST, RuleMailConfigGUI::GET_PARAM_RULE_ID, FILTER_DEFAULT, FILTER_FORCE_ARRAY);
 
-        $table->resetOffset();
+        /**
+         * @var Rule[] $rules
+         */
+        $rules = array_map(function (int $rule_id)/*: ?Rule*/ {
+            return self::srAutoMails()->rules()->getRuleById($rule_id);
+        }, $rule_ids);
 
-        $table->resetFilter();
+        foreach ($rules as $rule) {
+            $rule->setEnabled(false);
 
-        //$this->redirect(self::CMD_LIST_RULES);
-        $this->listRules(); // Fix reset offset
+            self::srAutoMails()->rules()->storeRule($rule);
+        }
+
+        ilUtil::sendSuccess(self::plugin()->translate("disabled_rules", self::LANG_MODULE), true);
+
+        self::dic()->ctrl()->redirect($this, self::CMD_LIST_RULES);
     }
 
 
@@ -171,7 +161,18 @@ class RulesMailConfigGUI
     /**
      *
      */
-    protected function disableRules()/*: void*/
+    protected function listRules()/*: void*/
+    {
+        $table = self::srAutoMails()->rules()->factory()->newTableInstance($this);
+
+        self::output()->output($table);
+    }
+
+
+    /**
+     *
+     */
+    protected function removeRules()/*: void*/
     {
         $rule_ids = filter_input(INPUT_POST, RuleMailConfigGUI::GET_PARAM_RULE_ID, FILTER_DEFAULT, FILTER_FORCE_ARRAY);
 
@@ -183,12 +184,10 @@ class RulesMailConfigGUI
         }, $rule_ids);
 
         foreach ($rules as $rule) {
-            $rule->setEnabled(false);
-
-            self::srAutoMails()->rules()->storeRule($rule);
+            self::srAutoMails()->rules()->deleteRule($rule);
         }
 
-        ilUtil::sendSuccess(self::plugin()->translate("disabled_rules", self::LANG_MODULE), true);
+        ilUtil::sendSuccess(self::plugin()->translate("removed_rules", self::LANG_MODULE), true);
 
         self::dic()->ctrl()->redirect($this, self::CMD_LIST_RULES);
     }
@@ -228,23 +227,24 @@ class RulesMailConfigGUI
     /**
      *
      */
-    protected function removeRules()/*: void*/
+    protected function resetFilter()/*: void*/
     {
-        $rule_ids = filter_input(INPUT_POST, RuleMailConfigGUI::GET_PARAM_RULE_ID, FILTER_DEFAULT, FILTER_FORCE_ARRAY);
+        $table = self::srAutoMails()->rules()->factory()->newTableInstance($this, self::CMD_RESET_FILTER);
 
-        /**
-         * @var Rule[] $rules
-         */
-        $rules = array_map(function (int $rule_id)/*: ?Rule*/ {
-            return self::srAutoMails()->rules()->getRuleById($rule_id);
-        }, $rule_ids);
+        $table->resetOffset();
 
-        foreach ($rules as $rule) {
-            self::srAutoMails()->rules()->deleteRule($rule);
-        }
+        $table->resetFilter();
 
-        ilUtil::sendSuccess(self::plugin()->translate("removed_rules", self::LANG_MODULE), true);
+        //$this->redirect(self::CMD_LIST_RULES);
+        $this->listRules(); // Fix reset offset
+    }
 
-        self::dic()->ctrl()->redirect($this, self::CMD_LIST_RULES);
+
+    /**
+     *
+     */
+    protected function setTabs()/*: void*/
+    {
+
     }
 }

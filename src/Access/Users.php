@@ -28,6 +28,15 @@ final class Users
 
 
     /**
+     * Users constructor
+     */
+    private function __construct()
+    {
+
+    }
+
+
+    /**
      * @return self
      */
     public static function getInstance() : self
@@ -37,15 +46,6 @@ final class Users
         }
 
         return self::$instance;
-    }
-
-
-    /**
-     * Users constructor
-     */
-    private function __construct()
-    {
-
     }
 
 

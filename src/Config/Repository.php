@@ -27,6 +27,15 @@ final class Repository extends AbstractRepository
 
 
     /**
+     * Repository constructor
+     */
+    protected function __construct()
+    {
+        parent::__construct();
+    }
+
+
+    /**
      * @return self
      */
     public static function getInstance() : self
@@ -36,15 +45,6 @@ final class Repository extends AbstractRepository
         }
 
         return self::$instance;
-    }
-
-
-    /**
-     * Repository constructor
-     */
-    protected function __construct()
-    {
-        parent::__construct();
     }
 
 
@@ -62,17 +62,17 @@ final class Repository extends AbstractRepository
     /**
      * @inheritDoc
      */
-    protected function getTableName() : string
+    protected function getFields() : array
     {
-        return ilSrAutoMailsPlugin::PLUGIN_ID . "_config";
+        return [];
     }
 
 
     /**
      * @inheritDoc
      */
-    protected function getFields() : array
+    protected function getTableName() : string
     {
-        return [];
+        return ilSrAutoMailsPlugin::PLUGIN_ID . "_config";
     }
 }

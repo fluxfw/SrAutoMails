@@ -29,6 +29,15 @@ final class Repository
 
 
     /**
+     * Repository constructor
+     */
+    private function __construct()
+    {
+
+    }
+
+
+    /**
      * @return self
      */
     public static function getInstance() : self
@@ -38,15 +47,6 @@ final class Repository
         }
 
         return self::$instance;
-    }
-
-
-    /**
-     * Repository constructor
-     */
-    private function __construct()
-    {
-
     }
 
 
@@ -85,6 +85,23 @@ final class Repository
         return array_map(function (string $operator) : string {
             return self::plugin()->translate("operator_" . $operator, RulesMailConfigGUI::LANG_MODULE);
         }, Rule::$operators);
+    }
+
+
+    /**
+     * @param int $rule_id
+     *
+     * @return Rule|null
+     */
+    public function getRuleById(int $rule_id)/*: ?Rule*/
+    {
+        /**
+         * @var Rule|null $rule
+         */
+
+        $rule = Rule::where(["rule_id" => $rule_id])->first();
+
+        return $rule;
     }
 
 
@@ -139,23 +156,6 @@ final class Repository
         }
 
         return $rules;
-    }
-
-
-    /**
-     * @param int $rule_id
-     *
-     * @return Rule|null
-     */
-    public function getRuleById(int $rule_id)/*: ?Rule*/
-    {
-        /**
-         * @var Rule|null $rule
-         */
-
-        $rule = Rule::where(["rule_id" => $rule_id])->first();
-
-        return $rule;
     }
 
 

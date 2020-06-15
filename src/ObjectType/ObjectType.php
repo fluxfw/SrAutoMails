@@ -22,6 +22,12 @@ abstract class ObjectType
     use DICTrait;
     use SrAutoMailsTrait;
 
+    /**
+     * @var int
+     *
+     * @abstract
+     */
+    const OBJECT_TYPE = "";
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
 
 
@@ -153,6 +159,14 @@ abstract class ObjectType
 
 
     /**
+     * @param object $object
+     *
+     * @return int
+     */
+    public abstract function getObjectId($object) : int;
+
+
+    /**
      * @return array
      */
     public final function getObjectPropertiesText()
@@ -173,6 +187,12 @@ abstract class ObjectType
 
 
     /**
+     * @return object[]
+     */
+    public abstract function getObjects() : array;
+
+
+    /**
      * @param object $object
      * @param int    $user_id
      * @param Rule   $rule
@@ -190,6 +210,17 @@ abstract class ObjectType
         $this->applyMailPlaceholders($object, $placeholders);
 
         return $placeholders;
+    }
+
+
+    /**
+     * @return array
+     */
+    public final function getReceiverPropertiesText()
+    {
+        return array_map(function (string $object_property) : string {
+            return self::plugin()->translate("receiver_" . $object_property, RulesMailConfigGUI::LANG_MODULE);
+        }, $this->getReceiverProperties());
     }
 
 
@@ -222,25 +253,6 @@ abstract class ObjectType
 
 
     /**
-     * @return array
-     */
-    public final function getReceiverPropertiesText()
-    {
-        return array_map(function (string $object_property) : string {
-            return self::plugin()->translate("receiver_" . $object_property, RulesMailConfigGUI::LANG_MODULE);
-        }, $this->getReceiverProperties());
-    }
-
-
-    /**
-     * @var int
-     *
-     * @abstract
-     */
-    const OBJECT_TYPE = "";
-
-
-    /**
      * @param object $object
      * @param array  $placeholders
      *
@@ -265,30 +277,16 @@ abstract class ObjectType
 
 
     /**
-     * @return object[]
-     */
-    public abstract function getObjects() : array;
-
-
-    /**
-     * @param object $object
-     *
-     * @return int
-     */
-    public abstract function getObjectId($object) : int;
-
-
-    /**
-     * @return string[]
-     */
-    protected abstract function getReceiverProperties() : array;
-
-
-    /**
      * @param array  $receivers
      * @param object $object
      *
      * @return int[]
      */
     protected abstract function getReceiverForObject(array $receivers, $object) : array;
+
+
+    /**
+     * @return string[]
+     */
+    protected abstract function getReceiverProperties() : array;
 }

@@ -20,8 +20,12 @@ final class Repository
     use DICTrait;
     use SrAutoMailsTrait;
 
-    const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     const OBJECT_TYPE_COURSE = 1;
+    const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
+    /**
+     * @var self|null
+     */
+    protected static $instance = null;
     /**
      * @var array
      */
@@ -29,10 +33,15 @@ final class Repository
         = [
             self::OBJECT_TYPE_COURSE => "course"
         ];
+
+
     /**
-     * @var self|null
+     * Repository constructor
      */
-    protected static $instance = null;
+    private function __construct()
+    {
+
+    }
 
 
     /**
@@ -45,15 +54,6 @@ final class Repository
         }
 
         return self::$instance;
-    }
-
-
-    /**
-     * Repository constructor
-     */
-    private function __construct()
-    {
-
     }
 
 

@@ -26,7 +26,6 @@ class RuleMailConfigGUI
     use DICTrait;
     use SrAutoMailsTrait;
 
-    const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     const CMD_ADD_RULE = "addRule";
     const CMD_BACK = "back";
     const CMD_CREATE_RULE = "createRule";
@@ -35,6 +34,7 @@ class RuleMailConfigGUI
     const CMD_REMOVE_RULE_CONFIRM = "removeRuleConfirm";
     const CMD_UPDATE_RULE = "updateRule";
     const GET_PARAM_RULE_ID = "rule_id";
+    const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     const TAB_EDIT_RULE = "edit_rule";
     /**
      * @var RulesMailConfigGUI
@@ -107,6 +107,94 @@ class RuleMailConfigGUI
     /**
      *
      */
+    protected function addRule()/*: void*/
+    {
+        $form = self::srAutoMails()->rules()->factory()->newFormInstance($this, $this->rule);
+
+        self::output()->output($form);
+    }
+
+
+    /**
+     *
+     */
+    protected function back()/*: void*/
+    {
+        self::dic()->ctrl()->redirectByClass(RulesMailConfigGUI::class, RulesMailConfigGUI::CMD_LIST_RULES);
+    }
+
+
+    /**
+     *
+     */
+    protected function createRule()/*: void*/
+    {
+        $form = self::srAutoMails()->rules()->factory()->newFormInstance($this, $this->rule);
+
+        if (!$form->storeForm()) {
+            self::output()->output($form);
+
+            return;
+        }
+
+        self::dic()->ctrl()->setParameter($this, self::GET_PARAM_RULE_ID, $this->rule->getRuleId());
+
+        ilUtil::sendSuccess(self::plugin()->translate("added_rule", RulesMailConfigGUI::LANG_MODULE, [$this->rule->getTitle()]), true);
+
+        self::dic()->ctrl()->redirect($this, self::CMD_EDIT_RULE);
+    }
+
+
+    /**
+     *
+     */
+    protected function editRule()/*: void*/
+    {
+        self::dic()->tabs()->activateTab(self::TAB_EDIT_RULE);
+        self::dic()->tabs()->activateSubTab(self::TAB_EDIT_RULE);
+
+        $form = self::srAutoMails()->rules()->factory()->newFormInstance($this, $this->rule);
+
+        self::output()->output($form);
+    }
+
+
+    /**
+     *
+     */
+    protected function removeRule()/*: void*/
+    {
+        self::srAutoMails()->rules()->deleteRule($this->rule);
+
+        ilUtil::sendSuccess(self::plugin()->translate("removed_rule", RulesMailConfigGUI::LANG_MODULE, [$this->rule->getTitle()]), true);
+
+        self::dic()->ctrl()->redirect($this, self::CMD_BACK);
+    }
+
+
+    /**
+     *
+     */
+    protected function removeRuleConfirm()/*: void*/
+    {
+        $confirmation = new ilConfirmationGUI();
+
+        $confirmation->setFormAction(self::dic()->ctrl()->getFormAction($this));
+
+        $confirmation->setHeaderText(self::plugin()->translate("remove_rule_confirm", RulesMailConfigGUI::LANG_MODULE, [$this->rule->getTitle()]));
+
+        $confirmation->addItem(self::GET_PARAM_RULE_ID, $this->rule->getRuleId(), $this->rule->getTitle());
+
+        $confirmation->setConfirm(self::plugin()->translate("remove", RulesMailConfigGUI::LANG_MODULE), self::CMD_REMOVE_RULE);
+        $confirmation->setCancel(self::plugin()->translate("cancel", RulesMailConfigGUI::LANG_MODULE), self::CMD_BACK);
+
+        self::output()->output($confirmation);
+    }
+
+
+    /**
+     *
+     */
     protected function setTabs()/*: void*/
     {
         self::dic()->tabs()->clearTargets();
@@ -153,61 +241,6 @@ class RuleMailConfigGUI
     /**
      *
      */
-    protected function back()/*: void*/
-    {
-        self::dic()->ctrl()->redirectByClass(RulesMailConfigGUI::class, RulesMailConfigGUI::CMD_LIST_RULES);
-    }
-
-
-    /**
-     *
-     */
-    protected function addRule()/*: void*/
-    {
-        $form = self::srAutoMails()->rules()->factory()->newFormInstance($this, $this->rule);
-
-        self::output()->output($form);
-    }
-
-
-    /**
-     *
-     */
-    protected function createRule()/*: void*/
-    {
-        $form = self::srAutoMails()->rules()->factory()->newFormInstance($this, $this->rule);
-
-        if (!$form->storeForm()) {
-            self::output()->output($form);
-
-            return;
-        }
-
-        self::dic()->ctrl()->setParameter($this, self::GET_PARAM_RULE_ID, $this->rule->getRuleId());
-
-        ilUtil::sendSuccess(self::plugin()->translate("added_rule", RulesMailConfigGUI::LANG_MODULE, [$this->rule->getTitle()]), true);
-
-        self::dic()->ctrl()->redirect($this, self::CMD_EDIT_RULE);
-    }
-
-
-    /**
-     *
-     */
-    protected function editRule()/*: void*/
-    {
-        self::dic()->tabs()->activateTab(self::TAB_EDIT_RULE);
-        self::dic()->tabs()->activateSubTab(self::TAB_EDIT_RULE);
-
-        $form = self::srAutoMails()->rules()->factory()->newFormInstance($this, $this->rule);
-
-        self::output()->output($form);
-    }
-
-
-    /**
-     *
-     */
     protected function updateRule()/*: void*/
     {
         self::dic()->tabs()->activateTab(self::TAB_EDIT_RULE);
@@ -224,38 +257,5 @@ class RuleMailConfigGUI
         ilUtil::sendSuccess(self::plugin()->translate("saved_rule", RulesMailConfigGUI::LANG_MODULE, [$this->rule->getTitle()]), true);
 
         self::dic()->ctrl()->redirect($this, self::CMD_EDIT_RULE);
-    }
-
-
-    /**
-     *
-     */
-    protected function removeRuleConfirm()/*: void*/
-    {
-        $confirmation = new ilConfirmationGUI();
-
-        $confirmation->setFormAction(self::dic()->ctrl()->getFormAction($this));
-
-        $confirmation->setHeaderText(self::plugin()->translate("remove_rule_confirm", RulesMailConfigGUI::LANG_MODULE, [$this->rule->getTitle()]));
-
-        $confirmation->addItem(self::GET_PARAM_RULE_ID, $this->rule->getRuleId(), $this->rule->getTitle());
-
-        $confirmation->setConfirm(self::plugin()->translate("remove", RulesMailConfigGUI::LANG_MODULE), self::CMD_REMOVE_RULE);
-        $confirmation->setCancel(self::plugin()->translate("cancel", RulesMailConfigGUI::LANG_MODULE), self::CMD_BACK);
-
-        self::output()->output($confirmation);
-    }
-
-
-    /**
-     *
-     */
-    protected function removeRule()/*: void*/
-    {
-        self::srAutoMails()->rules()->deleteRule($this->rule);
-
-        ilUtil::sendSuccess(self::plugin()->translate("removed_rule", RulesMailConfigGUI::LANG_MODULE, [$this->rule->getTitle()]), true);
-
-        self::dic()->ctrl()->redirect($this, self::CMD_BACK);
     }
 }

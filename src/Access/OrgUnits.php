@@ -33,6 +33,15 @@ final class OrgUnits
 
 
     /**
+     * OrgUnits constructor
+     */
+    private function __construct()
+    {
+
+    }
+
+
+    /**
      * @return self
      */
     public static function getInstance() : self
@@ -42,15 +51,6 @@ final class OrgUnits
         }
 
         return self::$instance;
-    }
-
-
-    /**
-     * OrgUnits constructor
-     */
-    private function __construct()
-    {
-
     }
 
 

@@ -27,19 +27,6 @@ final class Factory
 
 
     /**
-     * @return self
-     */
-    public static function getInstance() : self
-    {
-        if (self::$instance === null) {
-            self::$instance = new self();
-        }
-
-        return self::$instance;
-    }
-
-
-    /**
      * Factory constructor
      */
     private function __construct()
@@ -49,27 +36,15 @@ final class Factory
 
 
     /**
-     * @return Rule
+     * @return self
      */
-    public function newInstance() : Rule
+    public static function getInstance() : self
     {
-        $rule = new Rule();
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
 
-        return $rule;
-    }
-
-
-    /**
-     * @param RulesMailConfigGUI $parent
-     * @param string             $cmd
-     *
-     * @return RulesTableGUI
-     */
-    public function newTableInstance(RulesMailConfigGUI $parent, string $cmd = RulesMailConfigGUI::CMD_LIST_RULES) : RulesTableGUI
-    {
-        $table = new RulesTableGUI($parent, $cmd);
-
-        return $table;
+        return self::$instance;
     }
 
 
@@ -88,6 +63,17 @@ final class Factory
 
 
     /**
+     * @return Rule
+     */
+    public function newInstance() : Rule
+    {
+        $rule = new Rule();
+
+        return $rule;
+    }
+
+
+    /**
      * @return RulesJob
      */
     public function newJobInstance() : RulesJob
@@ -95,5 +81,19 @@ final class Factory
         $job = new RulesJob();
 
         return $job;
+    }
+
+
+    /**
+     * @param RulesMailConfigGUI $parent
+     * @param string             $cmd
+     *
+     * @return RulesTableGUI
+     */
+    public function newTableInstance(RulesMailConfigGUI $parent, string $cmd = RulesMailConfigGUI::CMD_LIST_RULES) : RulesTableGUI
+    {
+        $table = new RulesTableGUI($parent, $cmd);
+
+        return $table;
     }
 }

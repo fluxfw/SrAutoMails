@@ -19,13 +19,22 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin
     use PluginUninstallTrait;
     use SrAutoMailsTrait;
 
+    const PLUGIN_CLASS_NAME = self::class;
     const PLUGIN_ID = "srauma";
     const PLUGIN_NAME = "SrAutoMails";
-    const PLUGIN_CLASS_NAME = self::class;
     /**
      * @var self|null
      */
     protected static $instance = null;
+
+
+    /**
+     * ilSrAutoMailsPlugin constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
 
     /**
@@ -42,29 +51,11 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin
 
 
     /**
-     * ilSrAutoMailsPlugin constructor
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-
-    /**
      * @inheritDoc
      */
-    public function getPluginName() : string
+    public function exchangeUIRendererAfterInitialization(Container $dic) : Closure
     {
-        return self::PLUGIN_NAME;
-    }
-
-
-    /**
-     * @inheritDoc
-     */
-    public function getCronJobInstances() : array
-    {
-        return self::srAutoMails()->jobs()->factory()->newInstances();
+        return CustomInputGUIsLoaderDetector::exchangeUIRendererAfterInitialization();
     }
 
 
@@ -80,9 +71,27 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin
     /**
      * @inheritDoc
      */
-    protected function shouldUseOneUpdateStepOnly() : bool
+    public function getCronJobInstances() : array
     {
-        return true;
+        return self::srAutoMails()->jobs()->factory()->newInstances();
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function getPluginName() : string
+    {
+        return self::PLUGIN_NAME;
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function promoteGlobalScreenProvider() : AbstractStaticPluginMainMenuProvider
+    {
+        return self::srAutoMails()->menu();
     }
 
 
@@ -102,15 +111,6 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin
     /**
      * @inheritDoc
      */
-    public function promoteGlobalScreenProvider() : AbstractStaticPluginMainMenuProvider
-    {
-        return self::srAutoMails()->menu();
-    }
-
-
-    /**
-     * @inheritDoc
-     */
     protected function deleteData()/*: void*/
     {
         self::srAutoMails()->dropTables();
@@ -120,8 +120,8 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin
     /**
      * @inheritDoc
      */
-    public function exchangeUIRendererAfterInitialization(Container $dic) : Closure
+    protected function shouldUseOneUpdateStepOnly() : bool
     {
-        return CustomInputGUIsLoaderDetector::exchangeUIRendererAfterInitialization();
+        return true;
     }
 }

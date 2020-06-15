@@ -17,8 +17,8 @@ class ilSrAutoMailsConfigGUI extends ilPluginConfigGUI
     use DICTrait;
     use SrAutoMailsTrait;
 
-    const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     const CMD_CONFIGURE = "configure";
+    const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
 
 
     /**
@@ -63,19 +63,19 @@ class ilSrAutoMailsConfigGUI extends ilPluginConfigGUI
     /**
      *
      */
-    protected function setTabs()/*: void*/
+    protected function configure()/*: void*/
     {
-        RulesMailConfigGUI::addTabs();
-
-        self::dic()->locator()->addItem(ilSrAutoMailsPlugin::PLUGIN_NAME, self::dic()->ctrl()->getLinkTarget($this, self::CMD_CONFIGURE));
+        self::dic()->ctrl()->redirectByClass(RulesMailConfigGUI::class, RulesMailConfigGUI::CMD_LIST_RULES);
     }
 
 
     /**
      *
      */
-    protected function configure()/*: void*/
+    protected function setTabs()/*: void*/
     {
-        self::dic()->ctrl()->redirectByClass(RulesMailConfigGUI::class, RulesMailConfigGUI::CMD_LIST_RULES);
+        RulesMailConfigGUI::addTabs();
+
+        self::dic()->locator()->addItem(ilSrAutoMailsPlugin::PLUGIN_NAME, self::dic()->ctrl()->getLinkTarget($this, self::CMD_CONFIGURE));
     }
 }

@@ -1,7 +1,6 @@
 # Changelog
 
-## [x]
-- New org unit member
+## [1.5.0]
 - ILIAS 6 support
 - Remove ILIAS 5.3 support
 

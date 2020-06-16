@@ -15,80 +15,50 @@ use srag\DIC\SrAutoMails\DICTrait;
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
-abstract class AbstractLearningProgressPieUI {
+abstract class AbstractLearningProgressPieUI
+{
 
-	use DICTrait;
-	use CustomInputGUIsTrait;
-	const LP_STATUS = [
-		ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM,
-		ilLPStatus::LP_STATUS_IN_PROGRESS_NUM,
-		ilLPStatus::LP_STATUS_COMPLETED_NUM
-		//ilLPStatus::LP_STATUS_FAILED_NUM
-	];
-	const LP_STATUS_COLOR = [
-		ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM => [ 221, 221, 221 ],
-		ilLPStatus::LP_STATUS_IN_PROGRESS_NUM => [ 246, 216, 66 ],
-		ilLPStatus::LP_STATUS_COMPLETED_NUM => [ 189, 207, 50 ],
-		ilLPStatus::LP_STATUS_FAILED => [ 176, 96, 96 ]
-	];
-	/**
-	 * @var bool
-	 */
-	protected static $init = false;
-	/**
-	 * @var bool
-	 */
-	protected $show_legend = true;
+    use DICTrait;
+    use CustomInputGUIsTrait;
+
+    const LP_STATUS
+        = [
+            ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM,
+            ilLPStatus::LP_STATUS_IN_PROGRESS_NUM,
+            ilLPStatus::LP_STATUS_COMPLETED_NUM
+            //ilLPStatus::LP_STATUS_FAILED_NUM
+        ];
+    const LP_STATUS_COLOR
+        = [
+            ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM => [221, 221, 221],
+            ilLPStatus::LP_STATUS_IN_PROGRESS_NUM   => [246, 216, 66],
+            ilLPStatus::LP_STATUS_COMPLETED_NUM     => [189, 207, 50],
+            ilLPStatus::LP_STATUS_FAILED            => [176, 96, 96]
+        ];
     /**
      * @var bool
      */
-	protected $show_empty = false;
+    protected static $init = false;
     /**
      * @var array|null
      */
     protected $cache = null;
-
-
-	/**
-	 * AbstractLearningProgressPieUI constructor
-	 */
-	public function __construct() {
-
-	}
-
-
-	/**
-	 * @param bool show_legend
-	 *
-	 * @return self
-	 */
-	public function withShowLegend(bool $show_legend): self {
-		$this->show_legend = $show_legend;
-
-		return $this;
-	}
+    /**
+     * @var bool
+     */
+    protected $show_empty = false;
+    /**
+     * @var bool
+     */
+    protected $show_legend = true;
 
 
     /**
-     * @param bool $show_empty
-     *
-     * @return self
+     * AbstractLearningProgressPieUI constructor
      */
-    public function withShowEmpty(bool $show_empty): self {
-        $this->show_empty = $show_empty;
-
-        return $this;
-    }
-
-
-    /**
-     * @return array
-     */
-    public function getTitles() : array
+    public function __construct()
     {
-        return array_map(function (int $status) : string {
-            return $this->getText($status);
-        }, self::LP_STATUS);
+
     }
 
 
@@ -101,7 +71,7 @@ abstract class AbstractLearningProgressPieUI {
 
             $data = $this->parseData();
 
-            $data = array_map(function (int $status) use ($data): array {
+            $data = array_map(function (int $status) use ($data) : array {
                 return [
                     "color" => self::LP_STATUS_COLOR[$status],
                     "title" => $this->getText($status),
@@ -125,10 +95,22 @@ abstract class AbstractLearningProgressPieUI {
     }
 
 
-	/**
-	 * @return string
-	 */
-	public function render(): string {
+    /**
+     * @return array
+     */
+    public function getTitles() : array
+    {
+        return array_map(function (int $status) : string {
+            return $this->getText($status);
+        }, self::LP_STATUS);
+    }
+
+
+    /**
+     * @return string
+     */
+    public function render() : string
+    {
         $data = $this->getData();
         $count = $data["count"];
         $data = $data["data"];
@@ -147,29 +129,56 @@ abstract class AbstractLearningProgressPieUI {
         }
 
         return "";
-	}
+    }
 
 
-	/**
-	 * @param int $status
-	 *
-	 * @return string
-	 */
-	private function getText(int $status): string {
-		self::dic()->language()->loadLanguageModule("trac");
+    /**
+     * @param bool $show_empty
+     *
+     * @return self
+     */
+    public function withShowEmpty(bool $show_empty) : self
+    {
+        $this->show_empty = $show_empty;
 
-		return ilLearningProgressBaseGUI::_getStatusText($status);
-	}
-
-
-	/**
-	 * @return int[]
-	 */
-	protected abstract function parseData(): array;
+        return $this;
+    }
 
 
-	/**
-	 * @return int
-	 */
-	protected abstract function getCount(): int;
+    /**
+     * @param bool show_legend
+     *
+     * @return self
+     */
+    public function withShowLegend(bool $show_legend) : self
+    {
+        $this->show_legend = $show_legend;
+
+        return $this;
+    }
+
+
+    /**
+     * @return int
+     */
+    protected abstract function getCount() : int;
+
+
+    /**
+     * @return int[]
+     */
+    protected abstract function parseData() : array;
+
+
+    /**
+     * @param int $status
+     *
+     * @return string
+     */
+    private function getText(int $status) : string
+    {
+        self::dic()->language()->loadLanguageModule("trac");
+
+        return ilLearningProgressBaseGUI::_getStatusText($status);
+    }
 }

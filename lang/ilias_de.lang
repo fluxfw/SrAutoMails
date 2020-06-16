@@ -1,4 +1,3 @@
-config_rules#:#Regeln
 rules_actions#:#Aktionen
 rules_add#:#Hinzufügen
 rules_add_rule#:#Regel hinzufügen
@@ -6,6 +5,7 @@ rules_added_rule#:#Regel %s hinzugefügt
 rules_cancel#:#Abbrechen
 rules_configuration#:#Konfiguration
 rules_configuration_saved#:#Konfiguration gespeichert
+rules_cron_status#:#%1$s Regel(n) geprüft\n%2$s Mail(s) versendet
 rules_description#:#Beschreibung
 rules_disable_rules#:#Regeln deaktivieren
 rules_disabled_rules#:#Regeln deaktiviert
@@ -25,13 +25,13 @@ rules_match_type_match#:#Übereinstimmung setzen
 rules_metadata#:#Metadaten
 rules_no#:#Nein
 rules_notification#:#Benachrichtigung
+rules_object_course#:#Kurs
 rules_object_property_count_course_members#:#Anzahl Mitglieder
 rules_object_property_count_course_members_completed#:#Anzahl Mitglieder abgeschlossen
 rules_object_property_count_course_members_not_completed#:#Anzahl Mitglieder nicht abgeschlossen
 rules_object_property_course_end#:#Kurs-Ende
 rules_object_property_course_start#:#Kurs-Start
 rules_object_type#:#Objekt-Typ
-rules_object_course#:#Kurs
 rules_operator#:#Vergleicher
 rules_operator_bigger#:#Grösser als
 rules_operator_bigger_equals#:#Grösser als oder ist gleich
@@ -74,4 +74,3 @@ rules_save#:#Speichern
 rules_saved_rule#:#Regel %s gespeichert
 rules_title#:#Titel
 rules_yes#:#Ja
-cron_status#:#%1$s Regel(n) geprüft\n%2$s Mail(s) versendet

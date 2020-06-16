@@ -4,7 +4,7 @@ namespace srag\Notifications4Plugin\SrAutoMails\Parser;
 
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\Notifications4Plugin\SrAutoMails\Exception\Notifications4PluginException;
-use srag\Notifications4Plugin\SrAutoMails\Notification\Notification;
+use srag\Notifications4Plugin\SrAutoMails\Notification\NotificationInterface;
 use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
 
 /**
@@ -19,10 +19,24 @@ final class Repository implements RepositoryInterface
 
     use DICTrait;
     use Notifications4PluginTrait;
+
     /**
-     * @var RepositoryInterface
+     * @var RepositoryInterface|null
      */
     protected static $instance = null;
+    /**
+     * @var Parser[]
+     */
+    protected $parsers = [];
+
+
+    /**
+     * Repository constructor
+     */
+    private function __construct()
+    {
+        $this->addParser($this->factory()->twig());
+    }
 
 
     /**
@@ -39,36 +53,25 @@ final class Repository implements RepositoryInterface
 
 
     /**
-     * @var array
+     * @inheritDoc
      */
-    protected $parsers
-        = [
-            twigParser::class => twigParser::NAME
-        ];
+    public function addParser(Parser $parser)/* : void*/
+    {
+        $this->parsers[$parser->getClass()] = $parser;
+    }
 
 
     /**
-     * Repository constructor
+     * @inheritDoc
      */
-    private function __construct()
+    public function dropTables()/* : void*/
     {
 
     }
 
 
     /**
-     * @inheritdoc
-     */
-    public function addParser(Parser $parser)
-    {
-        $parser_class = get_class($parser);
-
-        $this->parsers[$parser_class] = $parser_class::NAME;
-    }
-
-
-    /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function factory() : FactoryInterface
     {
@@ -77,7 +80,29 @@ final class Repository implements RepositoryInterface
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
+     */
+    public function getParserByClass(string $parser_class) : Parser
+    {
+        if (isset($this->getPossibleParsers()[$parser_class])) {
+            return $this->getPossibleParsers()[$parser_class];
+        } else {
+            throw new Notifications4PluginException("Invalid parser class $parser_class");
+        }
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function getParserForNotification(NotificationInterface $notification) : Parser
+    {
+        return $this->getParserByClass($notification->getParser());
+    }
+
+
+    /**
+     * @inheritDoc
      */
     public function getPossibleParsers() : array
     {
@@ -86,41 +111,28 @@ final class Repository implements RepositoryInterface
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function getParserByClass(string $parser_class) : Parser
+    public function installTables()/* : void*/
     {
-        if (isset($this->getPossibleParsers()[$parser_class])) {
-            return new $parser_class();
-        } else {
-            throw new Notifications4PluginException("Invalid parser class $parser_class");
-        }
+
     }
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function getParserForNotification(Notification $notification) : Parser
+    public function parseSubject(Parser $parser, NotificationInterface $notification, array $placeholders = [], /*?string*/ $language = null) : string
     {
-        return $this->getParserByClass($notification->getParser());
+        return $parser->parse($notification->getSubject($language), $placeholders, $notification->getParserOptions());
     }
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function parseSubject(Parser $parser, Notification $notification, array $placeholders = [], string $language = "") : string
+    public function parseText(Parser $parser, NotificationInterface $notification, array $placeholders = [], /*?string*/ $language = null) : string
     {
-        return $parser->parse($notification->getSubject($language), $placeholders);
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function parseText(Parser $parser, Notification $notification, array $placeholders = [], string $language = "") : string
-    {
-        return $parser->parse($notification->getText($language), $placeholders);
+        return $parser->parse($notification->getText($language), $placeholders, $notification->getParserOptions());
     }
 }

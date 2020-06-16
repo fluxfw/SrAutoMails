@@ -21,6 +21,13 @@ abstract class ObjectType
 
     use DICTrait;
     use SrAutoMailsTrait;
+
+    /**
+     * @var int
+     *
+     * @abstract
+     */
+    const OBJECT_TYPE = "";
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
 
 
@@ -39,7 +46,7 @@ abstract class ObjectType
                 return true;
 
             case Rule::MATCH_TYPE_MATCH:
-                $metadata_value = self::ilias()->metadata()->getMetadataForObject($this->getObjectId($object), $rule->getMetadata());
+                $metadata_value = self::srAutoMails()->ilias()->metadata()->getMetadataForObject($this->getObjectId($object), $rule->getMetadata());
 
                 if (empty($metadata_value)) {
                     return false;
@@ -152,12 +159,20 @@ abstract class ObjectType
 
 
     /**
+     * @param object $object
+     *
+     * @return int
+     */
+    public abstract function getObjectId($object) : int;
+
+
+    /**
      * @return array
      */
     public final function getObjectPropertiesText()
     {
         return array_map(function (string $object_property) : string {
-            return self::plugin()->translate("object_property_" . $object_property, RulesMailConfigGUI::LANG_MODULE_RULES);
+            return self::plugin()->translate("object_property_" . $object_property, RulesMailConfigGUI::LANG_MODULE);
         }, $this->getObjectProperties());
     }
 
@@ -169,6 +184,12 @@ abstract class ObjectType
     {
         return static::OBJECT_TYPE;
     }
+
+
+    /**
+     * @return object[]
+     */
+    public abstract function getObjects() : array;
 
 
     /**
@@ -189,6 +210,17 @@ abstract class ObjectType
         $this->applyMailPlaceholders($object, $placeholders);
 
         return $placeholders;
+    }
+
+
+    /**
+     * @return array
+     */
+    public final function getReceiverPropertiesText()
+    {
+        return array_map(function (string $object_property) : string {
+            return self::plugin()->translate("receiver_" . $object_property, RulesMailConfigGUI::LANG_MODULE);
+        }, $this->getReceiverProperties());
     }
 
 
@@ -221,25 +253,6 @@ abstract class ObjectType
 
 
     /**
-     * @return array
-     */
-    public final function getReceiverPropertiesText()
-    {
-        return array_map(function (string $object_property) : string {
-            return self::plugin()->translate("receiver_" . $object_property, RulesMailConfigGUI::LANG_MODULE_RULES);
-        }, $this->getReceiverProperties());
-    }
-
-
-    /**
-     * @var int
-     *
-     * @abstract
-     */
-    const OBJECT_TYPE = "";
-
-
-    /**
      * @param object $object
      * @param array  $placeholders
      *
@@ -264,30 +277,16 @@ abstract class ObjectType
 
 
     /**
-     * @return object[]
-     */
-    public abstract function getObjects() : array;
-
-
-    /**
-     * @param object $object
-     *
-     * @return int
-     */
-    public abstract function getObjectId($object) : int;
-
-
-    /**
-     * @return string[]
-     */
-    protected abstract function getReceiverProperties() : array;
-
-
-    /**
      * @param array  $receivers
      * @param object $object
      *
      * @return int[]
      */
     protected abstract function getReceiverForObject(array $receivers, $object) : array;
+
+
+    /**
+     * @return string[]
+     */
+    protected abstract function getReceiverProperties() : array;
 }

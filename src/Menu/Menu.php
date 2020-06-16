@@ -24,27 +24,12 @@ class Menu extends AbstractStaticPluginMainMenuProvider
 
     use DICTrait;
     use SrAutoMailsTrait;
+
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
 
 
     /**
-     * @inheritdoc
-     */
-    public function getStaticTopItems() : array
-    {
-        return [
-            $this->mainmenu->topParentItem($this->if->identifier(ilSrAutoMailsPlugin::PLUGIN_ID . "_top"))->withTitle(ilSrAutoMailsPlugin::PLUGIN_NAME)
-                ->withAvailableCallable(function () : bool {
-                    return self::plugin()->getPluginObject()->isActive();
-                })->withVisibilityCallable(function () : bool {
-                    return self::dic()->rbacreview()->isAssigned(self::dic()->user()->getId(), 2); // Default admin role
-                })
-        ];
-    }
-
-
-    /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function getStaticSubItems() : array
     {
@@ -63,10 +48,26 @@ class Menu extends AbstractStaticPluginMainMenuProvider
                         ilAdministrationGUI::class,
                         ilObjComponentSettingsGUI::class,
                         ilSrAutoMailsConfigGUI::class
-                    ], ""))->withAvailableCallable(function () : bool {
+                    ], ilSrAutoMailsConfigGUI::CMD_CONFIGURE))->withAvailableCallable(function () : bool {
                     return self::plugin()->getPluginObject()->isActive();
                 })->withVisibilityCallable(function () : bool {
-                    return self::dic()->rbacreview()->isAssigned(self::dic()->user()->getId(), 2); // Default admin role
+                    return self::dic()->rbac()->review()->isAssigned(self::dic()->user()->getId(), 2); // Default admin role
+                })
+        ];
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function getStaticTopItems() : array
+    {
+        return [
+            $this->mainmenu->topParentItem($this->if->identifier(ilSrAutoMailsPlugin::PLUGIN_ID . "_top"))->withTitle(ilSrAutoMailsPlugin::PLUGIN_NAME)
+                ->withAvailableCallable(function () : bool {
+                    return self::plugin()->getPluginObject()->isActive();
+                })->withVisibilityCallable(function () : bool {
+                    return self::dic()->rbac()->review()->isAssigned(self::dic()->user()->getId(), 2); // Default admin role
                 })
         ];
     }

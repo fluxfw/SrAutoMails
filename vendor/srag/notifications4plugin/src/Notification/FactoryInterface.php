@@ -2,6 +2,8 @@
 
 namespace srag\Notifications4Plugin\SrAutoMails\Notification;
 
+use srag\Notifications4Plugin\SrAutoMails\Notification\Form\FormBuilder;
+use srag\Notifications4Plugin\SrAutoMails\Notification\Table\TableBuilder;
 use stdClass;
 
 /**
@@ -17,13 +19,30 @@ interface FactoryInterface
     /**
      * @param stdClass $data
      *
-     * @return Notification
+     * @return NotificationInterface
      */
-    public function fromDB(stdClass $data) : Notification;
+    public function fromDB(stdClass $data) : NotificationInterface;
 
 
     /**
-     * @return Notification
+     * @param NotificationCtrl      $parent
+     * @param NotificationInterface $notification
+     *
+     * @return FormBuilder
      */
-    public function newInstance() : Notification;
+    public function newFormBuilderInstance(NotificationCtrl $parent, NotificationInterface $notification) : FormBuilder;
+
+
+    /**
+     * @return NotificationInterface
+     */
+    public function newInstance() : NotificationInterface;
+
+
+    /**
+     * @param NotificationsCtrl $parent
+     *
+     * @return TableBuilder
+     */
+    public function newTableBuilderInstance(NotificationsCtrl $parent) : TableBuilder;
 }

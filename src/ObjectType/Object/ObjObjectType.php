@@ -16,7 +16,7 @@ abstract class ObjObjectType extends ObjectType
 {
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function getMailPlaceholderKeyTypes() : array
     {

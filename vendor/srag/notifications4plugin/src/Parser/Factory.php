@@ -17,10 +17,20 @@ final class Factory implements FactoryInterface
 
     use DICTrait;
     use Notifications4PluginTrait;
+
     /**
-     * @var FactoryInterface
+     * @var FactoryInterface|null
      */
     protected static $instance = null;
+
+
+    /**
+     * Factory constructor
+     */
+    private function __construct()
+    {
+
+    }
 
 
     /**
@@ -37,16 +47,7 @@ final class Factory implements FactoryInterface
 
 
     /**
-     * Factory constructor
-     */
-    private function __construct()
-    {
-
-    }
-
-
-    /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function twig() : twigParser
     {

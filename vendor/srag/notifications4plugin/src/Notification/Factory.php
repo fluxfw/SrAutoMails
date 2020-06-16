@@ -4,6 +4,8 @@ namespace srag\Notifications4Plugin\SrAutoMails\Notification;
 
 use ilDateTime;
 use srag\DIC\SrAutoMails\DICTrait;
+use srag\Notifications4Plugin\SrAutoMails\Notification\Form\FormBuilder;
+use srag\Notifications4Plugin\SrAutoMails\Notification\Table\TableBuilder;
 use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
 use stdClass;
 
@@ -19,71 +21,90 @@ final class Factory implements FactoryInterface
 
     use DICTrait;
     use Notifications4PluginTrait;
-    /**
-     * @var FactoryInterface[]
-     */
-    protected static $instances = [];
-
 
     /**
-     * @param string $notification_class
-     *
-     * @return FactoryInterface
+     * @var FactoryInterface|null
      */
-    public static function getInstance(string $notification_class) : FactoryInterface
-    {
-        if (!isset(self::$instances[$notification_class])) {
-            self::$instances[$notification_class] = new self($notification_class);
-        }
-
-        return self::$instances[$notification_class];
-    }
-
-
-    /**
-     * @var string|Notification
-     */
-    protected $notification_class;
+    protected static $instance = null;
 
 
     /**
      * Factory constructor
-     *
-     * @param string $notification_class
      */
-    private function __construct(string $notification_class)
+    private function __construct()
     {
-        $this->notification_class = $notification_class;
+
     }
 
 
     /**
-     * @inheritdoc
+     * @return FactoryInterface
      */
-    public function fromDB(stdClass $data) : Notification
+    public static function getInstance() : FactoryInterface
     {
-        $language = $this->newInstance();
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
 
-        $language->setId($data->id);
-        $language->setName($data->name);
-        $language->setTitle($data->title);
-        $language->setDescription($data->description);
-        $language->setDefaultLanguage($data->default_language);
-        $language->setParser($data->parser);
-        $language->setCreatedAt(new ilDateTime($data->created_at, IL_CAL_DATETIME));
-        $language->setUpdatedAt(new ilDateTime($data->updated_at, IL_CAL_DATETIME));
-
-        return $language;
+        return self::$instance;
     }
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function newInstance() : Notification
+    public function fromDB(stdClass $data) : NotificationInterface
     {
-        $notification = new $this->notification_class();
+        $notification = $this->newInstance();
+
+        $notification->setId($data->id);
+        $notification->setName($data->name);
+        $notification->setTitle($data->title);
+        $notification->setDescription($data->description);
+        $notification->setParser($data->parser);
+        $notification->setParserOptions(json_decode($data->parser_options, true) ?? []);
+        $notification->setSubjects(json_decode($data->subject, true) ?? []);
+        $notification->setTexts(json_decode($data->text, true) ?? []);
+        $notification->setCreatedAt(new ilDateTime($data->created_at, IL_CAL_DATETIME));
+        $notification->setUpdatedAt(new ilDateTime($data->updated_at, IL_CAL_DATETIME));
+
+        if (isset($data->default_language)) {
+            $notification->default_language = $data->default_language;
+        }
 
         return $notification;
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function newFormBuilderInstance(NotificationCtrl $parent, NotificationInterface $notification) : FormBuilder
+    {
+        $form = new FormBuilder($parent, $notification);
+
+        return $form;
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function newInstance() : NotificationInterface
+    {
+        $notification = new Notification();
+
+        return $notification;
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function newTableBuilderInstance(NotificationsCtrl $parent) : TableBuilder
+    {
+        $table = new TableBuilder($parent);
+
+        return $table;
     }
 }

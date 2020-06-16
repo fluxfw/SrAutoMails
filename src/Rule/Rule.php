@@ -21,28 +21,29 @@ class Rule extends ActiveRecord
 
     use DICTrait;
     use SrAutoMailsTrait;
-    const TABLE_NAME = "srauma_rule";
-    const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
+
+    const INTERVAL_TYPE_NUMBER = 2;
+    const INTERVAL_TYPE_ONCE = 1;
     const MATCH_TYPE_ALWAYS = 1;
     const MATCH_TYPE_MATCH = 2;
-    const OPERATOR_EQUALS = 1;
-    const OPERATOR_STARTS_WITH = 2;
-    const OPERATOR_CONTAINS = 3;
-    const OPERATOR_ENDS_WITH = 4;
-    const OPERATOR_IS_EMPTY = 5;
-    const OPERATOR_REG_EX = 6;
-    const OPERATOR_LESS = 7;
-    const OPERATOR_LESS_EQUALS = 8;
     const OPERATOR_BIGGER = 9;
     const OPERATOR_BIGGER_EQUALS = 10;
-    const OPERATOR_X_DAYS_BEFORE = 11;
-    const OPERATOR_X_DAYS_AFTER = 12;
-    const OPERATOR_VALUE_TYPE_TEXT = 1;
+    const OPERATOR_CONTAINS = 3;
+    const OPERATOR_ENDS_WITH = 4;
+    const OPERATOR_EQUALS = 1;
+    const OPERATOR_IS_EMPTY = 5;
+    const OPERATOR_LESS = 7;
+    const OPERATOR_LESS_EQUALS = 8;
+    const OPERATOR_REG_EX = 6;
+    const OPERATOR_STARTS_WITH = 2;
     const OPERATOR_VALUE_TYPE_OBJECT_PROPERTY = 2;
+    const OPERATOR_VALUE_TYPE_TEXT = 1;
+    const OPERATOR_X_DAYS_AFTER = 12;
+    const OPERATOR_X_DAYS_BEFORE = 11;
+    const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     const RECEIVER_TYPE_OBJECT = 1;
     const RECEIVER_TYPE_USERS = 2;
-    const INTERVAL_TYPE_ONCE = 1;
-    const INTERVAL_TYPE_NUMBER = 2;
+    const TABLE_NAME = ilSrAutoMailsPlugin::PLUGIN_ID . "_rule";
     /**
      * @var array
      */
@@ -61,39 +62,14 @@ class Rule extends ActiveRecord
             self::OPERATOR_X_DAYS_BEFORE => "x_days_before",
             self::OPERATOR_X_DAYS_AFTER  => "x_days_after"
         ];
-
-
     /**
-     * @return string
-     */
-    public function getConnectorContainerName()
-    {
-        return self::TABLE_NAME;
-    }
-
-
-    /**
-     * @return string
-     *
-     * @deprecated
-     */
-    public static function returnDbTableName()
-    {
-        return self::TABLE_NAME;
-    }
-
-
-    /**
-     * @var int
+     * @var string
      *
      * @con_has_field    true
-     * @con_fieldtype    integer
-     * @con_length       8
+     * @con_fieldtype    text
      * @con_is_notnull   true
-     * @con_is_primary   true
-     * @con_sequence     true
      */
-    protected $rule_id;
+    protected $description = "";
     /**
      * @var bool
      *
@@ -104,30 +80,39 @@ class Rule extends ActiveRecord
      */
     protected $enabled = false;
     /**
-     * @var string
+     * @var int
      *
      * @con_has_field    true
-     * @con_fieldtype    text
+     * @con_fieldtype    integer
+     * @con_length       1
      * @con_is_notnull   true
      */
-    protected $title = "";
-    /**
-     * @var string
-     *
-     * @con_has_field    true
-     * @con_fieldtype    text
-     * @con_is_notnull   true
-     */
-    protected $description = "";
+    protected $interval = 0;
     /**
      * @var int
      *
      * @con_has_field    true
      * @con_fieldtype    integer
-     * @con_length       2
+     * @con_length       1
      * @con_is_notnull   true
      */
-    protected $object_type = 0;
+    protected $interval_type = 0;
+    /**
+     * @var ilDateTime|null
+     *
+     * @con_has_field    true
+     * @con_fieldtype    timestamp
+     * @con_is_notnull   false
+     */
+    protected $last_check = null;
+    /**
+     * @var string
+     *
+     * @con_has_field    true
+     * @con_fieldtype    text
+     * @con_is_notnull   true
+     */
+    protected $mail_template_name = "";
     /**
      * @var int
      *
@@ -154,16 +139,16 @@ class Rule extends ActiveRecord
      * @con_length       2
      * @con_is_notnull   true
      */
-    protected $operator = 0;
+    protected $object_type = 0;
     /**
-     * @var bool
+     * @var int
      *
      * @con_has_field    true
      * @con_fieldtype    integer
-     * @con_length       1
+     * @con_length       2
      * @con_is_notnull   true
      */
-    protected $operator_negated = false;
+    protected $operator = 0;
     /**
      * @var bool
      *
@@ -174,14 +159,14 @@ class Rule extends ActiveRecord
      */
     protected $operator_case_sensitive = false;
     /**
-     * @var int
+     * @var bool
      *
      * @con_has_field    true
      * @con_fieldtype    integer
      * @con_length       1
      * @con_is_notnull   true
      */
-    protected $operator_value_type = 0;
+    protected $operator_negated = false;
     /**
      * @var string
      *
@@ -191,14 +176,6 @@ class Rule extends ActiveRecord
      */
     protected $operator_value = "";
     /**
-     * @var string
-     *
-     * @con_has_field    true
-     * @con_fieldtype    text
-     * @con_is_notnull   true
-     */
-    protected $mail_template_name = "";
-    /**
      * @var int
      *
      * @con_has_field    true
@@ -206,7 +183,7 @@ class Rule extends ActiveRecord
      * @con_length       1
      * @con_is_notnull   true
      */
-    protected $receiver_type = 0;
+    protected $operator_value_type = 0;
     /**
      * @var array
      *
@@ -223,24 +200,26 @@ class Rule extends ActiveRecord
      * @con_length       1
      * @con_is_notnull   true
      */
-    protected $interval_type = 0;
+    protected $receiver_type = 0;
     /**
      * @var int
      *
      * @con_has_field    true
      * @con_fieldtype    integer
-     * @con_length       1
+     * @con_length       8
      * @con_is_notnull   true
+     * @con_is_primary   true
+     * @con_sequence     true
      */
-    protected $interval = 0;
+    protected $rule_id;
     /**
-     * @var ilDateTime|null
+     * @var string
      *
      * @con_has_field    true
-     * @con_fieldtype    timestamp
-     * @con_is_notnull   false
+     * @con_fieldtype    text
+     * @con_is_notnull   true
      */
-    protected $last_check = null;
+    protected $title = "";
 
 
     /**
@@ -258,131 +237,22 @@ class Rule extends ActiveRecord
 
 
     /**
-     * @param string $field_name
+     * @inheritDoc
      *
-     * @return mixed|null
+     * @deprecated
      */
-    public function sleep(/*string*/
-        $field_name
-    ) {
-        $field_value = $this->{$field_name};
-
-        switch ($field_name) {
-            case "enabled":
-            case "operator_negated":
-            case "operator_case_sensitive":
-                return ($field_value ? 1 : 0);
-
-            case "receiver":
-                return json_encode($field_value);
-
-            case "last_check":
-                if ($field_value !== null) {
-                    return $field_value->get(IL_CAL_DATETIME);
-                } else {
-                    return null;
-                }
-
-            default:
-                return null;
-        }
-    }
-
-
-    /**
-     * @param string $field_name
-     * @param mixed  $field_value
-     *
-     * @return mixed|null
-     */
-    public function wakeUp(/*string*/
-        $field_name,
-        $field_value
-    ) {
-        switch ($field_name) {
-            case "rule_id":
-            case "object_type":
-            case "match_type":
-            case "metadata":
-            case "operator":
-            case "operator_value_type":
-            case "receiver_type":
-            case "interval_type":
-            case "interval":
-                return intval($field_value);
-
-            case "enabled":
-            case "operator_negated":
-            case "operator_case_sensitive":
-                return boolval($field_value);
-
-            case "receiver":
-                return json_decode($field_value);
-
-            case "last_check":
-                if ($field_value !== null) {
-                    return new ilDateTime($field_value, IL_CAL_DATETIME);
-                } else {
-                    return null;
-                }
-
-            default:
-                return null;
-        }
-    }
-
-
-    /**
-     * @return int
-     */
-    public function getRuleId() : int
+    public static function returnDbTableName() : string
     {
-        return $this->rule_id;
+        return self::TABLE_NAME;
     }
 
 
     /**
-     * @param int $rule_id
+     * @inheritDoc
      */
-    public function setRuleId(int $rule_id)/*: void*/
+    public function getConnectorContainerName() : string
     {
-        $this->rule_id = $rule_id;
-    }
-
-
-    /**
-     * @return bool
-     */
-    public function isEnabled() : bool
-    {
-        return $this->enabled;
-    }
-
-
-    /**
-     * @param bool $enabled
-     */
-    public function setEnabled(bool $enabled)/*: void*/
-    {
-        $this->enabled = $enabled;
-    }
-
-
-    /**
-     * @return string
-     */
-    public function getTitle() : string
-    {
-        return $this->title;
-    }
-
-
-    /**
-     * @param string $title
-     */
-    public function setTitle(string $title)/*: void*/
-    {
-        $this->title = $title;
+        return self::TABLE_NAME;
     }
 
 
@@ -407,18 +277,72 @@ class Rule extends ActiveRecord
     /**
      * @return int
      */
-    public function getObjectType() : int
+    public function getInterval() : int
     {
-        return $this->object_type;
+        return $this->interval;
     }
 
 
     /**
-     * @param int $object_type
+     * @param int $interval
      */
-    public function setObjectType(int $object_type)/*: void*/
+    public function setInterval(int $interval)/*: void*/
     {
-        $this->object_type = $object_type;
+        $this->interval = $interval;
+    }
+
+
+    /**
+     * @return int
+     */
+    public function getIntervalType() : int
+    {
+        return $this->interval_type;
+    }
+
+
+    /**
+     * @param int $interval_type
+     */
+    public function setIntervalType(int $interval_type)/*: void*/
+    {
+        $this->interval_type = $interval_type;
+    }
+
+
+    /**
+     * @return ilDateTime|null
+     */
+    public function getLastCheck()/*: ?ilDateTime*/
+    {
+        return $this->last_check;
+    }
+
+
+    /**
+     * @param ilDateTime $last_check
+     */
+    public function setLastCheck(ilDateTime $last_check)/*: void*/
+    {
+        $this->last_check = $last_check;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getMailTemplateName() : string
+    {
+        return $this->mail_template_name;
+    }
+
+
+    /**
+     * @param string $mail_template_name
+     */
+    public function setMailTemplateName(string $mail_template_name)/*: void*/
+    {
+        $this->mail_template_name = $mail_template_name;
     }
 
 
@@ -461,6 +385,24 @@ class Rule extends ActiveRecord
     /**
      * @return int
      */
+    public function getObjectType() : int
+    {
+        return $this->object_type;
+    }
+
+
+    /**
+     * @param int $object_type
+     */
+    public function setObjectType(int $object_type)/*: void*/
+    {
+        $this->object_type = $object_type;
+    }
+
+
+    /**
+     * @return int
+     */
     public function getOperator() : int
     {
         return $this->operator;
@@ -473,60 +415,6 @@ class Rule extends ActiveRecord
     public function setOperator(int $operator)/*: void*/
     {
         $this->operator = $operator;
-    }
-
-
-    /**
-     * @return bool
-     */
-    public function isOperatorNegated() : bool
-    {
-        return $this->operator_negated;
-    }
-
-
-    /**
-     * @param bool $operator_negated
-     */
-    public function setOperatorNegated(bool $operator_negated)/*: void*/
-    {
-        $this->operator_negated = $operator_negated;
-    }
-
-
-    /**
-     * @return bool
-     */
-    public function isOperatorCaseSensitive() : bool
-    {
-        return $this->operator_case_sensitive;
-    }
-
-
-    /**
-     * @param bool $operator_case_sensitive
-     */
-    public function setOperatorCaseSensitive(bool $operator_case_sensitive)/*: void*/
-    {
-        $this->operator_case_sensitive = $operator_case_sensitive;
-    }
-
-
-    /**
-     * @return int
-     */
-    public function getOperatorValueType() : int
-    {
-        return $this->operator_value_type;
-    }
-
-
-    /**
-     * @param int $operator_value_type
-     */
-    public function setOperatorValueType(int $operator_value_type)/*: void*/
-    {
-        $this->operator_value_type = $operator_value_type;
     }
 
 
@@ -549,38 +437,20 @@ class Rule extends ActiveRecord
 
 
     /**
-     * @return string
-     */
-    public function getMailTemplateName() : string
-    {
-        return $this->mail_template_name;
-    }
-
-
-    /**
-     * @param string $mail_template_name
-     */
-    public function setMailTemplateName(string $mail_template_name)/*: void*/
-    {
-        $this->mail_template_name = $mail_template_name;
-    }
-
-
-    /**
      * @return int
      */
-    public function getReceiverType() : int
+    public function getOperatorValueType() : int
     {
-        return $this->receiver_type;
+        return $this->operator_value_type;
     }
 
 
     /**
-     * @param int $receiver_type
+     * @param int $operator_value_type
      */
-    public function setReceiverType(int $receiver_type)/*: void*/
+    public function setOperatorValueType(int $operator_value_type)/*: void*/
     {
-        $this->receiver_type = $receiver_type;
+        $this->operator_value_type = $operator_value_type;
     }
 
 
@@ -605,53 +475,174 @@ class Rule extends ActiveRecord
     /**
      * @return int
      */
-    public function getIntervalType() : int
+    public function getReceiverType() : int
     {
-        return $this->interval_type;
+        return $this->receiver_type;
     }
 
 
     /**
-     * @param int $interval_type
+     * @param int $receiver_type
      */
-    public function setIntervalType(int $interval_type)/*: void*/
+    public function setReceiverType(int $receiver_type)/*: void*/
     {
-        $this->interval_type = $interval_type;
+        $this->receiver_type = $receiver_type;
     }
 
 
     /**
      * @return int
      */
-    public function getInterval() : int
+    public function getRuleId() : int
     {
-        return $this->interval;
+        return $this->rule_id;
     }
 
 
     /**
-     * @param int $interval
+     * @param int $rule_id
      */
-    public function setInterval(int $interval)/*: void*/
+    public function setRuleId(int $rule_id)/*: void*/
     {
-        $this->interval = $interval;
+        $this->rule_id = $rule_id;
     }
 
 
     /**
-     * @return ilDateTime|null
+     * @return string
      */
-    public function getLastCheck()/*: ?ilDateTime*/
+    public function getTitle() : string
     {
-        return $this->last_check;
+        return $this->title;
     }
 
 
     /**
-     * @param ilDateTime $last_check
+     * @param string $title
      */
-    public function setLastCheck(ilDateTime $last_check)/*: void*/
+    public function setTitle(string $title)/*: void*/
     {
-        $this->last_check = $last_check;
+        $this->title = $title;
+    }
+
+
+    /**
+     * @return bool
+     */
+    public function isEnabled() : bool
+    {
+        return $this->enabled;
+    }
+
+
+    /**
+     * @param bool $enabled
+     */
+    public function setEnabled(bool $enabled)/*: void*/
+    {
+        $this->enabled = $enabled;
+    }
+
+
+    /**
+     * @return bool
+     */
+    public function isOperatorCaseSensitive() : bool
+    {
+        return $this->operator_case_sensitive;
+    }
+
+
+    /**
+     * @param bool $operator_case_sensitive
+     */
+    public function setOperatorCaseSensitive(bool $operator_case_sensitive)/*: void*/
+    {
+        $this->operator_case_sensitive = $operator_case_sensitive;
+    }
+
+
+    /**
+     * @return bool
+     */
+    public function isOperatorNegated() : bool
+    {
+        return $this->operator_negated;
+    }
+
+
+    /**
+     * @param bool $operator_negated
+     */
+    public function setOperatorNegated(bool $operator_negated)/*: void*/
+    {
+        $this->operator_negated = $operator_negated;
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function sleep(/*string*/ $field_name)
+    {
+        $field_value = $this->{$field_name};
+
+        switch ($field_name) {
+            case "enabled":
+            case "operator_negated":
+            case "operator_case_sensitive":
+                return ($field_value ? 1 : 0);
+
+            case "receiver":
+                return json_encode($field_value);
+
+            case "last_check":
+                if ($field_value !== null) {
+                    return $field_value->get(IL_CAL_DATETIME);
+                } else {
+                    return parent::sleep($field_name);
+                }
+
+            default:
+                return parent::sleep($field_name);
+        }
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function wakeUp(/*string*/ $field_name, $field_value)
+    {
+        switch ($field_name) {
+            case "rule_id":
+            case "object_type":
+            case "match_type":
+            case "metadata":
+            case "operator":
+            case "operator_value_type":
+            case "receiver_type":
+            case "interval_type":
+            case "interval":
+                return intval($field_value);
+
+            case "enabled":
+            case "operator_negated":
+            case "operator_case_sensitive":
+                return boolval($field_value);
+
+            case "receiver":
+                return json_decode($field_value);
+
+            case "last_check":
+                if ($field_value !== null) {
+                    return new ilDateTime($field_value, IL_CAL_DATETIME);
+                } else {
+                    return parent::wakeUp($field_name, $field_value);
+                }
+
+            default:
+                return parent::wakeUp($field_name, $field_value);
+        }
     }
 }

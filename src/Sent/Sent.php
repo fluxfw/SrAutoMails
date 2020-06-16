@@ -18,39 +18,9 @@ class Sent extends ActiveRecord
 {
 
     use DICTrait;
-    const TABLE_NAME = "srauma_sent";
+
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
-
-
-    /**
-     * @return string
-     */
-    public function getConnectorContainerName() : string
-    {
-        return self::TABLE_NAME;
-    }
-
-
-    /**
-     * @return string
-     *
-     * @deprecated
-     */
-    public static function returnDbTableName() : string
-    {
-        return self::TABLE_NAME;
-    }
-
-
-    /**
-     * @var int
-     *
-     * @con_has_field   true
-     * @con_fieldtype   integer
-     * @con_length      8
-     * @con_is_notnull  true
-     */
-    protected $rule_id;
+    const TABLE_NAME = ilSrAutoMailsPlugin::PLUGIN_ID . "_sent";
     /**
      * @var int
      *
@@ -60,6 +30,15 @@ class Sent extends ActiveRecord
      * @con_is_notnull  true
      */
     protected $object_id;
+    /**
+     * @var int
+     *
+     * @con_has_field   true
+     * @con_fieldtype   integer
+     * @con_length      8
+     * @con_is_notnull  true
+     */
+    protected $rule_id;
     /**
      * @var int
      *
@@ -84,20 +63,22 @@ class Sent extends ActiveRecord
 
 
     /**
-     * @return int
+     * @inheritDoc
+     *
+     * @deprecated
      */
-    public function getRuleId() : int
+    public static function returnDbTableName() : string
     {
-        return $this->rule_id;
+        return self::TABLE_NAME;
     }
 
 
     /**
-     * @param int $rule_id
+     * @inheritDoc
      */
-    public function setRuleId(int $rule_id)/*: void*/
+    public function getConnectorContainerName() : string
     {
-        $this->rule_id = $rule_id;
+        return self::TABLE_NAME;
     }
 
 
@@ -116,6 +97,24 @@ class Sent extends ActiveRecord
     public function setObjectId(int $object_id)/*: void*/
     {
         $this->object_id = $object_id;
+    }
+
+
+    /**
+     * @return int
+     */
+    public function getRuleId() : int
+    {
+        return $this->rule_id;
+    }
+
+
+    /**
+     * @param int $rule_id
+     */
+    public function setRuleId(int $rule_id)/*: void*/
+    {
+        $this->rule_id = $rule_id;
     }
 
 

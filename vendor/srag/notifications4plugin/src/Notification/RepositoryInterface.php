@@ -2,7 +2,7 @@
 
 namespace srag\Notifications4Plugin\SrAutoMails\Notification;
 
-use srag\DIC\SrAutoMails\Plugin\PluginInterface;
+use srag\DataTableUI\SrAutoMails\Component\Settings\Settings;
 
 /**
  * Interface RepositoryInterface
@@ -15,18 +15,23 @@ interface RepositoryInterface
 {
 
     /**
-     * @param Notification $notification
+     * @param NotificationInterface $notification
      */
-    public function deleteNotification(Notification $notification)/*: void*/ ;
+    public function deleteNotification(NotificationInterface $notification)/* : void*/;
 
 
     /**
-     * @param Notification    $notification
-     * @param PluginInterface $plugin
-     *
-     * @return Notification
+     * @internal
      */
-    public function duplicateNotification(Notification $notification, PluginInterface $plugin) : Notification;
+    public function dropTables()/* : void*/;
+
+
+    /**
+     * @param NotificationInterface $notification
+     *
+     * @return NotificationInterface
+     */
+    public function duplicateNotification(NotificationInterface $notification) : NotificationInterface;
 
 
     /**
@@ -36,38 +41,27 @@ interface RepositoryInterface
 
 
     /**
-     * @param Notification[] $notifications
-     *
-     * @return array
-     */
-    public function getArrayForSelection(array $notifications) : array;
-
-
-    /**
      * @param int $id
      *
-     * @return Notification|null
+     * @return NotificationInterface|null
      */
-    public function getNotificationById(int $id)/*: ?Notification*/ ;
+    public function getNotificationById(int $id)/* : ?NotificationInterface*/;
 
 
     /**
      * @param string $name
      *
-     * @return Notification|null
+     * @return NotificationInterface|null
      */
-    public function getNotificationByName(string $name)/*: ?Notification*/ ;
+    public function getNotificationByName(string $name)/* : ?NotificationInterface*/;
 
 
     /**
-     * @param string|null $sort_by
-     * @param string|null $sort_by_direction
-     * @param int|null    $limit_start
-     * @param int|null    $limit_end
+     * @param Settings|null $settings
      *
-     * @return Notification[]
+     * @return NotificationInterface[]
      */
-    public function getNotifications(string $sort_by = null, string $sort_by_direction = null, int $limit_start = null, int $limit_end = null) : array;
+    public function getNotifications(/*?Settings*/ $settings = null) : array;
 
 
     /**
@@ -77,17 +71,23 @@ interface RepositoryInterface
 
 
     /**
-     * @param string $name |null
-     *
-     * @return Notification|null
-     *
-     * @deprecated
+     * @internal
      */
-    public function migrateFromOldGlobalPlugin(string $name = null)/*: ?Notification*/ ;
+    public function installTables()/* : void*/;
 
 
     /**
-     * @param Notification $notification
+     * @param string $name |null
+     *
+     * @return NotificationInterface|null
+     *
+     * @deprecated
      */
-    public function storeInstance(Notification $notification)/*: void*/ ;
+    public function migrateFromOldGlobalPlugin(string $name = null)/* : ?NotificationInterface*/;
+
+
+    /**
+     * @param NotificationInterface $notification
+     */
+    public function storeNotification(NotificationInterface $notification)/* : void*/;
 }

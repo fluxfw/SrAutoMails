@@ -6,6 +6,7 @@ use ilDBConstants;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
+use Throwable;
 
 /**
  * Class Repository
@@ -19,11 +20,21 @@ final class Repository
 
     use DICTrait;
     use SrAutoMailsTrait;
+
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     /**
-     * @var self
+     * @var self|null
      */
     protected static $instance = null;
+
+
+    /**
+     * Repository constructor
+     */
+    private function __construct()
+    {
+
+    }
 
 
     /**
@@ -40,11 +51,77 @@ final class Repository
 
 
     /**
-     * Repository constructor
+     * @internal
      */
-    private function __construct()
+    public function dropTables()/*: void*/
     {
 
+    }
+
+
+    /**
+     * @param int $rule_id
+     * @param int $object_id
+     * @param int $user_id
+     *
+     * @return bool
+     */
+    public function hasSent(int $rule_id, int $object_id, int $user_id) : bool
+    {
+        $sent = $this->getSent($rule_id, $object_id, $user_id);
+
+        return ($sent !== null);
+    }
+
+
+    /**
+     * @internal
+     */
+    public function installTables()/*: void*/
+    {
+        try {
+            Sent::updateDB();
+        } catch (Throwable $ex) {
+            // Fix Call to a member function getName() on null (Because not use ILIAS sequence)
+        }
+
+        if (self::dic()->database()->tableColumnExists(Sent::TABLE_NAME, "id")) {
+            self::dic()->database()->dropTableColumn(Sent::TABLE_NAME, "id");
+        }
+    }
+
+
+    /**
+     * @param int $rule_id
+     * @param int $object_id
+     * @param int $user_id
+     */
+    public function sent(int $rule_id, int $object_id, int $user_id)/*: void*/
+    {
+        $sent = $this->getSent($rule_id, $object_id, $user_id);
+
+        if ($sent === null) {
+            $sent = $this->factory()->newInstance();
+            $sent->setRuleId($rule_id);
+            $sent->setObjectId($object_id);
+            $sent->setUserId($user_id);
+            $this->store($sent);
+        }
+    }
+
+
+    /**
+     * @param int $rule_id
+     * @param int $object_id
+     * @param int $user_id
+     */
+    public function unsent(int $rule_id, int $object_id, int $user_id)/*: void*/
+    {
+        $sent = $this->getSent($rule_id, $object_id, $user_id);
+
+        if ($sent !== null) {
+            $this->delete($sent);
+        }
     }
 
 
@@ -95,40 +172,6 @@ final class Repository
 
 
     /**
-     * @param int $rule_id
-     * @param int $object_id
-     * @param int $user_id
-     *
-     * @return bool
-     */
-    public function hasSent(int $rule_id, int $object_id, int $user_id) : bool
-    {
-        $sent = $this->getSent($rule_id, $object_id, $user_id);
-
-        return ($sent !== null);
-    }
-
-
-    /**
-     * @param int $rule_id
-     * @param int $object_id
-     * @param int $user_id
-     */
-    public function sent(int $rule_id, int $object_id, int $user_id)/*: void*/
-    {
-        $sent = $this->getSent($rule_id, $object_id, $user_id);
-
-        if ($sent === null) {
-            $sent = $this->factory()->newInstance();
-            $sent->setRuleId($rule_id);
-            $sent->setObjectId($object_id);
-            $sent->setUserId($user_id);
-            $this->store($sent);
-        }
-    }
-
-
-    /**
      * @param Sent $sent
      */
     protected function store(Sent $sent)/*: void*/
@@ -138,20 +181,5 @@ final class Repository
             "object_id" => [ilDBConstants::T_INTEGER, $sent->getObjectId()],
             "user_id"   => [ilDBConstants::T_INTEGER, $sent->getUserId()]
         ]);
-    }
-
-
-    /**
-     * @param int $rule_id
-     * @param int $object_id
-     * @param int $user_id
-     */
-    public function unsent(int $rule_id, int $object_id, int $user_id)/*: void*/
-    {
-        $sent = $this->getSent($rule_id, $object_id, $user_id);
-
-        if ($sent !== null) {
-            $this->delete($sent);
-        }
     }
 }

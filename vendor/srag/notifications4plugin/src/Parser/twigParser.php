@@ -2,8 +2,7 @@
 
 namespace srag\Notifications4Plugin\SrAutoMails\Parser;
 
-use srag\DIC\SrAutoMails\DICTrait;
-use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
+use srag\Notifications4Plugin\SrAutoMails\Notification\NotificationsCtrl;
 use Twig_Environment;
 use Twig_Error;
 use Twig_Loader_String;
@@ -16,20 +15,11 @@ use Twig_Loader_String;
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  * @author  Stefan Wanzenried <sw@studer-raimann.ch>
  */
-class twigParser implements Parser
+class twigParser extends AbstractParser
 {
 
-    use DICTrait;
-    use Notifications4PluginTrait;
-    const NAME = "twig";
     const DOC_LINK = "https://twig.symfony.com/doc/1.x/templates.html";
-    /**
-     * @var array
-     */
-    protected $options
-        = [
-            "autoescape" => false // Do not auto escape variables by default when using {{ myVar }}
-        ];
+    const NAME = "twig";
 
 
     /**
@@ -37,23 +27,47 @@ class twigParser implements Parser
      *
      * @param array $options
      */
-    public function __construct(array $options = [])
+    public function __construct()
     {
-        $this->options = array_merge($this->options, $options);
+        parent::__construct();
     }
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
+     */
+    public function getOptionsFields() : array
+    {
+        return [
+            "autoescape" => self::dic()
+                ->ui()
+                ->factory()
+                ->input()
+                ->field()
+                ->checkbox(self::notifications4plugin()->getPlugin()->translate("parser_option_autoescape", NotificationsCtrl::LANG_MODULE))
+                ->withByline(nl2br(implode("\n", [
+                    self::notifications4plugin()->getPlugin()->translate("parser_option_autoescape_info_1", NotificationsCtrl::LANG_MODULE, ["|raw"]),
+                    self::notifications4plugin()->getPlugin()->translate("parser_option_autoescape_info_2", NotificationsCtrl::LANG_MODULE, ["|e"]),
+                    "<b>" . self::notifications4plugin()->getPlugin()->translate("parser_option_autoescape_info_3", NotificationsCtrl::LANG_MODULE) . "</b>",
+                    self::notifications4plugin()->getPlugin()->translate("parser_option_autoescape_info_4", NotificationsCtrl::LANG_MODULE)
+                ]), false))
+        ];
+    }
+
+
+    /**
+     * @inheritDoc
      *
      * @throws Twig_Error
      */
-    public function parse(string $text, array $placeholders = []) : string
+    public function parse(string $text, array $placeholders = [], array $options = []) : string
     {
         $loader = new Twig_Loader_String();
 
-        $twig = new Twig_Environment($loader, $this->options);
+        $twig = new Twig_Environment($loader, [
+            "autoescape" => boolval($options["autoescape"])
+        ]);
 
-        return $twig->render($text, $placeholders);
+        return $this->fixLineBreaks($twig->render($text, $placeholders));
     }
 }

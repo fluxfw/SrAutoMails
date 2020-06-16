@@ -18,11 +18,21 @@ final class Factory
 
     use DICTrait;
     use SrAutoMailsTrait;
+
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     /**
-     * @var self
+     * @var self|null
      */
     protected static $instance = null;
+
+
+    /**
+     * Factory constructor
+     */
+    private function __construct()
+    {
+
+    }
 
 
     /**
@@ -39,11 +49,16 @@ final class Factory
 
 
     /**
-     * Factory constructor
+     * @param RuleMailConfigGUI $parent
+     * @param Rule              $rule
+     *
+     * @return RuleFormGUI
      */
-    private function __construct()
+    public function newFormInstance(RuleMailConfigGUI $parent, Rule $rule) : RuleFormGUI
     {
+        $form = new RuleFormGUI($parent, $rule);
 
+        return $form;
     }
 
 
@@ -55,5 +70,30 @@ final class Factory
         $rule = new Rule();
 
         return $rule;
+    }
+
+
+    /**
+     * @return RulesJob
+     */
+    public function newJobInstance() : RulesJob
+    {
+        $job = new RulesJob();
+
+        return $job;
+    }
+
+
+    /**
+     * @param RulesMailConfigGUI $parent
+     * @param string             $cmd
+     *
+     * @return RulesTableGUI
+     */
+    public function newTableInstance(RulesMailConfigGUI $parent, string $cmd = RulesMailConfigGUI::CMD_LIST_RULES) : RulesTableGUI
+    {
+        $table = new RulesTableGUI($parent, $cmd);
+
+        return $table;
     }
 }

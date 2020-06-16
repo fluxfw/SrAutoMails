@@ -19,8 +19,13 @@ final class Repository
 
     use DICTrait;
     use SrAutoMailsTrait;
-    const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
+
     const OBJECT_TYPE_COURSE = 1;
+    const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
+    /**
+     * @var self|null
+     */
+    protected static $instance = null;
     /**
      * @var array
      */
@@ -28,10 +33,15 @@ final class Repository
         = [
             self::OBJECT_TYPE_COURSE => "course"
         ];
+
+
     /**
-     * @var self
+     * Repository constructor
      */
-    protected static $instance = null;
+    private function __construct()
+    {
+
+    }
 
 
     /**
@@ -48,9 +58,9 @@ final class Repository
 
 
     /**
-     * Repository constructor
+     * @internal
      */
-    private function __construct()
+    public function dropTables()/*: void*/
     {
 
     }
@@ -82,7 +92,16 @@ final class Repository
     public function getObjectTypesText() : array
     {
         return array_map(function (string $object_type) : string {
-            return self::plugin()->translate("object_" . $object_type, RulesMailConfigGUI::LANG_MODULE_RULES);
+            return self::plugin()->translate("object_" . $object_type, RulesMailConfigGUI::LANG_MODULE);
         }, self::$object_types);
+    }
+
+
+    /**
+     * @internal
+     */
+    public function installTables()/*: void*/
+    {
+
     }
 }

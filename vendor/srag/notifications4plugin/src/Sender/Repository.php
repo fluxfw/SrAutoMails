@@ -3,7 +3,7 @@
 namespace srag\Notifications4Plugin\SrAutoMails\Sender;
 
 use srag\DIC\SrAutoMails\DICTrait;
-use srag\Notifications4Plugin\SrAutoMails\Notification\Notification;
+use srag\Notifications4Plugin\SrAutoMails\Notification\NotificationInterface;
 use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
 
 /**
@@ -18,10 +18,20 @@ final class Repository implements RepositoryInterface
 
     use DICTrait;
     use Notifications4PluginTrait;
+
     /**
-     * @var RepositoryInterface
+     * @var RepositoryInterface|null
      */
     protected static $instance = null;
+
+
+    /**
+     * Repository constructor
+     */
+    private function __construct()
+    {
+
+    }
 
 
     /**
@@ -38,16 +48,16 @@ final class Repository implements RepositoryInterface
 
 
     /**
-     * Repository constructor
+     * @inheritDoc
      */
-    private function __construct()
+    public function dropTables()/* : void*/
     {
 
     }
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function factory() : FactoryInterface
     {
@@ -56,15 +66,24 @@ final class Repository implements RepositoryInterface
 
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function send(Sender $sender, Notification $notification, array $placeholders = [], string $language = "")/*: void*/
+    public function installTables()/* : void*/
     {
-        $parser = self::parser()->getParserForNotification($notification);
 
-        $sender->setSubject(self::parser()->parseSubject($parser, $notification, $placeholders, $language));
+    }
 
-        $sender->setMessage(self::parser()->parseText($parser, $notification, $placeholders, $language));
+
+    /**
+     * @inheritDoc
+     */
+    public function send(Sender $sender, NotificationInterface $notification, array $placeholders = [], /*?string*/ $language = null)/* : void*/
+    {
+        $parser = self::notifications4plugin()->parser()->getParserForNotification($notification);
+
+        $sender->setSubject(self::notifications4plugin()->parser()->parseSubject($parser, $notification, $placeholders, $language));
+
+        $sender->setMessage(self::notifications4plugin()->parser()->parseText($parser, $notification, $placeholders, $language));
 
         $sender->send();
     }

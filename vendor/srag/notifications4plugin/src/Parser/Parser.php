@@ -2,6 +2,7 @@
 
 namespace srag\Notifications4Plugin\SrAutoMails\Parser;
 
+use ILIAS\UI\Component\Input\Field\Input;
 use srag\Notifications4Plugin\SrAutoMails\Exception\Notifications4PluginException;
 
 /**
@@ -20,15 +21,47 @@ interface Parser
      *
      * @abstract
      */
-    //const NAME = "";
+    const DOC_LINK = "";
+    /**
+     * @var string
+     *
+     * @abstract
+     */
+    const NAME = "";
+
+
+    /**
+     * @return string
+     */
+    public function getClass() : string;
+
+
+    /**
+     * @return string
+     */
+    public function getDocLink() : string;
+
+
+    /**
+     * @return string
+     */
+    public function getName() : string;
+
+
+    /**
+     * @return Input[]
+     */
+    public function getOptionsFields() : array;
+
 
     /**
      * @param string $text
      * @param array  $placeholders
+     * @param array  $options
      *
      * @return string
      *
      * @throws Notifications4PluginException
      */
-    public function parse(string $text, array $placeholders = []) : string;
+    public function parse(string $text, array $placeholders = [], array $options = []) : string;
 }

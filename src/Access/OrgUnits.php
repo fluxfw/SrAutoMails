@@ -3,7 +3,11 @@
 namespace srag\Plugins\SrAutoMails\Access;
 
 use ilDBConstants;
+use ilObjOrgUnit;
+use ilOrgUnitOperationContext;
+use ilOrgUnitPermission;
 use ilOrgUnitPosition;
+use ilOrgUnitUserAssignment;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
@@ -20,11 +24,21 @@ final class OrgUnits
 
     use DICTrait;
     use SrAutoMailsTrait;
+
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     /**
-     * @var self
+     * @var self|null
      */
     protected static $instance = null;
+
+
+    /**
+     * OrgUnits constructor
+     */
+    private function __construct()
+    {
+
+    }
 
 
     /**
@@ -41,25 +55,19 @@ final class OrgUnits
 
 
     /**
-     * OrgUnits constructor
-     */
-    private function __construct()
-    {
-
-    }
-
-
-    /**
      * @param int $user_id
      *
      * @return int[]
      */
     public function getMemberOrgIdsOfUser(int $user_id) : array
     {
-        $result = self::dic()->database()->queryF('SELECT orgu_id FROM il_orgu_permissions
-				INNER JOIN il_orgu_ua ON il_orgu_ua.position_id=il_orgu_permissions.position_id
-				INNER JOIN il_orgu_op_contexts ON il_orgu_op_contexts.id=il_orgu_permissions.context_id AND il_orgu_op_contexts.context IS NOT NULL
-				WHERE il_orgu_ua.user_id=%s AND il_orgu_permissions.operations IS NOT NULL AND il_orgu_permissions.parent_id=%s AND il_orgu_permissions.position_id=%s', [
+        $result = self::dic()->database()->queryF('SELECT orgu_id FROM ' . ilOrgUnitPermission::TABLE_NAME . '
+				INNER JOIN ' . ilOrgUnitUserAssignment::returnDbTableName() . ' ON ' . ilOrgUnitUserAssignment::returnDbTableName() . '.position_id=' . ilOrgUnitPermission::TABLE_NAME . '.position_id
+				INNER JOIN ' . ilOrgUnitOperationContext::returnDbTableName() . ' ON ' . ilOrgUnitOperationContext::returnDbTableName() . '.id=' . ilOrgUnitPermission::TABLE_NAME . '.context_id AND '
+            . ilOrgUnitOperationContext::returnDbTableName() . '.context IS NOT NULL
+				WHERE ' . ilOrgUnitUserAssignment::returnDbTableName()
+            . '.user_id=%s AND ' . ilOrgUnitPermission::TABLE_NAME . '.operations IS NOT NULL AND ' . ilOrgUnitPermission::TABLE_NAME . '.parent_id=%s AND ' . ilOrgUnitPermission::TABLE_NAME
+            . '.position_id=%s', [
             ilDBConstants::T_INTEGER,
             ilDBConstants::T_INTEGER,
             ilDBConstants::T_INTEGER
@@ -80,13 +88,31 @@ final class OrgUnits
 
 
     /**
+     * @return ilObjOrgUnit[]
+     */
+    public function getOrgUnits() : array
+    {
+        $result = self::dic()->database()->queryF('SELECT obj_id FROM object_data WHERE type=%s', [ilDBConstants::T_TEXT], ["orgu"]);
+
+        $array = [];
+
+        while (($row = $result->fetchAssoc()) !== false) {
+            $array[] = new ilObjOrgUnit($row["obj_id"], false);
+        }
+
+        return $array;
+    }
+
+
+    /**
      * @param int $org_unit_ref_id
      *
      * @return int[]
      */
     public function getSuperiorsOfOrgUnit(int $org_unit_ref_id) : array
     {
-        $result = self::dic()->database()->queryF('SELECT user_id FROM il_orgu_ua WHERE il_orgu_ua.orgu_id=%s AND il_orgu_ua.position_id=%s', [
+        $result = self::dic()->database()->queryF('SELECT user_id FROM ' . ilOrgUnitUserAssignment::returnDbTableName() . ' WHERE ' . ilOrgUnitUserAssignment::returnDbTableName() . '.orgu_id=%s AND '
+            . ilOrgUnitUserAssignment::returnDbTableName() . '.position_id=%s', [
             ilDBConstants::T_INTEGER,
             ilDBConstants::T_INTEGER
         ], [

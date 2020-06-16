@@ -21,11 +21,21 @@ final class Courses
 
     use DICTrait;
     use SrAutoMailsTrait;
+
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     /**
-     * @var self
+     * @var self|null
      */
     protected static $instance = null;
+
+
+    /**
+     * Courses constructor
+     */
+    private function __construct()
+    {
+
+    }
 
 
     /**
@@ -42,11 +52,13 @@ final class Courses
 
 
     /**
-     * Courses constructor
+     * @param int $obj_id
+     *
+     * @return array
      */
-    private function __construct()
+    public function getCompletedUsers(int $obj_id) : array
     {
-
+        return ilLPStatusWrapper::_lookupCompletedForObject($obj_id);
     }
 
 
@@ -64,16 +76,5 @@ final class Courses
         }
 
         return $array;
-    }
-
-
-    /**
-     * @param int $obj_id
-     *
-     * @return array
-     */
-    public function getCompletedUsers(int $obj_id) : array
-    {
-        return ilLPStatusWrapper::_lookupCompletedForObject($obj_id);
     }
 }

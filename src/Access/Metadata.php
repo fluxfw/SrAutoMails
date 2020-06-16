@@ -23,11 +23,21 @@ final class Metadata
 
     use DICTrait;
     use SrAutoMailsTrait;
+
     const PLUGIN_CLASS_NAME = ilSrAutoMailsPlugin::class;
     /**
-     * @var self
+     * @var self|null
      */
     protected static $instance = null;
+
+
+    /**
+     * Metadata constructor
+     */
+    private function __construct()
+    {
+
+    }
 
 
     /**
@@ -40,15 +50,6 @@ final class Metadata
         }
 
         return self::$instance;
-    }
-
-
-    /**
-     * Metadata constructor
-     */
-    private function __construct()
-    {
-
     }
 
 

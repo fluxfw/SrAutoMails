@@ -41,7 +41,7 @@ class CourseObjectType extends ObjObjectType
             "object"                => "object " . ilObjCourse::class,
             "members"               => "array " . ilObjUser::class,
             "members_completed"     => "array " . ilObjUser::class,
-            "members_not_completed" => "array " . ilObjUser::class,
+            "members_not_completed" => "array " . ilObjUser::class
         ]);
     }
 

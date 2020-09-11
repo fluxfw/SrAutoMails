@@ -163,6 +163,8 @@ class RulesMailConfigGUI
      */
     protected function listRules()/*: void*/
     {
+        self::dic()->tabs()->activateTab(self::TAB_LIST_RULES);
+
         $table = self::srAutoMails()->rules()->factory()->newTableInstance($this);
 
         self::output()->output($table);
@@ -198,6 +200,8 @@ class RulesMailConfigGUI
      */
     protected function removeRulesConfirm()/*: void*/
     {
+        self::dic()->tabs()->activateTab(self::TAB_LIST_RULES);
+
         $rule_ids = filter_input(INPUT_POST, RuleMailConfigGUI::GET_PARAM_RULE_ID, FILTER_DEFAULT, FILTER_FORCE_ARRAY);
 
         /**

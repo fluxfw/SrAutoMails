@@ -2,6 +2,7 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
+use srag\DIC\SrAutoMails\DevTools\DevToolsCtrl;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\Plugins\SrAutoMails\Rule\RulesMailConfigGUI;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
@@ -10,6 +11,8 @@ use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
  * Class ilSrAutoMailsConfigGUI
  *
  * @author studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
+ *
+ * @ilCtrl_isCalledBy srag\DIC\SrAutoMails\DevTools\DevToolsCtrl: ilSrAutoMailsConfigGUI
  */
 class ilSrAutoMailsConfigGUI extends ilPluginConfigGUI
 {
@@ -40,6 +43,10 @@ class ilSrAutoMailsConfigGUI extends ilPluginConfigGUI
         $next_class = self::dic()->ctrl()->getNextClass($this);
 
         switch (strtolower($next_class)) {
+            case strtolower(DevToolsCtrl::class):
+                self::dic()->ctrl()->forwardCommand(new DevToolsCtrl($this, self::plugin()));
+                break;
+
             case strtolower(RulesMailConfigGUI::class):
                 self::dic()->ctrl()->forwardCommand(new RulesMailConfigGUI());
                 break;
@@ -75,6 +82,8 @@ class ilSrAutoMailsConfigGUI extends ilPluginConfigGUI
     protected function setTabs()/*: void*/
     {
         RulesMailConfigGUI::addTabs();
+
+        DevToolsCtrl::addTabs(self::plugin());
 
         self::dic()->locator()->addItem(ilSrAutoMailsPlugin::PLUGIN_NAME, self::dic()->ctrl()->getLinkTarget($this, self::CMD_CONFIGURE));
     }

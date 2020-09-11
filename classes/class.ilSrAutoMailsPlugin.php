@@ -5,6 +5,7 @@ require_once __DIR__ . "/../vendor/autoload.php";
 use ILIAS\DI\Container;
 use ILIAS\GlobalScreen\Scope\MainMenu\Provider\AbstractStaticPluginMainMenuProvider;
 use srag\CustomInputGUIs\SrAutoMails\Loader\CustomInputGUIsLoaderDetector;
+use srag\DIC\SrAutoMails\DevTools\DevToolsCtrl;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 use srag\RemovePluginDataConfirm\SrAutoMails\PluginUninstallTrait;
 
@@ -105,6 +106,8 @@ class ilSrAutoMailsPlugin extends ilCronHookPlugin
         $this->installRemovePluginDataConfirmLanguages();
 
         self::srAutoMails()->notifications4plugin()->installLanguages();
+
+        DevToolsCtrl::installLanguages(self::plugin());
     }
 
 

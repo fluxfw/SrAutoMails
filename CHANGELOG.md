@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.5.2]
+- Dev tools
+
 ## [1.5.1]
 - Fix PHP 7.0
 

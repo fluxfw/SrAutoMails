@@ -73,7 +73,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "srag\\CustomInputGUIs\\": "src/"
+                    "srag\\CustomInputGUIs\\SrAutoMails\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -165,7 +165,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "srag\\DIC\\": "src/"
+                    "srag\\DIC\\SrAutoMails\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -301,7 +301,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "srag\\RemovePluginDataConfirm\\": "src/"
+                    "srag\\RemovePluginDataConfirm\\SrAutoMails\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",

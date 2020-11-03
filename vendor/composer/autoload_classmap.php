@@ -342,6 +342,7 @@ return array(
     'srag\\DataTableUI\\SrAutoMails\\Implementation\\Table' => $vendorDir . '/srag/datatable/src/Implementation/Table.php',
     'srag\\DataTableUI\\SrAutoMails\\Implementation\\Utils\\AbstractTableBuilder' => $vendorDir . '/srag/datatable/src/Implementation/Utils/AbstractTableBuilder.php',
     'srag\\DataTableUI\\SrAutoMails\\Implementation\\Utils\\DataTableUITrait' => $vendorDir . '/srag/datatable/src/Implementation/Utils/DataTableUITrait.php',
+    'srag\\DevTools\\SrAutoMails\\DevToolsCtrl' => $vendorDir . '/srag/devtools/src/class.DevToolsCtrl.php',
     'srag\\LibrariesNamespaceChanger\\GeneratePluginPhpAndXml' => $vendorDir . '/srag/librariesnamespacechanger/src/GeneratePluginPhpAndXml.php',
     'srag\\LibrariesNamespaceChanger\\GeneratePluginReadme' => $vendorDir . '/srag/librariesnamespacechanger/src/GeneratePluginReadme.php',
     'srag\\LibrariesNamespaceChanger\\LibrariesNamespaceChanger' => $vendorDir . '/srag/librariesnamespacechanger/src/LibrariesNamespaceChanger.php',

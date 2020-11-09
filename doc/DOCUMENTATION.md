@@ -1,1 +1,0 @@
-# SrAutoMails ILIAS Plugin Documentation

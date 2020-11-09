@@ -22,7 +22,7 @@ class ComposerStaticInit35b1bc54d9a9b3b775b1077762099551
             'srag\\GeneratePluginInfosHelper\\SrAutoMails\\' => 43,
             'srag\\DevTools\\SrAutoMails\\' => 26,
             'srag\\DataTableUI\\SrAutoMails\\' => 29,
-            'srag\\DIC\\' => 9,
+            'srag\\DIC\\SrAutoMails\\' => 21,
             'srag\\CustomInputGUIs\\SrAutoMails\\' => 33,
             'srag\\ActiveRecordConfig\\SrAutoMails\\' => 36,
         ),
@@ -61,7 +61,7 @@ class ComposerStaticInit35b1bc54d9a9b3b775b1077762099551
         array (
             0 => __DIR__ . '/..' . '/srag/datatable/src',
         ),
-        'srag\\DIC\\' => 
+        'srag\\DIC\\SrAutoMails\\' => 
         array (
             0 => __DIR__ . '/..' . '/srag/dic/src',
         ),

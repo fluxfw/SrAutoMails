@@ -14,7 +14,7 @@ return array(
     'srag\\GeneratePluginInfosHelper\\SrAutoMails\\' => array($vendorDir . '/srag/generateplugininfoshelper/src'),
     'srag\\DevTools\\SrAutoMails\\' => array($vendorDir . '/srag/devtools/src'),
     'srag\\DataTableUI\\SrAutoMails\\' => array($vendorDir . '/srag/datatable/src'),
-    'srag\\DIC\\' => array($vendorDir . '/srag/dic/src'),
+    'srag\\DIC\\SrAutoMails\\' => array($vendorDir . '/srag/dic/src'),
     'srag\\CustomInputGUIs\\SrAutoMails\\' => array($vendorDir . '/srag/custominputguis/src'),
     'srag\\ActiveRecordConfig\\SrAutoMails\\' => array($vendorDir . '/srag/activerecordconfig/src'),
 );

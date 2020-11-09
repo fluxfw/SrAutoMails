@@ -16,7 +16,7 @@ use srag\DataTableUI\SrAutoMails\Implementation\Settings\Factory as SettingsFact
 use srag\DataTableUI\SrAutoMails\Implementation\Utils\DataTableUITrait;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\DIC\SrAutoMails\Plugin\PluginInterface;
-use srag\DIC\SrAutoMails\Util\LibraryLanguageInstaller;
+use srag\LibraryLanguageInstaller\SrAutoMails\LibraryLanguageInstaller;
 
 /**
  * Class Factory

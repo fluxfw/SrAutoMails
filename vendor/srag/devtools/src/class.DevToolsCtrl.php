@@ -9,7 +9,7 @@ use ilPluginConfigGUI;
 use ilUtil;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\DIC\SrAutoMails\Plugin\PluginInterface;
-use srag\DIC\SrAutoMails\Util\LibraryLanguageInstaller;
+use srag\LibraryLanguageInstaller\SrAutoMails\LibraryLanguageInstaller;
 
 /**
  * Class DevToolsCtrl

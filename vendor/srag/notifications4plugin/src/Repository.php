@@ -6,7 +6,7 @@ use LogicException;
 use srag\DataTableUI\SrAutoMails\Implementation\Utils\DataTableUITrait;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\DIC\SrAutoMails\Plugin\PluginInterface;
-use srag\DIC\SrAutoMails\Util\LibraryLanguageInstaller;
+use srag\LibraryLanguageInstaller\SrAutoMails\LibraryLanguageInstaller;
 use srag\Notifications4Plugin\SrAutoMails\Notification\Repository as NotificationsRepository;
 use srag\Notifications4Plugin\SrAutoMails\Notification\RepositoryInterface as NotificationsRepositoryInterface;
 use srag\Notifications4Plugin\SrAutoMails\Parser\Repository as ParserRepository;

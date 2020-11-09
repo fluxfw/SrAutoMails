@@ -4,7 +4,7 @@ namespace srag\RemovePluginDataConfirm\SrAutoMails;
 
 use ilUIPluginRouterGUI;
 use srag\DIC\SrAutoMails\DICTrait;
-use srag\DIC\SrAutoMails\Util\LibraryLanguageInstaller;
+use srag\LibraryLanguageInstaller\SrAutoMails\LibraryLanguageInstaller;
 
 /**
  * Trait BasePluginUninstallTrait

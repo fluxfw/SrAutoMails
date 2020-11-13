@@ -1,5 +1,5 @@
 {
-  "name": "srag/plugins/srautomails",
+  "name": "srag/srautomails",
   "description": "",
   "version": "1.5.4",
   "extra": {
@@ -46,7 +46,9 @@
       "srag\\Plugins\\SrAutoMails\\": "src/"
     },
     "classmap": [
-      "classes/"
+      "classes/",
+      "src/Rule/class.RulesMailConfigGUI.php",
+      "src/Rule/class.RuleMailConfigGUI.php"
     ],
     "files": [
       "vendor/srag/dic/src/PHPVersionChecker.php",

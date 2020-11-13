@@ -1,6 +1,6 @@
 <?php
 
-namespace srag\CustomInputGUIs\SrAutoMails\CheckboxInputGUI;
+namespace srag\CustomInputGUIs\SrAutoMails\AjaxCheckbox;
 
 use srag\CustomInputGUIs\SrAutoMails\Template\Template;
 use srag\CustomInputGUIs\SrAutoMails\Waiter\Waiter;
@@ -9,7 +9,7 @@ use srag\DIC\SrAutoMails\DICTrait;
 /**
  * Class AjaxCheckbox
  *
- * @package srag\CustomInputGUIs\SrAutoMails\CheckboxInputGUI
+ * @package srag\CustomInputGUIs\SrAutoMails\AjaxCheckbox
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */

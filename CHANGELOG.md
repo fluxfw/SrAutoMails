@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.5.5]
+- Ping after each object for not ILIAS auto set inactive cron job if during longer
+
 ## [1.5.4]
 - Main menu icon
 

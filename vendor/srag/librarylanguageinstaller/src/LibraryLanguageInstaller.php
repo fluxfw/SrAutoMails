@@ -1,6 +1,6 @@
 <?php
 
-namespace srag\DIC\SrAutoMails\Util;
+namespace srag\LibraryLanguageInstaller\SrAutoMails;
 
 use ilDBConstants;
 use ilGlobalCache;
@@ -12,7 +12,7 @@ use srag\DIC\SrAutoMails\Plugin\PluginInterface;
 /**
  * Class LibraryLanguageInstaller
  *
- * @package srag\DIC\SrAutoMails\Util
+ * @package srag\LibraryLanguageInstaller\SrAutoMails
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */

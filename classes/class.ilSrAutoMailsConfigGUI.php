@@ -2,7 +2,7 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-use srag\DIC\SrAutoMails\DevTools\DevToolsCtrl;
+use srag\DevTools\SrAutoMails\DevToolsCtrl;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\Plugins\SrAutoMails\Rule\RulesMailConfigGUI;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
@@ -12,7 +12,7 @@ use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
  *
  * @author            studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  *
- * @ilCtrl_isCalledBy srag\DIC\SrAutoMails\DevTools\DevToolsCtrl: ilSrAutoMailsConfigGUI
+ * @ilCtrl_isCalledBy srag\DevTools\SrAutoMails\DevToolsCtrl: ilSrAutoMailsConfigGUI
  */
 class ilSrAutoMailsConfigGUI extends ilPluginConfigGUI
 {

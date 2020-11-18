@@ -1,6 +1,6 @@
 <?php
 
-namespace srag\DIC\SrAutoMails\DevTools;
+namespace srag\DevTools\SrAutoMails;
 
 use ilAdministrationGUI;
 use ilDBConstants;
@@ -9,12 +9,12 @@ use ilPluginConfigGUI;
 use ilUtil;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\DIC\SrAutoMails\Plugin\PluginInterface;
-use srag\DIC\SrAutoMails\Util\LibraryLanguageInstaller;
+use srag\LibraryLanguageInstaller\SrAutoMails\LibraryLanguageInstaller;
 
 /**
  * Class DevToolsCtrl
  *
- * @package srag\DIC\SrAutoMails\DevTools
+ * @package srag\DevTools\SrAutoMails
  *
  * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
@@ -69,7 +69,7 @@ class DevToolsCtrl
      */
     public static function installLanguages(PluginInterface $plugin)/*:void*/
     {
-        LibraryLanguageInstaller::getInstance()->withPlugin($plugin)->withLibraryLanguageDirectory(__DIR__ . "/lang")->updateLanguages();
+        LibraryLanguageInstaller::getInstance()->withPlugin($plugin)->withLibraryLanguageDirectory(__DIR__ . "/../lang")->updateLanguages();
     }
 
 

@@ -1,13 +1,16 @@
 {
-  "name": "srag/plugins/srautomails",
+  "name": "srag/srautomails",
   "description": "",
-  "version": "1.5.4",
-  "ilias_plugin": {
-    "id": "srauma",
-    "name": "SrAutoMails",
-    "ilias_min_version": "5.4.0",
-    "ilias_max_version": "6.999",
-    "slot": "Services/Cron/CronHook"
+  "version": "1.5.5",
+  "extra": {
+    "ilias_plugin": {
+      "id": "srauma",
+      "name": "SrAutoMails",
+      "ilias_min_version": "5.4.0",
+      "ilias_max_version": "6.999",
+      "slot": "Services/Cron/CronHook"
+    },
+    "generate_plugin_readme_template": "SRAG_ILIAS_PLUGIN"
   },
   "type": "project",
   "keywords": [
@@ -31,7 +34,9 @@
     "php": ">=7.0",
     "srag/activerecordconfig": ">=0.1.0",
     "srag/custominputguis": ">=0.1.0",
+    "srag/devtools": ">=0.1.0",
     "srag/dic": ">=0.1.0",
+    "srag/generateplugininfoshelper": ">=0.1.0",
     "srag/librariesnamespacechanger": ">=0.1.0",
     "srag/notifications4plugin": ">=0.1.0",
     "srag/removeplugindataconfirm": ">=0.1.0"
@@ -41,7 +46,9 @@
       "srag\\Plugins\\SrAutoMails\\": "src/"
     },
     "classmap": [
-      "classes/"
+      "classes/",
+      "src/Rule/class.RulesMailConfigGUI.php",
+      "src/Rule/class.RuleMailConfigGUI.php"
     ],
     "files": [
       "vendor/srag/dic/src/PHPVersionChecker.php",
@@ -57,8 +64,8 @@
     "pre-autoload-dump": [
       "srag\\LibrariesNamespaceChanger\\LibrariesNamespaceChanger::rewriteLibrariesNamespaces",
       "srag\\LibrariesNamespaceChanger\\PHP72Backport::PHP72Backport",
-      "srag\\LibrariesNamespaceChanger\\GeneratePluginPhpAndXml::generatePluginPhpAndXml",
-      "srag\\LibrariesNamespaceChanger\\UpdatePluginReadme::updatePluginReadme"
+      "srag\\GeneratePluginInfosHelper\\SrAutoMails\\GeneratePluginPhpAndXml::generatePluginPhpAndXml",
+      "srag\\GeneratePluginInfosHelper\\SrAutoMails\\GeneratePluginReadme::generatePluginReadme"
     ]
   }
 }

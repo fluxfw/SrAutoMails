@@ -4,6 +4,7 @@ namespace srag\Plugins\SrAutoMails\Rule;
 
 use ilCronJob;
 use ilCronJobResult;
+use ilCronManager;
 use ilDateTime;
 use ilLogLevel;
 use ilSrAutoMailsPlugin;
@@ -146,14 +147,22 @@ class RulesJob extends ilCronJob
                                     self::dic()->logger()->root()->log($ex->__toString(), ilLogLevel::ERROR);
                                 }
                             }
+
+                            ilCronManager::ping($this->getId());
                         }
                     }
 
                     if (!isset($checked_rules[$rule->getRuleId()])) {
                         $checked_rules[$rule->getRuleId()] = $rule;
                     }
+
+                    ilCronManager::ping($this->getId());
                 }
+
+                ilCronManager::ping($this->getId());
             }
+
+            ilCronManager::ping($this->getId());
         }
 
         foreach ($checked_rules as $rule) {

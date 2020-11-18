@@ -1,7 +1,7 @@
 {
   "name": "srag/srautomails",
   "description": "",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "extra": {
     "ilias_plugin": {
       "id": "srauma",

@@ -2,6 +2,8 @@
 
 namespace srag\Notifications4Plugin\SrAutoMails\Notification;
 
+require_once __DIR__ . "/../../../../autoload.php";
+
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
 

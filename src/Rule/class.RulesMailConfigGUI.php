@@ -2,6 +2,8 @@
 
 namespace srag\Plugins\SrAutoMails\Rule;
 
+require_once __DIR__ . "/../../vendor/autoload.php";
+
 use ilConfirmationGUI;
 use ilSrAutoMailsPlugin;
 use ilUtil;

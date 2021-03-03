@@ -2,7 +2,7 @@
 
 # SrAutoMails ILIAS Plugin
 
-
+Auto send mails per rule
 
 This is an OpenSource project by studer + raimann ag, CH-Burgdorf (https://studer-raimann.ch)
 
@@ -20,7 +20,7 @@ Start at your ILIAS root directory
 ```bash
 mkdir -p Customizing/global/plugins/Services/Cron/CronHook
 cd Customizing/global/plugins/Services/Cron/CronHook
-git clone https://github.com/studer-raimann/SrAutoMails.git SrAutoMails
+git clone https://github.com/fluxfw/SrAutoMails.git SrAutoMails
 ```
 
 Update, activate and config the plugin in the ILIAS Plugin Administration
@@ -32,8 +32,9 @@ Rule:
 
 ## Adjustment suggestions
 
-* External users can report suggestions and bugs at https://plugins.studer-raimann.ch/goto.php?target=uihk_srsu_PLSRAUMA
-* Adjustment suggestions by pull requests via github
+You can report bugs or suggestions at https://plugins.studer-raimann.ch/goto.php?target=uihk_srsu_PLSRAUMA
+
+There is no guarantee this can be fixed or implemented
 
 ## ILIAS Plugin SLA
 

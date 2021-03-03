@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.5.6]
+- Update project url
+
 ## [1.5.5]
 - Ping after each object for not ILIAS auto set inactive cron job if during longer
 

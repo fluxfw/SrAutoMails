@@ -36,7 +36,7 @@ rules_operator#:#Operator
 rules_operator_bigger#:#Bigger than
 rules_operator_bigger_equals#:#Bigger than or is equals
 rules_operator_case_sensitive#:#Case sensitive
-rules_operator_contains#:#Contanints
+rules_operator_contains#:#Contains
 rules_operator_ends_with#:#Ends with
 rules_operator_equals#:#Is equals
 rules_operator_is_empty#:#Is empty

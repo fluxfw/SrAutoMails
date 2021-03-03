@@ -69,10 +69,10 @@ class CourseObjectType extends ObjObjectType
 
         $placeholders = array_merge($placeholders, [
             "members"               => $members,
-            "members_completed"     => array_filter($members, function (ilObjUser $user) use ($completed): bool {
+            "members_completed"     => array_filter($members, function (ilObjUser $user) use ($completed) : bool {
                 return in_array($user->getId(), $completed);
             }),
-            "members_not_completed" => array_filter($members, function (ilObjUser $user) use ($completed): bool {
+            "members_not_completed" => array_filter($members, function (ilObjUser $user) use ($completed) : bool {
                 return !in_array($user->getId(), $completed);
             })
         ]);
@@ -115,7 +115,7 @@ class CourseObjectType extends ObjObjectType
             case self::OBJECT_PROPERTY_COUNT_COURSE_MEMBERS_COMPLETED:
                 $completed = self::srAutoMails()->ilias()->courses()->getCompletedUsers($object->getId());
 
-                $completed = array_filter($object->getMembersObject()->getMembers(), function (int $user_id) use ($completed): bool {
+                $completed = array_filter($object->getMembersObject()->getMembers(), function (int $user_id) use ($completed) : bool {
                     return in_array($user_id, $completed);
                 });
 
@@ -124,7 +124,7 @@ class CourseObjectType extends ObjObjectType
             case self::OBJECT_PROPERTY_COUNT_COURSE_MEMBERS_NOT_COMPLETED:
                 $completed = self::srAutoMails()->ilias()->courses()->getCompletedUsers($object->getId());
 
-                $not_completed = array_filter($object->getMembersObject()->getMembers(), function (int $user_id) use ($completed): bool {
+                $not_completed = array_filter($object->getMembersObject()->getMembers(), function (int $user_id) use ($completed) : bool {
                     return !in_array($user_id, $completed);
                 });
 
@@ -160,14 +160,14 @@ class CourseObjectType extends ObjObjectType
 
                 case self::RECEIVER_COURSE_MEMBERS_COMPLETED:
                     $array = array_merge($array, array_filter($object->getMembersObject()
-                        ->getMembers(), function (int $user_id) use ($completed): bool {
+                        ->getMembers(), function (int $user_id) use ($completed) : bool {
                         return in_array($user_id, $completed);
                     }));
                     break;
 
                 case self::RECEIVER_COURSE_MEMBERS_NOT_COMPLETED:
                     $array = array_merge($array, array_filter($object->getMembersObject()
-                        ->getMembers(), function (int $user_id) use ($completed): bool {
+                        ->getMembers(), function (int $user_id) use ($completed) : bool {
                         return !in_array($user_id, $completed);
                     }));
                     break;
@@ -178,14 +178,14 @@ class CourseObjectType extends ObjObjectType
 
                 case self::RECEIVER_COURSE_SUPERIOR_OF_MEMBERS_COMPLETED:
                     $array = array_merge($array, self::srAutoMails()->ilias()->orgUnits()->getSuperiorsOfUsers(array_filter($object->getMembersObject()
-                        ->getMembers(), function (int $user_id) use ($completed): bool {
+                        ->getMembers(), function (int $user_id) use ($completed) : bool {
                         return in_array($user_id, $completed);
                     })));
                     break;
 
                 case self::RECEIVER_COURSE_SUPERIOR_OF_MEMBERS_NOT_COMPLETED:
                     $array = array_merge($array, self::srAutoMails()->ilias()->orgUnits()->getSuperiorsOfUsers(array_filter($object->getMembersObject()
-                        ->getMembers(), function (int $user_id) use ($completed): bool {
+                        ->getMembers(), function (int $user_id) use ($completed) : bool {
                         return !in_array($user_id, $completed);
                     })));
                     break;

@@ -3,6 +3,7 @@
 namespace srag\Plugins\SrAutoMails\Menu;
 
 use ilAdministrationGUI;
+use ilDBConstants;
 use ILIAS\GlobalScreen\Scope\MainMenu\Factory\AbstractBaseItem;
 use ILIAS\GlobalScreen\Scope\MainMenu\Provider\AbstractStaticPluginMainMenuProvider;
 use ILIAS\UI\Component\Symbol\Icon\Standard;
@@ -37,7 +38,13 @@ class Menu extends AbstractStaticPluginMainMenuProvider
     {
         $parent = $this->getStaticTopItems()[0];
 
-        self::dic()->ctrl()->setParameterByClass(ilSrAutoMailsConfigGUI::class, "ref_id", 31);
+        self::dic()
+            ->ctrl()
+            ->setParameterByClass(ilSrAutoMailsConfigGUI::class, "ref_id", self::dic()
+                                                                               ->database()
+                                                                               ->queryF('SELECT ref_id FROM object_data INNER JOIN object_reference ON object_data.obj_id=object_reference.obj_id WHERE type=%s',
+                                                                                   [ilDBConstants::T_TEXT], ["cmps"])
+                                                                               ->fetchAssoc()["ref_id"]);
         self::dic()->ctrl()->setParameterByClass(ilSrAutoMailsConfigGUI::class, "ctype", IL_COMP_SERVICE);
         self::dic()->ctrl()->setParameterByClass(ilSrAutoMailsConfigGUI::class, "cname", "Cron");
         self::dic()->ctrl()->setParameterByClass(ilSrAutoMailsConfigGUI::class, "slot_id", "crnhk");

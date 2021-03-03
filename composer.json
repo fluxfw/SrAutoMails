@@ -1,23 +1,27 @@
 {
   "name": "srag/srautomails",
-  "description": "",
-  "version": "1.5.5",
+  "description": "Auto send mails per rule",
+  "version": "1.5.6",
   "extra": {
     "ilias_plugin": {
       "id": "srauma",
       "name": "SrAutoMails",
       "ilias_min_version": "5.4.0",
       "ilias_max_version": "6.999",
-      "slot": "Services/Cron/CronHook"
+      "slot": "Services/Cron/CronHook",
+      "supports_cli_setup": true
     },
-    "generate_plugin_readme_template": "SRAG_ILIAS_PLUGIN"
+    "generate_plugin_readme_template": "SRAG_ILIAS_PLUGIN",
+    "long_description_template": "src/LONG_DESCRIPTION.md"
   },
   "type": "project",
   "keywords": [
-    "ILIAS",
-    "Plugin"
+    "cron",
+    "ilias",
+    "job",
+    "plugin"
   ],
-  "homepage": "https://github.com/studer-raimann/SrAutoMails",
+  "homepage": "https://github.com/fluxfw/SrAutoMails",
   "license": "GPL-3.0-only",
   "authors": [
     {
@@ -51,8 +55,7 @@
       "src/Rule/class.RuleMailConfigGUI.php"
     ],
     "files": [
-      "vendor/srag/dic/src/PHPVersionChecker.php",
-      "vendor/srag/dic/src/Ilias7PreWarn.php"
+      "vendor/srag/dic/src/PHPVersionChecker.php"
     ]
   },
   "config": {

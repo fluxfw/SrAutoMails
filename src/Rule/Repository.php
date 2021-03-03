@@ -142,7 +142,7 @@ final class Repository
         if ($interval_check) {
             $time = time();
 
-            $rules = array_filter($rules, function (Rule $rule) use ($time): bool {
+            $rules = array_filter($rules, function (Rule $rule) use ($time) : bool {
                 if ($rule->getLastCheck() === null) {
                     return true;
                 }

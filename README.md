@@ -2,7 +2,7 @@
 
 # SrAutoMails ILIAS Plugin
 
-Auto send mails per rule
+Auto send mails per rules
 
 This is an OpenSource project by studer + raimann ag, CH-Burgdorf (https://studer-raimann.ch)
 

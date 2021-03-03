@@ -1,6 +1,6 @@
 {
   "name": "srag/srautomails",
-  "description": "",
+  "description": "Auto send mails per rule",
   "version": "1.5.5",
   "extra": {
     "ilias_plugin": {

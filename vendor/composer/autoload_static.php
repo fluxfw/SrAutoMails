@@ -423,6 +423,7 @@ class ComposerStaticInit35b1bc54d9a9b3b775b1077762099551
         'srag\\DevTools\\SrAutoMails\\DevToolsCtrl' => __DIR__ . '/..' . '/srag/devtools/src/class.DevToolsCtrl.php',
         'srag\\GeneratePluginInfosHelper\\SrAutoMails\\GeneratePluginPhpAndXml' => __DIR__ . '/..' . '/srag/generateplugininfoshelper/src/GeneratePluginPhpAndXml.php',
         'srag\\GeneratePluginInfosHelper\\SrAutoMails\\GeneratePluginReadme' => __DIR__ . '/..' . '/srag/generateplugininfoshelper/src/GeneratePluginReadme.php',
+        'srag\\GeneratePluginInfosHelper\\SrAutoMails\\UpdateVersion' => __DIR__ . '/..' . '/srag/generateplugininfoshelper/src/UpdateVersion.php',
         'srag\\LibrariesNamespaceChanger\\LibrariesNamespaceChanger' => __DIR__ . '/..' . '/srag/librariesnamespacechanger/src/LibrariesNamespaceChanger.php',
         'srag\\LibrariesNamespaceChanger\\PHP72Backport' => __DIR__ . '/..' . '/srag/librariesnamespacechanger/src/PHP72Backport.php',
         'srag\\LibrariesNamespaceChanger\\PHP7Backport' => __DIR__ . '/..' . '/srag/librariesnamespacechanger/src/PHP7Backport.php',

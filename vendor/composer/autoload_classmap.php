@@ -344,6 +344,7 @@ return array(
     'srag\\DevTools\\SrAutoMails\\DevToolsCtrl' => $vendorDir . '/srag/devtools/src/class.DevToolsCtrl.php',
     'srag\\GeneratePluginInfosHelper\\SrAutoMails\\GeneratePluginPhpAndXml' => $vendorDir . '/srag/generateplugininfoshelper/src/GeneratePluginPhpAndXml.php',
     'srag\\GeneratePluginInfosHelper\\SrAutoMails\\GeneratePluginReadme' => $vendorDir . '/srag/generateplugininfoshelper/src/GeneratePluginReadme.php',
+    'srag\\GeneratePluginInfosHelper\\SrAutoMails\\UpdateVersion' => $vendorDir . '/srag/generateplugininfoshelper/src/UpdateVersion.php',
     'srag\\LibrariesNamespaceChanger\\LibrariesNamespaceChanger' => $vendorDir . '/srag/librariesnamespacechanger/src/LibrariesNamespaceChanger.php',
     'srag\\LibrariesNamespaceChanger\\PHP72Backport' => $vendorDir . '/srag/librariesnamespacechanger/src/PHP72Backport.php',
     'srag\\LibrariesNamespaceChanger\\PHP7Backport' => $vendorDir . '/srag/librariesnamespacechanger/src/PHP7Backport.php',

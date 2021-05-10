@@ -6,10 +6,12 @@ use ilCronJob;
 use ilCronJobResult;
 use ilCronManager;
 use ilDateTime;
-use ilLogLevel;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
 use srag\Notifications4Plugin\SrAutoMails\Exception\Notifications4PluginException;
+use srag\Plugins\SrAutoMails\EnrolmentWorkflow\Rule\RulesGUI;
+use srag\Plugins\SrAutoMails\Log\Log;
+use srag\Plugins\SrAutoMails\Log\LogsMailGUI;
 use srag\Plugins\SrAutoMails\ObjectType\ObjectType;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 use Throwable;
@@ -109,74 +111,115 @@ class RulesJob extends ilCronJob
     public function run() : ilCronJobResult
     {
         $time = time();
-        $sent_mails_count = 0;
 
         $result = new ilCronJobResult();
-
-        $object_types = self::srAutoMails()->objectTypes()->getObjectTypes();
 
         /**
          * @var Rule[] $checked_rules
          */
         $checked_rules = [];
 
-        foreach ($object_types as $object_type) {
-            $objects = $object_type->getObjects();
+        try {
+            $object_types = self::srAutoMails()->objectTypes()->getObjectTypes();
 
-            $rules = self::srAutoMails()->rules()->getRules(true, $object_type->getObjectType(), true, null, null);
+            foreach ($object_types as $object_type) {
+                try {
+                    $objects = $object_type->getObjects();
 
-            foreach ($objects as $object) {
+                    $rules = self::srAutoMails()->rules()->getRules(true, $object_type->getObjectType(), true, null, null);
 
-                foreach ($rules as $rule) {
-                    if ($object_type->checkRuleForObject($rule, $object)) {
+                    foreach ($objects as $object) {
+                        try {
 
-                        $receivers = $object_type->getReceivers($rule, $object);
-
-                        foreach ($receivers as $user_id) {
-                            if ($rule->getIntervalType() === Rule::INTERVAL_TYPE_NUMBER
-                                || !self::srAutoMails()->sents()->hasSent($rule->getRuleId(), $object_type->getObjectId($object), $user_id)
-                            ) {
-
+                            foreach ($rules as $rule) {
                                 try {
-                                    $this->sendNotification($rule, $object_type, $object, $user_id);
 
-                                    self::srAutoMails()->sents()->sent($rule->getRuleId(), $object_type->getObjectId($object), $user_id);
+                                    if ($object_type->checkRuleForObject($rule, $object)) {
 
-                                    $sent_mails_count++;
+                                        $receivers = $object_type->getReceivers($rule, $object);
+
+                                        foreach ($receivers as $user_id) {
+                                            try {
+
+                                                if ($rule->getIntervalType() === Rule::INTERVAL_TYPE_NUMBER
+                                                    || !self::srAutoMails()->sents()->hasSent($rule->getRuleId(), $object_type->getObjectId($object), $user_id)
+                                                ) {
+
+                                                    $this->sendNotification($rule, $object_type, $object, $user_id);
+
+                                                    self::srAutoMails()->sents()->sent($rule->getRuleId(), $object_type->getObjectId($object), $user_id);
+
+                                                    self::srAutoMails()->logs()->storeLog(self::srAutoMails()->logs()->factory()
+                                                        ->newObjectRuleUserInstance($object->getId(), $rule->getRuleId(), $user_id)->withStatus(Log::STATUS_MAIL_SENT));
+                                                } else {
+                                                    self::srAutoMails()->logs()->storeLog(self::srAutoMails()->logs()->factory()
+                                                        ->newObjectRuleUserInstance($object->getId(), $rule->getRuleId(), $user_id)->withStatus(Log::STATUS_MAIL_SKIPPED));
+                                                }
+                                            } catch (Throwable $ex) {
+                                                self::srAutoMails()->logs()->storeLog(self::srAutoMails()->logs()->factory()
+                                                    ->newExceptionInstance($ex, $object->getId(), $rule->getRuleId(), $user_id)->withStatus(Log::STATUS_MAIL_FAILED));
+                                            }
+
+                                            ilCronManager::ping($this->getId());
+                                        }
+                                    } else {
+                                        self::srAutoMails()->logs()->storeLog(self::srAutoMails()->logs()->factory()
+                                            ->newObjectRuleUserInstance($object->getId(), $rule->getRuleId())->withStatus(Log::STATUS_RULE_SKIPPED));
+                                    }
+
+                                    if (!isset($checked_rules[$rule->getRuleId()])) {
+                                        $checked_rules[$rule->getRuleId()] = $rule;
+                                    }
                                 } catch (Throwable $ex) {
-                                    self::dic()->logger()->root()->log($ex->__toString(), ilLogLevel::ERROR);
+                                    self::srAutoMails()->logs()->storeLog(self::srAutoMails()->logs()->factory()
+                                        ->newExceptionInstance($ex, $object->getId(), $rule->getRuleId())->withStatus(Log::STATUS_RULE_FAILED));
                                 }
+
+                                ilCronManager::ping($this->getId());
                             }
-
-                            ilCronManager::ping($this->getId());
+                        } catch (Throwable $ex) {
+                            self::srAutoMails()->logs()->storeLog(self::srAutoMails()->logs()->factory()
+                                ->newExceptionInstance($ex, $object->getId())->withStatus(Log::STATUS_OBJECT_TYPE_FAILED));
                         }
-                    }
 
-                    if (!isset($checked_rules[$rule->getRuleId()])) {
-                        $checked_rules[$rule->getRuleId()] = $rule;
+                        ilCronManager::ping($this->getId());
                     }
-
-                    ilCronManager::ping($this->getId());
+                } catch (Throwable $ex) {
+                    self::srAutoMails()->logs()->storeLog(self::srAutoMails()->logs()->factory()
+                        ->newExceptionInstance($ex)->withStatus(Log::STATUS_OBJECT_TYPE_FAILED));
                 }
 
                 ilCronManager::ping($this->getId());
+            }
+        } catch (Throwable $ex) {
+            self::srAutoMails()->logs()->storeLog(self::srAutoMails()->logs()->factory()
+                ->newExceptionInstance($ex)->withStatus(Log::STATUS_OBJECT_TYPE_FAILED));
+        }
+
+        foreach ($checked_rules as $rule) {
+            try {
+                $rule->setLastCheck(new ilDateTime($time, IL_CAL_UNIX));
+
+                self::srAutoMails()->rules()->storeRule($rule);
+            } catch (Throwable $ex) {
+                self::srAutoMails()->logs()->storeLog(self::srAutoMails()->logs()->factory()
+                    ->newExceptionInstance($ex, null, $rule->getRuleId())->withStatus(Log::STATUS_RULE_FAILED));
             }
 
             ilCronManager::ping($this->getId());
         }
 
-        foreach ($checked_rules as $rule) {
-            $rule->setLastCheck(new ilDateTime($time, IL_CAL_UNIX));
+        $logs = array_reduce(array_keys(Log::$status_all), function (array $logs, int $status) : array {
+            $logs[] = self::plugin()->translate("status_" . Log::$status_all[$status], LogsMailGUI::LANG_MODULE) . ": " . count(self::srAutoMails()->logs()->getKeptLogs($status));
 
-            self::srAutoMails()->rules()->storeRule($rule);
-        }
+            return $logs;
+        }, []);
+
+        $result_count = nl2br(implode("\n", $logs), false);
 
         $result->setStatus(ilCronJobResult::STATUS_OK);
 
-        $result->setMessage(nl2br(self::plugin()->translate("cron_status", RulesMailConfigGUI::LANG_MODULE, [
-            count($rules),
-            $sent_mails_count
-        ]), false));
+        $result->setMessage($result_count);
 
         return $result;
     }

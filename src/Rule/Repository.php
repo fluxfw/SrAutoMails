@@ -26,6 +26,10 @@ final class Repository
      * @var self|null
      */
     protected static $instance = null;
+    /**
+     * @var Rule[]
+     */
+    protected $rules_by_id = [];
 
 
     /**
@@ -56,6 +60,8 @@ final class Repository
     public function deleteRule(Rule $rule)/*: void*/
     {
         $rule->delete();
+
+        unset($this->rules_by_id[$rule->getRuleId()]);
     }
 
 
@@ -95,13 +101,11 @@ final class Repository
      */
     public function getRuleById(int $rule_id)/*: ?Rule*/
     {
-        /**
-         * @var Rule|null $rule
-         */
+        if ($this->rules_by_id[$rule_id] === null) {
+            $this->rules_by_id[$rule_id] = Rule::where(["rule_id" => $rule_id])->first();
+        }
 
-        $rule = Rule::where(["rule_id" => $rule_id])->first();
-
-        return $rule;
+        return $this->rules_by_id[$rule_id];
     }
 
 
@@ -138,6 +142,10 @@ final class Repository
          * @var Rule[] $rules
          */
         $rules = $where->orderBy("title", "ASC")->get();
+
+        foreach ($rules as $rule) {
+            $this->rules_by_id[$rule->getRuleId()] = $rule;
+        }
 
         if ($interval_check) {
             $time = time();
@@ -200,6 +208,8 @@ final class Repository
         $is_new = (empty($rule->getRuleId()));
 
         $rule->store();
+
+        $this->rules_by_id[$rule->getRuleId()] = $rule;
 
         if ($is_new) {
             $rule->setMailTemplateName("rule_" . $rule->getRuleId());

@@ -1,3 +1,23 @@
+logs_date#:#Datum / Zeit
+logs_days#:#Tage
+logs_delete_old_logs#:#Alte Logs löschen
+logs_delete_old_logs_description#:#Nach den angegebenen konfigurierten Zeit werden alte Logs automatisch gelöscht
+logs_delete_old_logs_status#:#%s Log(s) gelöscht
+logs_execute_user_id#:#Benutzer ausgeführt Login
+logs_keep_old_logs_time#:#Alte Logs maximal behalten für
+logs_keep_old_logs_time_info#:#Nach den angegebenen Zeit werden alte Logs automatisch gelöscht\n0 = Deaktiviert
+logs_logs#:#Logs
+logs_message#:#Nachricht
+logs_object_id#:#Objekt
+logs_rule_id#:#Regel
+logs_status#:#Status
+logs_status_mail_failed#:#Mail fehlgeschlagen
+logs_status_mail_sent#:#Mail gesendet
+logs_status_mail_skipped#:#Mail übersprungen
+logs_status_object_type_failed#:#Objekt-Typ fehlgeschlagen
+logs_status_rule_failed#:#Regel fehlgeschlagen
+logs_status_rule_skipped#:#Regel übersprungen
+logs_user_id#:#Benutzer Login
 rules_actions#:#Aktionen
 rules_add#:#Hinzufügen
 rules_add_rule#:#Regel hinzufügen
@@ -5,7 +25,6 @@ rules_added_rule#:#Regel %s hinzugefügt
 rules_cancel#:#Abbrechen
 rules_configuration#:#Konfiguration
 rules_configuration_saved#:#Konfiguration gespeichert
-rules_cron_status#:#%1$s Regel(n) geprüft\n%2$s Mail(s) versendet
 rules_description#:#Beschreibung
 rules_disable_rules#:#Regeln deaktivieren
 rules_disabled_rules#:#Regeln deaktiviert

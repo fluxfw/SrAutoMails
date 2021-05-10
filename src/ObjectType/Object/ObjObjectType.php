@@ -15,6 +15,9 @@ use srag\Plugins\SrAutoMails\ObjectType\ObjectType;
 abstract class ObjObjectType extends ObjectType
 {
 
+    const TYPES = ["crs"];
+
+
     /**
      * @inheritDoc
      */

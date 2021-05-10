@@ -4,6 +4,7 @@ require_once __DIR__ . "/../vendor/autoload.php";
 
 use srag\DevTools\SrAutoMails\DevToolsCtrl;
 use srag\DIC\SrAutoMails\DICTrait;
+use srag\Plugins\SrAutoMails\Log\LogsMailGUI;
 use srag\Plugins\SrAutoMails\Rule\RulesMailConfigGUI;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
@@ -51,6 +52,10 @@ class ilSrAutoMailsConfigGUI extends ilPluginConfigGUI
                 self::dic()->ctrl()->forwardCommand(new RulesMailConfigGUI());
                 break;
 
+            case strtolower(LogsMailGUI::class):
+                self::dic()->ctrl()->forwardCommand(new LogsMailGUI());
+                break;
+
             default:
                 $cmd = self::dic()->ctrl()->getCmd();
 
@@ -82,6 +87,8 @@ class ilSrAutoMailsConfigGUI extends ilPluginConfigGUI
     protected function setTabs()/*: void*/
     {
         RulesMailConfigGUI::addTabs();
+
+        LogsMailGUI::addTabs();
 
         DevToolsCtrl::addTabs(self::plugin());
 

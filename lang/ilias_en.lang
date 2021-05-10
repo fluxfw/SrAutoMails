@@ -1,3 +1,23 @@
+logs_date#:#Date / Time
+logs_days#:#Days
+logs_delete_old_logs#:#Delete old logs
+logs_delete_old_logs_description#:#After the specified config time, old logs will be deleted automatically
+logs_delete_old_logs_status#:#Deleted %s log(s)
+logs_execute_user_id#:#User executed login
+logs_keep_old_logs_time#:#Keep old logs maximal for
+logs_keep_old_logs_time_info#:#After the specified time, old logs will be deleted automatically\n0 = Disabled
+logs_logs#:#Logs
+logs_message#:#Message
+logs_object_id#:#Object
+logs_rule_id#:#Rule
+logs_status#:#Status
+logs_status_mail_failed#:#Mail failed
+logs_status_mail_sent#:#Mail sent
+logs_status_mail_skipped#:#Mail skipped
+logs_status_object_type_failed#:#Object type failed
+logs_status_rule_failed#:#Rule failed
+logs_status_rule_skipped#:#Rule skipped
+logs_user_id#:#User login
 rules_actions#:#Actions
 rules_add#:#Add
 rules_add_rule#:#Add rule
@@ -5,7 +25,6 @@ rules_added_rule#:#Rule %s added
 rules_cancel#:#Cancel
 rules_configuration#:#Configuration
 rules_configuration_saved#:#Configuration saved
-rules_cron_status#:#%1$s rule(s) checked\n%2$s mail(s) sent
 rules_description#:#Description
 rules_disable_rules#:#Disable rules
 rules_disabled_rules#:#Rules disabled

@@ -5,6 +5,7 @@ namespace srag\Plugins\SrAutoMails\Job;
 use ilCronJob;
 use ilSrAutoMailsPlugin;
 use srag\DIC\SrAutoMails\DICTrait;
+use srag\Plugins\SrAutoMails\Log\DeleteOldLogsJob;
 use srag\Plugins\SrAutoMails\Rule\RulesJob;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
@@ -61,6 +62,9 @@ final class Factory
             case RulesJob::CRON_JOB_ID:
                 return self::srAutoMails()->rules()->factory()->newJobInstance();
 
+            case DeleteOldLogsJob::CRON_JOB_ID:
+                return self::srAutoMails()->logs()->factory()->newDeleteOldLogsJobInstance();
+
             default:
                 return null;
         }
@@ -73,7 +77,8 @@ final class Factory
     public function newInstances() : array
     {
         return [
-            self::srAutoMails()->rules()->factory()->newJobInstance()
+            self::srAutoMails()->rules()->factory()->newJobInstance(),
+            self::srAutoMails()->logs()->factory()->newDeleteOldLogsJobInstance()
         ];
     }
 }

@@ -5,6 +5,8 @@ namespace srag\Plugins\SrAutoMails\Config;
 use ilSrAutoMailsPlugin;
 use srag\ActiveRecordConfig\SrAutoMails\Config\AbstractFactory;
 use srag\ActiveRecordConfig\SrAutoMails\Config\AbstractRepository;
+use srag\ActiveRecordConfig\SrAutoMails\Config\Config;
+use srag\Plugins\SrAutoMails\Log\DeleteOldLogsJob;
 use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
 
 /**
@@ -64,7 +66,9 @@ final class Repository extends AbstractRepository
      */
     protected function getFields() : array
     {
-        return [];
+        return [
+            DeleteOldLogsJob::KEY_KEEP_OLD_LOGS_TIME => [Config::TYPE_INTEGER, 0],
+        ];
     }
 
 

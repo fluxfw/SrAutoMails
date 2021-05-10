@@ -1,7 +1,7 @@
 {
   "name": "srag/srautomails",
   "description": "Auto send mails per rules",
-  "version": "1.5.8",
+  "version": "1.6.0",
   "extra": {
     "ilias_plugin": {
       "id": "srauma",
@@ -48,6 +48,7 @@
     },
     "classmap": [
       "classes/",
+      "src/Log/class.LogsMailGUI.php",
       "src/Rule/class.RulesMailConfigGUI.php",
       "src/Rule/class.RuleMailConfigGUI.php"
     ],

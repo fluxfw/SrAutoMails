@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.6.0]
+- Logs
+
 ## [1.5.8]
 - Ignore not supported languages
 

@@ -13,8 +13,6 @@ use srag\DataTableUI\SrAutoMails\Component\Table;
  * Class CsvFormat
  *
  * @package srag\DataTableUI\SrAutoMails\Implementation\Format
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 class CsvFormat extends AbstractFormat
 {

@@ -6,8 +6,6 @@ namespace srag\RemovePluginDataConfirm\SrAutoMails;
  * Trait RepositoryObjectPluginUninstallTrait
  *
  * @package srag\RemovePluginDataConfirm\SrAutoMails
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 trait RepositoryObjectPluginUninstallTrait
 {

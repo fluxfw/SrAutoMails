@@ -8,8 +8,6 @@ use srag\DataTableUI\SrAutoMails\Component\Column\Formatter\Actions\Factory as A
  * Interface Factory
  *
  * @package srag\DataTableUI\SrAutoMails\Component\Column\Formatter
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 interface Factory
 {

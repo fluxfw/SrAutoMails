@@ -14,8 +14,6 @@ use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
  *
  * @package           srag\Notifications4Plugin\SrAutoMails\Notification
  *
- * @author            studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
- *
  * @ilCtrl_isCalledBy srag\Notifications4Plugin\SrAutoMails\Notification\NotificationCtrl: srag\Notifications4Plugin\SrAutoMails\Notification\NotificationsCtrl
  */
 class NotificationCtrl

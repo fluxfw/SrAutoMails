@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.6.1]
+- Update urls
+
 ## [1.6.0]
 - Logs
 

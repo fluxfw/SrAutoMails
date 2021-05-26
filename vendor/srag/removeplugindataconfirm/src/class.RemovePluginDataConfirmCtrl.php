@@ -17,8 +17,6 @@ use srag\DIC\SrAutoMails\DICTrait;
  *
  * @package           srag\RemovePluginDataConfirm\SrAutoMails
  *
- * @author            studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
- *
  * @ilCtrl_isCalledBy srag\RemovePluginDataConfirm\SrAutoMails\RemovePluginDataConfirmCtrl: ilUIPluginRouterGUI
  */
 class RemovePluginDataConfirmCtrl

@@ -11,8 +11,6 @@ use srag\DIC\SrAutoMails\DICTrait;
  * Class Factory
  *
  * @package srag\DataTableUI\SrAutoMails\Implementation\Data\Row
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 class Factory implements FactoryInterface
 {

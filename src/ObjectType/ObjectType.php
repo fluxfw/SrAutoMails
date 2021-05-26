@@ -13,8 +13,6 @@ use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
  * Class ObjectType
  *
  * @package srag\Plugins\SrAutoMails\ObjectType
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 abstract class ObjectType
 {

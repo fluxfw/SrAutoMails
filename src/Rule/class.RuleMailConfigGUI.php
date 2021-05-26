@@ -17,8 +17,6 @@ use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
  *
  * @package           srag\Plugins\SrAutoMails\Rule
  *
- * @author            studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
- *
  * @ilCtrl_isCalledBy srag\Plugins\SrAutoMails\Rule\RuleMailConfigGUI: srag\Plugins\SrAutoMails\Rule\RulesMailConfigGUI
  * @ilCtrl_isCalledBy srag\Notifications4Plugin\SrAutoMails\Notification\NotificationsCtrl: srag\Plugins\SrAutoMails\Rule\RuleMailConfigGUI
  */

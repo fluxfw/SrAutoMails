@@ -10,8 +10,6 @@ use srag\Plugins\SrAutoMails\ObjectType\Repository;
  * Class CourseObjectType
  *
  * @package srag\Plugins\SrAutoMails\ObjectType\Object
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 class CourseObjectType extends ObjObjectType
 {

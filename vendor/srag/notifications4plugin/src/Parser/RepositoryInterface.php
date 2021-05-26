@@ -9,8 +9,6 @@ use srag\Notifications4Plugin\SrAutoMails\Notification\NotificationInterface;
  * Interface RepositoryInterface
  *
  * @package srag\Notifications4Plugin\SrAutoMails\Parser
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 interface RepositoryInterface
 {

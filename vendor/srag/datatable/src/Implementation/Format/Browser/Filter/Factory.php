@@ -14,8 +14,6 @@ use srag\DIC\SrAutoMails\DICTrait;
  * Class Factory
  *
  * @package srag\DataTableUI\SrAutoMails\Implementation\Format\Browser\Filter
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 class Factory implements FactoryInterface
 {

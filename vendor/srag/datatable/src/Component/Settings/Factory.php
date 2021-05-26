@@ -10,8 +10,6 @@ use srag\DataTableUI\SrAutoMails\Component\Settings\Storage\Factory as StorageFa
  * Interface Factory
  *
  * @package srag\DataTableUI\SrAutoMails\Component\Settings
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 interface Factory
 {

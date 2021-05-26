@@ -20,8 +20,6 @@ use Throwable;
  * Class RulesJob
  *
  * @package srag\Plugins\SrAutoMails\Rule
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 class RulesJob extends ilCronJob
 {

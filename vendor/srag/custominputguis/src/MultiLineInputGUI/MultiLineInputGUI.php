@@ -22,9 +22,6 @@ use srag\DIC\SrAutoMails\DICTrait;
  *
  * @package    srag\CustomInputGUIs\SrAutoMails\MultiLineInputGUI
  *
- * @author     studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
- * @author     Michael Herren <mh@studer-raimann.ch>
- *
  * @deprecated Please switch to `MultiLineNewInputGUI`
  */
 class MultiLineInputGUI extends ilFormPropertyGUI implements ilTableFilterItem, ilToolbarItem

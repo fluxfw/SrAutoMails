@@ -4,8 +4,6 @@
 
 Auto send mails per rules
 
-This is an OpenSource project by studer + raimann ag, CH-Burgdorf (https://studer-raimann.ch)
-
 This project is licensed under the GPL-3.0-only license
 
 ## Requirements
@@ -20,7 +18,7 @@ Start at your ILIAS root directory
 ```bash
 mkdir -p Customizing/global/plugins/Services/Cron/CronHook
 cd Customizing/global/plugins/Services/Cron/CronHook
-git clone https://github.com/fluxfw/SrAutoMails.git SrAutoMails
+git clone https://github.com/fluxapps/SrAutoMails.git SrAutoMails
 ```
 
 Update, activate and config the plugin in the ILIAS Plugin Administration

@@ -13,8 +13,6 @@ use srag\DIC\SrAutoMails\DICTrait;
  * Class Column
  *
  * @package srag\DataTableUI\SrAutoMails\Implementation\Column
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 class Column implements ColumnInterface
 {

@@ -9,8 +9,6 @@ use srag\CustomInputGUIs\SrAutoMails\PropertyFormGUI\ConfigPropertyFormGUI;
  *
  * @package    srag\ActiveRecordConfig\SrAutoMails
  *
- * @author     studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
- *
  * @deprecated Please use PropertyFormGUI from CustomInputGUIs instead
  */
 abstract class ActiveRecordConfigFormGUI extends ConfigPropertyFormGUI

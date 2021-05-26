@@ -12,8 +12,6 @@ use srag\DIC\SrAutoMails\Version\VersionInterface;
  * Trait DICTrait
  *
  * @package srag\DIC\SrAutoMails
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 trait DICTrait
 {

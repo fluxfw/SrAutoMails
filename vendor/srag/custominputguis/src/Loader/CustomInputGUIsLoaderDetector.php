@@ -17,8 +17,6 @@ use srag\DIC\SrAutoMails\Loader\AbstractLoaderDetector;
  * Class CustomInputGUIsLoaderDetector
  *
  * @package srag\CustomInputGUIs\SrAutoMails\Loader
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 class CustomInputGUIsLoaderDetector extends AbstractLoaderDetector
 {

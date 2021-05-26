@@ -9,8 +9,6 @@ use srag\CustomInputGUIs\SrAutoMails\PropertyFormGUI\Exception\PropertyFormGUIEx
  *
  * @package    srag\CustomInputGUIs\SrAutoMails\PropertyFormGUI
  *
- * @author     studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
- *
  * @deprecated Please use PropertyFormGUI instead
  */
 abstract class ConfigPropertyFormGUI extends PropertyFormGUI

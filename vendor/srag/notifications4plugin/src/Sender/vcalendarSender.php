@@ -16,8 +16,6 @@ use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
  * Sends the notification to an external E-Mail with calendar dates
  *
  * @package srag\Notifications4Plugin\SrAutoMails\Sender
- *
- * @author  Martin Studer <ms@studer-raimann.ch>
  */
 class vcalendarSender implements Sender
 {

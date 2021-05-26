@@ -15,8 +15,6 @@ use srag\DIC\SrAutoMails\Version\PluginVersionParameter;
  * Class MultiSelectSearchNewInputGUI
  *
  * @package srag\CustomInputGUIs\SrAutoMails\MultiSelectSearchNewInputGUI
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 class MultiSelectSearchNewInputGUI extends ilFormPropertyGUI implements ilTableFilterItem, ilToolbarItem
 {

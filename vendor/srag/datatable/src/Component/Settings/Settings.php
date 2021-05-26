@@ -10,8 +10,6 @@ use srag\DataTableUI\SrAutoMails\Component\Settings\Sort\SortField;
  * Interface Settings
  *
  * @package srag\DataTableUI\SrAutoMails\Component\Settings
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 interface Settings
 {

@@ -11,8 +11,6 @@ use srag\Notifications4Plugin\SrAutoMails\Utils\Notifications4PluginTrait;
  * Class Repository
  *
  * @package srag\Notifications4Plugin\SrAutoMails\Parser
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 final class Repository implements RepositoryInterface
 {

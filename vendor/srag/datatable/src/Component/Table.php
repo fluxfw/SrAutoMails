@@ -17,8 +17,6 @@ use srag\DIC\SrAutoMails\Plugin\PluginInterface;
  * Interface Table
  *
  * @package srag\DataTableUI\SrAutoMails\Component
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 interface Table extends Component, Pluginable
 {

@@ -15,8 +15,6 @@ use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
  *
  * @package           srag\Plugins\SrAutoMails\Log
  *
- * @author            studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
- *
  * @ilCtrl_isCalledBy srag\Plugins\SrAutoMails\Log\LogsMailGUI: ilSrAutoMailsConfigGUI
  * @ilCtrl_isCalledBy srag\CustomInputGUIs\SrAutoMails\MultiSelectSearchNewInputGUI\ObjectsAjaxAutoCompleteCtrl: srag\Plugins\SrAutoMails\Log\LogsMailGUI
  */

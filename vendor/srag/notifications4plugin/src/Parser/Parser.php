@@ -9,9 +9,6 @@ use srag\Notifications4Plugin\SrAutoMails\Exception\Notifications4PluginExceptio
  * Interface Parser
  *
  * @package srag\Notifications4Plugin\SrAutoMails\Parser
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
- * @author  Stefan Wanzenried <sw@studer-raimann.ch>
  */
 interface Parser
 {

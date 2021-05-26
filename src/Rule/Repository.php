@@ -12,8 +12,6 @@ use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
  * Class Repository
  *
  * @package srag\Plugins\SrAutoMails\Rule
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 final class Repository
 {

@@ -11,8 +11,6 @@ use srag\DIC\SrAutoMails\DICTrait;
  * Class Sent
  *
  * @package srag\Plugins\SrAutoMails\Sent
- *
- * @author  studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
  */
 class Sent extends ActiveRecord
 {

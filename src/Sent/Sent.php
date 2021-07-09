@@ -92,7 +92,7 @@ class Sent extends ActiveRecord
     /**
      * @param int $object_id
      */
-    public function setObjectId(int $object_id)/*: void*/
+    public function setObjectId(int $object_id) : void
     {
         $this->object_id = $object_id;
     }
@@ -110,7 +110,7 @@ class Sent extends ActiveRecord
     /**
      * @param int $rule_id
      */
-    public function setRuleId(int $rule_id)/*: void*/
+    public function setRuleId(int $rule_id) : void
     {
         $this->rule_id = $rule_id;
     }
@@ -128,7 +128,7 @@ class Sent extends ActiveRecord
     /**
      * @param int $user_id
      */
-    public function setUserId(int $user_id)/*: void*/
+    public function setUserId(int $user_id) : void
     {
         $this->user_id = $user_id;
     }

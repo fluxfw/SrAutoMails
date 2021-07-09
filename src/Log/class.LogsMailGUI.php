@@ -44,7 +44,7 @@ class LogsMailGUI
     /**
      *
      */
-    public static function addTabs()/*:void*/
+    public static function addTabs() : void
     {
         self::dic()->tabs()->addTab(self::TAB_LOGS, self::plugin()->translate("logs", LogsMailGUI::LANG_MODULE), self::dic()->ctrl()
             ->getLinkTargetByClass(self::class, self::CMD_LIST_LOGS));
@@ -54,7 +54,7 @@ class LogsMailGUI
     /**
      *
      */
-    public function executeCommand()/*: void*/
+    public function executeCommand() : void
     {
         $this->setTabs();
 
@@ -86,7 +86,7 @@ class LogsMailGUI
     /**
      *
      */
-    protected function applyFilter()/*: void*/
+    protected function applyFilter() : void
     {
         $table = self::srAutoMails()->logs()->factory()->newTableInstance($this, self::CMD_APPLY_FILTER);
 
@@ -102,7 +102,7 @@ class LogsMailGUI
     /**
      *
      */
-    protected function listLogs()/*: void*/
+    protected function listLogs() : void
     {
         self::dic()->tabs()->activateTab(self::TAB_LOGS);
 
@@ -115,7 +115,7 @@ class LogsMailGUI
     /**
      *
      */
-    protected function resetFilter()/*: void*/
+    protected function resetFilter() : void
     {
         $table = self::srAutoMails()->logs()->factory()->newTableInstance($this, self::CMD_RESET_FILTER);
 
@@ -131,7 +131,7 @@ class LogsMailGUI
     /**
      *
      */
-    protected function setTabs()/*:void*/
+    protected function setTabs() : void
     {
 
     }

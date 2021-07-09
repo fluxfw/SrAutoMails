@@ -60,7 +60,7 @@ class RuleMailConfigGUI
     /**
      *
      */
-    public function executeCommand()/*: void*/
+    public function executeCommand() : void
     {
         $this->rule = self::srAutoMails()->rules()->getRuleById(intval(filter_input(INPUT_GET, self::GET_PARAM_RULE_ID)));
 
@@ -107,7 +107,7 @@ class RuleMailConfigGUI
     /**
      *
      */
-    protected function addRule()/*: void*/
+    protected function addRule() : void
     {
         $form = self::srAutoMails()->rules()->factory()->newFormInstance($this, $this->rule);
 
@@ -118,7 +118,7 @@ class RuleMailConfigGUI
     /**
      *
      */
-    protected function back()/*: void*/
+    protected function back() : void
     {
         self::dic()->ctrl()->redirectByClass(RulesMailConfigGUI::class, RulesMailConfigGUI::CMD_LIST_RULES);
     }
@@ -127,7 +127,7 @@ class RuleMailConfigGUI
     /**
      *
      */
-    protected function createRule()/*: void*/
+    protected function createRule() : void
     {
         $form = self::srAutoMails()->rules()->factory()->newFormInstance($this, $this->rule);
 
@@ -148,7 +148,7 @@ class RuleMailConfigGUI
     /**
      *
      */
-    protected function editRule()/*: void*/
+    protected function editRule() : void
     {
         self::dic()->tabs()->activateTab(self::TAB_EDIT_RULE);
         self::dic()->tabs()->activateSubTab(self::TAB_EDIT_RULE);
@@ -162,7 +162,7 @@ class RuleMailConfigGUI
     /**
      *
      */
-    protected function removeRule()/*: void*/
+    protected function removeRule() : void
     {
         self::srAutoMails()->rules()->deleteRule($this->rule);
 
@@ -175,7 +175,7 @@ class RuleMailConfigGUI
     /**
      *
      */
-    protected function removeRuleConfirm()/*: void*/
+    protected function removeRuleConfirm() : void
     {
         $confirmation = new ilConfirmationGUI();
 
@@ -195,7 +195,7 @@ class RuleMailConfigGUI
     /**
      *
      */
-    protected function setTabs()/*: void*/
+    protected function setTabs() : void
     {
         self::dic()->tabs()->clearTargets();
 
@@ -241,7 +241,7 @@ class RuleMailConfigGUI
     /**
      *
      */
-    protected function updateRule()/*: void*/
+    protected function updateRule() : void
     {
         self::dic()->tabs()->activateTab(self::TAB_EDIT_RULE);
         self::dic()->tabs()->activateSubTab(self::TAB_EDIT_RULE);

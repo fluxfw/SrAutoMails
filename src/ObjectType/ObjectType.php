@@ -256,7 +256,7 @@ abstract class ObjectType
      *
      * @return mixed
      */
-    protected abstract function applyMailPlaceholders($object, array &$placeholders)/*: void*/ ;
+    protected abstract function applyMailPlaceholders($object, array &$placeholders) : void;
 
 
     /**

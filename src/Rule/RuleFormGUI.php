@@ -105,7 +105,7 @@ class RuleFormGUI extends PropertyFormGUI
     /**
      * @inheritDoc
      */
-    protected function initCommands()/*: void*/
+    protected function initCommands() : void
     {
         if (!empty($this->rule->getRuleId())) {
             $this->addCommandButton(RuleMailConfigGUI::CMD_UPDATE_RULE, $this->txt("save"));
@@ -119,7 +119,7 @@ class RuleFormGUI extends PropertyFormGUI
     /**
      * @inheritDoc
      */
-    protected function initFields()/*: void*/
+    protected function initFields() : void
     {
         $this->fields = [
             "object_type" => [
@@ -265,7 +265,7 @@ class RuleFormGUI extends PropertyFormGUI
     /**
      * @inheritDoc
      */
-    protected function initId()/*: void*/
+    protected function initId() : void
     {
 
     }
@@ -274,7 +274,7 @@ class RuleFormGUI extends PropertyFormGUI
     /**
      * @inheritDoc
      */
-    protected function initTitle()/*: void*/
+    protected function initTitle() : void
     {
         $this->setTitle($this->txt(!empty($this->rule->getRuleId()) ? "edit_rule" : "add_rule"));
     }
@@ -283,7 +283,7 @@ class RuleFormGUI extends PropertyFormGUI
     /**
      * @inheritDoc
      */
-    protected function storeValue(string $key, $value)/*: void*/
+    protected function storeValue(string $key, $value) : void
     {
         switch ($key) {
             case "object_type":

@@ -61,7 +61,7 @@ final class Factory
      *
      * @return ObjectType|null
      */
-    public function getByObjectType(string $object_type)/*: ?ObjectType*/
+    public function getByObjectType(string $object_type) : ?ObjectType
     {
         switch ($object_type) {
             case Repository::OBJECT_TYPE_COURSE:

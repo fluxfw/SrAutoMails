@@ -51,7 +51,7 @@ final class Repository
     /**
      * @internal
      */
-    public function dropTables()/*: void*/
+    public function dropTables() : void
     {
 
     }
@@ -75,7 +75,7 @@ final class Repository
     /**
      * @internal
      */
-    public function installTables()/*: void*/
+    public function installTables() : void
     {
         try {
             Sent::updateDB();
@@ -94,7 +94,7 @@ final class Repository
      * @param int $object_id
      * @param int $user_id
      */
-    public function sent(int $rule_id, int $object_id, int $user_id)/*: void*/
+    public function sent(int $rule_id, int $object_id, int $user_id) : void
     {
         $sent = $this->getSent($rule_id, $object_id, $user_id);
 
@@ -113,7 +113,7 @@ final class Repository
      * @param int $object_id
      * @param int $user_id
      */
-    public function unsent(int $rule_id, int $object_id, int $user_id)/*: void*/
+    public function unsent(int $rule_id, int $object_id, int $user_id) : void
     {
         $sent = $this->getSent($rule_id, $object_id, $user_id);
 
@@ -126,7 +126,7 @@ final class Repository
     /**
      * @param Sent $sent
      */
-    protected function delete(Sent $sent)/*: void*/
+    protected function delete(Sent $sent) : void
     {
         self::dic()->database()->manipulateF('DELETE FROM ' . self::dic()->database()->quoteIdentifier(Sent::TABLE_NAME)
             . " WHERE rule_id=%s AND object_id=%s AND user_id=%s", [
@@ -153,7 +153,7 @@ final class Repository
      *
      * @return Sent|null
      */
-    protected function getSent(int $rule_id, int $object_id, int $user_id)/*: ?Sent*/
+    protected function getSent(int $rule_id, int $object_id, int $user_id) : ?Sent
     {
         /**
          * @var Sent|null $sent
@@ -172,7 +172,7 @@ final class Repository
     /**
      * @param Sent $sent
      */
-    protected function store(Sent $sent)/*: void*/
+    protected function store(Sent $sent) : void
     {
         self::dic()->database()->insert(Sent::TABLE_NAME, [
             "rule_id"   => [ilDBConstants::T_INTEGER, $sent->getRuleId()],

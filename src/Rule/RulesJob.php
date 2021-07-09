@@ -52,7 +52,7 @@ class RulesJob extends ilCronJob
     /**
      * @inheritDoc
      */
-    public function getDefaultScheduleValue()/*:?int*/
+    public function getDefaultScheduleValue() : ?int
     {
         return 1;
     }
@@ -231,7 +231,7 @@ class RulesJob extends ilCronJob
      *
      * @throws Notifications4PluginException
      */
-    protected function sendNotification(Rule $rule, ObjectType $object_type, $object, int $user_id)/*: void*/
+    protected function sendNotification(Rule $rule, ObjectType $object_type, $object, int $user_id) : void
     {
         $notification = self::srAutoMails()->notifications4plugin()->notifications()->getNotificationByName($rule->getMailTemplateName());
 

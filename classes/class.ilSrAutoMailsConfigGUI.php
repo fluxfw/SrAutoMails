@@ -35,7 +35,7 @@ class ilSrAutoMailsConfigGUI extends ilPluginConfigGUI
     /**
      * @inheritDoc
      */
-    public function performCommand(/*string*/ $cmd)/*:void*/
+    public function performCommand(/*string*/ $cmd) : void
     {
         $this->setTabs();
 
@@ -73,7 +73,7 @@ class ilSrAutoMailsConfigGUI extends ilPluginConfigGUI
     /**
      *
      */
-    protected function configure()/*: void*/
+    protected function configure() : void
     {
         self::dic()->ctrl()->redirectByClass(RulesMailConfigGUI::class, RulesMailConfigGUI::CMD_LIST_RULES);
     }
@@ -82,7 +82,7 @@ class ilSrAutoMailsConfigGUI extends ilPluginConfigGUI
     /**
      *
      */
-    protected function setTabs()/*: void*/
+    protected function setTabs() : void
     {
         RulesMailConfigGUI::addTabs();
 

@@ -47,7 +47,7 @@ class RulesMailConfigGUI
     /**
      *
      */
-    public static function addTabs()/*: void*/
+    public static function addTabs() : void
     {
         self::dic()->tabs()->addTab(self::TAB_LIST_RULES, self::plugin()->translate("rules", self::LANG_MODULE), self::dic()->ctrl()
             ->getLinkTargetByClass(self::class, self::CMD_LIST_RULES));
@@ -57,7 +57,7 @@ class RulesMailConfigGUI
     /**
      *
      */
-    public function executeCommand()/*: void*/
+    public function executeCommand() : void
     {
         $this->setTabs();
 
@@ -93,7 +93,7 @@ class RulesMailConfigGUI
     /**
      *
      */
-    protected function applyFilter()/*: void*/
+    protected function applyFilter() : void
     {
         $table = self::srAutoMails()->rules()->factory()->newTableInstance($this, self::CMD_APPLY_FILTER);
 
@@ -109,14 +109,14 @@ class RulesMailConfigGUI
     /**
      *
      */
-    protected function disableRules()/*: void*/
+    protected function disableRules() : void
     {
         $rule_ids = filter_input(INPUT_POST, RuleMailConfigGUI::GET_PARAM_RULE_ID, FILTER_DEFAULT, FILTER_FORCE_ARRAY);
 
         /**
          * @var Rule[] $rules
          */
-        $rules = array_map(function (int $rule_id)/*: ?Rule*/ {
+        $rules = array_map(function (int $rule_id) : ?Rule {
             return self::srAutoMails()->rules()->getRuleById($rule_id);
         }, $rule_ids);
 
@@ -135,14 +135,14 @@ class RulesMailConfigGUI
     /**
      *
      */
-    protected function enableRules()/*: void*/
+    protected function enableRules() : void
     {
         $rule_ids = filter_input(INPUT_POST, RuleMailConfigGUI::GET_PARAM_RULE_ID, FILTER_DEFAULT, FILTER_FORCE_ARRAY);
 
         /**
          * @var Rule[] $rules
          */
-        $rules = array_map(function (int $rule_id)/*: ?Rule*/ {
+        $rules = array_map(function (int $rule_id) : ?Rule {
             return self::srAutoMails()->rules()->getRuleById($rule_id);
         }, $rule_ids);
 
@@ -161,7 +161,7 @@ class RulesMailConfigGUI
     /**
      *
      */
-    protected function listRules()/*: void*/
+    protected function listRules() : void
     {
         self::dic()->tabs()->activateTab(self::TAB_LIST_RULES);
 
@@ -174,14 +174,14 @@ class RulesMailConfigGUI
     /**
      *
      */
-    protected function removeRules()/*: void*/
+    protected function removeRules() : void
     {
         $rule_ids = filter_input(INPUT_POST, RuleMailConfigGUI::GET_PARAM_RULE_ID, FILTER_DEFAULT, FILTER_FORCE_ARRAY);
 
         /**
          * @var Rule[] $rules
          */
-        $rules = array_map(function (int $rule_id)/*: ?Rule*/ {
+        $rules = array_map(function (int $rule_id) : ?Rule {
             return self::srAutoMails()->rules()->getRuleById($rule_id);
         }, $rule_ids);
 
@@ -198,7 +198,7 @@ class RulesMailConfigGUI
     /**
      *
      */
-    protected function removeRulesConfirm()/*: void*/
+    protected function removeRulesConfirm() : void
     {
         self::dic()->tabs()->activateTab(self::TAB_LIST_RULES);
 
@@ -207,7 +207,7 @@ class RulesMailConfigGUI
         /**
          * @var Rule[] $rules
          */
-        $rules = array_map(function (int $rule_id)/*: ?Rule*/ {
+        $rules = array_map(function (int $rule_id) : ?Rule {
             return self::srAutoMails()->rules()->getRuleById($rule_id);
         }, $rule_ids);
 
@@ -231,7 +231,7 @@ class RulesMailConfigGUI
     /**
      *
      */
-    protected function resetFilter()/*: void*/
+    protected function resetFilter() : void
     {
         $table = self::srAutoMails()->rules()->factory()->newTableInstance($this, self::CMD_RESET_FILTER);
 
@@ -247,7 +247,7 @@ class RulesMailConfigGUI
     /**
      *
      */
-    protected function setTabs()/*: void*/
+    protected function setTabs() : void
     {
 
     }

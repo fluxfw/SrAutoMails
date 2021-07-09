@@ -55,7 +55,7 @@ final class Repository
     /**
      * @param Rule $rule
      */
-    public function deleteRule(Rule $rule)/*: void*/
+    public function deleteRule(Rule $rule) : void
     {
         $rule->delete();
 
@@ -66,7 +66,7 @@ final class Repository
     /**
      * @internal
      */
-    public function dropTables()/*: void*/
+    public function dropTables() : void
     {
 
     }
@@ -97,7 +97,7 @@ final class Repository
      *
      * @return Rule|null
      */
-    public function getRuleById(int $rule_id)/*: ?Rule*/
+    public function getRuleById(int $rule_id) : ?Rule
     {
         if ($this->rules_by_id[$rule_id] === null) {
             $this->rules_by_id[$rule_id] = Rule::where(["rule_id" => $rule_id])->first();
@@ -168,7 +168,7 @@ final class Repository
     /**
      * @internal
      */
-    public function installTables()/*: void*/
+    public function installTables() : void
     {
         Rule::updateDB();
 
@@ -201,7 +201,7 @@ final class Repository
     /**
      * @param Rule $rule
      */
-    public function storeRule(Rule $rule)/*: void*/
+    public function storeRule(Rule $rule) : void
     {
         $is_new = (empty($rule->getRuleId()));
 

@@ -17,8 +17,6 @@ use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
  * Class Menu
  *
  * @package srag\Plugins\SrAutoMails\Menu
- *
- * @since   ILIAS 5.4
  */
 class Menu extends AbstractStaticPluginMainMenuProvider
 {
@@ -87,9 +85,7 @@ class Menu extends AbstractStaticPluginMainMenuProvider
      */
     protected function symbol(AbstractBaseItem $entry) : AbstractBaseItem
     {
-        if (self::version()->is6()) {
-            $entry = $entry->withSymbol(self::dic()->ui()->factory()->symbol()->icon()->standard(Standard::MAIL, ilSrAutoMailsPlugin::PLUGIN_NAME)->withIsOutlined(true));
-        }
+        $entry = $entry->withSymbol(self::dic()->ui()->factory()->symbol()->icon()->standard(Standard::MAIL, ilSrAutoMailsPlugin::PLUGIN_NAME)->withIsOutlined(true));
 
         return $entry;
     }

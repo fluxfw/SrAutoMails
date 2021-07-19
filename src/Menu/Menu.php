@@ -5,7 +5,7 @@ namespace srag\Plugins\SrAutoMails\Menu;
 use ilAdministrationGUI;
 use ilDBConstants;
 use ILIAS\GlobalScreen\Scope\MainMenu\Factory\AbstractBaseItem;
-use ILIAS\GlobalScreen\Scope\MainMenu\Provider\AbstractStaticPluginMainMenuProvider;
+use ILIAS\GlobalScreen\Scope\MainMenu\Provider\AbstractStaticMainMenuPluginProvider;
 use ILIAS\UI\Component\Symbol\Icon\Standard;
 use ilObjComponentSettingsGUI;
 use ilSrAutoMailsConfigGUI;
@@ -18,7 +18,7 @@ use srag\Plugins\SrAutoMails\Utils\SrAutoMailsTrait;
  *
  * @package srag\Plugins\SrAutoMails\Menu
  */
-class Menu extends AbstractStaticPluginMainMenuProvider
+class Menu extends AbstractStaticMainMenuPluginProvider
 {
 
     use DICTrait;

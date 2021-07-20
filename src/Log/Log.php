@@ -161,7 +161,7 @@ class Log extends ActiveRecord
     /**
      * @return int|null
      */
-    public function getExecuteUserId()/*: ?int*/
+    public function getExecuteUserId() : ?int
     {
         return $this->execute_user_id;
     }
@@ -188,7 +188,7 @@ class Log extends ActiveRecord
     /**
      * @return int|null
      */
-    public function getObjectId()/* : ?int*/
+    public function getObjectId() : ?int
     {
         return $this->object_id;
     }
@@ -197,7 +197,7 @@ class Log extends ActiveRecord
     /**
      * @return int|null
      */
-    public function getRuleId()/* : ?int*/
+    public function getRuleId() : ?int
     {
         return $this->rule_id;
     }
@@ -215,7 +215,7 @@ class Log extends ActiveRecord
     /**
      * @return int|null
      */
-    public function getUserId()/*: ?int*/
+    public function getUserId() : ?int
     {
         return $this->user_id;
     }

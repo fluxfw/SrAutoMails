@@ -57,7 +57,7 @@ class CourseObjectType extends ObjObjectType
      * @param ilObjCourse $object
      * @param array       $placeholders
      */
-    protected function applyMailPlaceholders($object, array &$placeholders)/*: void*/
+    protected function applyMailPlaceholders($object, array &$placeholders) : void
     {
         $members = array_map(function (int $user_id) : ilObjUser {
             return new ilObjUser($user_id);

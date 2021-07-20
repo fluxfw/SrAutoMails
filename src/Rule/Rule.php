@@ -266,7 +266,7 @@ class Rule extends ActiveRecord
     /**
      * @param string $description
      */
-    public function setDescription(string $description)/*: void*/
+    public function setDescription(string $description) : void
     {
         $this->description = $description;
     }
@@ -284,7 +284,7 @@ class Rule extends ActiveRecord
     /**
      * @param int $interval
      */
-    public function setInterval(int $interval)/*: void*/
+    public function setInterval(int $interval) : void
     {
         $this->interval = $interval;
     }
@@ -302,7 +302,7 @@ class Rule extends ActiveRecord
     /**
      * @param int $interval_type
      */
-    public function setIntervalType(int $interval_type)/*: void*/
+    public function setIntervalType(int $interval_type) : void
     {
         $this->interval_type = $interval_type;
     }
@@ -311,7 +311,7 @@ class Rule extends ActiveRecord
     /**
      * @return ilDateTime|null
      */
-    public function getLastCheck()/*: ?ilDateTime*/
+    public function getLastCheck() : ?ilDateTime
     {
         return $this->last_check;
     }
@@ -320,7 +320,7 @@ class Rule extends ActiveRecord
     /**
      * @param ilDateTime $last_check
      */
-    public function setLastCheck(ilDateTime $last_check)/*: void*/
+    public function setLastCheck(ilDateTime $last_check) : void
     {
         $this->last_check = $last_check;
     }
@@ -338,7 +338,7 @@ class Rule extends ActiveRecord
     /**
      * @param string $mail_template_name
      */
-    public function setMailTemplateName(string $mail_template_name)/*: void*/
+    public function setMailTemplateName(string $mail_template_name) : void
     {
         $this->mail_template_name = $mail_template_name;
     }
@@ -356,7 +356,7 @@ class Rule extends ActiveRecord
     /**
      * @param int $match_type
      */
-    public function setMatchType(int $match_type)/*: void*/
+    public function setMatchType(int $match_type) : void
     {
         $this->match_type = $match_type;
     }
@@ -374,7 +374,7 @@ class Rule extends ActiveRecord
     /**
      * @param int $metadata
      */
-    public function setMetadata(int $metadata)/*: void*/
+    public function setMetadata(int $metadata) : void
     {
         $this->metadata = $metadata;
     }
@@ -392,7 +392,7 @@ class Rule extends ActiveRecord
     /**
      * @param int $object_type
      */
-    public function setObjectType(int $object_type)/*: void*/
+    public function setObjectType(int $object_type) : void
     {
         $this->object_type = $object_type;
     }
@@ -410,7 +410,7 @@ class Rule extends ActiveRecord
     /**
      * @param int $operator
      */
-    public function setOperator(int $operator)/*: void*/
+    public function setOperator(int $operator) : void
     {
         $this->operator = $operator;
     }
@@ -428,7 +428,7 @@ class Rule extends ActiveRecord
     /**
      * @param string $operator_value
      */
-    public function setOperatorValue(string $operator_value)/*: void*/
+    public function setOperatorValue(string $operator_value) : void
     {
         $this->operator_value = $operator_value;
     }
@@ -446,7 +446,7 @@ class Rule extends ActiveRecord
     /**
      * @param int $operator_value_type
      */
-    public function setOperatorValueType(int $operator_value_type)/*: void*/
+    public function setOperatorValueType(int $operator_value_type) : void
     {
         $this->operator_value_type = $operator_value_type;
     }
@@ -464,7 +464,7 @@ class Rule extends ActiveRecord
     /**
      * @param array $receiver
      */
-    public function setReceiver(array $receiver)/*: void*/
+    public function setReceiver(array $receiver) : void
     {
         $this->receiver = $receiver;
     }
@@ -482,7 +482,7 @@ class Rule extends ActiveRecord
     /**
      * @param int $receiver_type
      */
-    public function setReceiverType(int $receiver_type)/*: void*/
+    public function setReceiverType(int $receiver_type) : void
     {
         $this->receiver_type = $receiver_type;
     }
@@ -500,7 +500,7 @@ class Rule extends ActiveRecord
     /**
      * @param int $rule_id
      */
-    public function setRuleId(int $rule_id)/*: void*/
+    public function setRuleId(int $rule_id) : void
     {
         $this->rule_id = $rule_id;
     }
@@ -518,7 +518,7 @@ class Rule extends ActiveRecord
     /**
      * @param string $title
      */
-    public function setTitle(string $title)/*: void*/
+    public function setTitle(string $title) : void
     {
         $this->title = $title;
     }
@@ -536,7 +536,7 @@ class Rule extends ActiveRecord
     /**
      * @param bool $enabled
      */
-    public function setEnabled(bool $enabled)/*: void*/
+    public function setEnabled(bool $enabled) : void
     {
         $this->enabled = $enabled;
     }
@@ -554,7 +554,7 @@ class Rule extends ActiveRecord
     /**
      * @param bool $operator_case_sensitive
      */
-    public function setOperatorCaseSensitive(bool $operator_case_sensitive)/*: void*/
+    public function setOperatorCaseSensitive(bool $operator_case_sensitive) : void
     {
         $this->operator_case_sensitive = $operator_case_sensitive;
     }
@@ -572,7 +572,7 @@ class Rule extends ActiveRecord
     /**
      * @param bool $operator_negated
      */
-    public function setOperatorNegated(bool $operator_negated)/*: void*/
+    public function setOperatorNegated(bool $operator_negated) : void
     {
         $this->operator_negated = $operator_negated;
     }

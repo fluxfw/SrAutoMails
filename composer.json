@@ -1,7 +1,7 @@
 {
   "name": "srag/srautomails",
   "description": "Auto send mails per rules",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "extra": {
     "ilias_plugin": {
       "id": "srauma",
@@ -61,7 +61,8 @@
   "scripts": {
     "pre-autoload-dump": [
       "srag\\LibrariesNamespaceChanger\\LibrariesNamespaceChanger::rewriteLibrariesNamespaces",
-      "srag\\GeneratePluginInfosHelper\\SrAutoMails\\GeneratePluginPhpAndXml::generatePluginPhpAndXml"
+      "srag\\GeneratePluginInfosHelper\\SrAutoMails\\GeneratePluginPhpAndXml::generatePluginPhpAndXml",
+      "vendor/srag/notifications4plugin/bin/twig_php74_patch.php"
     ],
     "update-version": [
       "srag\\GeneratePluginInfosHelper\\SrAutoMails\\UpdateVersion::updateVersion"

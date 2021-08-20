@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.7.1]
+- Twig PHP 7.4 patch
+
 ## [1.7.0]
 - Switched to main branch
 - ILIAS 7 support

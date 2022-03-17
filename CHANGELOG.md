@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.7.3]
+- Move `ilias7_core_apply_ilctrl_patch.sh`
+
 ## [1.7.2]
 - Twig PHP 7.4 patch
 

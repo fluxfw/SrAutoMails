@@ -1,16 +1,7 @@
 {
   "name": "srag/srautomails",
   "description": "Auto send mails per rules",
-  "version": "1.7.3",
-  "extra": {
-    "ilias_plugin": {
-      "id": "srauma",
-      "name": "SrAutoMails",
-      "ilias_min_version": "6.0",
-      "ilias_max_version": "7.999",
-      "slot": "Services/Cron/CronHook"
-    }
-  },
+  "version": "1.8.0",
   "type": "project",
   "keywords": [
     "cron",
@@ -18,23 +9,13 @@
     "job",
     "plugin"
   ],
-  "homepage": "https://github.com/fluxapps/SrAutoMails",
   "license": "GPL-3.0-only",
-  "authors": [
-    {
-      "name": "fluxlabs",
-      "email": "support@fluxlabs.ch",
-      "homepage": "https://fluxlabs.ch",
-      "role": "Developer"
-    }
-  ],
   "require": {
     "php": ">=7.2",
     "srag/activerecordconfig": ">=0.1.0",
     "srag/custominputguis": ">=0.1.0",
     "srag/devtools": ">=0.1.0",
     "srag/dic": ">=0.1.0",
-    "srag/generateplugininfoshelper": ">=0.1.0",
     "srag/librariesnamespacechanger": ">=0.1.0",
     "srag/notifications4plugin": ">=0.1.0",
     "srag/removeplugindataconfirm": ">=0.1.0"
@@ -61,11 +42,7 @@
   "scripts": {
     "pre-autoload-dump": [
       "srag\\LibrariesNamespaceChanger\\LibrariesNamespaceChanger::rewriteLibrariesNamespaces",
-      "srag\\GeneratePluginInfosHelper\\SrAutoMails\\GeneratePluginPhpAndXml::generatePluginPhpAndXml",
       "vendor/srag/notifications4plugin/bin/twig_php74_patch.php"
-    ],
-    "update-version": [
-      "srag\\GeneratePluginInfosHelper\\SrAutoMails\\UpdateVersion::updateVersion"
     ]
   }
 }
